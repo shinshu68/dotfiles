@@ -24,6 +24,11 @@ colorscheme codedark
 
 set modeline
 
+" エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
+set laststatus=2
+" ステータス行に表示させる情報の指定(どこからかコピペしたので細かい意味はわかっていない)
+set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+
 set expandtab
 
 set tabstop=8
@@ -92,19 +97,48 @@ map <C-s> :r ~/.vimbuffer<CR>")"
 
 inoremap <silent> jj <ESC>
 inoremap <silent> ｊｊ <ESC>
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
+"inoremap { {}<LEFT>
+"inoremap [ []<LEFT>
+"inoremap ( ()<LEFT>
+"inoremap " ""<LEFT>
+"inoremap ' ''<LEFT>
 
 function! s:isWsl()
-	return filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
+    return filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
 endfunction
 
 if s:isWsl() && executable('AutoHotkeyU64.exe')
-	augroup insertLeave
-		autocmd!
-		autocmd InsertLeave * :call system('AutoHotkeyU64.exe "D:\ImDisable.ahk"')
-	augroup END
+    augroup insertLeave
+        autocmd!
+        autocmd InsertLeave * :call system('AutoHotkeyU64.exe "D:\ImDisable.ahk"')
+    augroup END
 endif
+
+let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=LightCyan cterm=none'
+if has('syntax')
+    augroup InsertHook
+        autocmd!
+        autocmd InsertEnter * call s:StatusLine('Enter')
+        autocmd InsertLeave * call s:StatusLine('Leave')
+    augroup END
+endif
+
+let s:slhlcmd = ''
+function! s:StatusLine(mode)
+    if a:mode == 'Enter'
+        silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
+        silent exec g:hi_insert
+    else
+        highlight clear StatusLine
+        silent exec s:slhlcmd
+    endif
+endfunction
+
+function! s:GetHighlight(hi)
+    redir => hl
+    exec 'highlight '.a:hi
+    redir END
+    let hl = substitute(hl, '[\r\n]', '', 'g')
+    let hl = substitute(hl, 'xxx', '', '')
+    return hl
+endfunction
