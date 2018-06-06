@@ -1,2 +1,2 @@
-/bundle/vim-colorschemes
-/bundle/vim-code-dark
+/bundle/*
+!/bundle/Vundle.vim

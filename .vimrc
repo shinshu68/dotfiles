@@ -10,6 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin '[Github Author]/[Github repo]' の形式で記入
 Plugin 'tomasiser/vim-code-dark'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 call vundle#end()
 filetype plugin indent on
@@ -21,6 +22,11 @@ syntax on
 set t_Co=256
 set t_ut=
 colorscheme codedark
+
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626   ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#303030   ctermbg=236
 
 set modeline
 
