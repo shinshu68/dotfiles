@@ -193,4 +193,3 @@ function! s:GetHighlight(hi)
     let hl = substitute(hl, 'xxx', '', '')
     return hl
 endfunction
->>>>>>> refs/remotes/origin/master
