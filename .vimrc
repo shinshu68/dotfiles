@@ -10,6 +10,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin '[Github Author]/[Github repo]' の形式で記入
 Plugin 'tomasiser/vim-code-dark'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'sophacles/vim-processing'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Townk/vim-autoclose'
 
@@ -120,6 +121,50 @@ if s:isWsl() && executable('AutoHotkeyU64.exe')
         autocmd InsertLeave * :call system('AutoHotkeyU64.exe "D:\ImDisable.ahk"')
     augroup END
 endif
+
+augroup Processing
+    autocmd!
+"    autocmd BufNewFile *.pde set vim-processing
+"    autocmd BufRead    *.pde set vim-processing
+augroup END
+
+function! s:get_syn_id(transparent)
+    let synid = synID(line("."), col("."), 1)
+    if a:transparent
+        return synIDtrans(synid)
+    else
+        return synid
+    endif
+endfunction
+function! s:get_syn_attr(synid)
+    let name = synIDattr(a:synid, "name")
+    let ctermfg = synIDattr(a:synid, "fg", "cterm")
+    let ctermbg = synIDattr(a:synid, "bg", "cterm")
+    let guifg = synIDattr(a:synid, "fg", "gui")
+    let guibg = synIDattr(a:synid, "bg", "gui")
+    return {
+        \ "name": name,
+        \ "ctermfg": ctermfg,
+        \ "ctermbg": ctermbg,
+        \ "guifg": guifg,
+        \ "guibg": guibg}
+endfunction
+function! s:get_syn_info()
+    let baseSyn = s:get_syn_attr(s:get_syn_id(0))
+    echo "name: " . baseSyn.name .
+        \ " ctermfg: " . baseSyn.ctermfg .
+        \ " ctermbg: " . baseSyn.ctermbg .
+        \ " guifg: " . baseSyn.guifg .
+        \ " guibg: " . baseSyn.guibg
+    let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
+    echo "link to"
+    echo "name: " . linkedSyn.name .
+        \ " ctermfg: " . linkedSyn.ctermfg .
+        \ " ctermbg: " . linkedSyn.ctermbg .
+        \ " guifg: " . linkedSyn.guifg .
+        \ " guibg: " . linkedSyn.guibg
+endfunction
+command! SyntaxInfo call s:get_syn_info()
 
 let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=LightCyan cterm=none'
 if has('syntax')
