@@ -92,7 +92,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias processing='sh /home/shinshu/processing.sh'
+alias processing='sh ~/dotfiles/.processing.sh'
 alias cls='source ~/.bashrc; clear'
 
 # Add an "alert" alias for long running commands.  Use like so:
