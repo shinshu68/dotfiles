@@ -47,12 +47,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -120,10 +120,10 @@ if ! shopt -oq posix; then
 fi
 
 if [ -f ~/.git-completion.bash ]; then
-	source $HOME/.git-completion.bash
+    source $HOME/.git-completion.bash
 fi
 if [ -f ~/.git-prompt.sh ]; then
-	source $HOME/.git-prompt.sh
+    source $HOME/.git-prompt.sh
 fi
 
 GIT_PS1_SHOWDIRTYSTATE=true
@@ -144,15 +144,15 @@ BLK_C="\[\e[38\;05\;0m\]"
 CYAN_C="\e[1;36m"
 
 function get_line () {
-	LINE=$COLUMNS
-	L1="\[\e[$[LINE-$(echo -n " [\u@yukari]\D{%H:%M} " | wc -c)]C[${CYAN_C}\u${RIN_C}@${JUN_C}${ON_BC}yukari${CLR_C}]${YERW_C}\D{%H:%M}\e[$[LINE]D\]"
-	PS1=$(echo "${L1}${CLR_C}[${BLUE_C}\w${CLR_C}]${YERW_C}${CLR_C}\n\`
-	if [ \$? = 0 ]; then
-		echo -e "${GREN_BC}${BLK_C}OK${CLR_C}";
-	else
-		echo -e "${RED_BC}${BLK_C}ERROR${CLR_C}";
-	fi
-	\`\n\[${CLR_C}\]\$ ")
+    LINE=$COLUMNS
+    L1="\[\e[$[LINE-$(echo -n " [\u@yukari]\D{%H:%M} " | wc -c)]C[${CYAN_C}\u${RIN_C}@${JUN_C}${ON_BC}yukari${CLR_C}]${YERW_C}\D{%H:%M}\e[$[LINE]D\]"
+    PS1=$(echo "${L1}${CLR_C}[${BLUE_C}\w${CLR_C}]${YERW_C}${CLR_C}\n\`
+    if [ \$? = 0 ]; then
+        echo -e "${GREN_BC}${BLK_C}OK${CLR_C}";
+    else
+        echo -e "${RED_BC}${BLK_C}ERROR${CLR_C}";
+    fi
+    \`$(__git_ps1)\n\[${CLR_C}\]\$ ")
 }
 #echo $(__git_ps1) > .columns
 PROMPT_COMMAND=get_line
