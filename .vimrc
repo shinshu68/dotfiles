@@ -111,6 +111,13 @@ inoremap <silent> ｊｊ <ESC>
 "inoremap " ""<LEFT>
 "inoremap ' ''<LEFT>
 
+let mapleader = "\<Space>"
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>h ^
+nnoremap <Leader>l $
+nnoremap <Leader>/ *
+nnoremap <Leader>m %
+
 function! s:isWsl()
     return filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
 endfunction
