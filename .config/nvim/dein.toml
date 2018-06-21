@@ -1,0 +1,11 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'tomasiser/vim-code-dark'
+
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+
+

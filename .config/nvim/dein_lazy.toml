@@ -1,0 +1,7 @@
+[[plugins]]
+repo = 'sophacles/vim-processing'
+on_ft = ['processing']
+
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+on_1 = 1
