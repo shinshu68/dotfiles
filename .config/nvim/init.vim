@@ -129,6 +129,12 @@ nnoremap <Leader>l $
 nnoremap <Leader>/ *
 nnoremap <Leader>m %
 
+" 不可視ファイルを表示する
+let NERDTreeShowHidden = 1
+
+" ツリーと編集領域を移動する
+nmap <Leader><Tab> <C-w>w
+
 function! s:isWsl()
     return filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
 endfunction

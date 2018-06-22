@@ -5,3 +5,17 @@ on_ft = ['processing']
 [[plugins]]
 repo = 'Townk/vim-autoclose'
 on_1 = 1
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+on_cmd = ['NERDTree']
+
+[[plugins]]
+repo = 'himanoa/ttene.nvim'
+hook_post_source = '''
+    let g:ttene_play_command = 'mplayer -ao alsa'
+'''
+hook_post_update = '''
+    let g:dein#plugin.build = 'magicalstick | grep "てねっ[0-9]" | xargs -P4 -In1 wget n1 -P voices/'
+'''
+on_i = 1
