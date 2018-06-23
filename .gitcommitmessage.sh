@@ -1,6 +1,6 @@
 #!/bin/bash
 
-vim msgfile.txt
+nvim msgfile.txt
 
 git commit --file='./msgfile.txt'
 
