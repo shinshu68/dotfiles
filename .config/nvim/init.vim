@@ -37,6 +37,45 @@ endif
 
 syntax on
 
+augroup InsertHook
+    autocmd!
+augroup END
+
+" エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
+set laststatus=2
+" ステータス行に表示させる情報の指定(どこからかコピペしたので細かい意味はわかっていない)
+set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+
+let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=LightCyan cterm=none'
+let g:hi_normal = 'highlight StatusLine ctermfg=188 ctermbg=237 guifg=#D4D4D4 guibg=#373737'
+if has('syntax')
+    augroup InsertHook
+        autocmd insertenter * call s:statusline('enter')
+        autocmd insertleave * call s:statusline('leave')
+    augroup END
+endif
+
+":highlight statusline
+"statusline     xxx ctermfg=188 ctermbg=237 guifg=#d4d4d4 guibg=#373737
+function! s:statusline(mode)
+    if a:mode == 'enter'
+        exec g:hi_insert
+    else
+        highlight clear StatusLine
+        silent exec g:hi_normal
+    endif
+endfunction
+
+function! s:gethighlight(hi)
+    let l:hl = ''
+    redir => l:hl
+    exec 'highlight '.a:hi
+    redir end
+    let l:hl = substitute(l:hl, '[\r\n]', '', 'g')
+    let l:hl = substitute(l:hl, 'xxx', '', '')
+    return l: hl
+endfunction
+
 set t_Co=256
 set t_ut=
 colorscheme codedark
@@ -48,10 +87,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#303030   ctermbg=236
 
 set modeline
 
-" エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
-set laststatus=2
-" ステータス行に表示させる情報の指定(どこからかコピペしたので細かい意味はわかっていない)
-set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 
 set expandtab
 
@@ -131,7 +166,7 @@ nnoremap <Leader>m %
 
 " 不可視ファイルを表示する
 let NERDTreeShowHidden = 1
-
+let NERDTreeShowBookmarks=1
 " ツリーと編集領域を移動する
 nmap <Leader><Tab> <C-w>w
 
@@ -184,31 +219,3 @@ function! s:get_syn_info()
 endfunction
 command! SyntaxInfo call s:get_syn_info()
 
-let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=LightCyan cterm=none'
-if has('syntax')
-    augroup InsertHook
-        autocmd!
-        autocmd InsertEnter * call s:StatusLine('Enter')
-        autocmd InsertLeave * call s:StatusLine('Leave')
-    augroup END
-endif
-
-let s:slhlcmd = ''
-function! s:StatusLine(mode)
-    if a:mode == 'Enter'
-        silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
-        silent exec g:hi_insert
-    else
-        highlight clear StatusLine
-        silent exec s:slhlcmd
-    endif
-endfunction
-
-function! s:GetHighlight(hi)
-    redir => hl
-    exec 'highlight '.a:hi
-    redir END
-    let hl = substitute(hl, '[\r\n]', '', 'g')
-    let hl = substitute(hl, 'xxx', '', '')
-    return hl
-endfunction
