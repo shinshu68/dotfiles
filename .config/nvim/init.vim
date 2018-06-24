@@ -146,12 +146,6 @@ if s:isWsl() && executable('AutoHotkeyU64.exe')
     augroup END
 endif
 
-augroup Processing
-    autocmd!
-"    autocmd BufNewFile *.pde set vim-processing
-"    autocmd BufRead    *.pde set vim-processing
-augroup END
-
 function! s:get_syn_id(transparent)
     let synid = synID(line("."), col("."), 1)
     if a:transparent
