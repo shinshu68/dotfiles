@@ -37,19 +37,31 @@ endif
 
 syntax on
 
-augroup InsertHook
-    autocmd!
-augroup END
+set t_Co=256
+set t_ut=
+colorscheme codedark
 
 " エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
 set laststatus=2
 " ステータス行に表示させる情報の指定(どこからかコピペしたので細かい意味はわかっていない)
 set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 
+function! s:gethighlight(hi)
+    let l:hl = ''
+    redir => l:hl
+    exec 'highlight '.a:hi
+    redir end
+    let l:hl = substitute(l:hl, '[\r\n]', '', 'g')
+    let l:hl = substitute(l:hl, 'xxx', '', '')
+    return l:hl
+endfunction
+
 let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=LightCyan cterm=none'
-let g:hi_normal = 'highlight StatusLine ctermfg=188 ctermbg=237 guifg=#D4D4D4 guibg=#373737'
+
+silent! let g:hi_normal = 'highlight ' . s:gethighlight('StatusLine')
 if has('syntax')
     augroup InsertHook
+        autocmd!
         autocmd insertenter * call s:statusline('enter')
         autocmd insertleave * call s:statusline('leave')
     augroup END
@@ -66,27 +78,12 @@ function! s:statusline(mode)
     endif
 endfunction
 
-function! s:gethighlight(hi)
-    let l:hl = ''
-    redir => l:hl
-    exec 'highlight '.a:hi
-    redir end
-    let l:hl = substitute(l:hl, '[\r\n]', '', 'g')
-    let l:hl = substitute(l:hl, 'xxx', '', '')
-    return l: hl
-endfunction
-
-set t_Co=256
-set t_ut=
-colorscheme codedark
-
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626   ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#303030   ctermbg=236
 
 set modeline
-
 
 set expandtab
 
@@ -147,7 +144,6 @@ set scrolloff=5
 
 set list
 set listchars=tab:⊳-,trail:‗
-
 
 inoremap <silent> jj <ESC>
 inoremap <silent> ｊｊ <ESC>
