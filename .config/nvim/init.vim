@@ -59,6 +59,7 @@ endfunction
 let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=LightCyan cterm=none'
 
 silent! let g:hi_normal = 'highlight ' . s:gethighlight('StatusLine')
+
 if has('syntax')
     augroup InsertHook
         autocmd!
@@ -67,8 +68,6 @@ if has('syntax')
     augroup END
 endif
 
-":highlight statusline
-"statusline     xxx ctermfg=188 ctermbg=237 guifg=#d4d4d4 guibg=#373737
 function! s:statusline(mode)
     if a:mode == 'enter'
         exec g:hi_insert
@@ -147,18 +146,12 @@ set listchars=tab:⊳-,trail:‗
 
 inoremap <silent> jj <ESC>
 inoremap <silent> ｊｊ <ESC>
-"inoremap { {}<LEFT>
-"inoremap [ []<LEFT>
-"inoremap ( ()<LEFT>
-"inoremap " ""<LEFT>
-"inoremap ' ''<LEFT>
 
-let mapleader = "\<Space>"
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>h ^
-nnoremap <Leader>l $
-nnoremap <Leader>/ *
-nnoremap <Leader>m %
+nnoremap <Space>w :w<CR>
+nnoremap <Space>h ^
+nnoremap <Space>l $
+nnoremap <Space>/ *
+nnoremap <Space>m %
 
 " 不可視ファイルを表示する
 let NERDTreeShowHidden = 1
