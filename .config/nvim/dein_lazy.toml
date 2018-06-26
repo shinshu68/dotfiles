@@ -1,18 +1,27 @@
+[[plugins]] # toml syntax
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
 [[plugins]]
 repo = 'sophacles/vim-processing'
 on_ft = ['processing']
 
 [[plugins]]
-repo = 'Townk/vim-autoclose'
-on_1 = 1
+repo = 'scrooloose/nerdtree'
+on_cmd = 'NERDTree'
+hook_add = '''
+    nmap <C-n> :NERDTree<CR>
+    let g:NERDTreeShowHidden=1
+    let g:NERDTreeShowBookmarks=1
+'''
 
 [[plugins]]
-repo = 'scrooloose/nerdtree'
-on_cmd = ['NERDTree']
+repo = 'Townk/vim-autoclose'
+on_i = 1
 
 [[plugins]]
 repo = 'himanoa/ttene.nvim'
+on_i = 1
 hook_post_update = '''
     let g:dein#plugin.build = 'magicalstick | grep "てねっ[0-9]" | xargs -P4 -In1 wget n1 -P voices/'
 '''
-on_i = 1

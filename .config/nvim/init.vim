@@ -37,10 +37,6 @@ endif
 
 syntax on
 
-set t_Co=256
-set t_ut=
-colorscheme codedark
-
 " エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
 set laststatus=2
 " ステータス行に表示させる情報の指定(どこからかコピペしたので細かい意味はわかっていない)
@@ -76,11 +72,6 @@ function! s:statusline(mode)
         silent exec g:hi_normal
     endif
 endfunction
-
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626   ctermbg=235
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#303030   ctermbg=236
 
 set modeline
 
@@ -147,15 +138,13 @@ set listchars=tab:⊳-,trail:‗
 inoremap <silent> jj <ESC>
 inoremap <silent> ｊｊ <ESC>
 
+let mapleader = "\<Space>"
 nnoremap <Space>w :w<CR>
 nnoremap <Space>h ^
 nnoremap <Space>l $
 nnoremap <Space>/ *
 nnoremap <Space>m %
 
-" 不可視ファイルを表示する
-let NERDTreeShowHidden = 1
-let NERDTreeShowBookmarks=1
 " ツリーと編集領域を移動する
 nmap <Leader><Tab> <C-w>w
 
