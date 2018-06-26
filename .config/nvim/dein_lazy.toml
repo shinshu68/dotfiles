@@ -16,6 +16,13 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'reireias/vim-cheatsheet'
+on_cmd = 'Cheat'
+hook_add = '''
+    autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+    let g:cheatsheet#cheat_file = "~/dotfiles/.cheatsheet.md"
+'''
+[[plugins]]
 repo = 'Townk/vim-autoclose'
 on_i = 1
 
