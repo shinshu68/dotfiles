@@ -23,4 +23,3 @@ repo = 'thinca/vim-quickrun'
 [[plugins]]
 repo = 'skywind3000/asyncrun.vim'
 
-
