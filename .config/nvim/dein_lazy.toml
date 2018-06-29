@@ -64,3 +64,6 @@ on_ft = 'markdown'
 [[plugins]]
 repo = 'rcmdnk/vim-markdown'
 on_ft = 'markdown'
+hook_add = '''
+    let g:vim_markdown_folding_disabled = 1
+'''
