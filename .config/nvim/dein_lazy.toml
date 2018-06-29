@@ -52,3 +52,15 @@ on_i = 1
 hook_post_update = '''
     let g:dein#plugin.build = 'magicalstick | grep "てねっ[0-9]" | xargs -P4 -In1 wget n1 -P voices/'
 '''
+
+[[plugins]]
+repo = 'godlygeek/tabular'
+on_ft = 'markdown'
+
+[[plugins]]
+repo = 'joker1007/vim-markdown-quote-syntax'
+on_ft = 'markdown'
+
+[[plugins]]
+repo = 'rcmdnk/vim-markdown'
+on_ft = 'markdown'
