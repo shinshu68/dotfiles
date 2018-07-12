@@ -137,6 +137,7 @@ set listchars=tab:⊳-,trail:‗
 
 inoremap <silent> jj <ESC>
 inoremap <silent> ｊｊ <ESC>
+tnoremap <silent> jj <C-\><C-n> 
 
 let mapleader = "\<Space>"
 nnoremap <Space>w :w<CR>
