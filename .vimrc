@@ -1,30 +1,30 @@
-set nocompatible
-filetype off
+"set nocompatible
+"filetype off
+"
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
+"
+"Plugin 'VundleVim/Vundle.vim'
+"
+"" 導入したいプラグインを以下に列挙
+"" Plugin '[Github Author]/[Github repo]' の形式で記入
+"Plugin 'tomasiser/vim-code-dark'
+"
+"call vundle#end()
+"filetype plugin indent on
+"
+""　その他のカスタム設定を以下に書く
+"
+syntax off
+"
+"set t_Co=256
+"set t_ut=
+"colorscheme codedark
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-
-" 導入したいプラグインを以下に列挙
-" Plugin '[Github Author]/[Github repo]' の形式で記入
-Plugin 'tomasiser/vim-code-dark'
-
-call vundle#end()
-filetype plugin indent on
-
-"　その他のカスタム設定を以下に書く
-
-syntax on
-
-set t_Co=256
-set t_ut=
-colorscheme codedark
-
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626   ctermbg=235
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#303030   ctermbg=236
+"let g:indent_guides_enable_on_vim_startup = 1
+"let g:indent_guides_auto_colors = 0
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#262626   ctermbg=235
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#303030   ctermbg=236
 
 set modeline
 
@@ -35,7 +35,7 @@ set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%
 
 set expandtab
 
-set tabstop=8
+set tabstop=4
 
 set softtabstop=4
 
@@ -93,11 +93,11 @@ set scrolloff=5
 set list
 set listchars=tab:⊳-,trail:‗
 
-set clipboard=unnamed,autoselect
+"set clipboard=unnamed,autoselect
 "copy (write) highlighted text to .vimbuffer
-vmap <C-a> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \| clip.exe <CR><CR>
+"vmap <C-a> y:new ~/.vimbuffer<CR>VGp:x<CR> \| :!cat ~/.vimbuffer \| clip.exe <CR><CR>
 " paste from buffer
-map <C-s> :r ~/.vimbuffer<CR>")"
+"map <C-s> :r ~/.vimbuffer<CR>")"
 
 inoremap <silent> jj <ESC>
 inoremap <silent> ｊｊ <ESC>
@@ -125,75 +125,75 @@ if s:isWsl() && executable('AutoHotkeyU64.exe')
     augroup END
 endif
 
-augroup Processing
-    autocmd!
-"    autocmd BufNewFile *.pde set vim-processing
-"    autocmd BufRead    *.pde set vim-processing
-augroup END
-
-function! s:get_syn_id(transparent)
-    let synid = synID(line("."), col("."), 1)
-    if a:transparent
-        return synIDtrans(synid)
-    else
-        return synid
-    endif
-endfunction
-function! s:get_syn_attr(synid)
-    let name = synIDattr(a:synid, "name")
-    let ctermfg = synIDattr(a:synid, "fg", "cterm")
-    let ctermbg = synIDattr(a:synid, "bg", "cterm")
-    let guifg = synIDattr(a:synid, "fg", "gui")
-    let guibg = synIDattr(a:synid, "bg", "gui")
-    return {
-        \ "name": name,
-        \ "ctermfg": ctermfg,
-        \ "ctermbg": ctermbg,
-        \ "guifg": guifg,
-        \ "guibg": guibg}
-endfunction
-function! s:get_syn_info()
-    let baseSyn = s:get_syn_attr(s:get_syn_id(0))
-    echo "name: " . baseSyn.name .
-        \ " ctermfg: " . baseSyn.ctermfg .
-        \ " ctermbg: " . baseSyn.ctermbg .
-        \ " guifg: " . baseSyn.guifg .
-        \ " guibg: " . baseSyn.guibg
-    let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
-    echo "link to"
-    echo "name: " . linkedSyn.name .
-        \ " ctermfg: " . linkedSyn.ctermfg .
-        \ " ctermbg: " . linkedSyn.ctermbg .
-        \ " guifg: " . linkedSyn.guifg .
-        \ " guibg: " . linkedSyn.guibg
-endfunction
-command! SyntaxInfo call s:get_syn_info()
-
-let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=LightCyan cterm=none'
-if has('syntax')
-    augroup InsertHook
-        autocmd!
-        autocmd InsertEnter * call s:StatusLine('Enter')
-        autocmd InsertLeave * call s:StatusLine('Leave')
-    augroup END
-endif
-
-let s:slhlcmd = ''
-function! s:StatusLine(mode)
-    if a:mode == 'Enter'
-        silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
-        silent exec g:hi_insert
-    else
-        highlight clear StatusLine
-        silent exec s:slhlcmd
-    endif
-endfunction
-
-function! s:GetHighlight(hi)
-    redir => hl
-    exec 'highlight '.a:hi
-    redir END
-    let hl = substitute(hl, '[\r\n]', '', 'g')
-    let hl = substitute(hl, 'xxx', '', '')
-    return hl
-endfunction
+"augroup Processing
+"    autocmd!
+""    autocmd BufNewFile *.pde set vim-processing
+""    autocmd BufRead    *.pde set vim-processing
+"augroup END
+"
+"function! s:get_syn_id(transparent)
+"    let synid = synID(line("."), col("."), 1)
+"    if a:transparent
+"        return synIDtrans(synid)
+"    else
+"        return synid
+"    endif
+"endfunction
+"function! s:get_syn_attr(synid)
+"    let name = synIDattr(a:synid, "name")
+"    let ctermfg = synIDattr(a:synid, "fg", "cterm")
+"    let ctermbg = synIDattr(a:synid, "bg", "cterm")
+"    let guifg = synIDattr(a:synid, "fg", "gui")
+"    let guibg = synIDattr(a:synid, "bg", "gui")
+"    return {
+"        \ "name": name,
+"        \ "ctermfg": ctermfg,
+"        \ "ctermbg": ctermbg,
+"        \ "guifg": guifg,
+"        \ "guibg": guibg}
+"endfunction
+"function! s:get_syn_info()
+"    let baseSyn = s:get_syn_attr(s:get_syn_id(0))
+"    echo "name: " . baseSyn.name .
+"        \ " ctermfg: " . baseSyn.ctermfg .
+"        \ " ctermbg: " . baseSyn.ctermbg .
+"        \ " guifg: " . baseSyn.guifg .
+"        \ " guibg: " . baseSyn.guibg
+"    let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
+"    echo "link to"
+"    echo "name: " . linkedSyn.name .
+"        \ " ctermfg: " . linkedSyn.ctermfg .
+"        \ " ctermbg: " . linkedSyn.ctermbg .
+"        \ " guifg: " . linkedSyn.guifg .
+"        \ " guibg: " . linkedSyn.guibg
+"endfunction
+"command! SyntaxInfo call s:get_syn_info()
+"
+"let g:hi_insert = 'highlight StatusLine guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=LightCyan cterm=none'
+"if has('syntax')
+"    augroup InsertHook
+"        autocmd!
+"        autocmd InsertEnter * call s:StatusLine('Enter')
+"        autocmd InsertLeave * call s:StatusLine('Leave')
+"    augroup END
+"endif
+"
+"let s:slhlcmd = ''
+"function! s:StatusLine(mode)
+"    if a:mode == 'Enter'
+"        silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
+"        silent exec g:hi_insert
+"    else
+"        highlight clear StatusLine
+"        silent exec s:slhlcmd
+"    endif
+"endfunction
+"
+"function! s:GetHighlight(hi)
+"    redir => hl
+"    exec 'highlight '.a:hi
+"    redir END
+"    let hl = substitute(hl, '[\r\n]', '', 'g')
+"    let hl = substitute(hl, 'xxx', '', '')
+"    return hl
+"endfunction
