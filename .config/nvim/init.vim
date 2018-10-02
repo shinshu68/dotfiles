@@ -77,7 +77,7 @@ set modeline
 
 set expandtab
 
-set tabstop=8
+set tabstop=4
 
 set softtabstop=4
 
@@ -137,7 +137,7 @@ set listchars=tab:⊳-,trail:‗
 
 inoremap <silent> jj <ESC>
 inoremap <silent> ｊｊ <ESC>
-tnoremap <silent> jj <C-\><C-n> 
+tnoremap <silent> jj <C-\><C-n>
 
 let mapleader = "\<Space>"
 nnoremap <Space>w :w<CR>
@@ -147,7 +147,7 @@ nnoremap <Space>/ *
 nnoremap <Space>m %
 
 " ツリーと編集領域を移動する
-nmap <Leader><Tab> <C-w>w
+nnoremap <Leader><Tab> <C-w>w
 
 function! s:isWsl()
     return filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')

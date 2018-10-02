@@ -40,7 +40,7 @@ on_ft = ['processing']
 repo = 'scrooloose/nerdtree'
 on_cmd = 'NERDTree'
 hook_add = '''
-    nmap <C-n> :NERDTree<CR>
+    nnoremap <C-n> :NERDTree<CR>
     let g:NERDTreeShowHidden=1
     let g:NERDTreeShowBookmarks=1
 '''
