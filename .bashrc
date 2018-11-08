@@ -17,7 +17,7 @@ shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
-HISTFILESIZE=2000
+HISTFILESIZE=200000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -94,7 +94,7 @@ alias l='ls -CF'
 
 alias processing='sh ~/dotfiles/.processing.sh'
 alias cls='source ~/.bashrc; clear'
-alias gitcommit='sh ~/dotfiles/.gitcommitmessage.sh'
+alias gitcommit='python ~/python/.gitcommit.py'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
