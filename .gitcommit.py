@@ -18,9 +18,11 @@ def runVim(prefix):
     subprocess.run(["git commit --file='./msgfile.txt'"], shell=True)
     if input('push? [y/n]') == 'y':
         subprocess.run(["git push origin master"], shell=True)
-    os.remove('msgfile.txt')
 
-def pos(l, n, esc):
+    if os.path.exists('msgfile.txt'):
+        os.remove('msgfile.txt')
+
+def posAndStr(l, n, esc):
     if n < 0:
         n = 0
     if n >= len(l):
@@ -39,12 +41,19 @@ def pos(l, n, esc):
 
     return n, s
 
+def reWrite(position, lines):
+    i, s = posAndStr(lines, position, ('\033[2K\033[F'*(len(lines)-1)))
+    sys.stderr.write(s)
+    sys.stderr.flush()
+    return i
+
+
 def main():
     subprocess.run(["git add ."], shell=True)
     subprocess.run(["git status"], shell=True)
 
     l = ['show issues','','add','update','fix','move','clean','delete', 'None']
-    i, s = pos(l, 0, '')
+    i, s = posAndStr(l, 0, '')
 
     sys.stderr.write(s)
     sys.stderr.flush()
@@ -53,18 +62,18 @@ def main():
         c = readchar.readchar()
         if c == 'j':
             i = i+1
-            i,s = pos(l, i, ('\033[2K\033[F'*(len(l)-1)))
-            sys.stderr.write(s)
-            sys.stderr.flush()
+            i = reWrite(i,l)
         elif c == 'k':
             i = i-1
-            i,s = pos(l, i, ('\033[2K\033[F'*(len(l)-1)))
-            sys.stderr.write(s)
-            sys.stderr.flush()
+            i = reWrite(i,l)
 
         elif c == 'q':
             print()
             exit()
+        elif c == 'G':
+            i = len(l) -1
+            i = reWrite(i,l)
+
         elif c == '\r':
             if l[i] == 'show issues':
                 issues = getMyIssues()
@@ -77,7 +86,7 @@ def main():
 
                 l.remove(l[0])
                 l.remove(l[0])
-                i,s = pos(l, i, '')
+                i,s = posAndStr(l, i, '')
                 sys.stderr.write(s)
                 sys.stderr.flush()
 
