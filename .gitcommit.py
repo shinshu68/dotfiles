@@ -66,13 +66,17 @@ def main():
             print()
             exit()
         elif c == '\r':
-            if i == 0:
+            if l[i] == 'show issues':
                 issues = getMyIssues()
                 sys.stderr.write('\033[2K\033[F'*(len(l)-1))
                 sys.stderr.flush()
                 for _issue in issues:
                     print(_issue, end='')
 
+                print()
+
+                l.remove(l[0])
+                l.remove(l[0])
                 i,s = pos(l, i, '')
                 sys.stderr.write(s)
                 sys.stderr.flush()
