@@ -43,7 +43,7 @@ def main():
     subprocess.run(["git add ."], shell=True)
     subprocess.run(["git status"], shell=True)
 
-    l = ['show issues','','add','update','fix','move','clean', 'None']
+    l = ['show issues','','add','update','fix','move','clean','delete', 'None']
     i, s = pos(l, 0, '')
 
     sys.stderr.write(s)
