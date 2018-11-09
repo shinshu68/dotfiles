@@ -126,7 +126,7 @@ if s:isWsl() && executable('AutoHotkeyU64.exe')
 endif
 
 function! s:InputPrefix(prefix)
-    execute "normal i" . a:prefix
+    execute "normal i" . a:prefix . ' '
 endfunction
 command! -nargs=1 InputPrefix call s:InputPrefix(<f-args>)
 
