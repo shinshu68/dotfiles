@@ -125,20 +125,8 @@ if s:isWsl() && executable('AutoHotkeyU64.exe')
     augroup END
 endif
 
-function! s:getStr(prefix)
-    if a:prefix == "add"
-        return "[add] "
-    elseif a:prefix == "move"
-        return "[move] "
-    elseif a:prefix == "update"
-        return "[update] "
-    elseif a:prefix == "fix"
-        return "[fix] "
-    endif
-endfunction
-
 function! s:InputPrefix(prefix)
-
-    execute "normal i" . s:getStr(a:prefix)
+    execute "normal i[" . a:prefix . "] "
 endfunction
 command! -nargs=1 InputPrefix call s:InputPrefix(<f-args>)
+
