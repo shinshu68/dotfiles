@@ -95,6 +95,7 @@ alias l='ls -CF'
 alias processing='sh ~/dotfiles/.processing.sh'
 alias cls='source ~/.bashrc; clear'
 alias gitcommit='python ~/dotfiles/.gitcommit.py'
+alias getissue='python ~/dotfiles/getMyIssues.py'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
