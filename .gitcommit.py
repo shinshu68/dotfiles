@@ -9,7 +9,7 @@ from getMyIssues import *
 
 class gitcommit():
     def __init__(self):
-        self.position = 0
+        self.position = 2
         self.issuePos = 0
         self.items = ['show issues','','add','update','fix','move','clean','delete','None']
         self.commands = ['j', 'k', 'q', 'g', 'G']
