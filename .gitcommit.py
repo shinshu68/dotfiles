@@ -7,100 +7,106 @@ import shutil
 import colorama
 from getMyIssues import *
 
-def runVim(prefix):
-    print()
-    prefix = '[' + prefix + ']'
-    if prefix == '[None]' or prefix == '[]':
-        subprocess.run([f'vim msgfile.txt'], shell=True)
-    else:
-        subprocess.run([f'vim msgfile.txt -c "InputPrefix {prefix}"'], shell=True)
+class gitcommit():
+    def __init__(self):
+        self.position = 0
+        self.item =['show issues','','add','update','fix','move','clean','delete','None']
+        self.commands = ['j', 'k', 'q', 'g', 'G']
 
-    subprocess.run(["git commit --file='./msgfile.txt'"], shell=True)
-    if input('push? [y/n]') == 'y':
-        subprocess.run(["git push origin master"], shell=True)
+    def setPos(self):
+        if self.position < 0:
+            self.position = 0
+        if self.position >= len(self.item):
+            self.position = len(self.item) - 1
 
-    if os.path.exists('msgfile.txt'):
-        os.remove('msgfile.txt')
+    def writeItem(self, esc):
+        self.setPos()
+        s = esc
+        for i, t in zip(range(len(self.item)), self.item):
+            if i == self.position:
+                s += '->'
+                s += colorama.Fore.GREEN + t + colorama.Fore.RESET
+            else:
+                s += '  '
+                s += t
+            if i != len(self.item) - 1:
+                s += '\n'
 
-def posAndStr(l, n, esc):
-    if n < 0:
-        n = 0
-    if n >= len(l):
-        n = len(l)-1
+        sys.stderr.write(s)
+        sys.stderr.flush()
 
-    s = esc
-    for i, t in zip(range(len(l)), l):
-        if i == n:
-            s += '->'
-            s += colorama.Fore.GREEN + t + colorama.Fore.RESET
+    def runVim(self):
+        print()
+        prefix = '[' + self.item[self.position] + ']'
+        if prefix == '[None]':
+            subprocess.run([f'vim msgfile.txt'], shell=True)
         else:
-            s += '  '
-            s += t
-        if i != len(l)-1:
-            s += '\n'
+            subprocess.run([f'vim msgfile.txt -c "InputPrefix {prefix}"'], shell=True)
 
-    return n, s
+        subprocess.run(["git commit --file='./msgfile.txt'"], shell=True)
+        if input('push? [y/n]') == 'y':
+            subprocess.run(["git push origin master"], shell=True)
 
-def reWrite(position, lines):
-    i, s = posAndStr(lines, position, ('\033[2K\033[F'*(len(lines)-1)))
-    sys.stderr.write(s)
-    sys.stderr.flush()
-    return i
+        if os.path.exists('msgfile.txt'):
+            os.remove('msgfile.txt')
+
+
+    def execute(self, cmd):
+        if cmd == 'j':
+            self.position += 1
+            self.writeItem('\033[2K\033[F'*(len(self.item)-1))
+
+        if cmd == 'k':
+            self.position -= 1
+            self.writeItem('\033[2K\033[F'*(len(self.item)-1))
+
+        if cmd == 'g':
+            c = readchar.readchar()
+            if c == 'g':
+                self.position = 0
+                self.writeItem('\033[2K\033[F'*(len(self.item)-1))
+
+        if cmd == 'G':
+            self.position = len(self.item) - 1
+            self.writeItem('\033[2K\033[F'*(len(self.item)-1))
+
+        if cmd == 'q':
+            print()
+            exit()
 
 
 def main():
     subprocess.run(["git add ."], shell=True)
     subprocess.run(["git status"], shell=True)
 
-    l = ['show issues','','add','update','fix','move','clean','delete', 'None']
-    i, s = posAndStr(l, 0, '')
-
-    sys.stderr.write(s)
-    sys.stderr.flush()
+    gc = gitcommit()
+    gc.writeItem('')
 
     while(True):
         c = readchar.readchar()
-        if c == 'j':
-            i = i+1
-            i = reWrite(i,l)
-
-        elif c == 'k':
-            i = i-1
-            i = reWrite(i,l)
-
-        elif c == 'q':
-            print()
-            exit()
-
-        elif c == 'g':
-            c = readchar.readchar()
-            if c == 'g':
-                i = reWrite(0,l)
-
-        elif c == 'G':
-            i = len(l) -1
-            i = reWrite(i,l)
+        if c in gc.commands:
+            gc.execute(c)
 
         elif c == '\r':
-            if l[i] == 'show issues':
+            if gc.item[gc.position] == 'show issues':
                 issues = getMyIssues()
-                sys.stderr.write('\033[2K\033[F'*(len(l)-1))
+                sys.stderr.write('\033[2K\033[F'*(len(gc.item)-1))
                 sys.stderr.flush()
                 for _issue in issues:
                     print(_issue, end='')
 
                 print()
 
-                l.remove(l[0])
-                l.remove(l[0])
-                i,s = posAndStr(l, i, '')
-                sys.stderr.write(s)
-                sys.stderr.flush()
+                gc.item.remove(gc.item[0])
+                gc.item.remove(gc.item[0])
+                gc.writeItem('')
+
+            elif gc.item[gc.position] == '':
+                pass
 
             else:
-                runVim(l[i])
+                gc.runVim()
                 exit()
-
 
         time.sleep(0.1)
 
