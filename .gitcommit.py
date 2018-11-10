@@ -63,6 +63,7 @@ def main():
         if c == 'j':
             i = i+1
             i = reWrite(i,l)
+
         elif c == 'k':
             i = i-1
             i = reWrite(i,l)
@@ -70,6 +71,12 @@ def main():
         elif c == 'q':
             print()
             exit()
+
+        elif c == 'g':
+            c = readchar.readchar()
+            if c == 'g':
+                i = reWrite(0,l)
+
         elif c == 'G':
             i = len(l) -1
             i = reWrite(i,l)
