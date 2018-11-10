@@ -54,34 +54,32 @@ class gitcommit():
     def execute(self, cmd):
         if cmd == 'j':
             self.position += 1
-            self.writeItem('\033[2K\033[F'*(len(self.items)-1))
 
-        if cmd == 'k':
+        elif cmd == 'k':
             self.position -= 1
-            self.writeItem('\033[2K\033[F'*(len(self.items)-1))
 
-        if cmd == 'g':
+        elif cmd == 'g':
             c = readchar.readchar()
             if c == 'g':
                 self.position = 0
-                self.writeItem('\033[2K\033[F'*(len(self.items)-1))
 
-        if cmd == 'G':
+        elif cmd == 'G':
             self.position = len(self.items) - 1
-            self.writeItem('\033[2K\033[F'*(len(self.items)-1))
 
-        if cmd == 'q':
+        elif cmd == 'q':
             print()
             exit()
 
+        self.writeItem('\033[2K\033[F'*(len(self.items) - 1))
+
     def showIssues(self):
-        issues = getMyIssues()
+        issues, numbers = getMyIssues()
         sys.stderr.write('\033[2K\033[F'*(len(self.items)-1))
         sys.stderr.flush()
         for _issue in issues:
             print(_issue, end='')
 
-        print()
+        print(numbers)
 
         self.items.remove(self.items[0])
         self.items.remove(self.items[0])
@@ -111,14 +109,10 @@ def main():
                 gc.runVim()
                 exit()
 
-        time.sleep(0.1)
-
 if __name__ == '__init__':
     colorama.init()
-    terminal_size = shutil.get_terminal_size()
 
 if __name__ == '__main__':
     main()
-
 
 

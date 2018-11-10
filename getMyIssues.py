@@ -35,6 +35,7 @@ def getMyIssues():
     now_repo = None
 
     result = []
+    issueNumbers = []
 
     for repo in g.get_user().get_repos():
         if repo.name == repo_name:
@@ -46,6 +47,7 @@ def getMyIssues():
     for _issue in now_repo.get_issues():
         result.append('  #{:<4} {}'.format(_issue.number, _issue.title))
         result.append(f'[{pycolor.setcolor(_issue.state)}]\n')
+        issueNumbers.append('#' + str(_issue.number))
 
         for line in _issue.body.split('\n'):
             if _issue.body == '':
@@ -67,7 +69,7 @@ def getMyIssues():
 
         result.append('\n')
 
-    return result
+    return result , issueNumbers
 
 if __name__ == '__main__':
     res = getMyIssues()
