@@ -72,6 +72,6 @@ def getMyIssues():
     return result , issueNumbers
 
 if __name__ == '__main__':
-    res = getMyIssues()
+    res, num = getMyIssues()
     for i in res:
         print(i, end='')
