@@ -14,6 +14,7 @@ class gitcommit():
         self.items = ['show issues','','add','update','fix','move','clean','delete','None']
         self.commands = ['j', 'k', 'q', 'g', 'G']
         self.mode = 'normal'
+        self.close = ''
 
     def setPos(self):
         if self.position < 0:
@@ -62,10 +63,14 @@ class gitcommit():
     def runVim(self):
         print()
         prefix = '[' + self.items[self.position] + ']'
+        cmd = 'vim msgfile.txt'
         if prefix == '[None]':
-            subprocess.run([f'vim msgfile.txt'], shell=True)
+            subprocess.run([cmd], shell=True)
         else:
-            subprocess.run([f'vim msgfile.txt -c "InputPrefix {prefix}"'], shell=True)
+            if self.close == '':
+                subprocess.run([cmd + f' -c "InputPrefix {prefix}"'], shell=True)
+            else:
+                subprocess.run([cmd + f' -c "InsertClose {self.close}" -c "InputPrefix {prefix}"'], shell=True)
 
         subprocess.run(["git commit --file='./msgfile.txt'"], shell=True)
         if input('push? [y/n]') == 'y':
@@ -130,7 +135,7 @@ class gitcommit():
         self.mode = 'issue'
         self.issuePos = 0
         print('\n')
-        self.writeIssueNumber('\033[2K\033[F'*(len(self.items)-1))
+        self.writeIssueNumber('\033[2K\033[F\033[2K'*(len(self.items)-1))
 
         self.commands = ['h', 'l', 'q']
 
@@ -139,9 +144,11 @@ class gitcommit():
             if c in self.commands:
                 self.execute(c)
             elif c == '\r':
+                self.mode = 'normal'
+                self.close = self.issueNumbers[self.issuePos]
                 print()
-                print(self.issueNumbers[self.issuePos])
-                exit()
+                self.position = 2
+                self.writeItem('')
 
             if self.mode != 'issue':
                 break
