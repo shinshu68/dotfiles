@@ -10,14 +10,22 @@ from getMyIssues import *
 class gitcommit():
     def __init__(self):
         self.position = 0
+        self.issuePos = 0
         self.items = ['show issues','','add','update','fix','move','clean','delete','None']
         self.commands = ['j', 'k', 'q', 'g', 'G']
+        self.mode = 'normal'
 
     def setPos(self):
         if self.position < 0:
             self.position = 0
         if self.position >= len(self.items):
             self.position = len(self.items) - 1
+
+    def setIssuePos(self):
+        if self.issuePos < 0:
+            self.issuePos = 0;
+        if self.issuePos >= len(self.issueNumbers):
+            self.issuePos = len(self.issueNumbers) - 1
 
     def writeItem(self, esc):
         self.setPos()
@@ -31,6 +39,22 @@ class gitcommit():
                 s += t
             if i != len(self.items) - 1:
                 s += '\n'
+
+        sys.stderr.write(s)
+        sys.stderr.flush()
+
+    def writeIssueNumber(self, esc):
+        self.setIssuePos()
+        s = esc
+        for i , t in zip(range(len(self.issueNumbers)), self.issueNumbers):
+            if i == self.issuePos:
+                s += '->'
+                s += colorama.Fore.GREEN + t + colorama.Fore.RESET
+            else:
+                s += '  '
+                s += t
+            if i != len(self.issueNumbers) - 1:
+                s += '  '
 
         sys.stderr.write(s)
         sys.stderr.flush()
@@ -54,23 +78,39 @@ class gitcommit():
     def execute(self, cmd):
         if cmd == 'j':
             self.position += 1
+            self.writeItem('\033[2K\033[F'*(len(self.items) - 1))
 
         elif cmd == 'k':
             self.position -= 1
+            self.writeItem('\033[2K\033[F'*(len(self.items) - 1))
+
+        elif cmd == 'h' and self.mode == 'issue':
+            self.issuePos -= 1
+            self.writeIssueNumber('\033[2K\033[G')
+
+        elif cmd == 'l' and self.mode == 'issue':
+            self.issuePos += 1
+            self.writeIssueNumber('\033[2K\033[G')
 
         elif cmd == 'g':
             c = readchar.readchar()
             if c == 'g':
                 self.position = 0
+                self.writeItem('\033[2K\033[F'*(len(self.items) - 1))
 
         elif cmd == 'G':
             self.position = len(self.items) - 1
+            self.writeItem('\033[2K\033[F'*(len(self.items) - 1))
 
         elif cmd == 'q':
-            print()
-            exit()
+            if self.mode == 'normal':
+                print()
+                exit()
 
-        self.writeItem('\033[2K\033[F'*(len(self.items) - 1))
+            elif self.mode == 'issue':
+                print()
+                self.writeItem('\033[2K\033[F'*3)
+                self.mode = 'normal'
 
     def showIssues(self):
         issues, numbers = getMyIssues()
@@ -79,12 +119,34 @@ class gitcommit():
         for _issue in issues:
             print(_issue, end='')
 
-        print(numbers)
+        self.issueNumbers = numbers
 
         self.items.remove(self.items[0])
-        self.items.remove(self.items[0])
+        #self.items.remove(self.items[0])
+        self.items.insert(0, 'close issue')
         self.writeItem('')
 
+    def closeIssue(self):
+        self.mode = 'issue'
+        self.issuePos = 0
+        print('\n')
+        self.writeIssueNumber('\033[2K\033[F'*(len(self.items)-1))
+
+        self.commands = ['h', 'l', 'q']
+
+        while True:
+            c = readchar.readchar()
+            if c in self.commands:
+                self.execute(c)
+            elif c == '\r':
+                print()
+                print(self.issueNumbers[self.issuePos])
+                exit()
+
+            if self.mode != 'issue':
+                break
+
+        self.commands = ['j', 'k', 'q', 'g', 'G']
 
 def main():
     subprocess.run(["git add ."], shell=True)
@@ -101,6 +163,9 @@ def main():
         elif c == '\r':
             if gc.items[gc.position] == 'show issues':
                 gc.showIssues()
+
+            elif gc.items[gc.position] == 'close issue':
+                gc.closeIssue()
 
             elif gc.items[gc.position] == '':
                 pass
