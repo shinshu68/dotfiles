@@ -10,26 +10,26 @@ from getMyIssues import *
 class gitcommit():
     def __init__(self):
         self.position = 0
-        self.item =['show issues','','add','update','fix','move','clean','delete','None']
+        self.items = ['show issues','','add','update','fix','move','clean','delete','None']
         self.commands = ['j', 'k', 'q', 'g', 'G']
 
     def setPos(self):
         if self.position < 0:
             self.position = 0
-        if self.position >= len(self.item):
-            self.position = len(self.item) - 1
+        if self.position >= len(self.items):
+            self.position = len(self.items) - 1
 
     def writeItem(self, esc):
         self.setPos()
         s = esc
-        for i, t in zip(range(len(self.item)), self.item):
+        for i, t in zip(range(len(self.items)), self.items):
             if i == self.position:
                 s += '->'
                 s += colorama.Fore.GREEN + t + colorama.Fore.RESET
             else:
                 s += '  '
                 s += t
-            if i != len(self.item) - 1:
+            if i != len(self.items) - 1:
                 s += '\n'
 
         sys.stderr.write(s)
@@ -37,7 +37,7 @@ class gitcommit():
 
     def runVim(self):
         print()
-        prefix = '[' + self.item[self.position] + ']'
+        prefix = '[' + self.items[self.position] + ']'
         if prefix == '[None]':
             subprocess.run([f'vim msgfile.txt'], shell=True)
         else:
@@ -54,25 +54,38 @@ class gitcommit():
     def execute(self, cmd):
         if cmd == 'j':
             self.position += 1
-            self.writeItem('\033[2K\033[F'*(len(self.item)-1))
+            self.writeItem('\033[2K\033[F'*(len(self.items)-1))
 
         if cmd == 'k':
             self.position -= 1
-            self.writeItem('\033[2K\033[F'*(len(self.item)-1))
+            self.writeItem('\033[2K\033[F'*(len(self.items)-1))
 
         if cmd == 'g':
             c = readchar.readchar()
             if c == 'g':
                 self.position = 0
-                self.writeItem('\033[2K\033[F'*(len(self.item)-1))
+                self.writeItem('\033[2K\033[F'*(len(self.items)-1))
 
         if cmd == 'G':
-            self.position = len(self.item) - 1
-            self.writeItem('\033[2K\033[F'*(len(self.item)-1))
+            self.position = len(self.items) - 1
+            self.writeItem('\033[2K\033[F'*(len(self.items)-1))
 
         if cmd == 'q':
             print()
             exit()
+
+    def showIssues(self):
+        issues = getMyIssues()
+        sys.stderr.write('\033[2K\033[F'*(len(self.items)-1))
+        sys.stderr.flush()
+        for _issue in issues:
+            print(_issue, end='')
+
+        print()
+
+        self.items.remove(self.items[0])
+        self.items.remove(self.items[0])
+        self.writeItem('')
 
 
 def main():
@@ -88,20 +101,10 @@ def main():
             gc.execute(c)
 
         elif c == '\r':
-            if gc.item[gc.position] == 'show issues':
-                issues = getMyIssues()
-                sys.stderr.write('\033[2K\033[F'*(len(gc.item)-1))
-                sys.stderr.flush()
-                for _issue in issues:
-                    print(_issue, end='')
+            if gc.items[gc.position] == 'show issues':
+                gc.showIssues()
 
-                print()
-
-                gc.item.remove(gc.item[0])
-                gc.item.remove(gc.item[0])
-                gc.writeItem('')
-
-            elif gc.item[gc.position] == '':
+            elif gc.items[gc.position] == '':
                 pass
 
             else:
