@@ -126,9 +126,10 @@ class gitcommit():
 
         self.issueNumbers = numbers
 
-        self.items.remove(self.items[0])
         #self.items.remove(self.items[0])
-        self.items.insert(0, 'close issue')
+        #self.items.remove(self.items[0])
+        #self.items.insert(0, 'close issue')
+        self.items[0] = 'close issue'
         self.writeItem('')
 
     def closeIssue(self):
