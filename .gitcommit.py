@@ -30,6 +30,7 @@ class gitcommit():
 
     def writeItem(self, esc):
         self.setPos()
+
         s = esc
         for i, t in zip(range(len(self.items)), self.items):
             if i == self.position:
@@ -83,11 +84,15 @@ class gitcommit():
     def execute(self, cmd):
         if cmd == 'j':
             self.position += 1
-            self.writeItem('\033[2K\033[F'*(len(self.items) - 1))
+            if self.items[self.position] == '':
+                self.position += 1
+            self.writeItem('\033[2K\033[F\033[2K'*(len(self.items) - 1))
 
         elif cmd == 'k':
             self.position -= 1
-            self.writeItem('\033[2K\033[F'*(len(self.items) - 1))
+            if self.items[self.position] == '':
+                self.position -= 1
+            self.writeItem('\033[2K\033[F\033[2K'*(len(self.items) - 1))
 
         elif cmd == 'h' and self.mode == 'issue':
             self.issuePos -= 1
@@ -114,8 +119,9 @@ class gitcommit():
 
             elif self.mode == 'issue':
                 print()
-                self.writeItem('\033[2K\033[F'*3)
                 self.mode = 'normal'
+                self.position = 2
+                self.writeItem('\033[2K\033[F\033[2K'*3)
 
     def showIssues(self):
         issues, numbers = getMyIssues()
@@ -126,16 +132,17 @@ class gitcommit():
 
         self.issueNumbers = numbers
 
-        self.items.remove(self.items[0])
         #self.items.remove(self.items[0])
-        self.items.insert(0, 'close issue')
+        #self.items.remove(self.items[0])
+        #self.items.insert(0, 'close issue')
+        self.items[0] = 'close issue'
         self.writeItem('')
 
     def closeIssue(self):
         self.mode = 'issue'
         self.issuePos = 0
-        print('\n')
-        self.writeIssueNumber('\033[2K\033[F\033[2K'*(len(self.items)-1))
+        #print('\n')
+        self.writeIssueNumber('\033[2K\033[F\033[2K'*(len(self.items)-3))
 
         self.commands = ['h', 'l', 'q']
 
