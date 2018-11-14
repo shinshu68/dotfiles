@@ -1,7 +1,7 @@
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 if = "has('nvim')"
-on_event = 'InsertEnter'
+on_event = 'InsertCharPre'
 hook_source = '''
     let g:deoplete#enable_at_startup = 1
     call deoplete#custom#option({
@@ -11,7 +11,6 @@ hook_source = '''
     \ })
     inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
 '''
-
 #hook_source = '''
 #    let g:deoplete#enable_at_startup = 1
 #    let g:deoplete#auto_complete_delay = 0
@@ -36,6 +35,10 @@ depends = ['deoplete.nvim']
 #\ neosnippet#expandable_or_jumpable() ?
 #\    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+depends = ['deoplete.nvim']
+on_ft = ['python']
 
 [[plugins]] # toml syntax
 repo = 'cespare/vim-toml'
@@ -87,3 +90,42 @@ on_ft = 'markdown'
 hook_add = '''
     let g:vim_markdown_folding_disabled = 1
 '''
+
+[[plugins]]
+repo = 'w0rp/ale'
+on_ft = 'python'
+hook_add = #'''
+#let g:ale_sign_error = 'x'
+#let g:ale_sign_warning = '!'
+'''
+    highlight clear ALEErrorSign
+    highlight clear ALEWarningSign
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    let g:ale_sign_column_always = 1
+
+    let g:ale_lint_on_enter = 1
+    let g:ale_lint_on_save = 1
+    let g:ale_lint_on_text_changed = 1
+
+    let g:ale_set_loclist = 0
+    let g:ale_set_quickfix = 0
+    let g:ale_open_list = 0
+    let g:ale_keep_list_window_open = 0
+
+    let g:ale_linters = {
+    \   'python': ['flake8'],
+    \}
+
+    nmap [ale] <Nop>
+    map <C-k> [ale]
+    nmap <silent> [ale]<C-P> <Plug>(ale_previous)
+    nmap <silent> [ale]<C-N> <Plug>(ale_next)
+'''
+
+#[[plugins]]
+#repo = 'neomake/neomake'
+#on_ft = ['python']
+#hook_source = '''
+#    autocmd! BufEnter,BufWritePost * Neomake
+#    let g:neomake_python_enabled_makers = ['python', 'flake8']
+#'''
