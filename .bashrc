@@ -165,4 +165,5 @@ rightprompt()
     printf "%*s" $COLUMNS "right prompt"
 }
 
+export DISPLAY=:0.0
 #export PS1='\[$(tput sc; rightprompt; tput rc)\]left prompt > '
