@@ -10,6 +10,7 @@ hook_source = '''
     \ 'refresh_always': v:true,
     \ })
     inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<tab>"
+    inoremap <expr><S-tab> pumvisible() ? "\<C-p>" : "\<S-tab>"
 '''
 #hook_source = '''
 #    let g:deoplete#enable_at_startup = 1
