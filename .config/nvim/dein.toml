@@ -29,3 +29,6 @@ repo = 'skywind3000/asyncrun.vim'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'tyru/caw.vim'
