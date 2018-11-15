@@ -2,16 +2,15 @@ import subprocess
 import os
 import sys
 import readchar
-import time
-import shutil
 import colorama
 from getMyIssues import *
+
 
 class gitcommit():
     def __init__(self):
         self.position = 2
         self.issuePos = 0
-        self.items = ['show issues','','add','update','fix','move','clean','delete','None']
+        self.items = ['show issues', '', 'add', 'update', 'fix', 'move', 'clean', 'delete', 'None']
         self.commands = ['j', 'k', 'q', 'g', 'G']
         self.mode = 'normal'
         self.close = ''
@@ -24,7 +23,7 @@ class gitcommit():
 
     def setIssuePos(self):
         if self.issuePos < 0:
-            self.issuePos = 0;
+            self.issuePos = 0
         if self.issuePos >= len(self.issueNumbers):
             self.issuePos = len(self.issueNumbers) - 1
 
@@ -48,7 +47,7 @@ class gitcommit():
     def writeIssueNumber(self, esc):
         self.setIssuePos()
         s = esc
-        for i , t in zip(range(len(self.issueNumbers)), self.issueNumbers):
+        for i, t in zip(range(len(self.issueNumbers)), self.issueNumbers):
             if i == self.issuePos:
                 s += '->'
                 s += colorama.Fore.GREEN + t + colorama.Fore.RESET
@@ -79,7 +78,6 @@ class gitcommit():
 
         if os.path.exists('msgfile.txt'):
             os.remove('msgfile.txt')
-
 
     def execute(self, cmd):
         if cmd == 'j':
@@ -132,16 +130,13 @@ class gitcommit():
 
         self.issueNumbers = numbers
 
-        #self.items.remove(self.items[0])
-        #self.items.remove(self.items[0])
-        #self.items.insert(0, 'close issue')
         self.items[0] = 'close issue'
         self.writeItem('')
 
     def closeIssue(self):
         self.mode = 'issue'
         self.issuePos = 0
-        #print('\n')
+        # print('\n')
         self.writeIssueNumber('\033[2K\033[F\033[2K'*(len(self.items)-3))
 
         self.commands = ['h', 'l', 'q']
@@ -161,6 +156,7 @@ class gitcommit():
                 break
 
         self.commands = ['j', 'k', 'q', 'g', 'G']
+
 
 def main():
     subprocess.run(["git add ."], shell=True)
@@ -188,10 +184,9 @@ def main():
                 gc.runVim()
                 exit()
 
+
 if __name__ == '__init__':
     colorama.init()
 
 if __name__ == '__main__':
     main()
-
-
