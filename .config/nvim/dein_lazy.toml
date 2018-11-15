@@ -122,6 +122,17 @@ hook_add = #'''
     nmap <silent> [ale]<C-P> <Plug>(ale_previous)
     nmap <silent> [ale]<C-N> <Plug>(ale_next)
 '''
+[[plugins]]
+repo = 'derekwyatt/vim-scala'
+on_ft = 'scala'
+hook_add = '''
+'''
+[[plugins]]
+repo = 'yuroyoro/vim-scala'
+on_ft = 'scala'
+hook_add = '''
+    setlocal dictionary+=~/.cache/dein/repos/github.com/yuroyoro/vim-scala/dict/scala.dict
+'''
 
 #[[plugins]]
 #repo = 'neomake/neomake'

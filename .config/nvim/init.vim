@@ -149,6 +149,8 @@ nnoremap <Space>m %
 " ツリーと編集領域を移動する
 nnoremap <Leader><Tab> <C-w>w
 
+au BufNewFile,BufRead *.scala setf scala
+
 function! s:isWsl()
     return filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
 endfunction
