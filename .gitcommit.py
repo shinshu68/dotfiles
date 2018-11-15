@@ -136,7 +136,6 @@ class gitcommit():
     def closeIssue(self):
         self.mode = 'issue'
         self.issuePos = 0
-        # print('\n')
         self.writeIssueNumber('\033[2K\033[F\033[2K'*(len(self.items)-3))
 
         self.commands = ['h', 'l', 'q']
