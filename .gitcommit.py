@@ -158,8 +158,8 @@ class gitcommit():
         self.commands = ['j', 'k', 'q', 'g', 'G']
 
 
-def main():
-    subprocess.run(["git add ."], shell=True)
+def main(gitaddFiles):
+    subprocess.run([f"git add {gitaddFiles}"], shell=True)
     subprocess.run(["git status"], shell=True)
 
     gc = gitcommit()
@@ -189,4 +189,9 @@ if __name__ == '__init__':
     colorama.init()
 
 if __name__ == '__main__':
-    main()
+    args = sys.argv
+    gitaddFiles = '.'
+    if len(args) > 1:
+        gitaddFiles = ' '.join(args[1:])
+
+    main(gitaddFiles)
