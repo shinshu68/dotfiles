@@ -57,7 +57,8 @@ def getMyIssues():
 
         comments = _issue.get_comments()
         if _issue.body != '' and len(list(comments)) != 0:
-            result.append('\n')
+            # result.append('\n')
+            pass
 
         for i, _comment in zip(itertools.count(1), comments):
             result.append('    {:<4}'.format(i))
@@ -69,7 +70,8 @@ def getMyIssues():
 
         result.append('\n')
 
-    return result , issueNumbers
+    return result, issueNumbers
+
 
 if __name__ == '__main__':
     res, num = getMyIssues()
