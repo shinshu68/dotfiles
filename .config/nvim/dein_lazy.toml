@@ -130,7 +130,7 @@ hook_add = '''
 [[plugins]]
 repo = 'yuroyoro/vim-scala'
 on_ft = 'scala'
-hook_add = '''
+hook_source = '''
     setlocal dictionary+=~/.cache/dein/repos/github.com/yuroyoro/vim-scala/dict/scala.dict
 '''
 
