@@ -95,10 +95,7 @@ hook_add = '''
 [[plugins]]
 repo = 'w0rp/ale'
 on_ft = 'python'
-hook_add = #'''
-#let g:ale_sign_error = 'x'
-#let g:ale_sign_warning = '!'
-'''
+hook_add = '''
     highlight clear ALEErrorSign
     highlight clear ALEWarningSign
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -122,14 +119,10 @@ hook_add = #'''
     nmap <silent> [ale]<C-P> <Plug>(ale_previous)
     nmap <silent> [ale]<C-N> <Plug>(ale_next)
 '''
-[[plugins]]
-repo = 'derekwyatt/vim-scala'
-on_ft = ['scala']
-hook_add = '''
-'''
+
 [[plugins]]
 repo = 'yuroyoro/vim-scala'
-on_ft = ['scala']
+on_ft = 'scala'
 hook_source = '''
     setlocal dictionary+=~/.cache/dein/repos/github.com/yuroyoro/vim-scala/dict/scala.dict
 '''
