@@ -2,20 +2,14 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'tomasiser/vim-code-dark'
-hook_add = '''
-    set t_Co=256
-    set t_ut=
-    colorscheme codedark
-'''
+repo = 'shinshu68/vim-code-dark'
+
+[[plugins]]
+repo = 'jdkanani/vim-material-theme'
 
 [[plugins]]
 repo = 'nathanaelkane/vim-indent-guides'
 hook_add = '''
-    let g:indent_guides_enable_on_vim_startup = 1
-    let g:indent_guides_auto_colors = 0
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#262626   ctermbg=235
-    autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#303030   ctermbg=236
 '''
 [[plugins]]
 repo = 'thinca/vim-quickrun'

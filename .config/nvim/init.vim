@@ -35,7 +35,21 @@ if dein#check_install()
     call dein#install()
 endif
 
-syntax on
+syntax enable
+" colorscheme material-theme
+if (has("nvim"))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+if (has("termguicolors"))
+    set termguicolors
+endif
+colorscheme codedark
+set t_ut=
+
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#262626   ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#303030   ctermbg=236
 
 " エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
 set laststatus=2

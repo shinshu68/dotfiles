@@ -124,13 +124,13 @@ hook_add = #'''
 '''
 [[plugins]]
 repo = 'derekwyatt/vim-scala'
-on_ft = 'scala'
+on_ft = ['scala']
 hook_add = '''
 '''
 [[plugins]]
 repo = 'yuroyoro/vim-scala'
-on_ft = 'scala'
-hook_add = '''
+on_ft = ['scala']
+hook_source = '''
     setlocal dictionary+=~/.cache/dein/repos/github.com/yuroyoro/vim-scala/dict/scala.dict
 '''
 
