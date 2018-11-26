@@ -163,6 +163,8 @@ nnoremap <Space>m %
 " ツリーと編集領域を移動する
 nnoremap <Leader><Tab> <C-w>w
 
+cnoremap <C-v> <C-r>0
+
 au BufNewFile,BufRead *.scala setf scala
 
 function! s:isWsl()
