@@ -119,6 +119,9 @@ on_ft = 'scala'
 hook_source = '''
     setlocal dictionary+=~/.cache/dein/repos/github.com/yuroyoro/vim-scala/dict/scala.dict
 '''
+[[plugins]]
+repo = 'posva/vim-vue'
+on_ft = 'vue'
 
 #[[plugins]]
 #repo = 'neomake/neomake'

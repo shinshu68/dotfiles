@@ -51,6 +51,8 @@ let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#262626   ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#303030   ctermbg=236
 
+autocmd FileType vue syntax sync fromstart
+
 " エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
 set laststatus=2
 " ステータス行に表示させる情報の指定(どこからかコピペしたので細かい意味はわかっていない)
