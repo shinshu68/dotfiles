@@ -98,6 +98,10 @@ alias gitcommit='python ~/dotfiles/.gitcommit.py'
 alias getissue='python ~/dotfiles/getMyIssues.py'
 alias py='python'
 alias easybuild='sh ~/dotfiles/easybuild.sh'
+alias torstart='service tor start'
+alias torrestart='service tor restart'
+alias torstop='service tor stop'
+alias sudo='sudo '
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
