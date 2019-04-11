@@ -153,8 +153,8 @@ CYAN_C="\e[1;36m"
 
 function get_line () {
     LINE=$COLUMNS
-    L1="\[\e[$[LINE-$(echo -n " [\u@yukari]\D{%H:%M} " | wc -c)]C[${CYAN_C}\u${RIN_C}@${JUN_C}${ON_BC}yukari${CLR_C}]${YERW_C}\D{%H:%M}\e[$[LINE]D\]"
-    PS1=$(echo "${L1}${CLR_C}[${BLUE_C}\w${CLR_C}]${YERW_C}${CLR_C}\n\`
+    L1="\[\e[$[LINE-$(echo -n " [\u]\D{%H:%M} " | wc -c)]C[${CYAN_C}\u${CLR_C}]${YERW_C}\D{%H:%M}\e[$[LINE]D\]"
+    PS1=$(echo "${L1}${CLR_C}[${BLUE_C}\w${CLR_C}]\n\`
     if [ \$? = 0 ]; then
         echo -e "${GREN_BC}${BLK_C}OK${CLR_C}";
     else
@@ -165,10 +165,4 @@ function get_line () {
 #echo $(__git_ps1) > .columns
 PROMPT_COMMAND=get_line
 
-rightprompt()
-{
-    printf "%*s" $COLUMNS "right prompt"
-}
-
 export DISPLAY=:0.0
-#export PS1='\[$(tput sc; rightprompt; tput rc)\]left prompt > '
