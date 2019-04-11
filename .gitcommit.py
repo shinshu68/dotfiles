@@ -82,12 +82,14 @@ class gitcommit():
     def execute(self, cmd):
         if cmd == 'j':
             self.position += 1
+            self.position = min(self.position, len(self.items)-1)
             if self.items[self.position] == '':
                 self.position += 1
             self.writeItem('\033[2K\033[F\033[2K'*(len(self.items) - 1))
 
         elif cmd == 'k':
             self.position -= 1
+            self.position = max(self.position, 0)
             if self.items[self.position] == '':
                 self.position -= 1
             self.writeItem('\033[2K\033[F\033[2K'*(len(self.items) - 1))
