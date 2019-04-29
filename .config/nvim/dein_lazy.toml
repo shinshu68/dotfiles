@@ -36,9 +36,15 @@ depends = ['deoplete.nvim']
 #\ neosnippet#expandable_or_jumpable() ?
 #\    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 
+# [[plugins]]
+# repo = 'fatih/vim-go'
+# on_ft = 'go'
+
 [[plugins]]
 repo = 'stamblerre/gocode'
 rtp =  'nvim/'
+on_ft = 'go'
+do = '~/.config/nvim/plugged/gocode/nvim/symlink.sh'
 
 [[plugins]]
 repo = 'deoplete-plugins/deoplete-go'
@@ -47,7 +53,7 @@ build = 'make'
     # let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
     # let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 # '''
-depends = ['deoplete.nvim']
+depends = ['deoplete.nvim', 'gocode']
 on_ft = 'go'
 
 [[plugins]]

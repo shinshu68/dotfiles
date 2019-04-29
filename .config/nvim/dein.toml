@@ -29,3 +29,6 @@ repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
 repo = 'tyru/caw.vim'
+
+[[plugins]]
+repo = 'benekastah/neomake'

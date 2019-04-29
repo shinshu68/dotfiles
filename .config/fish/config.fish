@@ -6,3 +6,7 @@ set -x XDG_CACHE_HOME $HOME/.cache
 set -x PATH "/usr/lib/go-1.10/bin" $PATH
 direnv hook fish | source
 set -x EDITOR nvim
+
+set -x GOPATH $HOME/goprojects
+set -x PATH $GOPATH/bin $PATH
+
