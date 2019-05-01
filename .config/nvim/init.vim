@@ -48,10 +48,10 @@ endif
 colorscheme codedark
 set t_ut=
 
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#262626   ctermbg=235
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#303030   ctermbg=236
+" let g:indent_guides_enable_on_vim_startup = 1
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#262626   ctermbg=235
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#303030   ctermbg=236
 
 autocmd FileType vue syntax sync fromstart
 
