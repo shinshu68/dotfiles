@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTPATH="~/dotfiles"
+DOTPATH=~/dotfiles
 GITHUB_URL="https://github.com/shinshu68/dotfiles.git"
 
 is_exists() {
