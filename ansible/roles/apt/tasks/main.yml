@@ -1,0 +1,17 @@
+- set_fact:
+    apt: {}
+
+- name: apt add repositories
+  apt_repository:
+    repo:         '{{ item }}'
+    update_cache: yes
+  with_items: '{{ apt.repositories }}'
+  when: apt.repositories
+
+- name: test apt install
+  apt:
+    name:             '{{ apt.packages }}'
+    update_cache:     yes
+    cache_valid_time: 3600
+  when: apt.packages
+

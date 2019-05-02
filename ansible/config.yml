@@ -1,0 +1,29 @@
+apt:
+  repositories:
+    - ppa:neovim-ppa/stable
+
+  packages:
+    - git
+    - fish
+    - vim-nox
+    - neovim
+    - python-pip
+    - python3-pip
+
+user:
+  default_shell:
+    - shell: '/usr/bin/fish'
+
+pip:
+  packages:
+    - neovim
+
+link:
+  bash/bashrc:                         .bashrc
+  config/fish/config.fish:             .config/fish/config.fish
+  config/fish/functions/cls.fish:      .config/fish/functions/cls.fish
+  config/fish/functions/reporoot.fish: .config/fish/functions/reporoot.fish
+  config/gitconfig:                    .gitconfig
+  config/nvim:                         .config/nvim
+  tmux/tmux.conf:                      .tmux.conf
+  vim/vimrc:                           .vimrc

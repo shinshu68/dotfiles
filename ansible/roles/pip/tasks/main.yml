@@ -1,0 +1,7 @@
+- set_fact:
+    pip: {}
+
+- name: pip install
+  pip:
+    name: '{{ pip.packages }}'
+  when: pip.packages
