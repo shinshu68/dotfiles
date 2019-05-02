@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DOTPATH=~/dotfiles
-GITHUB_URL="https://github.com/shinshu68/dotfiles.git"
+DOTPATH=~/dotfiles; export DOTPATH
+GITHUB_URL="https://github.com/shinshu68/dotfiles.git"; export GITHUB_URL
 
 is_exists() {
     which "$1" >/dev/null 2>&1
