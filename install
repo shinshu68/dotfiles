@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DOTPATH="~/dotfiles"
+GITHUB_URL="https://github.com/shinshu68/dotfiles.git"
+
 is_exists() {
     which "$1" >/dev/null 2>&1
     return $?
@@ -22,4 +25,22 @@ print_dotfiles() {
   printf "\e[0m\n"
 }
 
+dotfiles_clone() {
+    if is_exists "git"; then
+        git clone "$GITHUB_URL" "$DOTPATH"
+    elif is_exists "curl" then
+        local tar_url="https://github.com/shinshu68/dotfiles/achieve/master/tar.gz"
+        curl -L "$tar_url" | tar xvz
+
+        if [ ! -d dotfiles-master ]; then
+            echo "dotfiles-master: not found"
+            exit 1
+        fi
+        command mv -f dotfiles-master "$DOTPATH"
+    else
+        echo "required git or curl"
+    fi
+}
+
 print_dotfiles
+dotfiles_clone
