@@ -26,6 +26,8 @@ print_dotfiles() {
 }
 
 dotfiles_clone() {
+    echo 'Downloading dotfiles...'
+
     if is_exists "git"; then
         git clone "$GITHUB_URL" "$DOTPATH"
 
@@ -43,7 +45,21 @@ dotfiles_clone() {
         echo 'required git or curl'
         exit 1
     fi
+
+    echo 'done!'
+}
+
+install_ansible() {
+    if is_exists "ansible"; then
+        return
+    fi
+
+    echo 'Installing ansible...'
+    apt-add-repository ppa:ansible/ansible
+    apt install ansible
+    echo 'done!'
 }
 
 print_dotfiles
 dotfiles_clone
+install_ansible
