@@ -1,6 +1,6 @@
 - name:  shinshu68 test
-  hosts: 127.0.0.1
-  connection: local
+  hosts: test_servers
+  connection: docker
 
   vars:
     home_path:     '{{ lookup("env", "HOME") }}'

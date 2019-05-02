@@ -34,3 +34,7 @@ ansiblecheck:
 .PHONY: ansiblerun
 ansiblerun:
 	ansible-playbook -i inventory --extra-vars='@config.yml' playbook.yml --diff
+
+.PHONY: ansibledockerrun
+ansibledockerrun:
+	ansible-playbook -i inventory --extra-vars='@config.yml' playbook_docker.yml --diff
