@@ -28,7 +28,8 @@ print_dotfiles() {
 dotfiles_clone() {
     if is_exists "git"; then
         git clone "$GITHUB_URL" "$DOTPATH"
-    elif is_exists "curl" then
+
+    elif is_exists "curl"; then
         local tar_url="https://github.com/shinshu68/dotfiles/achieve/master/tar.gz"
         curl -L "$tar_url" | tar xvz
 
@@ -37,8 +38,10 @@ dotfiles_clone() {
             exit 1
         fi
         command mv -f dotfiles-master "$DOTPATH"
+
     else
         echo "required git or curl"
+        exit 1
     fi
 }
 
