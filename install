@@ -46,7 +46,7 @@ download_dotfiles() {
         command mv -f dotfiles-master "$DOTPATH"
 
     else
-        echo 'required git or curl'
+        echo 'Required git or curl'
         exit 1
     fi
 
@@ -55,7 +55,7 @@ download_dotfiles() {
 
 install_ansible() {
     if is_exists "ansible"; then
-        echo 'already installed ansible'
+        echo 'Already installed ansible'
         return
     fi
 
@@ -63,8 +63,9 @@ install_ansible() {
     yes | apt-add-repository ppa:ansible/ansible
     yes | apt update
     yes | apt install ansible
-    if $? then
-        echo 'done!'
+
+    if $?; then
+        e_done "Installi ansible"
     fi
 }
 
