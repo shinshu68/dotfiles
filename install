@@ -64,9 +64,7 @@ install_ansible() {
     yes | apt update
     yes | apt install ansible
 
-    if $?; then
-        e_done "Installi ansible"
-    fi
+    e_done "Installi ansible"
 }
 
 print_dotfiles
