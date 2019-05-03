@@ -8,6 +8,10 @@ is_exists() {
     return $?
 }
 
+e_done() {
+    printf " \033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*"
+}
+
 print_dotfiles() {
     printf "\e[34m"
     echo '---------------------------------------------------------------------------------------'
@@ -25,7 +29,7 @@ print_dotfiles() {
     printf "\e[0m\n"
 }
 
-dotfiles_clone() {
+download_dotfiles() {
     echo 'Downloading dotfiles...'
 
     if is_exists "git"; then
@@ -46,20 +50,24 @@ dotfiles_clone() {
         exit 1
     fi
 
-    echo 'done!'
+    e_done "Download"
 }
 
 install_ansible() {
     if is_exists "ansible"; then
+        echo 'already installed ansible'
         return
     fi
 
     echo 'Installing ansible...'
-    apt-add-repository ppa:ansible/ansible
-    apt install ansible
-    echo 'done!'
+    yes | apt-add-repository ppa:ansible/ansible
+    yes | apt update
+    yes | apt install ansible
+    if $? then
+        echo 'done!'
+    fi
 }
 
 print_dotfiles
-dotfiles_clone
+download_dotfiles
 install_ansible
