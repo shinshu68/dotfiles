@@ -9,6 +9,8 @@ apt:
     - neovim
     - python-pip
     - python3-pip
+    - direnv
+    - golang-1.10
 
 user:
   default_shell:
