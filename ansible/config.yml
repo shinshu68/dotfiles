@@ -3,14 +3,14 @@ apt:
     - ppa:neovim-ppa/stable
 
   packages:
-    - git
+    - direnv
     - fish
-    - vim-nox
+    - git
+    - golang-1.10
     - neovim
     - python-pip
     - python3-pip
-    - direnv
-    - golang-1.10
+    - vim-nox
 
 user:
   default_shell:
