@@ -50,7 +50,7 @@ download_dotfiles() {
         exit 1
     fi
 
-    e_done "Download"
+    e_done "Download dotfiles"
 }
 
 install_ansible() {
