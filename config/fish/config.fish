@@ -11,3 +11,4 @@ set -x EDITOR nvim
 set -x GOPATH $HOME/goprojects
 set -x PATH $GOPATH/bin $PATH
 
+set -x PATH $HOME/.anyenv/bin $PATH
