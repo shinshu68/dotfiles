@@ -1,6 +1,2 @@
-/bundle/*
-/colors/*
-!/bundle/Vundle.vim
-.gitconfig
 *.orig
 __pycache__/
