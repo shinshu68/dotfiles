@@ -1,3 +1,9 @@
 [user]
 	email = shinshu68@gmail.com
 	name = shinshu68
+[alias]
+	cm = commit -m
+
+	l = log --oneline
+
+	st = status
