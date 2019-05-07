@@ -12,7 +12,7 @@ e_done() {
     printf " \033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*"
 }
 
-print_dotfiles() {
+print_dotfiles_header() {
     printf "\e[34m"
     echo '---------------------------------------------------------------------------------------'
     echo '                                                                                       '
@@ -67,6 +67,6 @@ install_ansible() {
     e_done "Installi ansible"
 }
 
-print_dotfiles
+print_dotfiles_header
 download_dotfiles
 install_ansible
