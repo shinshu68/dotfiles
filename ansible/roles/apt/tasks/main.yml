@@ -4,11 +4,15 @@
 - name: apt add repositories
   apt_repository:
     repo:         '{{ item }}'
-    update_cache: yes
+    update_cache: no
   with_items: '{{ apt.repositories }}'
   when: apt.repositories
 
-- name: test apt install
+- name: apt update
+  apt:
+    update_cache: yes
+
+- name: apt install
   apt:
     name:             '{{ apt.packages }}'
     update_cache:     yes
