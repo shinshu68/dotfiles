@@ -3,7 +3,6 @@ apt:
     - ppa:neovim-ppa/stable
 
   packages:
-    - anyenv
     - direnv
     - fish
     - git
