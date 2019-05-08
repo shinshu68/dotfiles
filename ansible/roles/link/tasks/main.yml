@@ -8,7 +8,7 @@
     recurse: yes
   loop_control:
     label: '~/{{ item }}'
-  when: item != "" and not item.stat.exists
+  when: item != ""
   with_items: '{{ link.values() | map("dirname") | unique | list}}'
 
 - name: check destinations
