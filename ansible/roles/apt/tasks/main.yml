@@ -4,7 +4,7 @@
 - name: apt add repositories
   apt_repository:
     repo:         '{{ item }}'
-    update_cache: no
+    update_cache: yes
   with_items: '{{ apt.repositories }}'
   when: apt.repositories
 

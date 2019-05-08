@@ -10,6 +10,8 @@
   roles:
     - role: apt
       tags: ['install', 'apt']
+    - role: fish
+      tags: ['install', 'fish']
     - role: pip
       tags: ['install', 'pip']
     - role: link

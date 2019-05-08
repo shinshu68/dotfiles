@@ -1,11 +1,9 @@
 apt:
   repositories:
     - ppa:neovim-ppa/stable
-    - ppa:fish-shell/release-2
 
   packages:
     - direnv
-    - fish
     - git
     - golang-1.10
     - neovim
