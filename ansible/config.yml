@@ -1,6 +1,7 @@
 apt:
   repositories:
     - ppa:neovim-ppa/stable
+    - ppa:fish-shell/release-2
 
   packages:
     - direnv
