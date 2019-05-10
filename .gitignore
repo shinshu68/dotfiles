@@ -1,2 +1,3 @@
 *.orig
 __pycache__/
+ansible/playbook.retry
