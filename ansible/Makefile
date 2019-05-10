@@ -38,3 +38,7 @@ ansiblerun:
 .PHONY: ansibledockerrun
 ansibledockerrun:
 	ansible-playbook -i inventory --extra-vars='@config.yml' playbook_docker.yml --diff
+
+.PHONY: checkfishlink
+checkfishlink:
+	ansible-playbook -i localhost --extra-vars='@config.yml' --tag=fish --tag=link playbook.yml --check --diff
