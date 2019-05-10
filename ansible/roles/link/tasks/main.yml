@@ -1,15 +1,27 @@
 - set_fact:
     link: {}
-
-- name: allocate parent directories
-  file:
-    dest:    '{{ home_path }}/{{ item }}'
-    state:   directory
-    recurse: yes
+    
+- name: check dir stat
+  stat:
+    path: '{{ home_path }}/{{ item }}'
   loop_control:
     label: '~/{{ item }}'
   when: item != ""
   with_items: '{{ link.values() | map("dirname") | unique | list}}'
+  register: dir_stat
+ 
+# - name: show dir_stat
+#   debug: var=dir_stat
+ 
+- name: allocate parent directories
+  file:
+    dest:    '{{ home_path }}/{{ item.item }}'
+    state:   directory
+    recurse: yes
+  loop_control:
+    label: '~/{{ item.item }}'
+  when: item.item != "" and not item.stat.exists
+  with_items: '{{ dir_stat.results }}'
 
 - name: check destinations
   stat:
