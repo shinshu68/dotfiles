@@ -5,9 +5,9 @@ set -x PATH ~/.local/bin $PATH
 
 direnv hook fish | source
 
-set PYENV_ROOT ~/.pyenv/bin
+set -x PYENV_ROOT ~/.pyenv/
 set -x PATH $PYENV_ROOT $PATH
-status --is-interactive; and pyenv init - | source
+eval (pyenv init - | source)
 
 set -x PATH "/usr/lib/go-1.10/bin" $PATH
 set -x GOPATH $HOME/goprojects
