@@ -5,12 +5,13 @@ set -x PATH ~/.local/bin $PATH
 
 direnv hook fish | source
 
-set -x PYENV_ROOT ~/.pyenv/
-set -x PATH $PYENV_ROOT $PATH
-eval (pyenv init - | source)
+# set -x PYENV_ROOT ~/.pyenv/
+# set -x PATH $PYENV_ROOT $PATH
+# eval (pyenv init - | source)
 
 set -x PATH "/usr/lib/go-1.10/bin" $PATH
 set -x GOPATH $HOME/goprojects
 set -x PATH $GOPATH/bin $PATH
 
 set -x PATH $HOME/.anyenv/bin $PATH
+eval  (anyenv init - | source)
