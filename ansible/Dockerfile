@@ -10,6 +10,7 @@ RUN \
   apt install -y \
     sudo \
     curl \
+    vim \
     python \
     python3 \
     python-apt
