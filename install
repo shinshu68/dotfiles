@@ -37,7 +37,7 @@ download_dotfiles() {
 
     elif is_exists "curl"; then
         local tar_url="https://github.com/shinshu68/dotfiles/archive/master.tar.gz"
-        curl -L "$tar_url" | tar xvz
+        curl -sL "$tar_url" | tar xvz
 
         if [ ! -d dotfiles-master ]; then
             echo 'dotfiles-master: not found'
