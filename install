@@ -60,9 +60,10 @@ install_ansible() {
     fi
 
     echo 'Installing ansible...'
-    sudo yes | apt-add-repository ppa:ansible/ansible
-    sudo yes | apt update
-    sudo yes | apt install ansible
+
+    yes | sudo apt-add-repository ppa:ansible/ansible
+    yes | sudo apt update
+    yes | sudo apt install ansible
 
     e_done "Installi ansible"
 }
