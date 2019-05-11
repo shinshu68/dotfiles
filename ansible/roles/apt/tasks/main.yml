@@ -2,17 +2,15 @@
     apt: {}
 
 - name: apt add repositories
+  become: yes
   apt_repository:
     repo:         '{{ item }}'
     update_cache: yes
   with_items: '{{ apt.repositories }}'
   when: apt.repositories
 
-- name: apt update
-  apt:
-    update_cache: yes
-
 - name: apt install
+  become: yes
   apt:
     name:             '{{ apt.packages }}'
     update_cache:     yes
