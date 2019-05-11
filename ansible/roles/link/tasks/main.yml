@@ -17,6 +17,8 @@
   file:
     dest:    '{{ home_path }}/{{ item.item }}'
     state:   directory
+    owner:   '{{ user_name }}'
+    group:   '{{ user_name}}'
     recurse: yes
   loop_control:
     label: '~/{{ item.item }}'
@@ -45,6 +47,8 @@
   file:
     src:   '{{ dotfiles_path }}/{{ item.key }}'
     dest:  '{{ home_path }}/{{ item.value }}'
+    owner:   '{{ user_name }}'
+    group:   '{{ user_name}}'
     state: link
     force: yes
   loop_control:
