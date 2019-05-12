@@ -12,7 +12,9 @@
       tags: ['install', 'apt']
     - role: fish
       tags: ['install', 'fish']
+    - role: anyenv
+      tags: ['base', 'anyenv']
     - role: pip
       tags: ['install', 'pip']
     - role: link
-      tags: ['link']
+      tags: ['base']

@@ -1,3 +1,8 @@
+anyenv:
+  dir:         '{{ home_path }}/.anyenv'
+  plugins_dir: '{{ home_path }}/.anyenv/pluins'
+  envs_dir:    '{{ home_path }}/.anyenv/envs'
+
 apt:
   repositories:
     - ppa:neovim-ppa/stable
