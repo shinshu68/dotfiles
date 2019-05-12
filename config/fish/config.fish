@@ -14,4 +14,4 @@ set -x GOPATH $HOME/goprojects
 set -x PATH $GOPATH/bin $PATH
 
 set -x PATH $HOME/.anyenv/bin $PATH
-eval  (anyenv init - | source)
+anyenv init - fish | source
