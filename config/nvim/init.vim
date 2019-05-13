@@ -11,8 +11,8 @@ if &runtimepath !~# '/dein.vim'
     execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
-let g:python_host_prog  = '/home/shinshu/.pyenv/shims/python2'
-let g:python3_host_prog = '/home/shinshu/.pyenv/shims/python'
+let g:python_host_prog  = '/home/shinshu/.anyenv/envs/pyenv/shims/python2'
+let g:python3_host_prog = '/home/shinshu/.anyenv/envs/pyenv/shims/python'
 
 " 設定開始
 if dein#load_state(s:dein_dir)
