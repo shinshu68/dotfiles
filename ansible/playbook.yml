@@ -14,7 +14,9 @@
       tags: ['install', 'fish']
     - role: anyenv
       tags: ['base', 'anyenv']
+    - role: python
+      tags: ['lang', 'python']
     - role: pip
       tags: ['install', 'pip']
     - role: link
-      tags: ['base']
+      tags: ['base', 'link']

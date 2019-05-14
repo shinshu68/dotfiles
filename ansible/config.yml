@@ -21,6 +21,12 @@ user:
   default_shell:
     - shell: '/usr/bin/fish'
 
+python:
+  version2:
+    - '2.7.15'
+  version3:
+    - '3.7.2'
+
 pip:
   packages:
     - flake8
