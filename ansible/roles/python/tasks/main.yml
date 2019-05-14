@@ -4,27 +4,10 @@
 - name: install suggested build anvironment
   become: yes
   apt:
-    name:             '{{ item }}'
+    name:             '{{ python.pyenv.suggest_packages }}'
     update_cache:     yes
     cache_valid_time: 3600
-  with_items:
-    - make
-    - build-essential
-    - libssl-dev
-    - zlib1g-dev
-    - libbz2-dev
-    - libreadline-dev
-    - libsqlite3-dev
-    - wget
-    - curl
-    - llvm
-    - libncurses5-dev
-    - xz-utils
-    - tk-dev
-    - libxml2-dev
-    - libxmlsec1-dev
-    - libffi-dev
-    - liblzma-dev
+  when: python.pyenv.suggest_packages
 
 - name: check pyenv
   command: |
