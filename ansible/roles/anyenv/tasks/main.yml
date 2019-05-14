@@ -22,6 +22,7 @@
 - name: export anyenv path
   blockinfile:
     path: '{{ home_path }}/.bash_profile'
+    create: yes
     block: |
       export PATH="$HOME/.anyenv/bin:$PATH"
       eval "$(anyenv init -)"
@@ -32,4 +33,4 @@
 
 - name: anyenv init
   command: |
-    bash -lc 'anyenv install --init'
+    bash -lc 'yes | anyenv install --init'
