@@ -18,3 +18,18 @@
     repo: https://github.com/znz/anyenv-update
     dest: '{{ anyenv.plugins_dir }}/anyenv-update'
   when: anyenv.plugins_dir
+
+- name: export anyenv path
+  blockinfile:
+    path: '{{ home_path }}/.bash_profile'
+    block: |
+      export PATH="$HOME/.anyenv/bin:$PATH"
+      eval "$(anyenv init -)"
+
+- name: bash restart
+  command: |
+    bash -lc 'exec $SHELL -l'
+
+- name: anyenv init
+  command: |
+    bash -lc 'anyenv install --init'
