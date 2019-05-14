@@ -51,3 +51,7 @@
     bash -lc 'pyenv rehash'
   environment:
     DOTSHIM_FILE: '{{ anyenv.envs_dir }}/pyenv/.pyenv-shim'
+
+- name: bash restart
+  command: |
+    bash -lc 'exec $SHELL -l'
