@@ -40,5 +40,5 @@ ansibledockerrun:
 	ansible-playbook -i inventory --extra-vars='@config.yml' playbook_docker.yml --diff
 
 .PHONY: anyenvpython
-checkfishlink:
+anyenvpython:
 	ansible-playbook -i 'localhost,' --extra-vars='@config.yml' --tag=anyenv --tag=python playbook.yml --diff
