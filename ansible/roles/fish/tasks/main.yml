@@ -12,3 +12,13 @@
     state:        present
     update_cache: yes
 
+- name: create dir
+  file:
+    path: '{{ home_path }}/.config/fish/functions'
+    state: directory
+    mode: 0755
+
+- name: test get url
+  get_url:
+    url : https://git.io/fisher
+    dest: '{{ home_path }}/.config/fish/functions/fisher.fish'
