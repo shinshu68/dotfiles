@@ -24,9 +24,6 @@ login:
 stop:
 	docker stop $(CONTAINER_NAME)
 
-.PHONY: restart
-restart: stop run
-
 .PHONY: ansiblecheck
 ansiblecheck:
 	ansible-playbook -i inventory --extra-vars='@config.yml' playbook.yml --check --diff
