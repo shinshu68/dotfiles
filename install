@@ -68,6 +68,13 @@ install_ansible() {
     e_done "Installi ansible"
 }
 
+run_ansible() {
+    echo 'run Ansible...'
+    $DOTPATH/ansible/run.sh
+    e_done "run Ansible"
+}
+
 print_dotfiles_header
 download_dotfiles
 install_ansible
+run_ansible
