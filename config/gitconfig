@@ -9,3 +9,5 @@
 	st = status
 
 	b = branch
+
+	cho = checkout
