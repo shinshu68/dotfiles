@@ -10,3 +10,7 @@ set -x PATH $GOPATH/bin $PATH
 
 set -x PATH $HOME/.anyenv/bin $PATH
 anyenv init - fish | source
+
+if test -n $SSH_CLIENT
+    set -g theme_powerline_fonts no
+end
