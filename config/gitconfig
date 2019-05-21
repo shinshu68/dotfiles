@@ -5,10 +5,12 @@
 	cm = commit -m
 
 	l = log --oneline
-    lg = log --oneline --graph
+	lg = log --oneline --graph
 
 	st = status
 
 	b = branch
 
 	cho = checkout
+	chom = checkout master
+	choh = checkout HEAD^
