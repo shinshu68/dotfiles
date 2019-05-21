@@ -14,3 +14,8 @@
 	cho = checkout
 	chom = checkout master
 	choh = checkout HEAD^
+
+	sh = show --pretty=short HEAD
+	sh1 = show --pretty=short HEAD^
+	sh2 = show --pretty=short HEAD^^
+	sh3 = show --pretty=short HEAD^^^
