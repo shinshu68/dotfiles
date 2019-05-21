@@ -5,6 +5,7 @@
 	cm = commit -m
 
 	l = log --oneline
+    lg = log --oneline --graph
 
 	st = status
 
