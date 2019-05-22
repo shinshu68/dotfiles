@@ -57,7 +57,9 @@ link:
   config/fish/config.fish:             .config/fish/config.fish
   config/fish/functions/cls.fish:      .config/fish/functions/cls.fish
   config/fish/functions/hisgre.fish:   .config/fish/functions/hisgre.fish
+  config/fish/functions/histoday.fish: .config/fish/functions/histoday.fish
   config/fish/functions/reporoot.fish: .config/fish/functions/reporoot.fish
+  config/fish/functions/today.fish:    .config/fish/functions/today.fish
   config/gitconfig:                    .gitconfig
   config/nvim:                         .config/nvim
   tmux/tmux.conf:                      .tmux.conf
