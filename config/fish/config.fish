@@ -11,6 +11,8 @@ set -x PATH $GOPATH/bin $PATH
 set -x PATH $HOME/.anyenv/bin $PATH
 anyenv init - fish | source
 
+eval (dircolors -c ~/dotfiles/config/dircolors)
+
 set -q SSH_CLIENT
 if test $status -eq 0
     set -g theme_powerline_fonts no
