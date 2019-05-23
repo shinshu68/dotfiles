@@ -60,6 +60,7 @@ link:
   config/fish/functions/histoday.fish: .config/fish/functions/histoday.fish
   config/fish/functions/reporoot.fish: .config/fish/functions/reporoot.fish
   config/fish/functions/today.fish:    .config/fish/functions/today.fish
+  config/flake8:                       .config/flake8
   config/gitconfig:                    .gitconfig
   config/nvim:                         .config/nvim
   tmux/tmux.conf:                      .tmux.conf
