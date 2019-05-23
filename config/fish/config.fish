@@ -14,4 +14,5 @@ anyenv init - fish | source
 set -q SSH_CLIENT
 if test $status -eq 0
     set -g theme_powerline_fonts no
+    set -g theme_newline_cursor yes
 end
