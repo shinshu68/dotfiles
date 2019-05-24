@@ -24,6 +24,10 @@ class ExtendedList(List):
             pressed = key.UP
         elif pressed == 'q':
             pressed = key.CTRL_C
+        elif pressed == 'g':
+            self.current = 0
+        elif pressed == 'G':
+            self.current = len(self.question.choices) - 1
 
         super().process_input(pressed)
 
