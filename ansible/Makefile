@@ -39,3 +39,8 @@ ansibledockerrun:
 .PHONY: anyenvpython
 anyenvpython:
 	ansible-playbook -i 'localhost,' --extra-vars='@config.yml' --tag=anyenv --tag=python playbook.yml --diff
+
+.PHONY: link
+link:
+	ansible-playbook -i 'localhost,' -e '@config.yml' playbook.yml --tag=link --diff
+
