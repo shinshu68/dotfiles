@@ -32,3 +32,6 @@ repo = 'tyru/caw.vim'
 
 [[plugins]]
 repo = 'benekastah/neomake'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
