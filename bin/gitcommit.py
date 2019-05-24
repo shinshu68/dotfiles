@@ -42,6 +42,13 @@ def runVimAndCommit(word):
 
 
 def main(files):
+    pwd = os.getcwd()
+    reporoot = subprocess.run('git rev-parse --show-toplevel', stdout=subprocess.PIPE, shell=True)
+    if reporoot.returncode != 0:
+        exit()
+    else:
+        os.chdir(reporoot.stdout.decode("utf8").strip())
+
     subprocess.run([f'git add {files}'], shell=True)
     subprocess.run([f'git status'], shell=True)
     question = [
@@ -51,7 +58,12 @@ def main(files):
                       ),
     ]
     result = inquirer.prompt(question, render=ExtendedConsoleRender(theme=themes.Default()))
+    if result is None:
+        os.chdir(pwd)
+        exit()
+
     runVimAndCommit(result['word'])
+    os.chdir(pwd)
 
 
 if __name__ == '__main__':
