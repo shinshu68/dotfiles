@@ -1,193 +1,56 @@
-import subprocess
-import os
 import sys
-import readchar
-import colorama
-from getMyIssues import *
+import os
+import subprocess
+import inquirer
+from inquirer import themes
+from inquirer.render.console import ConsoleRender, List
+from readchar import key
 
 
-class gitcommit():
-    def __init__(self):
-        self.position = 2
-        self.issuePos = 0
-        self.items = ['show issues', '', 'add', 'update', 'fix', 'move', 'clean', 'delete', 'None']
-        self.commands = ['j', 'k', 'q', 'g', 'G']
-        self.mode = 'normal'
-        self.close = ''
-
-    def setPos(self):
-        if self.position < 0:
-            self.position = 0
-        if self.position >= len(self.items):
-            self.position = len(self.items) - 1
-
-    def setIssuePos(self):
-        if self.issuePos < 0:
-            self.issuePos = 0
-        if self.issuePos >= len(self.issueNumbers):
-            self.issuePos = len(self.issueNumbers) - 1
-
-    def writeItem(self, esc):
-        self.setPos()
-
-        s = esc
-        for i, t in zip(range(len(self.items)), self.items):
-            if i == self.position:
-                s += '->'
-                s += colorama.Fore.GREEN + t + colorama.Fore.RESET
-            else:
-                s += '  '
-                s += t
-            if i != len(self.items) - 1:
-                s += '\n'
-
-        sys.stderr.write(s)
-        sys.stderr.flush()
-
-    def writeIssueNumber(self, esc):
-        self.setIssuePos()
-        s = esc
-        for i, t in zip(range(len(self.issueNumbers)), self.issueNumbers):
-            if i == self.issuePos:
-                s += '->'
-                s += colorama.Fore.GREEN + t + colorama.Fore.RESET
-            else:
-                s += '  '
-                s += t
-            if i != len(self.issueNumbers) - 1:
-                s += '  '
-
-        sys.stderr.write(s)
-        sys.stderr.flush()
-
-    def runVim(self):
-        print()
-        prefix = '[' + self.items[self.position] + ']'
-        cmd = 'vim msgfile.txt'
-        if prefix == '[None]':
-            subprocess.run([cmd], shell=True)
-        else:
-            if self.close == '':
-                subprocess.run([cmd + f' -c "InputPrefix {prefix}"'], shell=True)
-            else:
-                subprocess.run([cmd + f' -c "InsertClose {self.close}" -c "InputPrefix {prefix}"'], shell=True)
-
-        subprocess.run(["git commit --file='./msgfile.txt'"], shell=True)
-        if input('push? [y/n]') == 'y':
-            subprocess.run(["git push origin master"], shell=True)
-
-        if os.path.exists('msgfile.txt'):
-            os.remove('msgfile.txt')
-
-    def execute(self, cmd):
-        if cmd == 'j':
-            self.position += 1
-            self.position = min(self.position, len(self.items)-1)
-            if self.items[self.position] == '':
-                self.position += 1
-            self.writeItem('\033[2K\033[F\033[2K'*(len(self.items) - 1))
-
-        elif cmd == 'k':
-            self.position -= 1
-            self.position = max(self.position, 0)
-            if self.items[self.position] == '':
-                self.position -= 1
-            self.writeItem('\033[2K\033[F\033[2K'*(len(self.items) - 1))
-
-        elif cmd == 'h' and self.mode == 'issue':
-            self.issuePos -= 1
-            self.writeIssueNumber('\033[2K\033[G')
-
-        elif cmd == 'l' and self.mode == 'issue':
-            self.issuePos += 1
-            self.writeIssueNumber('\033[2K\033[G')
-
-        elif cmd == 'g':
-            c = readchar.readchar()
-            if c == 'g':
-                self.position = 0
-                self.writeItem('\033[2K\033[F'*(len(self.items) - 1))
-
-        elif cmd == 'G':
-            self.position = len(self.items) - 1
-            self.writeItem('\033[2K\033[F'*(len(self.items) - 1))
-
-        elif cmd == 'q':
-            if self.mode == 'normal':
-                print()
-                exit()
-
-            elif self.mode == 'issue':
-                print()
-                self.mode = 'normal'
-                self.position = 2
-                self.writeItem('\033[2K\033[F\033[2K'*3)
-
-    def showIssues(self):
-        issues, numbers = getMyIssues()
-        sys.stderr.write('\033[2K\033[F'*(len(self.items)-1))
-        sys.stderr.flush()
-        for _issue in issues:
-            print(_issue, end='')
-
-        self.issueNumbers = numbers
-
-        self.items[0] = 'close issue'
-        self.writeItem('')
-
-    def closeIssue(self):
-        self.mode = 'issue'
-        self.issuePos = 0
-        self.writeIssueNumber('\033[2K\033[F\033[2K'*(len(self.items)-3))
-
-        self.commands = ['h', 'l', 'q']
-
-        while True:
-            c = readchar.readchar()
-            if c in self.commands:
-                self.execute(c)
-            elif c == '\r':
-                self.mode = 'normal'
-                self.close = self.issueNumbers[self.issuePos]
-                print()
-                self.position = 2
-                self.writeItem('')
-
-            if self.mode != 'issue':
-                break
-
-        self.commands = ['j', 'k', 'q', 'g', 'G']
+class ExtendedConsoleRender(ConsoleRender):
+    def render_factory(self, question_type):
+        if question_type == "list":
+            return ExtendedList
+        return super().render_factory(question_type)
 
 
-def main(gitaddFiles):
-    subprocess.run([f"git add {gitaddFiles}"], shell=True)
-    subprocess.run(["git status"], shell=True)
+class ExtendedList(List):
+    def process_input(self, pressed):
+        if pressed == 'j':
+            pressed = key.DOWN
+        elif pressed == 'k':
+            pressed = key.UP
+        elif pressed == 'q':
+            pressed = key.CTRL_C
 
-    gc = gitcommit()
-    gc.writeItem('')
-
-    while(True):
-        c = readchar.readchar()
-        if c in gc.commands:
-            gc.execute(c)
-
-        elif c == '\r':
-            if gc.items[gc.position] == 'show issues':
-                gc.showIssues()
-
-            elif gc.items[gc.position] == 'close issue':
-                gc.closeIssue()
-
-            elif gc.items[gc.position] == '':
-                pass
-
-            else:
-                gc.runVim()
-                exit()
+        super().process_input(pressed)
 
 
-if __name__ == '__init__':
-    colorama.init()
+def runVimAndCommit(word):
+    prefix = word + ':'
+    cmd = 'vim msgfile.txt'
+    if prefix == 'None:':
+        subprocess.run([cmd], shell=True)
+    else:
+        subprocess.run([f'{cmd} -c "InputPrefix {prefix}"'], shell=True)
+
+    subprocess.run(['git commit --file="./msgfile.txt"'], shell=True)
+    if os.path.exists('msgfile.txt'):
+        os.remove('msgfile.txt')
+
+
+def main(files):
+    subprocess.run([f'git add {files}'], shell=True)
+    subprocess.run([f'git status'], shell=True)
+    question = [
+        inquirer.List('word',
+                      message="choice prefix word",
+                      choices=['Add', 'Update', 'Fix', 'Move', 'Clean', 'Delete', 'None'],
+                      ),
+    ]
+    result = inquirer.prompt(question, render=ExtendedConsoleRender(theme=themes.Default()))
+    runVimAndCommit(result['word'])
+
 
 if __name__ == '__main__':
     args = sys.argv
