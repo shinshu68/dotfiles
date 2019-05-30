@@ -1,4 +1,5 @@
 umask 022
+
 set -x PATH $HOME/dotfiles/bin $PATH
 set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/.cache
@@ -20,3 +21,8 @@ if test $status -eq 0
     set -g theme_powerline_fonts no
     set -g theme_newline_cursor yes
 end
+
+if test -f $HOME/.env.fish
+    source $HOME/.env.fish
+end
+
