@@ -17,10 +17,6 @@ apt:
     - tmux
     - vim-nox
 
-user:
-  default_shell:
-    - shell: '/usr/bin/fish'
-
 python:
   pyenv:
     suggest_packages:
