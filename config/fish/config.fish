@@ -27,3 +27,9 @@ if test -f $HOME/.env.fish
 end
 
 set -x PATH $HOME/lib/zapcc/build/bin/ $PATH
+
+functions --copy cd standard_cd
+
+function cd
+  standard_cd $argv; and ls
+end
