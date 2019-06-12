@@ -1,4 +1,4 @@
-#!/home/shinshu/.anyenv/envs/pyenv/shims/python
+#!/usr/bin/python3
 
 import sys
 import os
