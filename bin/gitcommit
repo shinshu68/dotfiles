@@ -40,8 +40,6 @@ def runVim(word):
     else:
         subprocess.run([f'{cmd} -c "InputPrefix {prefix}"'], shell=True)
 
-    gitCommit()
-
 
 def gitCommit():
     if os.path.exists('msgfile.txt'):
@@ -71,6 +69,7 @@ def main(files):
         exit()
 
     runVim(result['word'])
+    gitCommit()
     os.chdir(pwd)
 
 
