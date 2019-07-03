@@ -36,3 +36,11 @@ end
 
 alias gitl='git l'
 alias gitlg='git lg'
+
+if test -d $HOME/development/flutter
+    set -x PATH $HOME/development/flutter/bin $PATH
+end
+
+if test -d $HOME/development/android-studio
+    set -x PATH $HOME/development/android-studio/bin $PATH
+end
