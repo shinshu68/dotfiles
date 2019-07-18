@@ -26,7 +26,9 @@ if test -f $HOME/.env.fish
     source $HOME/.env.fish
 end
 
-set -x PATH $HOME/lib/zapcc/build/bin/ $PATH
+if test -d PATH $HOME/lib/zapcc/build/bin
+    set -x PATH $HOME/lib/zapcc/build/bin/ $PATH
+end
 
 functions --copy cd standard_cd
 
