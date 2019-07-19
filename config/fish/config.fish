@@ -26,7 +26,7 @@ if test -f $HOME/.env.fish
     source $HOME/.env.fish
 end
 
-if test -d PATH $HOME/lib/zapcc/build/bin
+if test -d $HOME/lib/zapcc/build/bin
     set -x PATH $HOME/lib/zapcc/build/bin/ $PATH
 end
 
