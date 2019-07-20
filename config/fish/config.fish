@@ -1,20 +1,24 @@
 umask 022
 
+eval (dircolors -c ~/dotfiles/config/dircolors)
+
+direnv hook fish | source
+
+set -x PATH $HOME/.anyenv/bin $PATH
+anyenv init - fish | source
+
 set -x PATH $HOME/dotfiles/bin $PATH
 set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/.cache
 set -x EDITOR nvim
 
-direnv hook fish | source
-
 set -x PATH "/usr/lib/go-1.10/bin" $PATH
 set -x GOPATH $HOME/goprojects
 set -x PATH $GOPATH/bin $PATH
 
-set -x PATH $HOME/.anyenv/bin $PATH
-anyenv init - fish | source
-
-eval (dircolors -c ~/dotfiles/config/dircolors)
+if test -d $HOME/lib/zapcc/build/bin
+    set -x PATH $HOME/lib/zapcc/build/bin/ $PATH
+end
 
 set -q SSH_CLIENT
 if test $status -eq 0
@@ -26,8 +30,12 @@ if test -f $HOME/.env.fish
     source $HOME/.env.fish
 end
 
-if test -d $HOME/lib/zapcc/build/bin
-    set -x PATH $HOME/lib/zapcc/build/bin/ $PATH
+if test -d $HOME/development/flutter
+    set -x PATH $HOME/development/flutter/bin $PATH
+end
+
+if test -d $HOME/development/android-studio
+    set -x PATH $HOME/development/android-studio/bin $PATH
 end
 
 functions --copy cd standard_cd
@@ -39,10 +47,3 @@ end
 alias gitl='git l'
 alias gitlg='git lg'
 
-if test -d $HOME/development/flutter
-    set -x PATH $HOME/development/flutter/bin $PATH
-end
-
-if test -d $HOME/development/android-studio
-    set -x PATH $HOME/development/android-studio/bin $PATH
-end
