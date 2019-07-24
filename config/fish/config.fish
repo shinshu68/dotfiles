@@ -16,6 +16,9 @@ set -x PATH "/usr/lib/go-1.10/bin" $PATH
 set -x GOPATH $HOME/goprojects
 set -x PATH $GOPATH/bin $PATH
 
+set -x PATH /home/shinshu/bin $PATH
+set -x DOCKER_HOST unix:///run/user/1000/docker.sock
+
 if test -d $HOME/lib/zapcc/build/bin
     set -x PATH $HOME/lib/zapcc/build/bin/ $PATH
 end
@@ -46,4 +49,5 @@ end
 
 alias gitl='git l'
 alias gitlg='git lg'
+
 
