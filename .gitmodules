@@ -1,0 +1,3 @@
+[submodule "submodule/urllink"]
+	path = submodule/urllink
+	url = git@github.com:shinshu68/urllink.git
