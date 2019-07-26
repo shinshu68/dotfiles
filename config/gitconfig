@@ -9,6 +9,8 @@
 
 	st = status
 
+	cl = clone --recursive
+
 	b = branch
 
 	cho = checkout
