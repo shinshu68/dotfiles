@@ -47,7 +47,6 @@ function cd
   standard_cd $argv; and ls
 end
 
-alias gitl='git l'
-alias gitlg='git lg'
-
-
+if test -f $HOME/.config/fish/aliases.fish
+    source $HOME/.config/fish/aliases.fish
+end
