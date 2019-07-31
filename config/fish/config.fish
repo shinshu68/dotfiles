@@ -41,10 +41,13 @@ if test -d $HOME/development/android-studio
     set -x PATH $HOME/development/android-studio/bin $PATH
 end
 
-functions --copy cd standard_cd
+functions -q standard_cd
+if test $status -ne 0
+    functions --copy cd standard_cd
 
-function cd
-  standard_cd $argv; and ls
+    function cd
+        standard_cd $argv; and ls
+    end
 end
 
 if test -f $HOME/.config/fish/aliases.fish
