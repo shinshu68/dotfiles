@@ -20,23 +20,23 @@ apt:
 python:
   pyenv:
     suggest_packages:
-      - make
       - build-essential
-      - libssl-dev
-      - zlib1g-dev
-      - libbz2-dev
-      - libreadline-dev
-      - libsqlite3-dev
-      - wget
       - curl
-      - llvm
-      - libncurses5-dev
-      - xz-utils
-      - tk-dev
-      - libxml2-dev
-      - libxmlsec1-dev
+      - libbz2-dev
       - libffi-dev
       - liblzma-dev
+      - libncurses5-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - libssl-dev
+      - libxml2-dev
+      - libxmlsec1-dev
+      - llvm
+      - make
+      - tk-dev
+      - wget
+      - xz-utils
+      - zlib1g-dev
   version2:
     - '2.7.15'
   version3:
