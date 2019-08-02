@@ -44,9 +44,16 @@ python:
 
 pip:
   packages:
+    - PyGithub
+    - beautifulsoup4
     - flake8
+    - inquirer
     - jedi
     - neovim
+    - pyperclip
+    - readchar
+    - requests
+    - truecolor
 
 link:
   bash/bashrc:                         .bashrc
