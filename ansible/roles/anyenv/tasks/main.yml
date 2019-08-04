@@ -3,8 +3,8 @@
 
 - name: fetch anyenv repo
   git:
-    repo:    https://github.com/riywo/anyenv
-    dest:    '{{ anyenv.dir }}'
+    repo: https://github.com/riywo/anyenv
+    dest: '{{ anyenv.dir }}'
   when: anyenv.dir
 
 - name: create plugins dir
@@ -21,7 +21,7 @@
 
 - name: export anyenv path
   blockinfile:
-    path: '{{ home_path }}/.bash_profile'
+    path:   '{{ home_path }}/.bash_profile'
     create: yes
     block: |
       export PATH="$HOME/.anyenv/bin:$PATH"
@@ -34,5 +34,5 @@
 - name: anyenv init
   command: |
     bash -lc 'yes | anyenv install --init'
-  register: anyenv_init
+  register:    anyenv_init
   failed_when: anyenv_init.rc not in [0, 1]
