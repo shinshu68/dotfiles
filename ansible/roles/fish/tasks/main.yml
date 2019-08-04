@@ -18,7 +18,12 @@
     state: directory
     mode:  0755
 
-- name: test get url
+- name: install fisher
   get_url:
     url:  https://git.io/fisher
     dest: '{{ home_path }}/.config/fish/functions/fisher.fish'
+
+- name: install fish theme
+  command: |
+    fish -c "fisher add oh-my-fish/theme-bobthefish"
+
