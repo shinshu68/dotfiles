@@ -12,12 +12,16 @@ set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/.cache
 set -x EDITOR nvim
 
-set -x PATH "/usr/lib/go-1.10/bin" $PATH
-set -x GOPATH $HOME/goprojects
-set -x PATH $GOPATH/bin $PATH
+if test -d $HOME/goprojects
+    set -x PATH "/usr/lib/go-1.10/bin" $PATH
+    set -x GOPATH $HOME/goprojects
+    set -x PATH $GOPATH/bin $PATH
+end
 
-set -x PATH /home/shinshu/bin $PATH
-set -x DOCKER_HOST unix:///run/user/1000/docker.sock
+if test -d $HOME/bin
+    set -x PATH /home/shinshu/bin $PATH
+    set -x DOCKER_HOST unix:///run/user/1000/docker.sock
+end
 
 if test -d $HOME/lib/zapcc/build/bin
     set -x PATH $HOME/lib/zapcc/build/bin/ $PATH
