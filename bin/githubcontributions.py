@@ -1,4 +1,4 @@
-#!/home/shinshu/.anyenv/envs/pyenv/versions/3.7.2/bin/python3
+#!/usr/bin/env python
 
 import requests
 import truecolor
