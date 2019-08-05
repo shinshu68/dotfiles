@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/home/shinshu/.anyenv/envs/pyenv/versions/3.7.2/bin/python3
 
 import inquirer
 import os
