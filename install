@@ -74,7 +74,11 @@ run_ansible() {
     e_done "run Ansible"
 }
 
-print_dotfiles_header
-download_dotfiles
-install_ansible
-run_ansible
+main() {
+    print_dotfiles_header
+    download_dotfiles
+    install_ansible
+    run_ansible
+}
+
+main
