@@ -33,5 +33,10 @@ for i in range(7):
     txt = ""
     for j in range(i, len(parser.data), 7):
         data = parser.data[j]
-        txt += truecolor.fore_text('■', truecolor.hex_to_rgb(data[1]))
+        red, green, blue = truecolor.hex_to_rgb(data[1])
+        txt += f'\x1b[38;2;{red};{green};{blue}m'
+        txt += f'\x1b[48;2;{red};{green};{blue}m'
+        txt += '  '
+        txt += '\x1b[0m'
     print(txt)
+
