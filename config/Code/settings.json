@@ -48,7 +48,6 @@
     "vim.showcmd": true,
     "vim.showmodename": true,
     "vim.useCtrlKeys": true,
-    "vim.disableExtension": true,
     "vim.insertModeKeyBindings": [
         {
             "before": ["j","j"],
@@ -63,10 +62,6 @@
         {
             "before": ["<leader>", "w"],
             "commands": [":w"]
-        },
-        {
-            "before": ["<leader>", "t", "v"],
-            "commands": ["toggleVim"]
         },
         {
             "before": ["u"],
