@@ -57,3 +57,8 @@ end
 if test -f $HOME/.config/fish/aliases.fish
     source $HOME/.config/fish/aliases.fish
 end
+
+if test -f $HOME/.ssh/config
+    eval (ssh-agent -c) ^/dev/null >/dev/null
+    ssh-add ~/.ssh/id_rsa ^/dev/null >/dev/null
+end
