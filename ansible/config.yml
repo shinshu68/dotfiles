@@ -61,7 +61,7 @@ link:
   config/fish/aliases.fish:                         .config/fish/aliases.fish
   config/fish/config.fish:                          .config/fish/config.fish
   config/fish/functions/cls.fish:                   .config/fish/functions/cls.fish
-  config/fish/functions/fish_user_key_binding.fish: .config/fish/functions/fish_user_key_binding.fish
+  config/fish/functions/fish_user_key_bindings.fish: .config/fish/functions/fish_user_key_bindings.fish
   config/fish/functions/hisgre.fish:                .config/fish/functions/hisgre.fish
   config/fish/functions/histoday.fish:              .config/fish/functions/histoday.fish
   config/fish/functions/reporoot.fish:              .config/fish/functions/reporoot.fish
