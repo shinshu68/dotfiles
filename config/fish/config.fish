@@ -64,3 +64,15 @@ if test -f $HOME/.ssh/config
     eval (ssh-agent -c) ^/dev/null >/dev/null
     ssh-add ~/.ssh/id_rsa ^/dev/null >/dev/null
 end
+
+if test $SHLVL -eq 1
+    set -x FZF_TMUX 1
+    set -x FZF_TMUX_HEIGHT 15%
+
+    tmux ls ^/dev/null >/dev/null
+    if test $status -eq 0
+        tmux a
+    else
+        tmux
+    end
+end
