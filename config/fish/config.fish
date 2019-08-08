@@ -7,6 +7,8 @@ direnv hook fish | source
 set -x PATH $HOME/.anyenv/bin $PATH
 anyenv init - fish | source
 
+set -x FZF_LEGACY_KEYBINDINGS 0
+
 set -x PATH $HOME/dotfiles/bin $PATH
 set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/.cache
