@@ -67,7 +67,8 @@ end
 
 if test $SHLVL -eq 1
     set -x FZF_TMUX 1
-    set -x FZF_TMUX_HEIGHT 15%
+    set -x FZF_TMUX_HEIGHT 25%
+    set -x FZF_DEFAULT_OPTS '--reverse'
 
     tmux ls ^/dev/null >/dev/null
     if test $status -eq 0
