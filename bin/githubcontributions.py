@@ -4,6 +4,8 @@ import requests
 import truecolor
 from html.parser import HTMLParser
 
+last_contribution = None
+
 
 class Parser(HTMLParser):
     def __init__(self):
@@ -11,8 +13,10 @@ class Parser(HTMLParser):
         self.data = []
 
     def handle_starttag(self, tag, attrs):
+        global last_contribution
         if tag == "rect":
             attrs = dict(attrs)
+            last_contribution = attrs['data-count']
             # print(attrs)
             if 'data-count' in attrs and 'fill' in attrs and 'data-date' in attrs:
                 self.data.append((attrs['data-count'], attrs['fill'], attrs['data-date']))
@@ -40,3 +44,4 @@ for i in range(7):
         txt += '\x1b[0m'
     print(txt)
 
+print(f"{last_contribution} contributions on Today")
