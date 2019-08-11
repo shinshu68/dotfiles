@@ -2,6 +2,7 @@
 	email = shinshu68@gmail.com
 	name = shinshu68
 [alias]
+	a = add
 	c = commit
 	cm = commit -m
 	ca = commit --allow-empty
