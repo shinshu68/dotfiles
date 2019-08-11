@@ -2,7 +2,10 @@
 	email = shinshu68@gmail.com
 	name = shinshu68
 [alias]
+	c = commit
 	cm = commit -m
+	ca = commit --allow-empty
+	cam = commit -m --allow-empty
 
 	l = log --oneline
 	lg = log --oneline --graph
