@@ -56,18 +56,19 @@ pip:
     - truecolor
 
 link:
-  bash/bashrc:                                      .bashrc
-  config/Code/settings.json:                        .config/Code/User/settings.json
-  config/fish/aliases.fish:                         .config/fish/aliases.fish
-  config/fish/config.fish:                          .config/fish/config.fish
-  config/fish/functions/cls.fish:                   .config/fish/functions/cls.fish
+  bash/bashrc:                                       .bashrc
+  config/Code/settings.json:                         .config/Code/User/settings.json
+  config/fish/aliases.fish:                          .config/fish/aliases.fish
+  config/fish/config.fish:                           .config/fish/config.fish
+  config/fish/functions/ansible-tag.fish:            .config/fish/functions/ansible-tag.fish
+  config/fish/functions/cls.fish:                    .config/fish/functions/cls.fish
   config/fish/functions/fish_user_key_bindings.fish: .config/fish/functions/fish_user_key_bindings.fish
-  config/fish/functions/hisgre.fish:                .config/fish/functions/hisgre.fish
-  config/fish/functions/histoday.fish:              .config/fish/functions/histoday.fish
-  config/fish/functions/reporoot.fish:              .config/fish/functions/reporoot.fish
-  config/fish/functions/today.fish:                 .config/fish/functions/today.fish
-  config/flake8:                                    .config/flake8
-  config/gitconfig:                                 .gitconfig
-  config/nvim:                                      .config/nvim
-  tmux/tmux.conf:                                   .tmux.conf
-  vim/vimrc:                                        .vimrc
+  config/fish/functions/hisgre.fish:                 .config/fish/functions/hisgre.fish
+  config/fish/functions/histoday.fish:               .config/fish/functions/histoday.fish
+  config/fish/functions/reporoot.fish:               .config/fish/functions/reporoot.fish
+  config/fish/functions/today.fish:                  .config/fish/functions/today.fish
+  config/flake8:                                     .config/flake8
+  config/nvim:                                       .config/nvim
+  git/gitconfig:                                     .gitconfig
+  tmux/tmux.conf:                                    .tmux.conf
+  vim/vimrc:                                         .vimrc
