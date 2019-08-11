@@ -22,4 +22,4 @@
 	sh2 = show --pretty=short HEAD^^
 	sh3 = show --pretty=short HEAD^^^
 [commit]
-	template = /home/shinshu/dotfiles/git/git-template
+	template = ~/dotfiles/git/git-template
