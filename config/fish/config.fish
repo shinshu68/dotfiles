@@ -20,9 +20,10 @@ if test -d $HOME/goprojects
     set -x PATH $GOPATH/bin $PATH
 end
 
-if test -d $HOME/bin
+if test -x $HOME/bin/docker
     set -x PATH /home/shinshu/bin $PATH
     set -x DOCKER_HOST unix:///run/user/1000/docker.sock
+    systemctl --user start docker
 end
 
 if test -d $HOME/lib/zapcc/build/bin
