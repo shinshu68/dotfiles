@@ -1,4 +1,4 @@
-function ansible-run
+function ansible-tag
     set -l len (count $argv)
     set -l cmd "ansible-playbook -i 'localhost,' -e '@$HOME/dotfiles/ansible/config.yml' $HOME/dotfiles/ansible/playbook.yml"
     if test $len -eq 0
