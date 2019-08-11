@@ -73,7 +73,13 @@ if test $SHLVL -eq 1
 
     tmux ls ^/dev/null >/dev/null
     if test $status -eq 0
-        tmux a
+        set -l tmux_ls (tmux ls)
+        set -l tmux_status (string split ' ' $tmux_ls)[-1]
+        if test $tmux_status = '(attached)'
+            tmux
+        else
+            tmux a
+        end
     else
         tmux
     end
