@@ -1,5 +1,5 @@
 - set_fact:
-    dotfiles_fish_config_path: '{{ dotfiles_path }}/config/fish'
+    dotfiles_fish_config_path: '{{ dotfiles_path }}/config/fish/'
 
 - name: add fish repository
   become: yes
@@ -60,14 +60,14 @@
 
 - name: get fish config files
   find:
-    paths: '{{ dotfiles_path }}/config/fish/'
+    paths:   '{{ dotfiles_fish_config_path }}'
     recurse: yes
   register: fish_files
 
 - name: create symlinks
   file:
     src:   '{{ item.path }}'
-    dest:  '{{ home_path }}/.config/fish{{ item.path[dotfiles_fish_config_path|length:] }}'
+    dest:  '{{ home_path }}/.config/fish/{{ item.path[dotfiles_fish_config_path|length:] }}'
     owner: '{{ user_name }}'
     group: '{{ user_name }}'
     state: link
