@@ -7,12 +7,18 @@ direnv hook fish | source
 set -x PATH $HOME/.anyenv/bin $PATH
 anyenv init - fish | source
 
-set -x FZF_LEGACY_KEYBINDINGS 0
-
 set -x PATH $HOME/dotfiles/bin $PATH
 set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/.cache
 set -x EDITOR nvim
+
+if test -f $HOME/.config/fish/aliases.fish
+    source $HOME/.config/fish/aliases.fish
+end
+
+if test -f $HOME/.env.fish
+    source $HOME/.env.fish
+end
 
 if test -d $HOME/goprojects
     set -x PATH "/usr/lib/go-1.10/bin" $PATH
@@ -28,16 +34,6 @@ end
 
 if test -d $HOME/lib/zapcc/build/bin
     set -x PATH $HOME/lib/zapcc/build/bin/ $PATH
-end
-
-set -q SSH_CLIENT
-if test $status -eq 0
-    set -g theme_powerline_fonts no
-    set -g theme_newline_cursor yes
-end
-
-if test -f $HOME/.env.fish
-    source $HOME/.env.fish
 end
 
 if test -d $HOME/development/flutter
@@ -57,8 +53,10 @@ if test $status -ne 0
     end
 end
 
-if test -f $HOME/.config/fish/aliases.fish
-    source $HOME/.config/fish/aliases.fish
+set -q SSH_CLIENT
+if test $status -eq 0
+    set -g theme_powerline_fonts no
+    set -g theme_newline_cursor yes
 end
 
 if test -f $HOME/.ssh/config -a -f $HOME/.ssh/id_rsa
@@ -66,6 +64,7 @@ if test -f $HOME/.ssh/config -a -f $HOME/.ssh/id_rsa
     ssh-add ~/.ssh/id_rsa ^/dev/null >/dev/null
 end
 
+set -x FZF_LEGACY_KEYBINDINGS 0
 if test $SHLVL -eq 1 -a -x /usr/bin/tmux
     set -x FZF_TMUX 1
     set -x FZF_TMUX_HEIGHT 25%
