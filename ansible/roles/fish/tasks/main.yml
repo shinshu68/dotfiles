@@ -39,11 +39,13 @@
   command: |
       fish -c "fisher self-update"
   when: fisher_stat.stat.exists
+  changed_when: False
 
 - name: check installed fisher plugins
   command: |
       fish -c "fisher ls"
   register: installed_fisher_plugins
+  changed_when: False
 
 - name: install fisher plugins
   command: |
