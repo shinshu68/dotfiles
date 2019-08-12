@@ -21,7 +21,7 @@ if test -d $HOME/goprojects
 end
 
 if test -x $HOME/bin/docker
-    set -x PATH /home/shinshu/bin $PATH
+    set -x PATH $HOME/bin $PATH
     set -x DOCKER_HOST unix:///run/user/1000/docker.sock
     systemctl --user start docker
 end
@@ -61,12 +61,12 @@ if test -f $HOME/.config/fish/aliases.fish
     source $HOME/.config/fish/aliases.fish
 end
 
-if test -f $HOME/.ssh/config
+if test -f $HOME/.ssh/config -a -f $HOME/.ssh/id_rsa
     eval (ssh-agent -c) ^/dev/null >/dev/null
     ssh-add ~/.ssh/id_rsa ^/dev/null >/dev/null
 end
 
-if test $SHLVL -eq 1
+if test $SHLVL -eq 1 -a -x /usr/bin/tmux
     set -x FZF_TMUX 1
     set -x FZF_TMUX_HEIGHT 25%
     set -x FZF_DEFAULT_OPTS '--reverse'
