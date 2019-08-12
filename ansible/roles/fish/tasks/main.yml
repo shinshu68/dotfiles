@@ -8,9 +8,10 @@
 - name: install fish
   become: yes
   apt:
-    name:         'fish'
-    state:        present
-    update_cache: yes
+    name:             'fish'
+    state:            present
+    update_cache:     yes
+    cache_valid_time: 3600
 
 - name: check fish config functions directory
   stat:
