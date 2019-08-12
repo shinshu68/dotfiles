@@ -1,4 +1,4 @@
-- name: add fish repo
+- name: add fish repository
   become: yes
   apt_repository:
     repo:         'ppa:fish-shell/release-2'
@@ -12,18 +12,42 @@
     state:        present
     update_cache: yes
 
-- name: create dir
+- name: check fish config functions directory
+  stat:
+    path:   '{{ home_path }}/.config/fish/functions'
+  register: config_stat
+
+- name: create fish config directory
   file:
     path:  '{{ home_path }}/.config/fish/functions'
     state: directory
     mode:  0755
+  when: not config_stat.stat.exists
+
+- name: check installed fisher
+  stat:
+    path:   '{{ home_path }}/.config/fish/functions/fisher.fish'
+  register: fisher_stat
 
 - name: install fisher
   get_url:
     url:  https://git.io/fisher
     dest: '{{ home_path }}/.config/fish/functions/fisher.fish'
+  when: not fisher_stat.stat.exists
 
-- name: install fish theme
+- name: update fisher
   command: |
-    fish -c "fisher add oh-my-fish/theme-bobthefish"
+      fish -c "fisher self-update"
+  when: fisher_stat.stat.exists
 
+- name: check installed fisher plugins
+  command: |
+      fish -c "fisher ls"
+  register: installed_fisher_plugins
+
+- name: install fisher plugins
+  command: |
+    fish -c "fisher add {{ item | quote }}"
+  when: |
+    installed_fisher_plugins.stdout.find(item) == -1
+  with_items: '{{ fish.fisher_plugins }}'

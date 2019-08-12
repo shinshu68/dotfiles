@@ -55,6 +55,12 @@ pip:
     - requests
     - truecolor
 
+fish:
+  fisher_plugins:
+    - 0rax/fish-bd
+    - jethrokuan/fzf
+    - oh-my-fish/theme-bobthefish
+
 link:
   bash/bashrc:                                       .bashrc
   config/Code/settings.json:                         .config/Code/User/settings.json
