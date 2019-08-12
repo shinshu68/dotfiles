@@ -44,4 +44,6 @@ for i in range(7):
         txt += '\x1b[0m'
     print(txt)
 
+print()
 print(f"{last_contribution} contributions on Today")
+print()
