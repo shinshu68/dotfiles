@@ -8,11 +8,13 @@
 
 # ==================== Emojis ====================
 # 🎉  :tada:        First commit
-# 🔖  :bookmark:    Tag
-# 👍  :+1:          Add
-# ✨  :sparkles:    Update
-# 🐛  :bug:         Fix
-# 📚  :books:       Document
-# ♻️   :recycle:     Refactor
-# 🚿  :shower:      Clean
-# 🗑️   :wastebasket: Delete
+# 🔖  :bookmark:    Add Tag
+# 👍  :+1:          Add file
+# ✨  :sparkles:    Update code
+# ⚡  :zap:         Update performance
+# 🐛  :bug:         Fix bug
+# 📝  :pencil:      Write document
+# ✏️   :pencil2:     Fix typo
+# ♻️   :recycle:     Refactor code
+# 🚚  :truck:       Move file
+# 🔥  :fire:        Delete file
