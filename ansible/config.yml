@@ -70,3 +70,29 @@ link:
   tmux/tmux.conf:            .tmux.conf
   vim/vimrc:                 .vimrc
 
+vscode:
+  extensions:
+    - CoenraadS.bracket-pair-colorizer
+    - Dart-Code.dart-code
+    - Dart-Code.flutter
+    - DavidAnson.vscode-markdownlint
+    - MS-CEINTL.vscode-language-pack-ja
+    - PKief.material-icon-theme
+    - christian-kohler.path-intellisense
+    - dbaeumer.vscode-eslint
+    - donjayamanne.githistory
+    - eamodio.gitlens
+    - formulahendry.auto-close-tag
+    - formulahendry.auto-rename-tag
+    - justusadam.language-haskell
+    - ms-azuretools.vscode-docker
+    - ms-python.python
+    - ms-vscode.cpptools
+    - ms-vscode.csharp
+    - ms-vscode.vs-keybindings
+    - oderwat.indent-rainbow
+    - twxs.cmake
+    - vector-of-bool.cmake-tools
+    - vsciot-vscode.vscode-arduino
+    - vscodevim.vim
+    - xyz.plsql-language
