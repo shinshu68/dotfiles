@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
-import requests
-import truecolor
 from html.parser import HTMLParser
+import os
+import readchar
+import requests
+import subprocess
+import truecolor
 
 last_contribution = None
 
@@ -25,6 +28,12 @@ class Parser(HTMLParser):
     def handle_endtag(self, tag):
         pass
 
+
+# コンソールをクリア
+if os.getenv('TMUX') is not None:
+    _, lines = os.get_terminal_size()
+    for i in range(lines):
+        print()
 
 url = 'https://github.com/users/shinshu68/contributions'
 res = requests.get(url)
@@ -49,3 +58,11 @@ for i in range(7):
 print()
 print(f"{last_contribution} contributions on Today")
 print()
+
+
+if os.getenv('TMUX') is not None:
+    while True:
+        c = readchar.readchar()
+        if (c == readchar.key.CTRL_C or c == readchar.key.ESC or c == 'q'):
+            subprocess.run('tmux kill-pane', shell=True)
+
