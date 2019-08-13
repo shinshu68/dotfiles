@@ -47,7 +47,8 @@ def show_detail(num):
     issue = remote_repo.get_issue(num)
     print(issue.title, f'#{issue.number}')
     print(issue.body) if issue.body != '' else print('No description proveded.')
-    print()
+    if issue.comments != 0:
+        print()
     for comment in issue.get_comments():
         print(comment.body)
 
