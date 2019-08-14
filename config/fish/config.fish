@@ -26,7 +26,8 @@ if test -d $HOME/goprojects
     set -x PATH $GOPATH/bin $PATH
 end
 
-if test -x $HOME/bin/docker
+set -q DOCKER_HOST
+if test $status -ne 0
     set -x PATH $HOME/bin $PATH
     set -x DOCKER_HOST unix:///run/user/1000/docker.sock
     systemctl --user start docker
