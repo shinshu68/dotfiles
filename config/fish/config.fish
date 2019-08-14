@@ -12,8 +12,8 @@ set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/.cache
 set -x EDITOR nvim
 
-if test -f $HOME/.config/fish/aliases.fish
-    source $HOME/.config/fish/aliases.fish
+if test -f $HOME/.config/fish/user_aliases.fish
+    source $HOME/.config/fish/user_aliases.fish
 end
 
 if test -f $HOME/.env.fish
