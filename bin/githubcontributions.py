@@ -53,6 +53,7 @@ for i in range(7):
 
 print()
 print(f"{last_contribution} contributions on Today")
+print('\x1b[0;0H')
 
 if os.getenv('TMUX') is not None:
     while True:
