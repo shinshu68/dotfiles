@@ -29,12 +29,6 @@ class Parser(HTMLParser):
         pass
 
 
-# コンソールをクリア
-if os.getenv('TMUX') is not None:
-    _, lines = os.get_terminal_size()
-    for i in range(lines):
-        print()
-
 url = 'https://github.com/users/shinshu68/contributions'
 res = requests.get(url)
 
