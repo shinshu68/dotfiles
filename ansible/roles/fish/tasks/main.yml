@@ -4,7 +4,7 @@
 - name: add fish repository
   become: yes
   apt_repository:
-    repo:         'ppa:fish-shell/release-2'
+    repo:         'ppa:fish-shell/release-3'
     state:        present
     update_cache: yes
 
