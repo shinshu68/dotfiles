@@ -29,6 +29,9 @@ class Parser(HTMLParser):
         pass
 
 
+column, _ = os.get_terminal_size()
+block = '  ' if column >= 53*2 else ' '
+
 url = 'https://github.com/users/shinshu68/contributions'
 res = requests.get(url)
 
@@ -44,7 +47,7 @@ for i in range(7):
         red, green, blue = truecolor.hex_to_rgb(data[1])
         txt += f'\x1b[38;2;{red};{green};{blue}m'
         txt += f'\x1b[48;2;{red};{green};{blue}m'
-        txt += '  '
+        txt += block
         txt += '\x1b[0m'
     print(txt)
 
