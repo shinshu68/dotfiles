@@ -43,7 +43,6 @@ parser = Parser()
 line = res.text.split('\n')
 parser.feed(res.text)
 
-print()
 for i in range(7):
     txt = ""
     for j in range(i, len(parser.data), 7):
@@ -57,8 +56,6 @@ for i in range(7):
 
 print()
 print(f"{last_contribution} contributions on Today")
-print()
-
 
 if os.getenv('TMUX') is not None:
     while True:

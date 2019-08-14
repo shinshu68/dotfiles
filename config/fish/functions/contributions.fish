@@ -3,7 +3,7 @@ function contributions
     set -q TMUX
     if test $status -eq 0
         tmux set-option default-command "$cmd"
-        tmux split-window -p 25
+        tmux split-window -l 10
         tmux set-option default-command ""
     else
         eval $cmd
