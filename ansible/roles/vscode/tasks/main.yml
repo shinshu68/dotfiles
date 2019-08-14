@@ -1,0 +1,72 @@
+- set_fact:
+    vscode_path: '{{ home_path }}/.config/Code/User'
+
+- name: check vscode repository
+  stat:
+    path: '/etc/apt/sources.list.d/vscode.list'
+  register: vscode_repository
+
+- name: add vscode repository and key
+  command: |
+    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg;
+    sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/;
+    sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+  when: not vscode_repository.stat.exists
+
+- name: install vscode
+  become: yes
+  apt:
+    name:             'code'
+    state:            present
+    update_cache:     yes
+    cache_valid_time: 3600
+  when: not vscode_repository.stat.exists
+
+- name: create parent directories
+  file:
+    dest:    '{{ vscode_path }}/{{ item }}'
+    state:   directory
+    recurse: yes
+  loop_control:
+    label: '{{ vscode_path }}/{{ item }}'
+  with_items: '{{ vscode.link.values() | map("dirname") | unique | list}}'
+
+- name: check destinations
+  stat:
+    path: '{{ vscode_path }}/{{ item.value }}'
+  loop_control:
+    label: '{{ item.value }}'
+  with_dict: '{{ vscode.link }}'
+  register: dest_stat
+
+- name: create backup files
+  command: |
+    mv -f \
+      {{ vscode_path | quote }}/{{ item.item.value | quote }} \
+      {{ vscode_path | quote }}/{{ item.item.value | quote }}.bak
+  when: item.stat.exists and not item.stat.islnk
+  loop_control:
+    label: '{{ item.item.value }}'
+  with_items: '{{ dest_stat.results }}'
+
+- name: create symlinks
+  file:
+    src: '{{ dotfiles_path }}/{{ item.key }}'
+    dest: '{{ vscode_path }}/{{ item.value }}'
+    state: link
+    force: yes
+  loop_control:
+    label: '{{ item.value }}'
+  with_dict: '{{ vscode.link }}'
+
+- name: get installed vscode extensions
+  command: |
+    code --list-extensions
+  register: installed_extensions
+  changed_when: False
+
+- name: install extensions
+  command: | 
+    code --install-extension {{ item | quote }}
+  when: vscode.extensions and installed_extensions.stdout.find(item) == -1
+  with_items: '{{ vscode.extensions }}'

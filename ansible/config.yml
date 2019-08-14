@@ -71,6 +71,9 @@ link:
   vim/vimrc:                 .vimrc
 
 vscode:
+  link:
+    config/Code/settings.json: settings.json
+
   extensions:
     - CoenraadS.bracket-pair-colorizer
     - Dart-Code.dart-code
