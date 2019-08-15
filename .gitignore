@@ -1,3 +1,4 @@
 *.orig
 __pycache__/
 ansible/playbook.retry
+bin/.issue_data
