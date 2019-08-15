@@ -20,5 +20,6 @@ fi
 ${CMD[@]} \
   -i 'localhost,' \
   --extra-vars='@config.yml' \
+  -K
   ${ARGS[@]} \
   playbook.yml
