@@ -1,5 +1,6 @@
 from github import Github
 import git
+import json
 import os
 import subprocess
 import sys
@@ -38,19 +39,34 @@ def get_remote_repo():
 
 def main():
     remote_repo = get_remote_repo()
+    data = {}
     for issue in remote_repo.get_issues():
         print(f'{issue.number:>3}', issue.title)
+        data[issue.number] = {
+            'title': issue.title,
+            'body': issue.body if issue.body != '' else 'No description proveded.',
+            'comments': list(map(lambda x: x.body, issue.get_comments()))
+        }
+
+    home = os.getenv('HOME')
+    with open(f'{home}/dotfiles/bin/.issue_data', 'w') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
 
 def show_detail(num):
-    remote_repo = get_remote_repo()
-    issue = remote_repo.get_issue(num)
-    print(issue.title, f'#{issue.number}')
-    print(issue.body) if issue.body != '' else print('No description proveded.')
-    if issue.comments != 0:
+    home = os.getenv('HOME')
+    issue = None
+    with open(f'{home}/dotfiles/bin/.issue_data') as f:
+        issue = json.load(f)[f'{num}']
+
+    print(issue['title'], f'#{num}')
+    print(issue['body'])
+
+    if len(issue['comments']) != 0:
         print()
-    for comment in issue.get_comments():
-        print(comment.body)
+
+    for comment in issue['comments']:
+        print(comment)
 
 
 if __name__ == '__main__':
