@@ -28,9 +28,11 @@ end
 
 set -q DOCKER_HOST
 if test $status -ne 0
-    set -x PATH $HOME/bin $PATH
-    set -x DOCKER_HOST unix:///run/user/1000/docker.sock
-    systemctl --user start docker
+    if test -d $HOME/bin
+        set -x PATH $HOME/bin $PATH
+        set -x DOCKER_HOST unix:///run/user/1000/docker.sock
+        systemctl --user start docker
+    end
 end
 
 if test -d $HOME/lib/zapcc/build/bin
