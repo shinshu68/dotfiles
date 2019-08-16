@@ -58,7 +58,8 @@ if test -f $HOME/.ssh/config -a -f $HOME/.ssh/id_rsa
     ssh-add ~/.ssh/id_rsa ^/dev/null >/dev/null
 end
 
-if test $SHLVL -eq 1 -a -x $HOME/bin/rootlesskit
+systemctl --user status docker ^/dev/null >/dev/null
+if test -x $HOME/bin/rootlesskit -a $status -ne 0
     sh ~/dotfiles/bin/docker-start.sh ^/dev/null >/dev/null
     set -x PATH $HOME/bin $PATH
     set -x DOCKER_HOST unix:///run/user/1000/docker.sock
