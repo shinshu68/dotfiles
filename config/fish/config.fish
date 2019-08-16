@@ -28,7 +28,8 @@ end
 
 set -q DOCKER_HOST
 if test $status -ne 0
-    if test -d $HOME/bin
+    if test -d $HOME/bin/rootlesskit
+        sh ~/dotfiles/bin/docker-start.sh
         set -x PATH $HOME/bin $PATH
         set -x DOCKER_HOST unix:///run/user/1000/docker.sock
         systemctl --user start docker
