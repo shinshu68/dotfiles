@@ -26,16 +26,6 @@ if test -d $HOME/goprojects
     set -x PATH $GOPATH/bin $PATH
 end
 
-set -q DOCKER_HOST
-if test $status -ne 0
-    if test -x $HOME/bin/rootlesskit
-        sh ~/dotfiles/bin/docker-start.sh
-        set -x PATH $HOME/bin $PATH
-        set -x DOCKER_HOST unix:///run/user/1000/docker.sock
-        # systemctl --user start docker
-    end
-end
-
 if test -d $HOME/lib/zapcc/build/bin
     set -x PATH $HOME/lib/zapcc/build/bin/ $PATH
 end
@@ -66,6 +56,12 @@ end
 if test -f $HOME/.ssh/config -a -f $HOME/.ssh/id_rsa
     eval (ssh-agent -c) ^/dev/null >/dev/null
     ssh-add ~/.ssh/id_rsa ^/dev/null >/dev/null
+end
+
+if test $SHLVL -eq 1 -a -x $HOME/bin/rootlesskit
+    sh ~/dotfiles/bin/docker-start.sh ^/dev/null >/dev/null
+    set -x PATH $HOME/bin $PATH
+    set -x DOCKER_HOST unix:///run/user/1000/docker.sock
 end
 
 set -x FZF_LEGACY_KEYBINDINGS 0
