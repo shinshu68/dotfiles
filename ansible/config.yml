@@ -47,9 +47,11 @@ pip:
     - PyGithub
     - beautifulsoup4
     - flake8
+    - gitPython
     - inquirer
     - jedi
     - neovim
+    - pipreqs
     - pyperclip
     - readchar
     - requests
