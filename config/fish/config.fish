@@ -60,7 +60,7 @@ end
 
 systemctl --user status docker ^/dev/null >/dev/null
 if test -x $HOME/bin/rootlesskit -a $status -ne 0
-    sh ~/dotfiles/bin/docker-start.sh ^/dev/null >/dev/null
+    sh ~/dotfiles/bin/start-docker.sh ^/dev/null >/dev/null
     set -x PATH $HOME/bin $PATH
     set -x DOCKER_HOST unix:///run/user/1000/docker.sock
 end
