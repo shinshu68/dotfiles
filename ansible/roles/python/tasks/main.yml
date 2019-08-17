@@ -14,6 +14,7 @@
     bash -lc 'which pyenv'
   register: which_pyenv
   ignore_errors: yes
+  changed_when: False
 
 - name: install pyenv
   command: |
@@ -24,6 +25,7 @@
   command: |
     bash -lc 'pyenv versions'
   register: installed_versions
+  changed_when: False
 
 - name: install python3
   command: |
@@ -42,6 +44,8 @@
 - name: set global python
   command: |
     bash -lc 'pyenv global {{ python.version3[0] | quote }} {{ python.version2[0] | quote}}'
+  when: |
+    installed_versions.stdout.find(python.version3[0]) == -1 or installed_versions.stdout.find(python.version2[0]) == -1
 
 - name: rehash
   shell: |
@@ -51,7 +55,9 @@
     bash -lc 'pyenv rehash'
   environment:
     DOTSHIM_FILE: '{{ anyenv.envs_dir }}/pyenv/.pyenv-shim'
+  changed_when: False
 
 - name: bash restart
   command: |
     bash -lc 'exec $SHELL -l'
+  changed_when: False
