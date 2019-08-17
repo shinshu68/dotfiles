@@ -22,3 +22,5 @@
       tags: ['base', 'link']
     - role: vscode
       tags: ['editor', 'vscode']
+    - role: others
+      tags: ['install', 'others']
