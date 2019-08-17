@@ -1,0 +1,30 @@
+- name: check fzf
+  stat:
+    path: '{{ home_path }}/.fzf'
+  register: fzf_stat
+  changed_when: False
+
+- block:
+  - name: clone fzf
+    git:
+      repo:  https://github.com/junegunn/fzf.git
+      dist:  '{{ home_path }}/.fzf'
+      depth: 1
+
+  - name: install fzf
+    command: |
+      '{{ home_path }}/.fzf/install'
+  when: not fzf_stat.stat.exists
+
+- name: check emojify
+  stat:
+    path: '/usr/local/bin/emojify'
+  register: emojify_stat
+  changed_when: False
+
+- name: install emojify
+  shell: |
+    'sudo sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"'
+  when: not emojify_stat.stat.exists
+
+
