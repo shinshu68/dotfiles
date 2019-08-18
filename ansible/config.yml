@@ -5,12 +5,14 @@ anyenv:
 
 apt:
   repositories:
+    - ppa:dawidd0811/neofetch
     - ppa:neovim-ppa/stable
 
   packages:
     - direnv
     - git
     - golang-1.10
+    - neofetch
     - neovim
     - python-pip
     - python3-pip
