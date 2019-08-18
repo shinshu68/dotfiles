@@ -75,3 +75,24 @@
   loop_control:
     label: '{{ item.path | basename }}'
   with_items: '{{ fish_files.files }}'
+
+- name: check installed emoji-fish
+  stat:
+    path: '{{ home_path }}/.emoji-fish'
+  register: emoji_fish_stat
+
+- block:
+  - name: install emoji-fish
+    git:
+      repo: https://github.com/shinshu68/emoji-fish.git
+      dest: '{{ home_path }}/.emoji-fish'
+
+  - name: create emoji-fish symlink
+    file:
+      src:   '{{ home_path }}/.emoji-fish/emoji-fish.fish'
+      dest:  '{{ home_path }}/.config/fish/functions/emoji-fish.fish'
+      owner: '{{ user_name }}'
+      group: '{{ user_name }}'
+      state: link
+      force: yes
+  when: not emoji_fish_stat.stat.exists
