@@ -12,3 +12,18 @@
     name:       '{{ pip.packages }}'
     extra_args: --upgrade
   when: pip.packages
+
+- set_fact: 
+    pip: {}
+    ansible_python_interpreter: '{{ anyenv.envs_dir }}/pyenv/shims/python2'
+
+- name: pip install
+  pip:
+    name: '{{ pip.packages }}'
+  when: pip.packages
+
+- name: pip install --upgrade
+  pip:
+    name:       '{{ pip.packages }}'
+    extra_args: --upgrade
+  when: pip.packages
