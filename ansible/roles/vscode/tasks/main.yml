@@ -51,8 +51,8 @@
 
 - name: create symlinks
   file:
-    src: '{{ dotfiles_path }}/{{ item.key }}'
-    dest: '{{ vscode_path }}/{{ item.value }}'
+    src:   '{{ dotfiles_path }}/{{ item.key }}'
+    dest:  '{{ vscode_path }}/{{ item.value }}'
     state: link
     force: yes
   loop_control:

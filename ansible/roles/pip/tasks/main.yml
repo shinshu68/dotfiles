@@ -9,6 +9,6 @@
 
 - name: pip install --upgrade
   pip:
-    name: '{{ pip.packages }}'
+    name:       '{{ pip.packages }}'
     extra_args: --upgrade
   when: pip.packages

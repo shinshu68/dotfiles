@@ -7,23 +7,23 @@
   register: anyenv_stat
 
 - block:
-    - name: fetch anyenv repo
-      git:
-        repo: https://github.com/riywo/anyenv
-        dest: '{{ anyenv.dir }}'
-      when: anyenv.dir
+  - name: fetch anyenv repo
+    git:
+      repo: https://github.com/riywo/anyenv
+      dest: '{{ anyenv.dir }}'
+    when: anyenv.dir
     
-    - name: create plugins dir
-      file:
-        dest:  '{{ anyenv.plugins_dir }}'
-        state: directory
-      when: anyenv.plugins_dir
+  - name: create plugins dir
+    file:
+      dest:  '{{ anyenv.plugins_dir }}'
+      state: directory
+    when: anyenv.plugins_dir
     
-    - name: fetch anyenv update repo
-      git:
-        repo: https://github.com/znz/anyenv-update
-        dest: '{{ anyenv.plugins_dir }}/anyenv-update'
-      when: anyenv.plugins_dir
+  - name: fetch anyenv update repo
+    git:
+      repo: https://github.com/znz/anyenv-update
+      dest: '{{ anyenv.plugins_dir }}/anyenv-update'
+    when: anyenv.plugins_dir
   when: not anyenv_stat.stat.exists
 
 - name: export anyenv path
@@ -42,6 +42,6 @@
 - name: anyenv init
   command: |
     bash -lc 'yes | anyenv install --init'
-  register:    anyenv_init
+  register: anyenv_init
   failed_when: anyenv_init.rc not in [0, 1]
   changed_when: False
