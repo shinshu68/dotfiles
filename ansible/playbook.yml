@@ -18,9 +18,9 @@
       tags: ['lang', 'python']
     - role: pip
       tags: ['install', 'pip']
-    - role: link
-      tags: ['base', 'link']
     - role: vscode
       tags: ['editor', 'vscode']
+    - role: link
+      tags: ['base', 'link']
     - role: others
       tags: ['install', 'others']
