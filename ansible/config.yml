@@ -67,7 +67,6 @@ fish:
 
 link:
   bash/bashrc:               .bashrc
-  config/Code/settings.json: .config/Code/User/settings.json
   config/flake8:             .config/flake8
   config/nvim:               .config/nvim
   git/gitconfig:             .gitconfig
