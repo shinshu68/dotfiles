@@ -76,28 +76,3 @@
     label: '{{ item.path | basename }}'
   with_items: '{{ fish_files.files }}'
 
-- name: check installed emoji-fish
-  stat:
-    path: '{{ home_path }}/.emoji-fish'
-  register: emoji_fish_stat
-
-- name: check ssh
-  stat:
-    path: '{{ home_path }}/.ssh/id_rsa.pub'
-  register: ssh_stat
-
-- block:
-  - name: install emoji-fish
-    git:
-      repo: git@github.com:shinshu68/emoji-fish
-      dest: '{{ home_path }}/.emoji-fish'
-
-  - name: create emoji-fish symlink
-    file:
-      src:   '{{ home_path }}/.emoji-fish/emoji-fish.fish'
-      dest:  '{{ home_path }}/.config/fish/functions/emoji-fish.fish'
-      owner: '{{ user_name }}'
-      group: '{{ user_name }}'
-      state: link
-      force: yes
-  when: not emoji_fish_stat.stat.exists and ssh_stat.stat.exists
