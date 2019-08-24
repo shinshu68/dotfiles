@@ -53,7 +53,7 @@ if test $status -eq 0
     set -g theme_newline_cursor yes
 end
 
-if test -f $HOME/.ssh/config -a -f $HOME/.ssh/id_rsa
+if test -f $HOME/.ssh/id_rsa
     eval (ssh-agent -c) ^/dev/null >/dev/null
     ssh-add ~/.ssh/id_rsa ^/dev/null >/dev/null
 end
