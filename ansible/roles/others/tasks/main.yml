@@ -40,12 +40,12 @@
 - block:
   - name: install emoji-fish
     git:
-      repo: git@github.com:shinshu68/emoji-fish
+      repo:  https://github.com/shinshu68/emoji-fish.git
       dest: '{{ home_path }}/.emoji-fish'
 
   - name: clone emoji-fish
     git:
-      repo:  https://github.com/shinshu68/emoji-fish.git
+      repo: git@github.com:shinshu68/emoji-fish
       dest: '{{ home_path }}/workspace/emoji-fish'
 
   - name: create emoji-fish symlink
