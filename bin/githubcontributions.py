@@ -30,7 +30,7 @@ class Parser(HTMLParser):
 
 
 column, _ = os.get_terminal_size()
-block = '  ' if column >= 53*2 else ' '
+block = '  ' if column >= 53 * 2 else ' '
 
 url = 'https://github.com/users/shinshu68/contributions'
 res = requests.get(url)
