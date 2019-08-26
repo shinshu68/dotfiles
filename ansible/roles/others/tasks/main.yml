@@ -45,7 +45,7 @@
 
   - name: clone emoji-fish
     git:
-      repo: git@github.com:shinshu68/emoji-fish
+      repo: git@github.com:shinshu68/emoji-fish.git
       dest: '{{ home_path }}/workspace/emoji-fish'
 
   - name: create emoji-fish symlink
