@@ -32,7 +32,10 @@ class Parser(HTMLParser):
 column, _ = os.get_terminal_size()
 block = '  ' if column >= 53 * 2 else ' '
 
-url = 'https://github.com/users/shinshu68/contributions'
+user = subprocess.run('git config --get user.name', shell=True, stdout=subprocess.PIPE).stdout
+username = user.decode('utf-8').strip()
+
+url = f'https://github.com/users/{username}/contributions'
 res = requests.get(url)
 
 parser = Parser()
