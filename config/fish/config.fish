@@ -67,7 +67,7 @@ end
 
 set -x FZF_LEGACY_KEYBINDINGS 0
 set -q TMUX
-+if test $status -ne 0 -a -x /usr/bin/tmux
+if test $status -ne 0 -a -x /usr/bin/tmux
     set -x FZF_TMUX 1
     set -x FZF_TMUX_HEIGHT 25%
     set -x FZF_DEFAULT_OPTS '--reverse'
