@@ -66,7 +66,8 @@ if test -x $HOME/bin/rootlesskit -a $status -ne 0
 end
 
 set -x FZF_LEGACY_KEYBINDINGS 0
-if test $SHLVL -eq 1 -a -x /usr/bin/tmux
+set -q TMUX
++if test $status -ne 0 -a -x /usr/bin/tmux
     set -x FZF_TMUX 1
     set -x FZF_TMUX_HEIGHT 25%
     set -x FZF_DEFAULT_OPTS '--reverse'
