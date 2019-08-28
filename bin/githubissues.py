@@ -33,6 +33,10 @@ def get_remote_repo():
     ext = '.git'
 
     origin_url = local_repo.remotes.origin.url
+
+    if origin_url[:5] == 'https':
+        exit()
+
     remote_user_repo = origin_url[len(host):-len(ext)]
     return g.get_repo(remote_user_repo)
 
