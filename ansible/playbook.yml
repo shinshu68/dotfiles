@@ -9,18 +9,18 @@
 
   roles:
     - role: apt
-      tags: ['install', 'apt']
+      tags: ['apt']
     - role: fish
-      tags: ['install', 'fish']
+      tags: ['fish']
     - role: anyenv
-      tags: ['base', 'anyenv']
+      tags: ['anyenv']
     - role: python
-      tags: ['lang', 'python']
+      tags: ['python']
     - role: pip
-      tags: ['install', 'pip']
+      tags: ['pip']
     - role: vscode
-      tags: ['editor', 'vscode']
+      tags: ['vscode']
     - role: link
-      tags: ['base', 'link']
+      tags: ['link']
     - role: others
-      tags: ['install', 'others']
+      tags: ['others']
