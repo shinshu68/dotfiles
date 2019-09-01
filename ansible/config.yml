@@ -11,12 +11,12 @@ apt:
   packages:
     - direnv
     - git
-    - golang-1.10
     - neofetch
     - neovim
     - python-pip
     - python3-pip
     - tmux
+    - tree
     - vim-nox
 
 python:
@@ -39,6 +39,7 @@ python:
       - wget
       - xz-utils
       - zlib1g-dev
+
   version2:
     - '2.7.15'
   version3:
