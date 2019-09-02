@@ -1,14 +1,14 @@
 # dotfiles
 shinshu68's dotfiles
 
-## install
+## Install
 ```shell
-bash -c "$(curl -sL git.io/shinshu68.dot)"
+bash -c "$(curl -sSL git.io/shinshu68.dot)"
 ```
 
 or
 
 ```shell
-curl -sL git.io/shinshu68.dot | bash
+curl -sSL git.io/shinshu68.dot | bash
 ```
 
