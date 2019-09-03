@@ -54,7 +54,7 @@ if test $status -eq 0
 end
 
 set -q SSH_AGENT_PID
-if test $status -eq 0 -a -f $HOME/.ssh/id_rsa
+if test $status -ne 0 -a -f $HOME/.ssh/id_rsa
     eval (ssh-agent -c) ^/dev/null >/dev/null
     ssh-add ~/.ssh/id_rsa ^/dev/null >/dev/null
 end
