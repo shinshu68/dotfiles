@@ -53,12 +53,14 @@ if test $status -eq 0
     set -g theme_newline_cursor yes
 end
 
-if test -f $HOME/.ssh/id_rsa
+set -q SSH_AGENT_PID
+if test $status -eq 0 -a -f $HOME/.ssh/id_rsa
     eval (ssh-agent -c) ^/dev/null >/dev/null
     ssh-add ~/.ssh/id_rsa ^/dev/null >/dev/null
 end
 
-systemctl --user status docker ^/dev/null >/dev/null
+# systemctl --user status docker ^/dev/null >/dev/null
+set -q DOCKER_HOST
 if test -x $HOME/bin/rootlesskit -a $status -ne 0
     sh ~/dotfiles/bin/start-docker.sh ^/dev/null >/dev/null
     set -x PATH $HOME/bin $PATH
