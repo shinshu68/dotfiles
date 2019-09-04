@@ -20,10 +20,8 @@ class Parser(HTMLParser):
         if tag == "rect":
             attrs = dict(attrs)
             last_contribution = attrs['data-count']
-            # print(attrs)
             if 'data-count' in attrs and 'fill' in attrs and 'data-date' in attrs:
                 self.data.append((attrs['data-count'], attrs['fill'], attrs['data-date']))
-                # print(attrs['data-count'], attrs['fill'], attrs['data-date'])
 
     def handle_endtag(self, tag):
         pass
@@ -43,16 +41,19 @@ parser = Parser()
 line = res.text.split('\n')
 parser.feed(res.text)
 
+arr = [[0 for i in range(53)] for j in range(7)]
+
 for i in range(7):
-    txt = ""
     for j in range(i, len(parser.data), 7):
+        txt = ""
         data = parser.data[j]
         red, green, blue = truecolor.hex_to_rgb(data[1])
         txt += f'\x1b[38;2;{red};{green};{blue}m'
         txt += f'\x1b[48;2;{red};{green};{blue}m'
         txt += block
         txt += '\x1b[0m'
-    print(txt)
+        print(txt, end='')
+    print()
 
 print()
 print(f"{last_contribution} contributions on Today")
