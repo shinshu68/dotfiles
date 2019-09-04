@@ -28,7 +28,7 @@ class Parser(HTMLParser):
 
 
 column, _ = os.get_terminal_size()
-block = '  ' if column >= 53 * 2 else ' '
+block = '  '
 
 user = subprocess.run('git config --get user.name', shell=True, stdout=subprocess.PIPE).stdout
 username = user.decode('utf-8').strip()
@@ -52,11 +52,13 @@ for i in range(7):
         txt += f'\x1b[48;2;{red};{green};{blue}m'
         txt += block
         txt += '\x1b[0m'
-        print(txt, end='')
-    print()
+        arr[i][j // 7] = txt
 
-print()
-print(f"{last_contribution} contributions on Today")
+for i in range(7):
+    for j in range(max(0, 53 - column // 2), 53):
+        if arr[i][j] != 0:
+            print(rf'{arr[i][j]}', end='')
+    print()
 
 
 if os.getenv('TMUX') is not None:
