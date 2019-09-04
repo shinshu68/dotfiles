@@ -60,6 +60,8 @@ for i in range(7):
             print(rf'{arr[i][j]}', end='')
     print()
 
+print()
+print(f"{last_contribution} contributions on Today")
 
 if os.getenv('TMUX') is not None:
     res = subprocess.run('tmux list-panes',
