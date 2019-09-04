@@ -56,9 +56,16 @@ for i in range(7):
 
 print()
 print(f"{last_contribution} contributions on Today")
-print('\x1b[0;0H')
+
 
 if os.getenv('TMUX') is not None:
+    res = subprocess.run('tmux list-panes',
+                         shell=True,
+                         stdout=subprocess.PIPE).stdout.decode('utf-8').split('\n')
+    if len(res) <= 2:
+        exit()
+
+    print('\x1b[0;0H')
     while True:
         c = readchar.readchar()
         if (c == readchar.key.CTRL_C or c == readchar.key.ESC or c == 'q'):
