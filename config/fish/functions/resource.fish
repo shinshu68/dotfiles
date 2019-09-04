@@ -41,4 +41,4 @@ end
 # リストを文字列に結合する
 set link_files (echo $link_files | string join ' ')
 
-complete --command resource -r -a $link_files
+complete --command resource -x -a $link_files
