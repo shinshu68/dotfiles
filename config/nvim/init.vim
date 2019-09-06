@@ -55,6 +55,7 @@ set t_ut=
 " autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd guibg=#303030   ctermbg=236
 
 autocmd FileType vue syntax sync fromstart
+au BufRead,BufNewFile *.fish set filetype=fish
 
 " エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
 set laststatus=2
