@@ -5,7 +5,10 @@ import os
 import readchar
 import requests
 import subprocess
-import truecolor
+try:
+    import truecolor
+except RuntimeError:
+    pass
 
 last_contribution = None
 
@@ -47,20 +50,27 @@ for i in range(7):
     for j in range(i, len(parser.data), 7):
         txt = ""
         data = parser.data[j]
-        red, green, blue = truecolor.hex_to_rgb(data[1])
-        txt += f'\x1b[38;2;{red};{green};{blue}m'
-        txt += f'\x1b[48;2;{red};{green};{blue}m'
-        txt += block
-        txt += '\x1b[0m'
-        arr[i][j // 7] = txt
+        try:
+            red, green, blue = truecolor.hex_to_rgb(data[1])
+            txt += f'\x1b[38;2;{red};{green};{blue}m'
+            txt += f'\x1b[48;2;{red};{green};{blue}m'
+            txt += block
+            txt += '\x1b[0m'
+            arr[i][j // 7] = txt
+        except NameError:
+            pass
 
+f = False
 for i in range(7):
     for j in range(max(0, 53 - column // 2), 53):
         if arr[i][j] != 0:
             print(rf'{arr[i][j]}', end='')
-    print()
+            f = True
+    if f:
+        print()
 
-print()
+if f:
+    print()
 print(f"{last_contribution} contributions on Today")
 
 if os.getenv('TMUX') is not None:
