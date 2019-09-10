@@ -11,8 +11,8 @@ if &runtimepath !~# '/dein.vim'
     execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
-let g:python_host_prog  = '/home/shinshu/.anyenv/envs/pyenv/shims/python2'
-let g:python3_host_prog = '/home/shinshu/.anyenv/envs/pyenv/shims/python'
+let g:python_host_prog  = $HOME . '/.anyenv/envs/pyenv/shims/python2'
+let g:python3_host_prog = $HOME . '/.anyenv/envs/pyenv/shims/python'
 
 " 設定開始
 if dein#load_state(s:dein_dir)
@@ -56,6 +56,7 @@ set t_ut=
 
 autocmd FileType vue syntax sync fromstart
 au BufRead,BufNewFile *.fish set filetype=fish
+au BufNewFile,BufRead *.scala setf scala
 
 " エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
 set laststatus=2
@@ -126,8 +127,6 @@ set noswapfile
 
 set showbreak=↪
 
-"set title
-
 set infercase
 
 set ignorecase
@@ -139,8 +138,6 @@ set incsearch
 set hlsearch
 
 nnoremap <silent><Esc><Esc> :<C-u>set nohlsearch!<CR>
-
-"set mouse=a
 
 set wildmenu
 
@@ -170,8 +167,6 @@ nnoremap <Space>m %
 nnoremap <Leader><Tab> <C-w>w
 
 cnoremap <C-v> <C-r>0
-
-au BufNewFile,BufRead *.scala setf scala
 
 function! s:isWsl()
     return filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
