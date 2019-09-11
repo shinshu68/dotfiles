@@ -61,15 +61,17 @@ for i in range(7):
             pass
 
 f = False
+f2 = False
 for i in range(7):
     for j in range(max(0, 53 - column // 2), 53):
         if arr[i][j] != 0:
             print(rf'{arr[i][j]}', end='')
             f = True
+            f2 = True
     if f:
         print()
 
-if f:
+if f2:
     print()
 print(f"{last_contribution} contributions on Today")
 
