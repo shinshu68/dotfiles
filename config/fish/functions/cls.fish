@@ -1,4 +1,4 @@
 function cls
-    source ~/.config/fish/config.fish
+    source $XDG_CONFIG_HOME/fish/config.fish
     clear
 end
