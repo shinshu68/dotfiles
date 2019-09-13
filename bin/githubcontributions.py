@@ -58,7 +58,19 @@ for i in range(7):
             txt += '\x1b[0m'
             arr[i][j // 7] = txt
         except NameError:
-            pass
+            dic = {
+                '#ebedf0': 255,
+                '#c6e48b': 186,
+                '#7bc96f': 113,
+                '#239a3b': 29,
+                '#196127': 22
+            }
+            c = dic[data[1]]
+            txt += f'\x1b[38;05;{c}m'
+            txt += f'\x1b[48;05;{c}m'
+            txt += block
+            txt += '\x1b[0m'
+            arr[i][j // 7] = txt
 
 f = False
 f2 = False
