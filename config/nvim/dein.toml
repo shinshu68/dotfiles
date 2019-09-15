@@ -28,7 +28,7 @@ repo = 'skywind3000/asyncrun.vim'
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
-repo = 'tyru/caw.vim'
+repo = 'shinshu68/caw.vim'
 
 [[plugins]]
 repo = 'benekastah/neomake'
