@@ -40,23 +40,21 @@ url = f'https://github.com/users/{username}/contributions'
 res = requests.get(url)
 
 parser = Parser()
-
-line = res.text.split('\n')
 parser.feed(res.text)
 
 arr = [[0 for i in range(53)] for j in range(7)]
+dic = {
+    '#ebedf0': 255,
+    '#c6e48b': 186,
+    '#7bc96f': 113,
+    '#239a3b': 29,
+    '#196127': 22
+}
 
 for i in range(7):
     for j in range(i, len(parser.data), 7):
         txt = ""
         data = parser.data[j]
-        dic = {
-            '#ebedf0': 255,
-            '#c6e48b': 186,
-            '#7bc96f': 113,
-            '#239a3b': 29,
-            '#196127': 22
-        }
         try:
             red, green, blue = truecolor.hex_to_rgb(data[1])
             txt += f'\x1b[38;2;{red};{green};{blue}m'
