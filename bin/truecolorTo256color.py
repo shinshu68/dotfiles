@@ -1,6 +1,6 @@
 import json
-import sys
 import os
+import sys
 
 
 def main(c):
@@ -9,6 +9,7 @@ def main(c):
     with open(f'{home}/dotfiles/bin/color.json') as f:
         color_data = json.load(f)
 
+    # rgb(hex)を整数に変換
     r = int(c[0:2], 16)
     g = int(c[2:4], 16)
     b = int(c[4:6], 16)
