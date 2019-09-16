@@ -18,7 +18,7 @@
 
 - name: check fish config functions directory
   stat:
-    path:   '{{ home_path }}/.config/fish/functions'
+    path: '{{ home_path }}/.config/fish/functions'
   register: config_stat
 
 - name: create fish config directory
@@ -30,7 +30,7 @@
 
 - name: check installed fisher
   stat:
-    path:   '{{ home_path }}/.config/fish/functions/fisher.fish'
+    path: '{{ home_path }}/.config/fish/functions/fisher.fish'
   register: fisher_stat
 
 - name: install fisher
@@ -41,13 +41,13 @@
 
 - name: update fisher
   command: |
-      fish -c "fisher self-update"
+    fish -c "fisher self-update"
   when: fisher_stat.stat.exists
   changed_when: False
 
 - name: check installed fisher plugins
   command: |
-      fish -c "fisher ls"
+    fish -c "fisher ls"
   register: installed_fisher_plugins
   changed_when: False
 
