@@ -64,7 +64,8 @@ set -q DOCKER_HOST
 if test -x $HOME/bin/rootlesskit -a $status -ne 0
     sh ~/dotfiles/bin/start-docker.sh ^/dev/null >/dev/null
     set -x PATH $HOME/bin $PATH
-    set -x DOCKER_HOST unix:///run/user/1000/docker.sock
+    set -l user_id (id -u)
+    set -x DOCKER_HOST unix:///run/user/$user_id/docker.sock
 end
 
 set -x FZF_LEGACY_KEYBINDINGS 0
