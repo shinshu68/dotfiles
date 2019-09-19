@@ -11,6 +11,7 @@ apt:
   packages:
     - direnv
     - git
+    - golang-1.10
     - neofetch
     - neovim
     - python-pip
