@@ -1,5 +1,5 @@
 function issues
-    git rev-parse --show-toplevel ^/dev/null >/dev/null
+    git rev-parse --show-toplevel 2>/dev/null >/dev/null
     if test $status -ne 0
         false
         return

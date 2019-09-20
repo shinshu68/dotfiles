@@ -54,14 +54,14 @@ end
 # set -q SSH_AGENT_PID
 # if test $status -ne 0 -a -f $HOME/.ssh/id_rsa
 if not set -q SSH_AGENT_PID && test -f $HOME/.ssh/id_rsa
-    eval (ssh-agent -c) ^/dev/null >/dev/null
-    ssh-add ~/.ssh/id_rsa ^/dev/null >/dev/null
+    eval (ssh-agent -c) 2>/dev/null >/dev/null
+    ssh-add ~/.ssh/id_rsa 2>/dev/null >/dev/null
 end
 
-# systemctl --user status docker ^/dev/null >/dev/null
+# systemctl --user status docker 2>/dev/null >/dev/null
 # set -q DOCKER_HOST
 if not set -q DOCKER_HOST && test -x $HOME/bin/rootlesskit
-    sh ~/dotfiles/bin/start-docker.sh ^/dev/null >/dev/null
+    sh ~/dotfiles/bin/start-docker.sh 2>/dev/null >/dev/null
     set -x PATH $HOME/bin $PATH
     set -l user_id (id -u)
     set -x DOCKER_HOST unix:///run/user/$user_id/docker.sock
@@ -73,7 +73,7 @@ if test $SHLVL -eq 1 -a -x /usr/bin/tmux
     set -x FZF_TMUX_HEIGHT 25%
     set -x FZF_DEFAULT_OPTS '--reverse'
 
-    tmux ls ^/dev/null >/dev/null
+    tmux ls 2>/dev/null >/dev/null
     if test $status -eq 0
         set -l tmux_ls (tmux ls)
         set -l tmux_status (string split ' ' $tmux_ls)[-1]
