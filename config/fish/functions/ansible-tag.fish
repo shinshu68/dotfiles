@@ -1,7 +1,6 @@
 function ansible-tag
-    set -l len (count $argv)
     set -l cmd "ansible-playbook -K -i 'localhost,' -e '@$HOME/dotfiles/ansible/config.yml' $HOME/dotfiles/ansible/playbook.yml"
-    if test $len -eq 0
+    if test (count $argv) -eq 0
         true
     else
         set -l newcmd $cmd
