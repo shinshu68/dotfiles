@@ -38,8 +38,7 @@ if test -d $HOME/development/android-studio
     set -x PATH $HOME/development/android-studio/bin $PATH
 end
 
-functions -q standard_cd
-if test $status -ne 0
+if not functions -q standard_cd
     functions --copy cd standard_cd
 
     function cd
@@ -47,21 +46,21 @@ if test $status -ne 0
     end
 end
 
-set -q SSH_CLIENT
-if test $status -eq 0
+if set -q SSH_CLIENT
     set -g theme_powerline_fonts no
     set -g theme_newline_cursor yes
 end
 
-set -q SSH_AGENT_PID
-if test $status -ne 0 -a -f $HOME/.ssh/id_rsa
+# set -q SSH_AGENT_PID
+# if test $status -ne 0 -a -f $HOME/.ssh/id_rsa
+if not set -q SSH_AGENT_PID && test -f $HOME/.ssh/id_rsa
     eval (ssh-agent -c) ^/dev/null >/dev/null
     ssh-add ~/.ssh/id_rsa ^/dev/null >/dev/null
 end
 
 # systemctl --user status docker ^/dev/null >/dev/null
-set -q DOCKER_HOST
-if test -x $HOME/bin/rootlesskit -a $status -ne 0
+# set -q DOCKER_HOST
+if not set -q DOCKER_HOST && test -x $HOME/bin/rootlesskit
     sh ~/dotfiles/bin/start-docker.sh ^/dev/null >/dev/null
     set -x PATH $HOME/bin $PATH
     set -l user_id (id -u)
