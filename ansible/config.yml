@@ -9,16 +9,20 @@ apt:
     - ppa:neovim-ppa/stable
 
   packages:
+    - 7z
     - direnv
     - git
     - golang-1.10
     - neofetch
     - neovim
+    - p7zip-full
     - python-pip
     - python3-pip
     - tmux
     - tree
     - vim-nox
+    - xclip
+    - xsel
 
 python:
   pyenv:
