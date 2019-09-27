@@ -58,9 +58,12 @@ pip:
     - gitPython
     - inquirer
     - jedi
+    - matplotlib
     - neovim
+    - numpy
     - pipreqs
     - pyperclip
+    - pyyaml
     - readchar
     - requests
     - truecolor
