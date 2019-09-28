@@ -72,7 +72,6 @@ pip:
 
 fish:
   fisher_plugins:
-    - 0rax/fish-bd
     - jethrokuan/fzf
     - oh-my-fish/theme-bobthefish
 
