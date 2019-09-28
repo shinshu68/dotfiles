@@ -15,6 +15,8 @@ apt:
     - golang-1.10
     - neofetch
     - neovim
+    - nodejs
+    - npm
     - p7zip-full
     - python-pip
     - python3-pip
