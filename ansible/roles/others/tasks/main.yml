@@ -8,7 +8,7 @@
   - name: clone fzf
     git:
       repo:  https://github.com/junegunn/fzf.git
-      dist:  '{{ home_path }}/.fzf'
+      dest:  '{{ home_path }}/.fzf'
       depth: 1
 
   - name: install fzf
