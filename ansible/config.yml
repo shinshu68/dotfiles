@@ -13,6 +13,7 @@ apt:
     - direnv
     - git
     - golang-1.10
+    - haskell-platform
     - neofetch
     - neovim
     - nodejs
