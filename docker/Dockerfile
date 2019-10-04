@@ -21,9 +21,13 @@ RUN add-apt-repository \
 RUN add-apt-repository ppa:fish-shell/release-3
 
 RUN apt-get update && apt-get install -y \
+    direnv \
     docker-ce \
     fish \
+    git \
     neovim \
     python3 \
+    tmux \
+    tree \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
