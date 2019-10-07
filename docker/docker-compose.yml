@@ -1,0 +1,14 @@
+version: '3'
+services:
+    development:
+        build: .
+        environment:
+            - XDG_RUNTIME_DIR=/run/user/${UID}
+            - UID=${UID}
+            - GID=${GID}
+        image: shinshu68/development-env
+        tty: true
+        volumes:
+            - /home/${USER}:/home/${USER}
+            - /var/run/docker.sock:/var/run/docker.sock
+        working_dir: /home/${USER}
