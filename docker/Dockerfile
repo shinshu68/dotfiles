@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
-    software-properties-common
+    software-properties-common \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
