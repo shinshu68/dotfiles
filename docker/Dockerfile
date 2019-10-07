@@ -25,9 +25,14 @@ RUN apt-get update && apt-get install -y \
     docker-ce \
     fish \
     git \
+    gosu \
     neovim \
     python3 \
     tmux \
     tree \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
+
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
