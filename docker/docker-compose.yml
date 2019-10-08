@@ -4,13 +4,13 @@ services:
         build: .
         command: fish
         environment:
-            - XDG_RUNTIME_DIR=/run/user/${UID}
-            - UID=${UID}
-            - GID=${GID}
+            - XDG_RUNTIME_DIR=/run/user/${USER_ID}
+            - UID=${USER_ID}
+            - GID=${GROUP_ID}
         image: shinshu68/development-env
-        user: shinshu
         tty: true
         volumes:
             - /home/${USER}:/home/${USER}
+            - /home/${USER}:/home/shinshu
             - /var/run/docker.sock:/var/run/docker.sock
-        working_dir: /home/${USER}
+        working_dir: /home/shinshu
