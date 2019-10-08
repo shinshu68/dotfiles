@@ -27,7 +27,10 @@ RUN apt-get update && apt-get install -y \
     git \
     gosu \
     neovim \
+    python \
+    python-pip \
     python3 \
+    python3-pip \
     tmux \
     tree \
  && apt-get clean \
@@ -35,6 +38,12 @@ RUN apt-get update && apt-get install -y \
 
 RUN curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
  && chmod +x /usr/local/bin/docker-compose
+
+RUN pip install \
+    neovim
+
+RUN pip3 install \
+    neovim
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
