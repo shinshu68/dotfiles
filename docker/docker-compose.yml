@@ -5,8 +5,8 @@ services:
         command: fish
         environment:
             - XDG_RUNTIME_DIR=/run/user/${USER_ID}
-            - UID=${USER_ID}
-            - GID=${GROUP_ID}
+            - USER_ID
+            - GROUP_ID
         image: shinshu68/development-env
         tty: true
         volumes:
