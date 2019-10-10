@@ -9,10 +9,12 @@ services:
             - GID=${GROUP_ID}
             - TZ=Asia/Tokyo
             - USERNAME=shinshu
+            - SSH_AUTH_SOCK=/ssh-agent
         image: shinshu68/development-env
         tty: true
         volumes:
             - /home/${USER}:/home/${USER}
             - /home/${USER}:/home/shinshu
             - /var/run/docker.sock:/var/run/docker.sock
+            - ${SSH_AUTH_SOCK}:/ssh-agent
         working_dir: /home/shinshu
