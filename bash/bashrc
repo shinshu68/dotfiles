@@ -127,6 +127,9 @@ if [ -f ~/dotfiles/bin/git-prompt.sh ]; then
     source $HOME/dotfiles/bin/git-prompt.sh
 fi
 
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUPSTREAM=true
 GIT_PS1_SHOWUNTRACKEDFILES=auto
