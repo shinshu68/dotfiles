@@ -35,6 +35,7 @@ RUN apt-get update && apt-get install -y \
     python-pip \
     python3 \
     python3-pip \
+    time \
     tmux \
     tree \
  && apt-get clean \
@@ -46,10 +47,40 @@ RUN curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-c
 
 # pipで必要なパッケージのインストール
 RUN pip install \
-    neovim
+    PyGithub \
+    beautifulsoup4 \
+    flake8 \
+    gitPython \
+    inquirer \
+    jedi \
+    matplotlib \
+    neovim \
+    neovim \
+    numpy \
+    pipreqs \
+    pyperclip \
+    pyyaml \
+    readchar \
+    requests \
+    truecolor
 
 RUN pip3 install \
-    neovim
+    PyGithub \
+    beautifulsoup4 \
+    flake8 \
+    gitPython \
+    inquirer \
+    jedi \
+    matplotlib \
+    neovim \
+    neovim \
+    numpy \
+    pipreqs \
+    pyperclip \
+    pyyaml \
+    readchar \
+    requests \
+    truecolor
 
 RUN locale-gen ja_JP.UTF-8 \
  && localedef -f UTF-8 -i ja_JP ja_JP
