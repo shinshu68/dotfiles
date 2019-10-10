@@ -8,9 +8,7 @@ RUN apt-get update && apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
-    software-properties-common \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+    software-properties-common
 
 # dockerのリポジトリキーをダウンロード
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  apt-key add -
@@ -31,6 +29,7 @@ RUN apt-get update && apt-get install -y \
     fish \
     git \
     gosu \
+    locales \
     neovim \
     python \
     python-pip \
@@ -51,6 +50,13 @@ RUN pip install \
 
 RUN pip3 install \
     neovim
+
+RUN locale-gen ja_JP.UTF-8 \
+ && localedef -f UTF-8 -i ja_JP ja_JP
+
+ENV LANG ja_JP.UTF-8
+ENV LANGUAGE ja_JP:jp
+ENV LC_ALL ja_JP.UTF-8
 
 # ENTRYPOINTの設定
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
