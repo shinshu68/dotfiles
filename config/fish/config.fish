@@ -4,8 +4,10 @@ eval (dircolors -c $HOME/dotfiles/config/dircolors)
 
 direnv hook fish | source
 
-set -x PATH $HOME/.anyenv/bin $PATH
-anyenv init - fish | source
+if test -d $HOME/.anyenv
+    set -x PATH $HOME/.anyenv/bin $PATH
+    anyenv init - fish | source
+end
 
 set -x PATH $HOME/dotfiles/bin $PATH
 set -x XDG_CONFIG_HOME $HOME/.config

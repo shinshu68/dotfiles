@@ -3,4 +3,6 @@ function fish_user_key_bindings
     bind \cs emoji-fish
 end
 
-fzf_key_bindings
+if test -d $HOME/.fzf
+    fzf_key_bindings
+end
