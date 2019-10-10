@@ -7,6 +7,8 @@ services:
             - TERM=xterm-256color
             - UID=${USER_ID}
             - GID=${GROUP_ID}
+            - TZ=Asia/Tokyo
+            - USERNAME=shinshu
         image: shinshu68/development-env
         tty: true
         volumes:

@@ -13,14 +13,13 @@ RUN apt-get update && apt-get install -y \
 # dockerのリポジトリキーをダウンロード
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg |  apt-key add -
 
-# dockerのリポジトリを追加
+# docker fish neovimのリポジトリを追加
 RUN add-apt-repository \
     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) \
-    stable"
-
-# fishのリポジトリを追加
-RUN add-apt-repository ppa:fish-shell/release-3
+    stable" \
+ && add-apt-repository ppa:fish-shell/release-3 \
+ && add-apt-repository ppa:neovim-ppa/stable
 
 # 必要なパッケージのインストール
 RUN apt-get update && apt-get install -y \
@@ -29,6 +28,7 @@ RUN apt-get update && apt-get install -y \
     fish \
     git \
     gosu \
+    libclang-6.0-dev \
     locales \
     neovim \
     python \
