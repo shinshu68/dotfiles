@@ -55,7 +55,6 @@ RUN pip install \
     jedi \
     matplotlib \
     neovim \
-    neovim \
     numpy \
     pipreqs \
     pyperclip \
@@ -72,7 +71,6 @@ RUN pip3 install \
     inquirer \
     jedi \
     matplotlib \
-    neovim \
     neovim \
     numpy \
     pipreqs \
