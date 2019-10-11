@@ -9,7 +9,6 @@ services:
             - INSIDE_DOCKER=1
             - SSH_AUTH_SOCK=/ssh-agent
             - TERM=xterm-256color
-            - TZ=Asia/Tokyo
             - UID=${USER_ID}
             - USERNAME
         image: shinshu68/development-env

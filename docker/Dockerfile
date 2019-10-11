@@ -3,6 +3,8 @@ FROM ubuntu:18.04
 # aptのサーバを日本のミラーにする
 RUN sed -i".back" -e 's/\/\/archive.ubuntu.com/\/\/ftp.jaist.ac.jp\/pub\/Linux/g' /etc/apt/sources.list
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 # dockerのインストールのためのパッケージを追加する
 RUN apt-get update && apt-get install -y \
     apt-transport-https \
@@ -38,6 +40,7 @@ RUN apt-get update && apt-get install -y \
     time \
     tmux \
     tree \
+    tzdata \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -86,6 +89,7 @@ RUN locale-gen ja_JP.UTF-8 \
 ENV LANG ja_JP.UTF-8
 ENV LANGUAGE ja_JP:jp
 ENV LC_ALL ja_JP.UTF-8
+ENV TZ Asia/Tokyo
 
 # ENTRYPOINTの設定
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
