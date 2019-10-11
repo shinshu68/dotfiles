@@ -1,7 +1,7 @@
 version: '3'
 services:
     development:
-        build: .
+        build: ${HOME}/dotfiles/docker
         command: fish
         environment:
             - DOCKER_MACHINE_NAME=dev
@@ -11,12 +11,12 @@ services:
             - TERM=xterm-256color
             - TZ=Asia/Tokyo
             - UID=${USER_ID}
-            - USERNAME=shinshu
+            - USERNAME
         image: shinshu68/development-env
         tty: true
         volumes:
-            - /home/${USER}:/home/${USER}
-            - /home/${USER}:/home/shinshu
+            - ${HOME}:${HOME}
+            - ${HOME}:/home/shinshu
             - /var/run/docker.sock:/var/run/docker.sock
             - ${SSH_AUTH_SOCK}:/ssh-agent
-        working_dir: /home/shinshu
+        working_dir: /home/${USERNAME}
