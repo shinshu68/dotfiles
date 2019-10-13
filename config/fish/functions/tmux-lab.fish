@@ -10,8 +10,8 @@ function tmux-lab
         return
     end
 
-    tmux split-pane -v -l (math $LINES -10) -t 0
-    tmux split-pane -h -l 40 -t 0
+    tmux split-pane -v -l (math $LINES -8) -t 0
+    tmux split-pane -h -l 30 -t 0
     tmux clock-mode -t 1
     tmux select-pane -t 2
 end
