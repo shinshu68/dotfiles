@@ -57,6 +57,7 @@ pip:
     - PyGithub
     - beautifulsoup4
     - flake8
+    - flask
     - gitPython
     - inquirer
     - jedi
@@ -69,6 +70,7 @@ pip:
     - readchar
     - requests
     - truecolor
+    - youtube_dl
 
 fish:
   fisher_plugins:
