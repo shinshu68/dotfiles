@@ -9,7 +9,6 @@ apt:
     - ppa:neovim-ppa/stable
 
   packages:
-    - 7z
     - direnv
     - git
     - golang-1.10
