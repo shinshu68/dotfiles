@@ -1,6 +1,6 @@
 function font-setting
     cd ~/Downloads
-    curl -O https://github.com/miiton/Cica/releases/download/v5.0.1/Cica_v5.0.1_with_emoji.zip
+    curl -LO https://github.com/miiton/Cica/releases/download/v5.0.1/Cica_v5.0.1_with_emoji.zip
     unzip Cica_v5.0.1_with_emoji.zip
     cp -f *.ttf ~/.local/share/fonts
 
