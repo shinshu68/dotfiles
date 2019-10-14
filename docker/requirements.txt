@@ -1,0 +1,15 @@
+PyGithub
+beautifulsoup4
+flake8
+gitPython
+inquirer
+jedi
+matplotlib
+neovim
+numpy
+pipreqs
+pyperclip
+pyyaml
+readchar
+requests
+truecolor

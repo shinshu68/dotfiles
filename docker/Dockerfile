@@ -48,40 +48,12 @@ RUN apt-get update && apt-get install -y \
 RUN curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
  && chmod +x /usr/local/bin/docker-compose
 
-# pipで必要なパッケージのインストール
-RUN pip install \
-    PyGithub \
-    beautifulsoup4 \
-    flake8 \
-    gitPython \
-    inquirer \
-    jedi \
-    matplotlib \
-    neovim \
-    numpy \
-    pipreqs \
-    pyperclip \
-    pyyaml \
-    readchar \
-    requests \
-    truecolor
 
-RUN pip3 install \
-    PyGithub \
-    beautifulsoup4 \
-    flake8 \
-    gitPython \
-    inquirer \
-    jedi \
-    matplotlib \
-    neovim \
-    numpy \
-    pipreqs \
-    pyperclip \
-    pyyaml \
-    readchar \
-    requests \
-    truecolor
+# pipで必要なパッケージのインストール
+COPY requirements.txt .
+RUN pip install -r requirements.txt \
+ && pip3 install -r requirements.txt
+RUN rm requirements.txt
 
 RUN locale-gen ja_JP.UTF-8 \
  && localedef -f UTF-8 -i ja_JP ja_JP
