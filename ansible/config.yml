@@ -10,6 +10,8 @@ apt:
 
   packages:
     - direnv
+    - fcitx 
+    - fcitx-mozc
     - git
     - golang-1.10
     - haskell-platform
@@ -18,6 +20,7 @@ apt:
     - nodejs
     - npm
     - p7zip-full
+    - python-apt
     - python-pip
     - python3-pip
     - tmux
