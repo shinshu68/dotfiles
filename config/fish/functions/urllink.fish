@@ -1,3 +1,3 @@
 function urllink
-    python $HOME/dotfiles/submodule/urllink/urllink.py
+    python3 $HOME/dotfiles/submodule/urllink/urllink.py
 end
