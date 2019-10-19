@@ -1,5 +1,12 @@
 set -g apps docker docker-compose rootless-docker google-chrome vivaldi slack
 function app_installer
+    set -l apps (string split ' ' $apps)
+
+    if test (count $argv) -eq 0
+        false
+        return
+    end
+
     if test (count $argv) -eq 1
         if test $argv = all
             echo all
