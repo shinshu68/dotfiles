@@ -9,7 +9,9 @@ function app_installer
 
     if test (count $argv) -eq 1
         if test $argv = all
-            echo all
+            for app in $apps
+                __app_installer_$app
+            end
             return
         end
     end
