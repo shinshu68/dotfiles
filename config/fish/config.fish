@@ -2,7 +2,9 @@ umask 022
 
 eval (dircolors -c $HOME/dotfiles/config/dircolors)
 
-direnv hook fish | source
+if test -x /usr/bin/direnv
+    direnv hook fish | source
+end
 
 if test -d $HOME/.anyenv
     set -x PATH $HOME/.anyenv/bin $PATH
