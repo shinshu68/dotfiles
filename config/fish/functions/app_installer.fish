@@ -1,4 +1,5 @@
-set -g apps docker docker-compose rootless-docker google-chrome vivaldi slack
+set -g apps "all docker docker-compose rootless-docker google-chrome vivaldi slack"
+complete --command app_installer -x -a $apps
 function app_installer
     set -l apps (string split ' ' $apps)
 
@@ -24,7 +25,3 @@ function app_installer
         end
     end
 end
-
-set apps all $apps
-set apps (echo $apps | string join ' ')
-complete --command app_installer -x -a $apps
