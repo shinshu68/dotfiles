@@ -3,5 +3,5 @@ function is_exists
         false
         return
     end
-    which $args
+    which $argv 2>/dev/null >/dev/null
 end
