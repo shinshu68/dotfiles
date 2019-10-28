@@ -10,7 +10,7 @@ apt:
 
   packages:
     - direnv
-    - fcitx 
+    - fcitx
     - fcitx-mozc
     - git
     - golang-1.10
