@@ -56,11 +56,13 @@ if set -q SSH_CLIENT
 end
 
 if not set -q SSH_AGENT_PID && test -f $HOME/.ssh/id_rsa
-    ps aux | grep "^$USER" | grep "ssh-agent -c" 2>/dev/null > /dev/null
-    if test $status -ne 0
-        eval (ssh-agent -c) 2>/dev/null >/dev/null
-        ssh-add ~/.ssh/id_rsa 2>/dev/null >/dev/null
+    set -l ssh_grep (ps aux | grep "^$USER" | grep "ssh-agent -c")
+    if test $status -eq 0
+        set -l ssh_pid (echo $ssh_grep | awk '{print $2}')
+        kill -9 $ssh_pid
     end
+    eval (ssh-agent -c) 2>/dev/null >/dev/null
+    ssh-add ~/.ssh/id_rsa 2>/dev/null >/dev/null
 end
 
 if not set -q DOCKER_HOST && test -x $HOME/bin/rootlesskit
