@@ -96,6 +96,6 @@ if set -q INSIDE_DOCKER
     set -g theme_display_docker_machine yes
 end
 
-if set -q COLORTERM
+if not set -q COLORTERM
     set -x COLORTERM truecolor
 end
