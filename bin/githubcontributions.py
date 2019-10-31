@@ -97,7 +97,7 @@ if os.getenv('TMUX') is not None:
 
     while True:
         c = readchar.readchar()
-        if (c == readchar.key.CTRL_C or c == readchar.key.ESC or c == 'q'):
+        if (c == readchar.key.CTRL_C or c == readchar.key.ESC or c == 'q' or c == readchar.key.ENTER):
             subprocess.run('tmux kill-pane', shell=True)
 
 subprocess.run('tput cnorm', shell=True)
