@@ -30,6 +30,8 @@ class Parser(HTMLParser):
         pass
 
 
+subprocess.run('tput civis', shell=True)
+
 column, _ = os.get_terminal_size()
 block = '  '
 
@@ -89,9 +91,9 @@ if os.getenv('TMUX') is not None:
     if len(res) <= 2:
         exit()
 
-    print('\x1b[0;0H')
     while True:
         c = readchar.readchar()
         if (c == readchar.key.CTRL_C or c == readchar.key.ESC or c == 'q'):
             subprocess.run('tmux kill-pane', shell=True)
 
+subprocess.run('tput cnorm', shell=True)
