@@ -55,6 +55,10 @@ if set -q SSH_CLIENT
     set -g theme_newline_cursor yes
 end
 
+if not set -q colorterm
+    set -x colorterm truecolor
+end
+
 if not set -q SSH_AGENT_PID && test -f $HOME/.ssh/id_rsa
     set -l ssh_grep (ps aux | grep "^$USER" | grep "ssh-agent -c")
     if test $status -eq 0
@@ -94,8 +98,4 @@ end
 
 if set -q INSIDE_DOCKER
     set -g theme_display_docker_machine yes
-end
-
-if not set -q COLORTERM
-    set -x COLORTERM truecolor
 end
