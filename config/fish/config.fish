@@ -55,8 +55,8 @@ if set -q SSH_CLIENT
     set -g theme_newline_cursor yes
 end
 
-if not set -q colorterm
-    set -x colorterm truecolor
+if not set -q COLORTERM
+    set -x COLORTERM truecolor
 end
 
 if not set -q SSH_AGENT_PID && test -f $HOME/.ssh/id_rsa
