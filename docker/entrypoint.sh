@@ -11,6 +11,8 @@ if [ $? != 0 ]; then
     useradd -u $USER_ID -o -m -s /usr/bin/fish $USER_NAME
     export HOME=/home/$USER_NAME
     gpasswd -a $USER_NAME docker
+    gpasswd -a $USER_NAME sudo
+    echo "${USER_NAME}:${USER_NAME}" | chpasswd
 fi
 
 exec /usr/sbin/gosu $USER_NAME "$@"
