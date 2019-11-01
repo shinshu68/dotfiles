@@ -1,4 +1,4 @@
-function ignore-files
+function ignore-tree
     git rev-parse --show-toplevel 2>/dev/null >/dev/null
     if test $status -ne 0
         false
