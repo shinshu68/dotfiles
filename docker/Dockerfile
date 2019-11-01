@@ -25,6 +25,7 @@ RUN add-apt-repository \
 
 # 必要なパッケージのインストール
 RUN apt-get update && apt-get install -y \
+    cmake \
     direnv \
     docker-ce \
     fish \
