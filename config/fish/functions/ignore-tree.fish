@@ -23,4 +23,6 @@ function ignore-tree
             echo -e $tree[$i] '(\x1b[38;2;255;0;0mignore\x1b[0m)'
         end
     end
+    echo $tree[-2]
+    echo $tree[-1]
 end
