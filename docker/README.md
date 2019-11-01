@@ -7,7 +7,12 @@
 - localeをja_JPに設定
 - LANGをja_JPに設定
 - TZをAsia/Tokyoに設定
+- SSHのソケットがあればコンテナ内にも繋げる
+- docker daemonをコンテナ内に繋げる
 - コンテナに入った時にentrypoint.shでユーザを追加する
+- 追加されたユーザは与えられたUID, GIDをもつ(ホストのユーザと揃えることを想定)
+- 追加されたユーザはユーザ名と同じパスワードでsudo権限をもつ
+- 追加されたユーザはdockerグループに追加される
 
 ## apt-add-repositoryしたリポジトリ
 - docker-bionic/stable
