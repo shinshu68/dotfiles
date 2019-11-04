@@ -63,6 +63,6 @@
 # やること
 - ホストの$HOMEをボリュームする想定
 - fishやnvimなどのリンク(初めに1回やればボリュームでホストに反映される)
-- fisherのインストール
+- fisherのインストール `curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher`
 - `fisher install oh-my-fish/theme-bobthefish`
 - fontの設定(?)
