@@ -58,6 +58,7 @@
 - pyyaml
 - readchar
 - requests
+- toml
 - truecolor
 
 # やること
