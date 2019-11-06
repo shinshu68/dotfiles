@@ -30,6 +30,10 @@ if test -d $HOME/goprojects
     set -x PATH $GOPATH/bin $PATH
 end
 
+if test -d $HOME/.local/bin
+    set -x PATH $HOME/.local/bin $PATH
+end
+
 if test -d $HOME/lib/zapcc/build/bin
     set -x PATH $HOME/lib/zapcc/build/bin/ $PATH
 end
