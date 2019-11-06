@@ -12,4 +12,5 @@ pyperclip
 pyyaml
 readchar
 requests
+toml
 truecolor
