@@ -1,0 +1,43 @@
+[pre]
+[[pre.repo]]
+path = '~/dotfiles'
+[pre.repo.data]
+commands = ['pull']
+local = 'master'
+remote = { branch = 'master', name = 'origin' }
+
+[[pre.repo]]
+path = '~/workspace/prepost'
+[pre.repo.data]
+commands = ['pull']
+local = 'master'
+remote = { branch = 'master', name = 'origin' }
+
+[[pre.repo]]
+path = '~/shinshu_works'
+[pre.repo.data]
+commands = ['pull']
+local = 'master'
+remote = { branch = 'master', name = 'origin' }
+
+[post]
+[[post.repo]]
+path = '~/dotfiles'
+[post.repo.data]
+commands = ['commit', 'push']
+local = 'master'
+remote = { branch = 'master', name = 'origin' }
+
+[[post.repo]]
+path = '~/workspace/prepost'
+[post.repo.data]
+commands = ['commit', 'push']
+local = 'master'
+remote = { branch = 'master', name = 'origin' }
+
+[[post.repo]]
+path = '~/shinshu_works'
+[post.repo.data]
+commands = ['commit', 'push']
+local = 'master'
+remote = { branch = 'master', name = 'origin' }
