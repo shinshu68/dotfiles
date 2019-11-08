@@ -65,5 +65,6 @@
 - ホストの$HOMEをボリュームする想定
 - fishやnvimなどのリンク(初めに1回やればボリュームでホストに反映される)
 - fisherのインストール `curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher`
-- `fisher install oh-my-fish/theme-bobthefish`
+- fishのテーマのインストール `fisher install oh-my-fish/theme-bobthefish`
+- fzfのインストール `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; ~/.fzf/install`
 - fontの設定(?)
