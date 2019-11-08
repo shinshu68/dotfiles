@@ -83,6 +83,7 @@ fish:
 link:
   bash/bashrc:    .bashrc
   config/flake8:  .config/flake8
+  config/prepost: .config/prepost
   config/nvim:    .config/nvim
   git/gitconfig:  .gitconfig
   tmux/tmux.conf: .tmux.conf
