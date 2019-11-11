@@ -5,3 +5,5 @@ function prepost
     end
     python ~/workspace/prepost/src/prepost.py $argv
 end
+
+complete -c prepost -x -a "pre post"
