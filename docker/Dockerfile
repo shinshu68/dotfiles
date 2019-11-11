@@ -56,6 +56,9 @@ RUN pip install -r requirements.txt \
  && pip3 install -r requirements.txt
 RUN rm requirements.txt
 
+# emojifyのインストール
+RUN sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
+
 # localeを生成
 RUN locale-gen ja_JP.UTF-8 \
  && localedef -f UTF-8 -i ja_JP ja_JP
