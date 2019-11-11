@@ -4,6 +4,7 @@
 ## 追加点
 - aptのサーバをjaistのミラーに変更
 - docker-composeをインストール
+- emojifyをインストール
 - localeをja_JPに設定
 - LANGをja_JPに設定
 - TZをAsia/Tokyoに設定
