@@ -50,16 +50,17 @@ RUN apt-get update && apt-get install -y \
 RUN curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
  && chmod +x /usr/local/bin/docker-compose
 
-
 # pipで必要なパッケージのインストール
 COPY requirements.txt .
 RUN pip install -r requirements.txt \
  && pip3 install -r requirements.txt
 RUN rm requirements.txt
 
+# localeを生成
 RUN locale-gen ja_JP.UTF-8 \
  && localedef -f UTF-8 -i ja_JP ja_JP
 
+# 環境変数を設定
 ENV LANG ja_JP.UTF-8
 ENV LANGUAGE ja_JP:jp
 ENV LC_ALL ja_JP.UTF-8
