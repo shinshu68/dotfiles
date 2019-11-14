@@ -7,20 +7,20 @@
 # Commit body...
 
 # ==================== Emojis ====================
-# 🎉  :tada:        First commit
+# 🎉  :tada:        First Commit
 # 🔖  :bookmark:    Add Tag
-# 👍  :thumbsup:    Add file
-# ✨  :sparkles:    Update code
-# ⚡  :zap:         Update performance
-# 🐛  :bug:         Fix bug
-# 📝  :pencil:      Write document
-# ✏️   :pencil2:     Fix typo
+# 👍  :thumbsup:    Add File
+# ✨  :sparkles:    Update Code
+# ⚡  :zap:         Update Performance
+# 🐛  :bug:         Fix Bug
+# 📝  :pencil:      Write Document
+# ✏️   :pencil2:     Fix Typo
 # ✒️   :black_nib:   Add Comment
-# ♻️   :recycle:     Refactor code
-# ⬆️   :arrow_up:    Update submodule
-# 🐳  :whale:       Work about Docker
+# ♻️   :recycle:     Refactor Code
+# ⬆️   :arrow_up:    Update Submodule
+# 🐳  :whale:       Work About Docker
 # 🔧  :wrench:      Setting
-# 🔨  :hammer:      Little change
-# 🚚  :truck:       Move file
-# 🔥  :fire:        Delete file or code
+# 🔨  :hammer:      Little Change
+# 🚚  :truck:       Move File
+# 🔥  :fire:        Delete File or Code
 # 🙈  :see_no_evil: Update .gitignore
