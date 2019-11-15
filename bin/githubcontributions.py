@@ -47,9 +47,9 @@ parser.feed(res.text)
 arr = [[0 for i in range(53)] for j in range(7)]
 dic = {
     '#ebedf0': 255,
-    '#c6e48b': 186,
-    '#7bc96f': 113,
-    '#239a3b': 29,
+    '#c6e48b': 150,
+    '#7bc96f': 114,
+    '#239a3b': 35,
     '#196127': 22,
     '#ffee4a': 227,
     '#ffc501': 220,
