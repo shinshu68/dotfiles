@@ -45,9 +45,11 @@ parser = Parser()
 parser.feed(res.text)
 
 arr = [[0 for i in range(53)] for j in range(7)]
+
+# trueTo256 で計算した
 dic = {
     '#ebedf0': 255,
-    '#c6e48b': 186,
+    '#c6e48b': 186,  # これだけ昔のよくわからん計算方法で算出した
     '#7bc96f': 114,
     '#239a3b': 35,
     '#196127': 22,
