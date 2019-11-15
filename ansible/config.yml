@@ -59,6 +59,7 @@ pip:
   packages:
     - PyGithub
     - beautifulsoup4
+    - click
     - flake8
     - flask
     - gitPython
@@ -72,6 +73,7 @@ pip:
     - pyyaml
     - readchar
     - requests
+    - toml
     - truecolor
     - youtube_dl
 
