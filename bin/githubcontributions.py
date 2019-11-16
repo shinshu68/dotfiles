@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from html.parser import HTMLParser
+import click
 import os
 import readchar
 import requests
@@ -35,7 +36,9 @@ class Parser(HTMLParser):
         pass
 
 
-def main():
+@click.command()
+@click.option('--halloween', is_flag=True)
+def cmd(halloween):
     subprocess.run('tput civis', shell=True)
 
     column, _ = os.get_terminal_size()
@@ -65,16 +68,29 @@ def main():
         '#03001c': 0
     }
 
+    # ハロウィン用の変換辞書
+    normalToHalloween = {
+        '#ebedf0': '#ebedf0',
+        '#c6e48b': '#ffee4a',
+        '#7bc96f': '#ffc501',
+        '#239a3b': '#fe9600',
+        '#196127': '#03001c'
+    }
+
     for i in range(7):
         for j in range(i, len(parser.data), 7):
             txt = ""
-            data = parser.data[j]
+            color_data = parser.data[j]['fill']
+
+            if halloween:
+                color_data = normalToHalloween[color_data]
+
             try:
-                red, green, blue = truecolor.hex_to_rgb(data['fill'])
+                red, green, blue = truecolor.hex_to_rgb(color_data)
                 txt += f'\x1b[38;2;{red};{green};{blue}m'
                 txt += f'\x1b[48;2;{red};{green};{blue}m'
             except NameError:
-                c = dic[data['fill']]
+                c = dic[color_data]
                 txt += f'\x1b[38;05;{c}m'
                 txt += f'\x1b[48;05;{c}m'
             txt += block
@@ -109,6 +125,10 @@ def main():
                 subprocess.run('tmux kill-pane', shell=True)
 
     subprocess.run('tput cnorm', shell=True)
+
+
+def main():
+    cmd()
 
 
 if __name__ == '__main__':
