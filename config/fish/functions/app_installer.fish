@@ -20,7 +20,5 @@ function app_installer
         if contains $arg $apps
             __app_installer_$arg
         else
-            echo ng
-        end
     end
 end
