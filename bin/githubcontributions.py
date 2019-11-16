@@ -30,76 +30,81 @@ class Parser(HTMLParser):
         pass
 
 
-subprocess.run('tput civis', shell=True)
+def main():
+    subprocess.run('tput civis', shell=True)
 
-column, _ = os.get_terminal_size()
-block = '  '
+    column, _ = os.get_terminal_size()
+    block = '  '
 
-user = subprocess.run('git config --get user.name', shell=True, stdout=subprocess.PIPE).stdout
-username = user.decode('utf-8').strip()
+    user = subprocess.run('git config --get user.name', shell=True, stdout=subprocess.PIPE).stdout
+    username = user.decode('utf-8').strip()
 
-url = f'https://github.com/users/{username}/contributions'
-res = requests.get(url)
+    url = f'https://github.com/users/{username}/contributions'
+    res = requests.get(url)
 
-parser = Parser()
-parser.feed(res.text)
+    parser = Parser()
+    parser.feed(res.text)
 
-arr = [[0 for i in range(53)] for j in range(7)]
+    arr = [[0 for i in range(53)] for j in range(7)]
 
-# trueTo256 で計算した
-dic = {
-    '#ebedf0': 255,
-    '#c6e48b': 186,  # これだけ昔のよくわからん計算方法で算出した
-    '#7bc96f': 114,
-    '#239a3b': 35,
-    '#196127': 22,
-    '#ffee4a': 227,
-    '#ffc501': 220,
-    '#fe9600': 208,
-    '#03001c': 0
-}
+    # trueTo256 で計算した
+    dic = {
+        '#ebedf0': 255,
+        '#c6e48b': 186,  # これだけ昔のよくわからん計算方法で算出した
+        '#7bc96f': 114,
+        '#239a3b': 35,
+        '#196127': 22,
+        '#ffee4a': 227,
+        '#ffc501': 220,
+        '#fe9600': 208,
+        '#03001c': 0
+    }
 
-for i in range(7):
-    for j in range(i, len(parser.data), 7):
-        txt = ""
-        data = parser.data[j]
-        try:
-            red, green, blue = truecolor.hex_to_rgb(data[1])
-            txt += f'\x1b[38;2;{red};{green};{blue}m'
-            txt += f'\x1b[48;2;{red};{green};{blue}m'
-        except NameError:
-            c = dic[data[1]]
-            txt += f'\x1b[38;05;{c}m'
-            txt += f'\x1b[48;05;{c}m'
-        txt += block
-        txt += '\x1b[0m'
-        arr[i][j // 7] = txt
+    for i in range(7):
+        for j in range(i, len(parser.data), 7):
+            txt = ""
+            data = parser.data[j]
+            try:
+                red, green, blue = truecolor.hex_to_rgb(data[1])
+                txt += f'\x1b[38;2;{red};{green};{blue}m'
+                txt += f'\x1b[48;2;{red};{green};{blue}m'
+            except NameError:
+                c = dic[data[1]]
+                txt += f'\x1b[38;05;{c}m'
+                txt += f'\x1b[48;05;{c}m'
+            txt += block
+            txt += '\x1b[0m'
+            arr[i][j // 7] = txt
 
-f2 = False
-for i in range(7):
-    f = False
-    for j in range(max(0, 53 - column // 2), 53):
-        if arr[i][j] != 0:
-            print(rf'{arr[i][j]}', end='')
-            f = True
-            f2 = True
-    if f:
+    f2 = False
+    for i in range(7):
+        f = False
+        for j in range(max(0, 53 - column // 2), 53):
+            if arr[i][j] != 0:
+                print(rf'{arr[i][j]}', end='')
+                f = True
+                f2 = True
+        if f:
+            print()
+
+    if f2:
         print()
+    print(f"{last_contribution} contributions on Today")
 
-if f2:
-    print()
-print(f"{last_contribution} contributions on Today")
+    if os.getenv('TMUX') is not None:
+        res = subprocess.run('tmux list-panes',
+                             shell=True,
+                             stdout=subprocess.PIPE).stdout.decode('utf-8').split('\n')
+        if len(res) <= 2:
+            exit()
 
-if os.getenv('TMUX') is not None:
-    res = subprocess.run('tmux list-panes',
-                         shell=True,
-                         stdout=subprocess.PIPE).stdout.decode('utf-8').split('\n')
-    if len(res) <= 2:
-        exit()
+        while True:
+            c = readchar.readchar()
+            if (c == readchar.key.CTRL_C or c == readchar.key.ESC or c == 'q' or c == readchar.key.ENTER):
+                subprocess.run('tmux kill-pane', shell=True)
 
-    while True:
-        c = readchar.readchar()
-        if (c == readchar.key.CTRL_C or c == readchar.key.ESC or c == 'q' or c == readchar.key.ENTER):
-            subprocess.run('tmux kill-pane', shell=True)
+    subprocess.run('tput cnorm', shell=True)
 
-subprocess.run('tput cnorm', shell=True)
+
+if __name__ == '__main__':
+    main()
