@@ -1,5 +1,5 @@
 function app_installer
-    set -l apps "all docker docker-compose rootless-docker google-chrome vivaldi slack"
+    set -l apps "all discord docker docker-compose rootless-docker google-chrome vivaldi slack"
     set apps (string split ' ' $apps)
 
     if test (count $argv) -eq 0
