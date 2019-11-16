@@ -24,7 +24,12 @@ class Parser(HTMLParser):
             attrs = dict(attrs)
             last_contribution = attrs['data-count']
             if 'data-count' in attrs and 'fill' in attrs and 'data-date' in attrs:
-                self.data.append((attrs['data-count'], attrs['fill'], attrs['data-date']))
+                d = {
+                    'data-count': attrs['data-count'],
+                    'fill': attrs['fill'],
+                    'data-date': attrs['data-date']
+                }
+                self.data.append(d)
 
     def handle_endtag(self, tag):
         pass
@@ -65,11 +70,11 @@ def main():
             txt = ""
             data = parser.data[j]
             try:
-                red, green, blue = truecolor.hex_to_rgb(data[1])
+                red, green, blue = truecolor.hex_to_rgb(data['fill'])
                 txt += f'\x1b[38;2;{red};{green};{blue}m'
                 txt += f'\x1b[48;2;{red};{green};{blue}m'
             except NameError:
-                c = dic[data[1]]
+                c = dic[data['fill']]
                 txt += f'\x1b[38;05;{c}m'
                 txt += f'\x1b[48;05;{c}m'
             txt += block
