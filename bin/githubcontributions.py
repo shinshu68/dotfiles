@@ -37,7 +37,7 @@ class Parser(HTMLParser):
 
 
 @click.command()
-@click.option('--halloween', is_flag=True)
+@click.option('--halloween', is_flag=True, help="Halloween Mode")
 def cmd(halloween):
     subprocess.run('tput civis', shell=True)
 
