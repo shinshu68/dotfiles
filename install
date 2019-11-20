@@ -63,6 +63,9 @@ install_ansible() {
 
     sudo sed -i".back" -e 's/\/\/archive.ubuntu.com/\/\/ftp.jaist.ac.jp\/pub\/Linux/g' /etc/apt/sources.list
 
+    yes | sudo apt update
+    yes | sudo apt install software-properties-common
+
     yes | sudo apt-add-repository ppa:ansible/ansible
     yes | sudo apt update
     yes | sudo apt install ansible
