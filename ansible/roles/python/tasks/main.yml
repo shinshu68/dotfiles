@@ -1,7 +1,7 @@
 - set_fact:
     python: {}
 
-- name: install suggested build anvironment
+- name: install suggested build environment
   become: yes
   apt:
     name:             '{{ python.pyenv.suggest_packages }}'
