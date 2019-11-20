@@ -2,7 +2,6 @@
 let s:dein_dir = expand('~/.cache/dein')
 " dein.vim 本体
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-
 " dein.vim がなければ github から落としてくる
 if &runtimepath !~# '/dein.vim'
     if !isdirectory(s:dein_repo_dir)
@@ -147,6 +146,8 @@ set showmode
 set showcmd
 
 set scrolloff=5
+
+set clipboard+=unnamedplus
 
 set list
 set listchars=tab:⊳-,trail:‗
