@@ -19,6 +19,6 @@ function app_installer
     for arg in $argv
         if contains $arg $apps
             __app_installer_$arg
-        else
+        end
     end
 end
