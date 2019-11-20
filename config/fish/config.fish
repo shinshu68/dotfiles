@@ -16,6 +16,9 @@ set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/.cache
 set -x EDITOR nvim
 
+set -x USER_ID (id -u)
+set -x GROUP_ID (id -g)
+
 if test -f $XDG_CONFIG_HOME/fish/user_aliases.fish
     source $XDG_CONFIG_HOME/fish/user_aliases.fish
 end
