@@ -20,6 +20,13 @@ commands = ['pull']
 local = 'master'
 remote = { branch = 'master', name = 'origin' }
 
+[[pre.repo]]
+path = '~/bookshelf'
+[pre.repo.data]
+commands = ['pull']
+local = 'master'
+remote = { branch = 'master', name = 'origin' }
+
 [post]
 [[post.repo]]
 path = '~/dotfiles'
@@ -37,6 +44,13 @@ remote = { branch = 'master', name = 'origin' }
 
 [[post.repo]]
 path = '~/shinshu_works'
+[post.repo.data]
+commands = ['commit', 'push']
+local = 'master'
+remote = { branch = 'master', name = 'origin' }
+
+[[post.repo]]
+path = '~/bookshelf'
 [post.repo.data]
 commands = ['commit', 'push']
 local = 'master'
