@@ -9,12 +9,13 @@ apt:
     - ppa:neovim-ppa/stable
 
   packages:
+    - cmake
     - direnv
     - fcitx
     - fcitx-mozc
     - git
     - golang-1.10
-    - haskell-platform
+    - libclang-dev
     - neofetch
     - neovim
     - nodejs
