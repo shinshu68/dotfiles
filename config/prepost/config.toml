@@ -22,6 +22,7 @@ remote = { branch = 'master', name = 'origin' }
 
 [[pre.repo]]
 path = '~/workspace/bookshelf'
+optional = true
 [pre.repo.data]
 commands = ['pull']
 local = 'master'
@@ -51,6 +52,7 @@ remote = { branch = 'master', name = 'origin' }
 
 [[post.repo]]
 path = '~/workspace/bookshelf'
+optional = true
 [post.repo.data]
 commands = ['commit', 'push']
 local = 'master'
