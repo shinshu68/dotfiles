@@ -20,11 +20,14 @@ RUN add-apt-repository \
     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) \
     stable" \
+ && add-apt-repository ppa:ansible/ansible \
  && add-apt-repository ppa:fish-shell/release-3 \
  && add-apt-repository ppa:neovim-ppa/stable
 
+
 # 必要なパッケージのインストール
 RUN apt-get update && apt-get install -y \
+    ansible \
     cmake \
     direnv \
     docker-ce \
