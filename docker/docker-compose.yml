@@ -15,7 +15,7 @@ services:
         tty: true
         volumes:
             - ${HOME}:${HOME}
-            - ${HOME}:/home/shinshu
+            - ${HOME}:/${USERNAME}
             - /var/run/docker.sock:/var/run/docker.sock
             - ${SSH_AUTH_SOCK}:/ssh-agent
-        working_dir: /home/${USERNAME}
+        working_dir: /${USERNAME}
