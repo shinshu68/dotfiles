@@ -19,8 +19,10 @@
 - docker-bionic/stable
 - neovim-ppa/stable
 - fish-shell/release-3
+- ansible/ansible
 
 ## apt installしたパッケージ
+- ansible
 - apt-transport-https
 - ca-certificates
 - cmake
