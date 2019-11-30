@@ -23,8 +23,7 @@
 
 ## apt installしたパッケージ
 - ansible
-- apt-transport-https
-- ca-certificates
+- build-essential
 - cmake
 - curl
 - direnv
@@ -32,42 +31,56 @@
 - fish
 - git
 - gosu
+- libbz2-dev
 - libclang-6.0-dev
+- libffi-dev
+- liblzma-dev
+- libncurses5-dev
+- libreadline-dev
+- libsqlite3-dev
+- libssl-dev
+- libxml2-dev
+- libxmlsec1-dev
+- llvm
 - locales
+- make
 - neovim
 - python
 - python-pip
 - python3
 - python3-pip
-- software-properties-common
 - sudo
 - time
+- tk-dev
 - tmux
 - tree
 - tzdata
-
-## pip installしたパッケージ
-- PyGithub
-- beautifulsoup4
-- flake8
-- gitPython
-- inquirer
-- jedi
-- matplotlib
-- neovim
-- numpy
-- pipreqs
-- pyperclip
-- pyyaml
-- readchar
-- requests
-- toml
-- truecolor
+- wget
+- xz-utils
+- zlib1g-dev
 
 # やること
 - ホストの$HOMEをボリュームする想定
 - fishやnvimなどのリンク(初めに1回やればボリュームでホストに反映される)
-- fisherのインストール `curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher`
-- fishのテーマのインストール `fisher install oh-my-fish/theme-bobthefish`
-- fzfのインストール `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; ~/.fzf/install`
+  - `ln -s $HOME/dotfiles/config/fish/functions/func-link.fish ~/.config/fish/functions`
+  - `func-link`
+  - `ansible-tag link`
+- fisherのインストール
+  - `curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher`
+- fishのテーマのインストール
+  - `fisher install oh-my-fish/theme-bobthefish`
+- fzfのインストール
+  - `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; ~/.fzf/install`
+- pyenvのインストール
+  - `anyenv install --init`
+  - `anyenv install pyenv`
+- Pythonのインストール
+  - `pyenv install 2.7.15`
+  - `pyenv install 3.7.2`
+  - `pyenv global 3.7.2 2.7.15`
+  - `pyenv rehash`
+- pip install
+  - `pip install -r $HOME/dotfiles/docker/requirements.txt`
+  - `pip2 install -r $HOME/dotfiles/docker/requirements.txt`
 - fontの設定(?)
+  - `font-setting`
