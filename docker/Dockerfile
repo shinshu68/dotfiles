@@ -28,14 +28,27 @@ RUN add-apt-repository \
 # 必要なパッケージのインストール
 RUN apt-get update && apt-get install -y \
     ansible \
+    build-essential \
     cmake \
+    curl \
     direnv \
     docker-ce \
     fish \
     git \
     gosu \
+    libbz2-dev \
     libclang-6.0-dev \
+    libffi-dev \
+    liblzma-dev \
+    libncurses5-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    libssl-dev \
+    libxml2-dev \
+    libxmlsec1-dev \
+    llvm \
     locales \
+    make \
     neovim \
     python \
     python-pip \
@@ -43,9 +56,13 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     sudo \
     time \
+    tk-dev \
     tmux \
     tree \
     tzdata \
+    wget \
+    xz-utils \
+    zlib1g-dev \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
@@ -53,11 +70,8 @@ RUN apt-get update && apt-get install -y \
 RUN curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
  && chmod +x /usr/local/bin/docker-compose
 
-# pipで必要なパッケージのインストール
-COPY requirements.txt .
-RUN pip install -r requirements.txt \
- && pip3 install -r requirements.txt
-RUN rm requirements.txt
+# anyenvのクローン
+RUN git clone https://github.com/riywo/anyenv $HOME/.anyenv
 
 # emojifyのインストール
 RUN sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
