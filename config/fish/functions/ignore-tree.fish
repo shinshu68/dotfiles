@@ -5,8 +5,13 @@ function ignore-tree
         return
     end
 
-    set -l tree (tree -aCI "*.git*" .)
-    set -l files (tree -afCI "*.git*" . | awk '{print $NF}')[1..-3] # 最後の2行は使用しないので消す
+    set -l path .
+    if test (count $argv) -eq 1
+        set path ./$argv
+    end
+
+    set -l tree (tree -aCI "*.git*" $path)
+    set -l files (tree -afCI "*.git*" $path | awk '{print $NF}')[1..-3] # 最後の2行は使用しないので消す
     set -l ignore_files (git ls-files -i -o --exclude-standard)
 
     set -l out ""
