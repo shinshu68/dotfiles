@@ -1,7 +1,0 @@
-alias gitl='git l'
-alias gitlg='git lg'
-alias gitc='git c'
-alias gitcm='git cm'
-alias gitle='git l | emojify | less -N'
-alias gpom='git pull origin master'
-alias pushforce='git push --force origin master'
