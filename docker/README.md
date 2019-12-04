@@ -4,7 +4,6 @@
 ## 追加点
 - aptのサーバをjaistのミラーに変更
 - docker-composeをインストール
-- anyenvをクローン
 - emojifyをインストール
 - localeをja_JPに設定
 - LANGをja_JPに設定
@@ -72,6 +71,10 @@
   - `fisher install oh-my-fish/theme-bobthefish`
 - fzfのインストール
   - `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf; ~/.fzf/install`
+- anyenvのクローン
+  - `git clone https://github.com/anyenv/anyenv ~/.anyenv`
+- anyenvのinit
+  - `~/.anyenv/bin/anyenv init`
 - pyenvのインストール
   - `anyenv install --init`
   - `anyenv install pyenv`
