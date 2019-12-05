@@ -36,7 +36,8 @@
 
 - name: bash restart
   command: |
-    bash -lc 'exec $SHELL -l'
+    bash -lc 'exec {{ item }} -l'
+  with_pipe: which bash
   changed_when: False
 
 - name: anyenv init
