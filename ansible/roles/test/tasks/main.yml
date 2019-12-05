@@ -1,0 +1,6 @@
+- set_fact:
+    test: {}
+
+- name: bash restart
+  debug: msg={{ item }}
+  with_pipe: which bash
