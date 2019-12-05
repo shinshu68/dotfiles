@@ -24,3 +24,5 @@
       tags: ['link']
     - role: others
       tags: ['others']
+    - role: test
+      tags: ['test']
