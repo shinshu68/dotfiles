@@ -1,7 +1,7 @@
 function git-yesterday
-    git rev-parse --show-toplevel 2>/dev/null >/dev/null
-    if test $status -ne 0
+    if not is-inside-git-dir
         false
+        return
     end
 
     git log | grep "^Date:" | grep (date --date "-1 days" +"%a %b %d") 2>/dev/null >/dev/null
