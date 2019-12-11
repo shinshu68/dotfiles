@@ -1,0 +1,6 @@
+version: '3'
+services:
+    ansible:
+        build: .
+        working_dir: /home/shinshu/dotfiles
+        tty: true
