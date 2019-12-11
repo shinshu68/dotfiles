@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     sudo \
     locales \
-    python-apt
+    python-apt \
+    libasound2
 
 ENV LANG ja_JP.UTF-8
 RUN locale-gen $LANG
