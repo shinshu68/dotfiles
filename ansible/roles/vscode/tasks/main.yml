@@ -7,11 +7,22 @@
   register: vscode_stat
 
 - block:
-  - name: add vscode repository and key
+  - name: add gpg key
     shell: |
-      curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg;
-      sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/;
-      sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
+      curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > {{ home_path }}/microsoft.gpg;
+  - name: install gpg key
+    become: yes
+    shell: |
+      install -o root -g root -m 644 {{ home_path }}/microsoft.gpg /etc/apt/trusted.gpg.d/;
+  - name: add repository
+    become: yes
+    shell: |
+      sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"' > /etc/apt/sources.list.d/vscode.list
+
+  - name: apt update
+    become: yes
+    apt:
+      update_cache: yes
 
   - name: install vscode
     become: yes
@@ -23,7 +34,7 @@
 
   - name: remove microsoft.gpg
     command: |
-      rm microsoft.gpg
+      rm {{ home_path }}/microsoft.gpg
 
   when: not vscode_stat.stat.exists
 
