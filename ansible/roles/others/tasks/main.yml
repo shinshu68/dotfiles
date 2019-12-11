@@ -58,8 +58,14 @@
       force: yes
   when: not emoji_fish_stat.stat.exists and ssh_stat.stat.exists
 
-- name: clone shinshu_works
-  git:
-    repo: git@github.com:toyota-ct-selab/shinshu_works.git
-    dest: '{{ home_path }}/shinshu_works'
-  when: ssh_stat.stat.exists
+- name: check shinshu_works
+  stat:
+    path: '{{ home_path }}/shinshu_works'
+  register: shinshu_works_stat
+
+- block:
+  - name: clone shinshu_works
+    git:
+      repo: git@github.com:toyota-ct-selab/shinshu_works.git
+      dest: '{{ home_path }}/shinshu_works'
+  when: not shinshu_works_stat.stat.exists and ssh_stat.stat.exists
