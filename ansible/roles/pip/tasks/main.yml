@@ -27,3 +27,7 @@
     name:       '{{ pip.packages }}'
     extra_args: --upgrade
   when: pip.packages
+
+- set_fact:
+    pip: {}
+    ansible_python_interpreter: '/usr/bin/python'
