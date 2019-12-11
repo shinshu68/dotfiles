@@ -3,4 +3,6 @@ services:
     ansible:
         build: .
         working_dir: /home/shinshu/dotfiles
+        volumes:
+            - /home/shinshu/dotfiles/ansible:/home/shinshu/dotfiles/ansible
         tty: true
