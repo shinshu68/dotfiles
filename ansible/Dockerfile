@@ -27,3 +27,5 @@ RUN echo "${USER}:${USER}" | chpasswd
 
 USER ${USER}
 WORKDIR ${HOME}
+
+RUN git clone https://github.com/shinshu68/dotfiles.git

@@ -2,7 +2,5 @@ version: '3'
 services:
     ansible:
         build: .
-        volumes:
-            - /home/shinshu/dotfiles:/home/shinshu/dotfiles
         working_dir: /home/shinshu/dotfiles
         tty: true
