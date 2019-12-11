@@ -23,8 +23,9 @@
   changed_when: False
 
 - name: install emojify
+  become: yes
   shell: |
-    sudo sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
+    sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
   when: not emojify_stat.stat.exists
 
 - name: check installed emoji-fish
