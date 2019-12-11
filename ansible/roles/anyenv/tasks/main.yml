@@ -33,3 +33,10 @@
     block: |
       export PATH="$HOME/.anyenv/bin:$PATH"
       eval "$(anyenv init -)"
+
+-- name: anyenv init
+  command: |
+    bash -lc 'yes | anyenv install --init'
+  register: anyenv_init
+  failed_when: anyenv_init.rc not in [0, 1]
+  changed_when: False
