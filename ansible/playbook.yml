@@ -25,4 +25,4 @@
     - role: others
       tags: ['others']
     - role: test
-      tags: ['test']
+      tags: ['test', never]
