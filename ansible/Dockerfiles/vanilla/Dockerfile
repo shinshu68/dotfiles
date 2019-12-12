@@ -6,6 +6,11 @@ ENV SHELL /bin/bash
 
 RUN sed -i".back" -e 's/\/\/archive.ubuntu.com/\/\/ftp.jaist.ac.jp\/pub\/Linux/g' /etc/apt/sources.list
 
+RUN apt-get update && apt-get install -y \
+    curl \
+    libasound2 \
+    sudo
+
 RUN useradd -m ${USER}
 RUN gpasswd -a ${USER} sudo
 RUN echo "${USER}:${USER}" | chpasswd
