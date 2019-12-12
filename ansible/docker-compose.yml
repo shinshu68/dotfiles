@@ -6,3 +6,7 @@ services:
         volumes:
             - /home/shinshu/dotfiles/ansible:/home/shinshu/dotfiles/ansible
         tty: true
+
+    vanilla:
+        build: ./Dockerfiles/vanilla
+        tty: true
