@@ -13,6 +13,7 @@ RUN apt-add-repository --yes --update ppa:ansible/ansible
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ansible \
+    curl \
     git \
     sudo \
     locales \
