@@ -19,44 +19,26 @@
 - name: check fish config functions directory
   stat:
     path: '{{ home_path }}/.config/fish/functions'
-  register: config_stat
+  register: config_functions
 
 - name: create fish config directory
   file:
     path:  '{{ home_path }}/.config/fish/functions'
     state: directory
     mode:  0755
-  when: not config_stat.stat.exists
+  when: not config_functions.stat.exists
 
-- name: check installed fisher
+- name: check fish completions directory
   stat:
-    path: '{{ home_path }}/.config/fish/functions/fisher.fish'
-  register: fisher_stat
+    path: '{{ home_path }}/.config/fish/completions'
+  register: config_completions
 
-- name: install fisher
-  get_url:
-    url:  https://git.io/fisher
-    dest: '{{ home_path }}/.config/fish/functions/fisher.fish'
-  when: not fisher_stat.stat.exists
-
-- name: update fisher
-  command: |
-    fish -c "fisher self-update"
-  when: fisher_stat.stat.exists
-  changed_when: False
-
-- name: check installed fisher plugins
-  command: |
-    fish -c "fisher ls"
-  register: installed_fisher_plugins
-  changed_when: False
-
-- name: install fisher plugins
-  command: |
-    fish -c "fisher add {{ item | quote }}"
-  when: |
-    installed_fisher_plugins.stdout.find(item) == -1
-  with_items: '{{ fish.fisher_plugins }}'
+- name: create fish config directory
+  file:
+    path:  '{{ home_path }}/.config/fish/completions'
+    state: directory
+    mode:  0755
+  when: not config_completions.stat.exists
 
 - name: get fish config files
   find:
@@ -75,4 +57,34 @@
   loop_control:
     label: '{{ item.path | basename }}'
   with_items: '{{ fish_files.files }}'
+
+- name: check installed fisher
+  stat:
+    path: '{{ home_path }}/.config/fish/functions/fisher.fish'
+  register: fisher_stat
+
+- name: install fisher
+  get_url:
+    url:  https://git.io/fisher
+    dest: '{{ home_path }}/.config/fish/functions/fisher.fish'
+  when: not fisher_stat.stat.exists
+
+- name: update fisher
+  shell: |
+    fish -lc "fisher self-update"
+  when: fisher_stat.stat.exists
+  changed_when: False
+
+- name: check installed fisher plugins
+  shell: |
+    fish -lc "fisher ls"
+  register: installed_fisher_plugins
+  changed_when: False
+
+- name: install fisher plugins
+  shell: |
+    fish -lc "fisher add {{ item }}"
+  when: |
+    installed_fisher_plugins.stdout.find(item) == -1
+  with_items: '{{ fish.fisher_plugins }}'
 
