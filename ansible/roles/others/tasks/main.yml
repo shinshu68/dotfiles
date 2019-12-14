@@ -22,8 +22,11 @@
 
 - name: install emojify
   become: yes
-  shell: |
-    sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
+  get_url:
+    url:  https://raw.githubusercontent.com/mrowa44/emojify/master/emojify 
+    dest: /usr/local/bin/emojify
+    mode: +x
+
   when: not emojify_stat.stat.exists
 
 - name: check emoji-fish
