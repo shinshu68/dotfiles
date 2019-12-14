@@ -15,3 +15,6 @@
 
 - name: rootless docker task
   include_tasks: rootless-docker.yml
+
+- name: vivaldi task
+  include_tasks: vivaldi.yml
