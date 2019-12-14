@@ -9,3 +9,6 @@
 
 - name: docker-compose task
   include_tasks: docker-compose.yml
+
+- name: google-chrome task
+  include_tasks: google-chrome.yml
