@@ -12,6 +12,7 @@ apt:
     - cmake
     - direnv
     - git
+    - gdebi
     - golang-1.10
     - libclang-dev
     - neofetch
