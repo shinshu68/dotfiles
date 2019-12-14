@@ -22,13 +22,6 @@ fcitx-config-gtk3 & で確認
 再起動
 ```
 
-### ターミナル変更
-```shell
-sudo apt install gnome-terminal
-vim /usr/share/applications/gnome-terminal.desktop で'OnlyShouIn=GNOME;Unity;'の行をコメントアウト
-sudo apt remove pantheon-terminal
-```
-
 ### シェル変更
 ```shell
 chsh -s $(which fish)
@@ -38,11 +31,6 @@ chsh -s $(which fish)
 ```shell
 font-setting
 ```
-
-### AppCenterからインストール
-- Clipped
-- GParted
-- GNOME システムモニター
 
 ### SSHの設定
 ```shell
