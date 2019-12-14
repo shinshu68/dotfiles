@@ -15,21 +15,26 @@ curl -sSL git.io/shinshu68.dot | bash
 ## 手動でやらなきゃいけないことリスト (elementary OS版)
 できるところは自動化したい
 
-### 日本語変換
-```shell
-im-config でfcitxを選択
-fcitx-config-gtk3 & で確認
-再起動
-```
-
 ### シェル変更
 ```shell
 chsh -s $(which fish)
 ```
 
+### 追加で設定する
+```shell
+ansible-tag desktop
+```
+
 ### フォント設定
 ```shell
 font-setting
+```
+
+### 日本語変換
+```shell
+im-config でfcitxを選択
+fcitx-config-gtk3 & で確認
+再起動
 ```
 
 ### SSHの設定
