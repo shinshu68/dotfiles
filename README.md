@@ -45,8 +45,7 @@ GitHubに登録
 
 ### 色々インストール
 ```shell
-app_installer all
-ansible-tag others
+ansible-tag others applications
 ```
 
 ### mozcの日本語変換強化
