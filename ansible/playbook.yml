@@ -23,7 +23,7 @@
     - role: others
       tags: ['others']
     - role: vscode
-      tags: ['vscode' never]
+      tags: ['vscode', never]
     - role: test
       tags: ['test', never]
     - role: applications
