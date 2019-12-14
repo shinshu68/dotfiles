@@ -132,3 +132,14 @@ vscode:
     - vsciot-vscode.vscode-arduino
     - vscodevim.vim
     - xyz.plsql-language
+
+others:
+  repos:
+    - repo: 'git@github.com:shinshu68/PrePost.git'
+      dest: '{{ home_path }}/workspace/prepost'
+    - repo: 'git@github.com:shinshu68/emoji-fish.git'
+      dest: '{{ home_path }}/workspace/emoji-fish'
+    - repo: 'git@github.com:shinshu68/BookShelf.git'
+      dest: '{{ home_path }}/workspace/bookshelf'
+    - repo: 'git@github.com:toyota-ct-selab/shinshu_works.git'
+      dest: '{{ home_path }}/shinshu_works'
