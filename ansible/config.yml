@@ -43,26 +43,6 @@ desktop:
       - com.github.davidmhewitt.clipped
 
 python:
-  pyenv:
-    suggest_packages:
-      - build-essential
-      - curl
-      - libbz2-dev
-      - libffi-dev
-      - liblzma-dev
-      - libncurses5-dev
-      - libreadline-dev
-      - libsqlite3-dev
-      - libssl-dev
-      - libxml2-dev
-      - libxmlsec1-dev
-      - llvm
-      - make
-      - tk-dev
-      - wget
-      - xz-utils
-      - zlib1g-dev
-
   version2:
     - '2.7.15'
   version3:
