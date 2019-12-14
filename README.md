@@ -25,11 +25,6 @@ chsh -s $(which fish)
 ansible-tag desktop
 ```
 
-### フォント設定
-```shell
-font-setting
-```
-
 ### 日本語変換
 ```shell
 im-config でfcitxを選択
