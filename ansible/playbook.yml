@@ -26,3 +26,5 @@
       tags: ['others']
     - role: test
       tags: ['test', never]
+    - role: desktop
+      tags: ['desktop', never]

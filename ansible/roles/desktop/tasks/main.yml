@@ -1,0 +1,33 @@
+- set_fact:
+    desktop: {}
+
+- name: apt install
+  become: yes
+  apt:
+    name:             '{{ desktop.apt.packages }}'
+    update_cache:     yes
+    cache_valid_time: 3600
+
+- name: set terminal desktop entry
+  become: yes
+  copy:
+    src:   gnome-terminal.desktop
+    dest:  /usr/share/applications/gnome-terminal.desktop
+    owner: root
+    group: root
+    mode:  644
+
+- name: purge the package 'pantheon-terminal'
+  apt:
+    name:  pantheon-terminal
+    state: absent
+
+- block:
+  - name: package install (from AppCenter)
+    become: yes
+    apt:
+      name:             '{{ desktop.appcenter.packages }}'
+      update_cache:     yes
+      cache_valid_time: 3600
+  when: ansible_distribution == "elementary OS"
+

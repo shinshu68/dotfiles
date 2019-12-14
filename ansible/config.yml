@@ -11,8 +11,6 @@ apt:
   packages:
     - cmake
     - direnv
-    - fcitx
-    - fcitx-mozc
     - git
     - golang-1.10
     - libclang-dev
@@ -29,6 +27,19 @@ apt:
     - vim-nox
     - xclip
     - xsel
+
+desktop:
+  apt:
+    packages:
+      - fcitx
+      - fcitx-mozc
+      - gnome-system-monitor
+      - gnome-terminal
+      - gparted
+
+  appcenter:
+    packages:
+      - com.github.davidmhewitt.clipped
 
 python:
   pyenv:
