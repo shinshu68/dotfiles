@@ -1,0 +1,25 @@
+- set_fact:
+    slack: {}
+
+- name: check slack
+  stat:
+    path: '/usr/bin/slack'
+  register: slack
+
+- block:
+  - name: get slack deb file
+    get_url:
+      url:  'https://downloads.slack-edge.com/linux_releases/slack-desktop-4.2.0-amd64.deb'
+      dest: '{{ home_path }}/Downloads/slack-desktop-4.2.0-amd64.deb'
+
+  - name: install slack
+    become: yes
+    apt:
+      deb: '{{ home_path }}/Downloads/slack-desktop-4.2.0-amd64.deb'
+
+  - name: remove slack deb file
+    file:
+      path:  '{{ home_path }}/Downloads/slack-desktop-4.2.0-amd64.deb'
+      state: absent
+
+  when: not slack.stat.exists

@@ -1,0 +1,52 @@
+- set_fact:
+    docker: {}
+
+- name: check docker
+  stat:
+    path: '/usr/bin/docker'
+  register: docker
+
+- block:
+  - name: install required packages
+    become: yes
+    apt:
+      name:             '{{ required_packages }}'
+      update_cache:     yes
+      cache_valid_time: 3600
+    vars:
+      required_packages:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg-agent
+        - software-properties-common
+
+  - name: add docker GPG key
+    become: yes
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+
+  - name: add repository
+    become: yes
+    apt_repository:
+      repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+
+  - name: install docker
+    become: yes
+    apt:
+      name:  "{{ packages }}"
+      state: present
+    vars:
+      packages:
+        - "docker-ce"
+        - "docker-ce-cli"
+        - "containerd.io"
+
+  - name: start docker
+    become: yes
+    systemd:
+      name:    docker
+      state:   started
+      enabled: yes
+
+  when: not docker.stat.exists

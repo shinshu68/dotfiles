@@ -1,0 +1,23 @@
+- set_fact:
+    applications: {}
+
+- name: discord task
+  include_tasks: discord.yml
+
+- name: docker task
+  include_tasks: docker.yml
+
+- name: docker-compose task
+  include_tasks: docker-compose.yml
+
+- name: google-chrome task
+  include_tasks: google-chrome.yml
+
+- name: rootless docker task
+  include_tasks: rootless-docker.yml
+
+- name: vivaldi task
+  include_tasks: vivaldi.yml
+
+- name: slack task
+  include_tasks: slack.yml
