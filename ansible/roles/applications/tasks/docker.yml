@@ -34,7 +34,7 @@
   - name: install docker
     become: yes
     apt:
-      name:  "docker-ce"
+      name:  "{{ packages }}"
       state: present
     vars:
       packages:
