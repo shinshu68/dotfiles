@@ -38,25 +38,24 @@
     path: '{{ home_path }}/.ssh/id_rsa.pub'
   register: ssh_stat
 
-- block:
-  - name: install emoji-fish
-    git:
-      repo:  https://github.com/shinshu68/emoji-fish.git
-      dest: '{{ home_path }}/.emoji-fish'
+- name: install emoji-fish
+  git:
+    repo:  https://github.com/shinshu68/emoji-fish.git
+    dest: '{{ home_path }}/.emoji-fish'
 
-  - name: clone emoji-fish
-    git:
-      repo: git@github.com:shinshu68/emoji-fish.git
-      dest: '{{ home_path }}/workspace/emoji-fish'
+- name: create emoji-fish symlink
+  file:
+    src:   '{{ home_path }}/.emoji-fish/emoji-fish.fish'
+    dest:  '{{ home_path }}/.config/fish/functions/emoji-fish.fish'
+    owner: '{{ user_name }}'
+    group: '{{ user_name }}'
+    state: link
+    force: yes
 
-  - name: create emoji-fish symlink
-    file:
-      src:   '{{ home_path }}/.emoji-fish/emoji-fish.fish'
-      dest:  '{{ home_path }}/.config/fish/functions/emoji-fish.fish'
-      owner: '{{ user_name }}'
-      group: '{{ user_name }}'
-      state: link
-      force: yes
+- name: clone emoji-fish
+  git:
+    repo: git@github.com:shinshu68/emoji-fish.git
+    dest: '{{ home_path }}/workspace/emoji-fish'
   when: not emoji_fish_stat.stat.exists and ssh_stat.stat.exists
 
 - name: check shinshu_works
