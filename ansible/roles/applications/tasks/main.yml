@@ -6,3 +6,6 @@
 
 - name: docker task
   include_tasks: docker.yml
+
+- name: docker-compose task
+  include_tasks: docker-compose.yml
