@@ -50,7 +50,7 @@ if test -d $HOME/development/android-studio
 end
 
 if test -d $HOME/.cargo/bin
-    set -x PATH $HOME/.cargo/bin
+    set -x PATH $HOME/.cargo/bin $PATH
 end
 
 if not functions -q standard_cd
