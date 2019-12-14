@@ -2,7 +2,6 @@
   stat:
     path: '{{ home_path }}/.fzf'
   register: fzf_stat
-  changed_when: False
 
 - block:
   - name: clone fzf
@@ -20,7 +19,6 @@
   stat:
     path: '/usr/local/bin/emojify'
   register: emojify_stat
-  changed_when: False
 
 - name: install emojify
   become: yes
@@ -28,19 +26,26 @@
     sh -c "curl https://raw.githubusercontent.com/mrowa44/emojify/master/emojify -o /usr/local/bin/emojify && chmod +x /usr/local/bin/emojify"
   when: not emojify_stat.stat.exists
 
-- name: install emoji-fish
-  git:
-    repo:  https://github.com/shinshu68/emoji-fish.git
-    dest: '{{ home_path }}/.emoji-fish'
+- name: check emoji-fish
+  stat:
+    path: '{{ home_path }}/.emoji-fish'
+  register: emoji_fish_stat
 
-- name: create emoji-fish symlink
-  file:
-    src:   '{{ home_path }}/.emoji-fish/emoji-fish.fish'
-    dest:  '{{ home_path }}/.config/fish/functions/emoji-fish.fish'
-    owner: '{{ user_name }}'
-    group: '{{ user_name }}'
-    state: link
-    force: yes
+- block:
+  - name: install emoji-fish
+    git:
+      repo:  https://github.com/shinshu68/emoji-fish.git
+      dest: '{{ home_path }}/.emoji-fish'
+
+  - name: create emoji-fish symlink
+    file:
+      src:   '{{ home_path }}/.emoji-fish/emoji-fish.fish'
+      dest:  '{{ home_path }}/.config/fish/functions/emoji-fish.fish'
+      owner: '{{ user_name }}'
+      group: '{{ user_name }}'
+      state: link
+      force: yes
+  when: not emoji_fish_stat.stat.exists
 
 - name: check ssh
   stat:
