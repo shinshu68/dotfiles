@@ -49,6 +49,10 @@ if test -d $HOME/development/android-studio
     set -x PATH $HOME/development/android-studio/bin $PATH
 end
 
+if test -d $HOME/.cargo/bin
+    set -x PATH $HOME/.cargo/bin
+end
+
 if not functions -q standard_cd
     functions --copy cd standard_cd
 
