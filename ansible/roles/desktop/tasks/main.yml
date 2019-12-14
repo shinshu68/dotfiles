@@ -31,3 +31,42 @@
       cache_valid_time: 3600
   when: ansible_distribution == "elementary OS"
 
+- name: check Cica font
+  stat:
+    path: '{{ home_path }}/.local/share/fonts/Cica-Regular.ttf'
+  register: Cica
+
+- name: create font directory
+  file:
+    path:  '{{ home_path }}/.local/share/fonts'
+    state: directory
+    mode:  0755
+
+- block:
+  - name: download Cica
+    get_url:
+      url:  'https://github.com/miiton/Cica/releases/download/v5.0.1/Cica_v5.0.1_with_emoji.zip'
+      dest: '{{ home_path }}/Downloads/Cica_v5.0.1_with_emoji.zip'
+
+  - name: unzip Cica
+    unarchive:
+      src: '{{ home_path }}/Downloads/Cica_v5.0.1_with_emoji.zip'
+      dest: '{{ home_path }}/.local/share/fonts'
+
+  - name: cache font
+    shell: fc-cache -fv
+
+  - dconf:
+      key: '{{ item.key }}'
+      value: '{{ item.value | quote }}'
+      state: present
+    with_items:
+      - key: /org/gnome/desktop/interface/monospace-font-name
+        value: Cica 12
+      - key: /org/gnome/desktop/interface/document-font-name
+        value: Cica 12
+      - key: /org/gnome/desktop/interface/font-name
+        value: Cica 12
+
+  when: not Cica.stat.exists
+
