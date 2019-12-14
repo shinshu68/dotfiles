@@ -12,3 +12,6 @@
 
 - name: google-chrome task
   include_tasks: google-chrome.yml
+
+- name: rootless docker task
+  include_tasks: rootless-docker.yml

@@ -1,0 +1,32 @@
+- set_fact:
+    rootless_docker: {}
+
+- name: check rootless docker
+  stat:
+    path: '{{ home_path }}/bin/docker'
+  register: rootless_docker
+
+- block:
+  - name: create directory
+    file:
+      path:  '{{ home_path }}/bin'
+      state: directory
+      owner: '{{ user_name }}'
+      group: '{{ user_name }}'
+      mode:  0755
+
+  - name: get rootless docker install script
+    get_url:
+      url:  https://get.docker.com/rootless
+      dest: '{{ home_path }}/bin/install-rootless-docker.sh'
+      mode: 0755
+
+  - name: install rootless docker
+    shell: '{{ home_path }}/bin/install-rootless-docker.sh'
+
+  - name: remove install script
+    file:
+      path:  '{{ home_path }}/bin/install-rootless-docker.sh'
+      state: absent
+
+  when: not rootless_docker.stat.exists
