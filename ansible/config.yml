@@ -95,6 +95,9 @@ vscode:
     - DavidAnson.vscode-markdownlint
     - MS-CEINTL.vscode-language-pack-ja
     - PKief.material-icon-theme
+    - XadillaX.viml
+    - alanz.vscode-hie-server
+    - bungcip.better-toml
     - christian-kohler.path-intellisense
     - dbaeumer.vscode-eslint
     - donjayamanne.githistory
@@ -109,9 +112,11 @@ vscode:
     - ms-vscode.csharp
     - ms-vscode.vs-keybindings
     - oderwat.indent-rainbow
+    - skyapps.fish-vscode
     - twxs.cmake
     - vsciot-vscode.vscode-arduino
     - vscodevim.vim
+    - vscoss.vscode-ansible
     - xyz.plsql-language
 
 others:
