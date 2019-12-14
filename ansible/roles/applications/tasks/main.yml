@@ -18,3 +18,6 @@
 
 - name: vivaldi task
   include_tasks: vivaldi.yml
+
+- name: slack task
+  include_tasks: slack.yml
