@@ -1,6 +1,5 @@
 - set_fact:
     test: {}
 
-- name: bash restart
-  debug: msg={{ item }}
-  with_pipe: which bash
+- name: debug
+  debug: var=hostvars[inventory_hostname]
