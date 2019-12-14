@@ -31,3 +31,6 @@
 - set_fact:
     pip: {}
     ansible_python_interpreter: '/usr/bin/python'
+
+  pip:
+    name: pysutil
