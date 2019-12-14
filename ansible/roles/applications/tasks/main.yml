@@ -3,3 +3,6 @@
 
 - name: discord task
   include_tasks: discord.yml
+
+- name: docker task
+  include_tasks: docker.yml
