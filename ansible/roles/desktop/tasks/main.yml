@@ -20,6 +20,28 @@
     name:  pantheon-terminal
     state: absent
 
+- name: get gnome terminal profile id
+  shell: 'gsettings get org.gnome.Terminal.ProfilesList default'
+  register: profile
+  changed_when: false
+
+- name: set gnome terminal profile
+  dconf:
+    key: >-
+      /org/gnome/terminal/legacy/profiles:/:{{ profile.stdout | replace("'", "") }}/{{ item.key }}
+    state: present
+    value: '{{ item.value }}'
+  loop_control:
+    label: '{{ item.key }}'
+  with_dict:
+    - audible-bell: 'false'
+    - background-color: "'rgb(0,0,0)'"
+    - background-transparency-percent: 13
+    - foreground-color: "'rgb(255,255,255)'"
+    - use-theme-colors: 'false'
+    - use-theme-transparency: 'false'
+    - use-transparent-background: 'true'
+
 - block:
   - name: package install (from AppCenter)
     become: yes
