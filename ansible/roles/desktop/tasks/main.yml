@@ -10,12 +10,10 @@
 
 - name: set terminal desktop entry
   become: yes
-  copy:
-    src:   gnome-terminal.desktop
-    dest:  /usr/share/applications/gnome-terminal.desktop
-    owner: root
-    group: root
-    mode:  644
+  replace:
+    dest:    /usr/share/applications/gnome-terminal.desktop
+    regexp:  '^OnlyShowIn=GNOME;Unity;'
+    replace: '# OnlyShowIn=GNOME;Unity;'
 
 - name: purge the package 'pantheon-terminal'
   apt:
