@@ -50,7 +50,17 @@ desktop:
       use-theme-colors: 'false'
       use-theme-transparency: 'false'
       use-transparent-background: 'true'
-
+  plank:
+    dock_items:
+      - google-chrome
+      - vivaldi-stable
+      - slack
+      - io.elementary.files
+      - gnome-system-monitor
+      - io.elementary.appcenter
+      - io.elementary.switchboard
+      - code
+      - gnome-terminal
 
 python:
   version2:

@@ -83,3 +83,35 @@
 
   when: not Cica.stat.exists
 
+- name: check plank
+  stat:
+    path: /usr/bin/plank
+  register: plank
+
+- block:
+  - name: create plank config directory
+    file:
+      path:  '{{ home_path }}/.config/plank/dock1/launchers'
+      state: directory
+      mode:  0755
+
+  - name: check application desktop file
+    stat:
+      path: '/usr/share/applications/{{ item }}.desktop'
+    with_items: '{{ desktop.plank.dock_items }}'
+    register: application_file
+
+  - name: configure dock items
+    template:
+      src:   'launcher.dockitem.j2'
+      dest:  '{{ home_path }}/.config/plank/dock1/launchers/{{ item.item }}.dockitem'
+      owner: '{{ user_name }}'
+      group: '{{ user_name }}'
+      mode:  0644
+    loop_control:
+      label: '{{ item.item }}'
+    when: item.stat.exists
+    with_items: '{{ application_file.results }}'
+
+  when: plank.stat.exists
+
