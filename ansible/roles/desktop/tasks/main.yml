@@ -58,13 +58,12 @@
       key: '{{ item.key }}'
       value: '{{ item.value | quote }}'
       state: present
-    with_items:
-      - key: /org/gnome/desktop/interface/monospace-font-name
-        value: Cica 12
-      - key: /org/gnome/desktop/interface/document-font-name
-        value: Cica 12
-      - key: /org/gnome/desktop/interface/font-name
-        value: Cica 12
+    loop_control:
+      label: '{{ item.key }}'
+    with_dict:
+      - /org/gnome/desktop/interface/monospace-font-name: Cica 12
+      - /org/gnome/desktop/interface/document-font-name: Cica 12
+      - /org/gnome/desktop/interface/font-name: Cica 12
 
   when: not Cica.stat.exists
 
