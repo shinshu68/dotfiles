@@ -16,6 +16,7 @@
     replace: '# OnlyShowIn=GNOME;Unity;'
 
 - name: purge the package 'pantheon-terminal'
+  become: yes
   apt:
     name:  pantheon-terminal
     state: absent
