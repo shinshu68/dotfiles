@@ -8,18 +8,12 @@
     update_cache:     yes
     cache_valid_time: 3600
 
-- name: set terminal desktop entry
+- name: set GNOME terminal desktop entry
   become: yes
   replace:
     dest:    /usr/share/applications/gnome-terminal.desktop
     regexp:  '^OnlyShowIn=GNOME;Unity;'
     replace: '# OnlyShowIn=GNOME;Unity;'
-
-- name: purge the package 'pantheon-terminal'
-  become: yes
-  apt:
-    name:  pantheon-terminal
-    state: absent
 
 - name: get gnome terminal profile id
   shell: 'gsettings get org.gnome.Terminal.ProfilesList default'
@@ -43,6 +37,12 @@
       update_cache:     yes
       cache_valid_time: 3600
   when: ansible_distribution == "elementary OS"
+
+- name: purge 'pantheon-terminal'
+  become: yes
+  apt:
+    name:  pantheon-terminal
+    state: absent
 
 - name: check Cica font
   stat:
@@ -69,7 +69,8 @@
   - name: cache font
     shell: fc-cache -fv
 
-  - dconf:
+  - name: setting font
+    dconf:
       key: '{{ item.key }}'
       value: '{{ item.value | quote }}'
       state: present
