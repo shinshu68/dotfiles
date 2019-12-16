@@ -60,7 +60,8 @@ desktop:
       - io.elementary.appcenter
       - io.elementary.switchboard
       - code
-      - gnome-terminal
+      - org.gnome.Terminal
+
 
 python:
   version2:
