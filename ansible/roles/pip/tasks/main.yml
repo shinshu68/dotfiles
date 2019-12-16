@@ -33,4 +33,8 @@
     ansible_python_interpreter: '/usr/bin/python'
 
 - pip:
-    name: pysutil
+    name: '{{ packages }}'
+  vars:
+    packages:
+     - pysutil
+     - docker
