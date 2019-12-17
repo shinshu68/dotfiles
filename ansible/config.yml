@@ -41,6 +41,7 @@ desktop:
   appcenter:
     packages:
       - com.github.davidmhewitt.clipped
+
   gnome:
     terminal:
       audible-bell: 'false'
@@ -50,6 +51,7 @@ desktop:
       use-theme-colors: 'false'
       use-theme-transparency: 'false'
       use-transparent-background: 'true'
+
   plank:
     dock_items:
       - google-chrome
@@ -61,7 +63,6 @@ desktop:
       - io.elementary.switchboard
       - code
       - org.gnome.Terminal
-
 
 python:
   version2:
