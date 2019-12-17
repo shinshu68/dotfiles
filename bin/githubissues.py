@@ -48,7 +48,7 @@ def main():
         print(f'{issue.number:>3}', issue.title)
         data[issue.number] = {
             'title': issue.title,
-            'body': issue.body if issue.body != '' else 'No description proveded.',
+            'body': issue.body if issue.body != '' else 'No description provided.',
             'comments': list(map(lambda x: x.body, issue.get_comments()))
         }
 
