@@ -64,6 +64,41 @@ desktop:
       - code
       - org.gnome.Terminal
 
+  vscode:
+    link:
+      config/Code/settings.json: settings.json
+
+    extensions:
+      - CoenraadS.bracket-pair-colorizer
+      - Dart-Code.dart-code
+      - Dart-Code.flutter
+      - DavidAnson.vscode-markdownlint
+      - MS-CEINTL.vscode-language-pack-ja
+      - PKief.material-icon-theme
+      - XadillaX.viml
+      - alanz.vscode-hie-server
+      - bungcip.better-toml
+      - christian-kohler.path-intellisense
+      - dbaeumer.vscode-eslint
+      - donjayamanne.githistory
+      - eamodio.gitlens
+      - formulahendry.auto-close-tag
+      - formulahendry.auto-rename-tag
+      - justusadam.language-haskell
+      - ms-azuretools.vscode-docker
+      - ms-python.python
+      - ms-vscode.cmake-tools
+      - ms-vscode.cpptools
+      - ms-vscode.csharp
+      - ms-vscode.vs-keybindings
+      - oderwat.indent-rainbow
+      - skyapps.fish-vscode
+      - twxs.cmake
+      - vsciot-vscode.vscode-arduino
+      - vscodevim.vim
+      - vscoss.vscode-ansible
+      - xyz.plsql-language
+
 python:
   version2:
     - '2.7.15'
@@ -105,41 +140,6 @@ link:
   git/gitconfig:  .gitconfig
   tmux/tmux.conf: .tmux.conf
   vim/vimrc:      .vimrc
-
-vscode:
-  link:
-    config/Code/settings.json: settings.json
-
-  extensions:
-    - CoenraadS.bracket-pair-colorizer
-    - Dart-Code.dart-code
-    - Dart-Code.flutter
-    - DavidAnson.vscode-markdownlint
-    - MS-CEINTL.vscode-language-pack-ja
-    - PKief.material-icon-theme
-    - XadillaX.viml
-    - alanz.vscode-hie-server
-    - bungcip.better-toml
-    - christian-kohler.path-intellisense
-    - dbaeumer.vscode-eslint
-    - donjayamanne.githistory
-    - eamodio.gitlens
-    - formulahendry.auto-close-tag
-    - formulahendry.auto-rename-tag
-    - justusadam.language-haskell
-    - ms-azuretools.vscode-docker
-    - ms-python.python
-    - ms-vscode.cmake-tools
-    - ms-vscode.cpptools
-    - ms-vscode.csharp
-    - ms-vscode.vs-keybindings
-    - oderwat.indent-rainbow
-    - skyapps.fish-vscode
-    - twxs.cmake
-    - vsciot-vscode.vscode-arduino
-    - vscodevim.vim
-    - vscoss.vscode-ansible
-    - xyz.plsql-language
 
 others:
   repos:

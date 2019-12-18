@@ -115,3 +115,5 @@
 
   when: plank.stat.exists
 
+- name: vscode task
+  include_tasks: vscode.yml
