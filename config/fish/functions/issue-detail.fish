@@ -1,0 +1,20 @@
+function issue-detail
+    if not is-inside-git-dir
+        false
+        return
+    end
+
+    if string match -q 'issue-#*' $branch
+        false
+        return
+    end
+
+    if not test -f $HOME/dotfiles/bin/.issue_data
+        python3 $HOME/dotfiles/bin/githubissues.py 2>/dev/null >/dev/null
+    end
+
+    set -l branch (git symbolic-ref --short HEAD)
+    set -l issue_number (string sub -s (math (string length 'issue-#') + 1) $branch)
+
+    python3 $HOME/dotfiles/bin/githubissues.py $issue_number
+end
