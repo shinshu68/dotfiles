@@ -40,14 +40,14 @@
     recurse: yes
   loop_control:
     label: '{{ vscode_path }}/{{ item }}'
-  with_items: '{{ vscode.link.values() | map("dirname") | unique | list }}'
+  with_items: '{{ desktop.vscode.link.values() | map("dirname") | unique | list }}'
 
 - name: check destinations
   stat:
     path: '{{ vscode_path }}/{{ item.value }}'
   loop_control:
     label: '{{ item.value }}'
-  with_dict: '{{ vscode.link }}'
+  with_dict: '{{ desktop.vscode.link }}'
   register: dest_stat
 
 - name: create backup files
@@ -68,7 +68,7 @@
     force: yes
   loop_control:
     label: '{{ item.value }}'
-  with_dict: '{{ vscode.link }}'
+  with_dict: '{{ desktop.vscode.link }}'
 
 - name: get installed vscode extensions
   command: |
@@ -79,5 +79,5 @@
 - name: install extensions
   command: | 
     code --install-extension {{ item | quote }}
-  when: vscode.extensions and installed_extensions.stdout.find(item) == -1
-  with_items: '{{ vscode.extensions }}'
+  when: desktop.vscode.extensions and installed_extensions.stdout.find(item) == -1
+  with_items: '{{ desktop.vscode.extensions }}'
