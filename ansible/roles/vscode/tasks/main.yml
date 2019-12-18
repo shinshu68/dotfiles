@@ -28,8 +28,8 @@
   - name: install vscode
     become: yes
     apt:
-      name:             'code'
-      state:            present
+      name:  'code'
+      state: present
 
   when: not vscode_stat.stat.exists
 
@@ -40,7 +40,7 @@
     recurse: yes
   loop_control:
     label: '{{ vscode_path }}/{{ item }}'
-  with_items: '{{ vscode.link.values() | map("dirname") | unique | list}}'
+  with_items: '{{ vscode.link.values() | map("dirname") | unique | list }}'
 
 - name: check destinations
   stat:
