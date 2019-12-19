@@ -14,7 +14,8 @@
 
   - name: install discord
     become: yes
-    shell: "yes | gdebi {{ home_path }}/Downloads/discord-app.deb"
+    apt:
+      deb: "{{ home_path }}/Downloads/discord-app.deb"
 
   - name: remove discord deb file
     file:
