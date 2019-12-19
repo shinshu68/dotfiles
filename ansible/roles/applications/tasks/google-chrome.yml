@@ -11,15 +11,14 @@
     become: yes
     apt_key:
       url: https://dl.google.com/linux/linux_signing_key.pub
+      state: present
 
   - name: add google-chrome repo
     become: yes
-    copy:
-      content: 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'
-      dest:    /etc/apt/sources.list.d/google-chrome.list
-      owner:   root
-      group:   root
-      mode:    644
+    apt_repository:
+      repo: 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'
+      filename: google-chrome
+      state: present
 
   - name: update apt cache
     become: yes
