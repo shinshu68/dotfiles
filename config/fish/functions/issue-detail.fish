@@ -4,7 +4,9 @@ function issue-detail
         return
     end
 
-    if string match -q 'issue-#*' $branch
+    set -l branch (git symbolic-ref --short HEAD)
+
+    if not string match -q 'issue-#*' $branch
         false
         return
     end
@@ -13,7 +15,6 @@ function issue-detail
         python3 $HOME/dotfiles/bin/githubissues.py 2>/dev/null >/dev/null
     end
 
-    set -l branch (git symbolic-ref --short HEAD)
     set -l issue_number (string sub -s (math (string length 'issue-#') + 1) $branch)
 
     python3 $HOME/dotfiles/bin/githubissues.py $issue_number
