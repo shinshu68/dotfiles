@@ -1,34 +1,26 @@
 - set_fact:
     google_chrome: {}
 
-- name: check google-chrome
-  stat:
-    path: '/usr/bin/google-chrome'
-  register: google_chrome
+- name: add google-chrome key
+  become: yes
+  apt_key:
+    url: https://dl.google.com/linux/linux_signing_key.pub
+    state: present
 
-- block:
-  - name: add google-chrome key
-    become: yes
-    apt_key:
-      url: https://dl.google.com/linux/linux_signing_key.pub
-      state: present
+- name: add google-chrome repo
+  become: yes
+  apt_repository:
+    repo: 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'
+    filename: google-chrome
+    state: present
 
-  - name: add google-chrome repo
-    become: yes
-    apt_repository:
-      repo: 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main'
-      filename: google-chrome
-      state: present
+- name: update apt cache
+  become: yes
+  apt:
+    update_cache: yes
 
-  - name: update apt cache
-    become: yes
-    apt:
-      update_cache: yes
-
-  - name: install google-chrome
-    become: yes
-    apt:
-      name:  google-chrome-stable
-      state: present
-
-  when: not google_chrome.stat.exists
+- name: install google-chrome
+  become: yes
+  apt:
+    name:  google-chrome-stable
+    state: present
