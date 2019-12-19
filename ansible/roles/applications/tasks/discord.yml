@@ -1,25 +1,17 @@
 - set_fact:
     discord: {}
 
-- name: check discord
-  stat:
-    path: '/usr/bin/discord'
-  register: discord
+- name: get discord deb file
+  get_url:
+    url:  "https://discordapp.com/api/download?platform=linux&format=deb"
+    dest: "{{ home_path }}/Downloads/discord-app.deb"
 
-- block:
-  - name: get discord deb file
-    get_url:
-      url:  "https://discordapp.com/api/download?platform=linux&format=deb"
-      dest: "{{ home_path }}/Downloads/discord-app.deb"
+- name: install discord
+  become: yes
+  apt:
+    deb: "{{ home_path }}/Downloads/discord-app.deb"
 
-  - name: install discord
-    become: yes
-    apt:
-      deb: "{{ home_path }}/Downloads/discord-app.deb"
-
-  - name: remove discord deb file
-    file:
-      path:  "{{ home_path }}/Downloads/discord-app.deb"
-      state: absent
-
-  when: not discord.stat.exists
+- name: remove discord deb file
+  file:
+    path:  "{{ home_path }}/Downloads/discord-app.deb"
+    state: absent

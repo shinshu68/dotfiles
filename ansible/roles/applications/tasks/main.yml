@@ -1,23 +1,66 @@
 - set_fact:
     applications: {}
 
+- name: check discord
+  stat:
+    path: '/usr/bin/discord'
+  register: discord
+
 - name: discord task
   include_tasks: discord.yml
+  when: not discord.stat.exists
+
+- name: check docker
+  stat:
+    path: '/usr/bin/docker'
+  register: docker
 
 - name: docker task
   include_tasks: docker.yml
+  when: not docker.stat.exists
+
+- name: check docker-compose
+  stat:
+    path: /usr/local/bin/docker-compose
+  register: docker_compose
 
 - name: docker-compose task
   include_tasks: docker-compose.yml
+  when: not docker_compose.stat.exists
+
+- name: check google-chrome
+  stat:
+    path: '/usr/bin/google-chrome'
+  register: google_chrome
 
 - name: google-chrome task
   include_tasks: google-chrome.yml
+  when: not google_chrome.stat.exists
+
+- name: check rootless docker
+  stat:
+    path: '{{ home_path }}/bin/docker'
+  register: rootless_docker
 
 - name: rootless docker task
   include_tasks: rootless-docker.yml
+  when: not rootless_docker.stat.exists
 
-- name: vivaldi task
-  include_tasks: vivaldi.yml
+- name: check slack
+  stat:
+    path: '/usr/bin/slack'
+  register: slack
 
 - name: slack task
   include_tasks: slack.yml
+  when: not slack.stat.exists
+
+- name: check vivaldi
+  stat:
+    path: '/usr/bin/vivaldi'
+  register: vivaldi
+
+- name: vivaldi task
+  include_tasks: vivaldi.yml
+  when: not vivaldi.stat.exists
+
