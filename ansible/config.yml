@@ -10,6 +10,7 @@ apt:
 
   packages:
     - cmake
+    - dconf-tools
     - direnv
     - git
     - gdebi
