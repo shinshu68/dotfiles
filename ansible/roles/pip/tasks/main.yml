@@ -36,5 +36,5 @@
     name: '{{ packages }}'
   vars:
     packages:
-     - pysutil
+     - psutil
      - docker
