@@ -1,6 +1,16 @@
 - set_fact:
     rootless_docker: {}
 
+- name: apt install
+  apt:
+    name:             '{{ required_packages }}'
+    update_cache:     yes
+    cache_valid_time: 3600
+  vars:
+    required_packages:
+      - kmod
+      - uidmap
+
 - name: create directory
   file:
     path:  '{{ home_path }}/bin'
