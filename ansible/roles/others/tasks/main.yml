@@ -26,7 +26,6 @@
     url:  https://raw.githubusercontent.com/mrowa44/emojify/master/emojify 
     dest: /usr/local/bin/emojify
     mode: +x
-
   when: not emojify_stat.stat.exists
 
 - name: check emoji-fish
@@ -37,7 +36,7 @@
 - block:
   - name: install emoji-fish
     git:
-      repo:  https://github.com/shinshu68/emoji-fish.git
+      repo: https://github.com/shinshu68/emoji-fish.git
       dest: '{{ home_path }}/.emoji-fish'
 
   - name: create emoji-fish symlink
@@ -58,7 +57,7 @@
 - block:
   - name: check git repositories
     stat:
-        path: '{{ item.dest }}'
+      path: '{{ item.dest }}'
     loop_control:
       label: '{{ item.repo | basename }}'
     with_items: '{{ others.repos }}'
