@@ -1,6 +1,16 @@
 - set_fact:
     discord: {}
 
+- stat:
+    path: '{{ home_path }}/Downloads'
+  register: downloads
+
+- file:
+    path:  '{{ home_path }}/Downloads'
+    state: directory
+    mode:  0755
+  when: not downloads.stat.exists
+
 - name: get discord deb file
   get_url:
     url:  "https://discordapp.com/api/download?platform=linux&format=deb"
