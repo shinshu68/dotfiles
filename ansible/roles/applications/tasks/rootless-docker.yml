@@ -2,6 +2,7 @@
     rootless_docker: {}
 
 - name: apt install
+  become: yes
   apt:
     name:             '{{ required_packages }}'
     update_cache:     yes
