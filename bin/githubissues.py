@@ -41,20 +41,32 @@ def get_remote_repo():
     return g.get_repo(remote_user_repo)
 
 
-def main():
-    remote_repo = get_remote_repo()
+def get_issues(repo):
     data = {}
-    for issue in remote_repo.get_issues():
-        print(f'{issue.number:>3}', issue.title)
+    for issue in repo.get_issues():
+        # print(f'{issue.number:>3}', issue.title)
         data[issue.number] = {
             'title': issue.title,
             'body': issue.body if issue.body != '' else 'No description provided.',
             'comments': list(map(lambda x: x.body, issue.get_comments()))
         }
 
+    return data
+
+
+def print_issue_titles(data):
+    for num, value in data.items():
+        print(f'{num:>3}', value['title'])
+
+
+def main():
+    remote_repo = get_remote_repo()
+    issues = get_issues(remote_repo)
+    print_issue_titles(issues)
+
     home = os.getenv('HOME')
     with open(f'{home}/dotfiles/bin/.issue_data', 'w') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
+        json.dump(issues, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
 
 def show_detail(num):
