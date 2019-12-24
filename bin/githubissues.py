@@ -69,7 +69,6 @@ def main():
     repo_name = get_remote_repo_name()
     remote_repo = get_remote_repo(repo_name)
     issues = get_issues(remote_repo)
-    print_issue_titles(issues)
 
     home = os.getenv('HOME')
     data_path = f'{home}/dotfiles/bin/.issue_data'
@@ -83,6 +82,8 @@ def main():
     with open(data_path, 'w') as f:
         json.dump(data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
+    print_issue_titles(issues)
+
 
 def show_detail(num):
     home = os.getenv('HOME')
@@ -92,7 +93,7 @@ def show_detail(num):
         issue = json.load(f)[repo_name][f'{num}']
 
     print(issue['title'], f'#{num}')
-    print(issue['body'])
+    print(issue['body'].strip())
 
     if len(issue['comments']) != 0:
         print()
