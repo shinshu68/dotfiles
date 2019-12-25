@@ -29,13 +29,13 @@
   loop_control:
     label: '{{ item.key }}'
   with_dict: '{{ desktop.gnome.terminal }}'
-- block:
-  - name: package install (from AppCenter)
-    become: yes
-    apt:
-      name:             '{{ desktop.appcenter.packages }}'
-      update_cache:     yes
-      cache_valid_time: 3600
+
+- name: package install (from AppCenter)
+  become: yes
+  apt:
+    name:             '{{ desktop.appcenter.packages }}'
+    update_cache:     yes
+    cache_valid_time: 3600
   when: ansible_distribution == "elementary OS"
 
 - name: purge 'pantheon-terminal'
