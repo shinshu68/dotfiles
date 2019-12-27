@@ -1,5 +1,6 @@
-Click
 PyGithub
+autopep8
+click
 beautifulsoup4
 flake8
 gitPython

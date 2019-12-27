@@ -109,6 +109,7 @@ python:
 pip:
   packages:
     - PyGithub
+    - autopep8
     - beautifulsoup4
     - click
     - flake8
