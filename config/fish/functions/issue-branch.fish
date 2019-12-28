@@ -9,6 +9,13 @@ function issue-branch
         true
         return
     end
-    set -l issue_number (echo $issue | awk '{print $1}')
-    git checkout -b issue-\#$issue_number
+    set -l issue_branch issue-\#(echo $issue | awk '{print $1}')
+
+    git branch -a | grep -q $issue_branch
+    if test $status -eq 0
+        git checkout -q $issue_branch
+    else
+        git checkout -bq $issue_branch
+    end
+
 end
