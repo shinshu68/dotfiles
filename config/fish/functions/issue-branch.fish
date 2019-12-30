@@ -15,7 +15,7 @@ function issue-branch
     if test $status -eq 0
         git checkout -q $issue_branch
     else
-        git checkout -bq $issue_branch
+        git checkout -b $issue_branch
     end
 
 end
