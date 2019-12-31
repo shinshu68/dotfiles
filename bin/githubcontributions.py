@@ -97,19 +97,16 @@ def cmd(halloween):
             txt += '\x1b[0m'
             arr[i][j // 7] = txt
 
-    f2 = False
     for i in range(7):
         f = False
         for j in range(max(0, 53 - column // 2), 53):
             if arr[i][j] != 0:
                 print(rf'{arr[i][j]}', end='')
                 f = True
-                f2 = True
         if f:
             print()
 
-    if f2:
-        print()
+    print()
     print(f"{last_contribution} contributions on Today")
 
     if os.getenv('TMUX') is not None:
