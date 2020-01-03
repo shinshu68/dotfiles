@@ -37,15 +37,6 @@
   include_tasks: google-chrome.yml
   when: not google_chrome.stat.exists
 
-- name: check rootless docker
-  stat:
-    path: '{{ home_path }}/bin/docker'
-  register: rootless_docker
-
-- name: rootless docker task
-  include_tasks: rootless-docker.yml
-  when: not rootless_docker.stat.exists
-
 - name: check slack
   stat:
     path: '/usr/bin/slack'

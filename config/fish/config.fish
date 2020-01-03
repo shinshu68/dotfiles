@@ -84,13 +84,6 @@ if not set -q SSH_AGENT_PID && test -f $HOME/.ssh/id_rsa
     ssh-add ~/.ssh/id_rsa 2>/dev/null >/dev/null
 end
 
-if not set -q DOCKER_HOST && test -x $HOME/bin/rootlesskit
-    sh ~/dotfiles/bin/start-docker.sh 2>/dev/null >/dev/null
-    set -x PATH $HOME/bin $PATH
-    set -l user_id (id -u)
-    set -x DOCKER_HOST unix:///run/user/$user_id/docker.sock
-end
-
 set -x FZF_LEGACY_KEYBINDINGS 0
 if test $SHLVL -eq 1 -a -x /usr/bin/tmux
     set -x FZF_TMUX 1
