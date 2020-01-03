@@ -11,19 +11,17 @@ try:
 except RuntimeError:
     pass
 
-last_contribution = None
-
 
 class Parser(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
         self.data = []
+        self.last_contribution = None
 
     def handle_starttag(self, tag, attrs):
-        global last_contribution
         if tag == "rect":
             attrs = dict(attrs)
-            last_contribution = attrs['data-count']
+            self.last_contribution = attrs['data-count']
             if 'data-count' in attrs and 'fill' in attrs and 'data-date' in attrs:
                 d = {
                     'data-count': attrs['data-count'],
@@ -107,7 +105,7 @@ def cmd(halloween):
             print()
 
     print()
-    print(f"{last_contribution} contributions on Today")
+    print(f"{parser.last_contribution} contributions on Today")
 
     if os.getenv('TMUX') is not None:
         res = subprocess.run('tmux list-panes',
