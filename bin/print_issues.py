@@ -2,6 +2,7 @@ import git
 import json
 import os
 import subprocess
+import sys
 
 
 def get_status():
@@ -35,7 +36,12 @@ def get_remote_repo_name():
     return origin_url[len(host):-len(ext)]
 
 
-def print_issue_titles(data):
+def print_issue_titles():
+    home = os.getenv('HOME')
+    repo_name = get_remote_repo_name()
+    with open(f'{home}/dotfiles/bin/.issue_data') as f:
+        data = json.load(f)[repo_name]
+
     for num, value in data.items():
         print(f'{num:>3}', value['title'])
 
@@ -57,3 +63,8 @@ def show_detail(num):
         print(comment)
 
 
+if __name__ == '__main__':
+    if len(sys.argv) == 1:
+        print_issue_titles()
+    else:
+        show_detail(sys.argv[1])
