@@ -68,6 +68,7 @@ def main():
     home = os.getenv('HOME')
     data_path = f'{home}/dotfiles/bin/.issue_data'
 
+    data = {}
     if os.path.exists(data_path):
         with open(data_path, 'r') as f:
             data = json.load(f)
