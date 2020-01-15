@@ -64,6 +64,10 @@ def show_detail(num):
 
 
 if __name__ == '__main__':
+    home = os.getenv('HOME')
+    if not os.path.exists(f'{home}/dotfiles/bin/.issue_data'):
+        exit()
+
     if len(sys.argv) == 1:
         print_issue_titles()
     else:
