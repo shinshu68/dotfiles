@@ -12,7 +12,7 @@ or
 curl -sSL git.io/shinshu68.dot | bash
 ```
 
-## 手動でやらなきゃいけないことリスト (elementary OS版)
+## 手動でやらなきゃいけないことリスト (Ubuntu系 OS版)
 できるところは自動化したい
 
 ### シェル変更
