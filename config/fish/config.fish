@@ -18,13 +18,14 @@ end
 set -x PATH $HOME/dotfiles/bin $PATH
 set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/.cache
+set -x USER_ID (id -u)
+set -x GROUP_ID (id -g)
 
 if test -x /usr/bin/nvim
     set -x EDITOR nvim
+else if test -x /usr/bin/vim
+    set -x EDITOR vim
 end
-
-set -x USER_ID (id -u)
-set -x GROUP_ID (id -g)
 
 if test -f $XDG_CONFIG_HOME/fish/user_aliases.fish
     source $XDG_CONFIG_HOME/fish/user_aliases.fish
