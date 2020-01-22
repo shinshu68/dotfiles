@@ -4,7 +4,11 @@ function issue-branch
         return
     end
 
-    set -l issue (python3 $HOME/dotfiles/bin/githubissues.py | fzf-tmux -d $FZF_TMUX_HEIGHT)
+    if not test -f $HOME/dotfiles/bin/.issue_data
+        python3 $HOME/dotfiles/bin/get_github_issues.py
+    end
+
+    set -l issue (python3 $HOME/dotfiles/bin/print_issues.py | fzf-tmux -d $FZF_TMUX_HEIGHT)
     if test $status -ne 0
         true
         return
