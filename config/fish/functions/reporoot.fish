@@ -1,13 +1,8 @@
 function reporoot
-    set -l super (git rev-parse --show-superproject-working-tree)
-    if test $super != "" 2>/dev/null >/dev/null
-        cd $super
+    if not is-inside-git-dir
+        false
         return
     end
-    git rev-parse --show-toplevel 2>/dev/null >/dev/null
-    if test $status -eq 0
-        cd (git rev-parse --show-toplevel)
-    else 
-        false
-    end
+
+    cd (__reporoot_str)
 end
