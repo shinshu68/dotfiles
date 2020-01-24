@@ -1,4 +1,5 @@
-from github import Github
+from github import Github, GithubException
+import click
 import git
 import json
 import os
@@ -60,25 +61,36 @@ def get_issues(repo):
     return data
 
 
-def main():
-    repo_name = get_remote_repo_name()
-    remote_repo = get_remote_repo(repo_name)
-    issues = get_issues(remote_repo)
-
+@click.command()
+@click.option('-f', '--force', is_flag=True)
+def main(force):
+    data = {}
     home = os.getenv('HOME')
     data_path = f'{home}/dotfiles/bin/.issue_data'
 
-    data = {}
     if os.path.exists(data_path):
         with open(data_path, 'r') as f:
             data = json.load(f)
 
-    data[repo_name] = issues
+    if force or not os.path.exists(data_path):
+        repo_name = get_remote_repo_name()
+        remote_repo = get_remote_repo(repo_name)
+
+        try:
+            issues = get_issues(remote_repo)
+        except Exception:
+            exit()
+
+        data[repo_name] = issues
 
     with open(data_path, 'w') as f:
         json.dump(data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
 
-if __name__ == '__main__':
+def cmd():
     main()
+
+
+if __name__ == '__main__':
+    cmd()
 
