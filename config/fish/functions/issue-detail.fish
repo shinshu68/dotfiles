@@ -12,10 +12,10 @@ function issue-detail
     end
 
     if not test -f $HOME/dotfiles/bin/.issue_data
-        python3 $HOME/dotfiles/bin/githubissues.py 2>/dev/null >/dev/null
+        python3 $HOME/dotfiles/bin/get_github_issues.py
     end
 
     set -l issue_number (string sub -s (math (string length 'issue-#') + 1) $branch)
 
-    python3 $HOME/dotfiles/bin/githubissues.py $issue_number
+    python3 $HOME/dotfiles/bin/print_issues.py $issue_number
 end
