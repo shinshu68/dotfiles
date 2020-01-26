@@ -83,8 +83,8 @@ def main(force):
 
         data[repo_name] = issues
 
-    with open(data_path, 'w') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
+        with open(data_path, 'w') as f:
+            json.dump(data, f, ensure_ascii=False, indent=4, separators=(',', ': '))
 
 
 def cmd():
