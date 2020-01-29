@@ -1,6 +1,7 @@
 [user]
 	email = shinshu68@gmail.com
 	name = shinshu68
+
 [alias]
 	c = commit
 	cm = commit -m
