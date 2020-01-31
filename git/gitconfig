@@ -8,6 +8,7 @@
 
 	l = log --oneline
 	lg = log --oneline --graph
+	lf = log --pretty=fuller
 	le = !git l | emojify | less -N
 
 	st = status
