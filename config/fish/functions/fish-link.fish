@@ -1,4 +1,4 @@
-function func-link
+function fish-link
     set -l func (find $HOME/dotfiles/config/fish | grep '\.fish$')
     set -l len (string length $HOME/dotfiles/config/fish/)
 
