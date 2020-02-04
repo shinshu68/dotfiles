@@ -14,7 +14,5 @@ function func-link
         echo "リンク切れのファイルを削除"
         rm -v $broken_links
     end
-
-    # find $XDG_CONFIG_HOME/fish -xtype l | xargs rm -v
 end
 
