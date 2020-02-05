@@ -1,9 +1,9 @@
 function fish-link
-    set -l func (find $HOME/dotfiles/config/fish | grep '\.fish$')
+    set -l files (find $HOME/dotfiles/config/fish | grep '\.fish$')
     set -l len (string length $HOME/dotfiles/config/fish/)
     set -l flag 0
 
-    for f in $func
+    for f in $files
         set -l file (string sub -s $len $f)
         if not test -f $XDG_CONFIG_HOME/fish$file
             if test $flag -eq 0
