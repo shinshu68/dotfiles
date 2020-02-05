@@ -1,11 +1,18 @@
 function fish-link
     set -l func (find $HOME/dotfiles/config/fish | grep '\.fish$')
     set -l len (string length $HOME/dotfiles/config/fish/)
+    set -l flag 0
 
-    echo "リンク開始"
     for f in $func
         set -l file (string sub -s $len $f)
-        ln -sfv $f $XDG_CONFIG_HOME/fish$file
+        if not test -f $XDG_CONFIG_HOME/fish$file
+            if test $flag -eq 0
+                echo "リンク開始"
+                set flag 1
+            end
+
+            ln -sfv $f $XDG_CONFIG_HOME/fish$file
+        end
     end
 
     set -l broken_links (find $XDG_CONFIG_HOME/fish -xtype l)
