@@ -17,7 +17,10 @@ function fish-link
 
     set -l broken_links (find $XDG_CONFIG_HOME/fish -xtype l)
     if test (count $broken_links) -ne 0
-        echo
+        if test $flag -eq 1
+            echo
+        end
+
         echo "リンク切れのファイルを削除"
         rm -v $broken_links
     end
