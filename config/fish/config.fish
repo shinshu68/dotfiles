@@ -20,6 +20,8 @@ set -x XDG_CONFIG_HOME $HOME/.config
 set -x XDG_CACHE_HOME $HOME/.cache
 set -x USER_ID (id -u)
 set -x GROUP_ID (id -g)
+set -x DISPLAY :1.0
+set -x LIBGL_ALWAYS_INDIRECT 1
 
 if test -x /usr/bin/nvim
     set -x EDITOR nvim
