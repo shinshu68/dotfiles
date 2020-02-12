@@ -3,5 +3,5 @@ function trueTo256
         false
         return
     end
-    python $HOME/dotfiles/bin/truecolorTo256color.py $argv
+    python3 $HOME/dotfiles/bin/truecolorTo256color.py $argv
 end
