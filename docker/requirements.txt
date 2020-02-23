@@ -1,7 +1,7 @@
 PyGithub
 autopep8
-click
 beautifulsoup4
+click
 flake8
 gitPython
 inquirer
