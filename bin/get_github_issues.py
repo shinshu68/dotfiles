@@ -1,10 +1,9 @@
-from github import Github, GithubException
+from github import Github
 import click
 import git
 import json
 import os
 import subprocess
-import sys
 
 
 def get_status():
