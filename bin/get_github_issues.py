@@ -1,8 +1,8 @@
 from github import Github
+from modules.issues import is_inside_git_dir, get_remote_repo_name
 import click
 import json
 import os
-from modules.issues import is_inside_git_dir, get_remote_repo_name
 
 
 def get_remote_repo(repo_name):

@@ -1,7 +1,7 @@
+from modules.issues import get_remote_repo_name
 import json
 import os
 import sys
-from modules.issues import get_remote_repo_name
 
 
 def print_issue_titles(data):
