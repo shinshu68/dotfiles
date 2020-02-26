@@ -29,6 +29,19 @@ else if test -x /usr/bin/vim
     set -x EDITOR vim
 end
 
+if set -q SSH_CLIENT
+    set -g theme_powerline_fonts no
+    set -g theme_newline_cursor yes
+end
+
+if not set -q COLORTERM
+    set -x COLORTERM truecolor
+end
+
+if set -q INSIDE_DOCKER
+    set -g theme_display_docker_machine yes
+end
+
 if test -f $XDG_CONFIG_HOME/fish/user_aliases.fish
     source $XDG_CONFIG_HOME/fish/user_aliases.fish
 end
@@ -71,15 +84,6 @@ if not functions -q standard_cd
     end
 end
 
-if set -q SSH_CLIENT
-    set -g theme_powerline_fonts no
-    set -g theme_newline_cursor yes
-end
-
-if not set -q COLORTERM
-    set -x COLORTERM truecolor
-end
-
 if not set -q SSH_AGENT_PID && test -f $HOME/.ssh/id_rsa
     set -l ssh_grep (ps aux | grep "^$USER" | grep "ssh-agent -c")
     if test $status -eq 0
@@ -108,8 +112,4 @@ if test $SHLVL -eq 1 -a -x /usr/bin/tmux
     else
         tmux
     end
-end
-
-if set -q INSIDE_DOCKER
-    set -g theme_display_docker_machine yes
 end
