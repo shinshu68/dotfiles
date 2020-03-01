@@ -9,7 +9,9 @@ function git-yesterday
         set before_date $argv
     end
 
-    git log | grep "^Date:" | grep (date --date "-1 days" +"%a %b %d") 2>/dev/null >/dev/null
+    set -l date_str "-"$before_date" days"
+
+    git log | grep "^Date:" | grep (date --date $date_str +"%a %b %d") 2>/dev/null >/dev/null
     if test $status -eq 0
         echo "Yesterday commit exists."
         return
