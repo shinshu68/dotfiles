@@ -13,7 +13,7 @@ function git-yesterday
 
     git log | grep "^Date:" | grep (date --date $date_str +"%a %b %d") 2>/dev/null >/dev/null
     if test $status -eq 0
-        echo "Yesterday commit exists."
+        echo $before"day ago commit exists."
         return
     end
 
