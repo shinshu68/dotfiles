@@ -3,5 +3,5 @@ function prepost
         false
         return
     end
-    python3 ~/workspace/prepost/src/prepost.py $argv
+    python3 $HOME/workspace/prepost/src/prepost.py $argv
 end
