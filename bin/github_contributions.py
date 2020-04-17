@@ -75,6 +75,8 @@ def cmd(halloween):
         '#196127': '#03001c'
     }
 
+    week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+
     for i in range(7):
         for j in range(i, len(parser.data), 7):
             txt = ""
@@ -97,7 +99,8 @@ def cmd(halloween):
 
     for i in range(7):
         f = False
-        for j in range(max(0, 53 - column // 2), 53):
+        print(f'{week[i]} ', end='')
+        for j in range(max(0, 53 + 2  - column // 2), 53):
             if arr[i][j] != 0:
                 print(rf'{arr[i][j]}', end='')
                 f = True
