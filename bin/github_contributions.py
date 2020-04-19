@@ -75,7 +75,7 @@ def cmd(halloween):
         '#196127': '#03001c'
     }
 
-    week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    week = ["   ", "Mon", "   ", "Wed", "   ", "Fri", "   "]
 
     for i in range(7):
         for j in range(i, len(parser.data), 7):
