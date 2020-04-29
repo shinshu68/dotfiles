@@ -131,7 +131,11 @@ fi
 export USER_ID=$(id -u)
 export GROUP_ID=$(id -g)
 
-export EDITOR=vim
+if [ -f /usr/bin/nvim ]; then
+    export EDITOR=nvim
+elif [ -f /usr/bin/vim ]; then
+    export EDITOR=vim
+fi
 
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUPSTREAM=true
