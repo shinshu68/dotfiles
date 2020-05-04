@@ -53,6 +53,7 @@ colorscheme codedark
 set t_ut=
 
 autocmd FileType vue syntax sync fromstart
+au FileType markdown setlocal foldmethod=marker
 au BufRead,BufNewFile *.fish set filetype=fish
 au BufNewFile,BufRead *.scala setf scala
 
