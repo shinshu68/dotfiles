@@ -1,5 +1,8 @@
 syntax off
 
+au FileType markdown setlocal foldmethod=marker
+au BufRead,BufNewFile *.fish set filetype=fish
+
 set modeline
 
 " エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
