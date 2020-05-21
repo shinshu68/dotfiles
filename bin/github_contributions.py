@@ -2,7 +2,6 @@
 
 from html.parser import HTMLParser
 import click
-import datetime
 import os
 import readchar
 import requests
@@ -23,6 +22,7 @@ class Parser(HTMLParser):
         if tag == "rect":
             attrs = dict(attrs)
             self.last_contribution = attrs['data-count']
+            self.last_date = attrs['data-date']
             if 'data-count' in attrs and 'fill' in attrs and 'data-date' in attrs:
                 d = {
                     'data-count': attrs['data-count'],
@@ -109,8 +109,7 @@ def cmd(halloween):
             print()
 
     print()
-    today = datetime.date.today()
-    print(f" {parser.last_contribution} contributions on Today ({today.month}/{today.day})")
+    print(f" {parser.last_contribution} contributions on Today ({parser.last_date})")
 
     if os.getenv('TMUX') is not None:
         res = subprocess.run('tmux list-panes',
