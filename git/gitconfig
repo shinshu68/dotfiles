@@ -14,7 +14,7 @@
 	st = status
 
 [commit]
-	template = ~/dotfiles/git/git-template
+	template = ~/dotfiles/git/template
 
 [core]
 	autoCRLF = false
