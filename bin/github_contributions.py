@@ -2,6 +2,7 @@
 
 from html.parser import HTMLParser
 import click
+import datetime
 import os
 import readchar
 import requests
@@ -108,7 +109,8 @@ def cmd(halloween):
             print()
 
     print()
-    print(f"{parser.last_contribution} contributions on Today")
+    today = datetime.date.today()
+    print(f" {parser.last_contribution} contributions on Today ({today.month}/{today.day})")
 
     if os.getenv('TMUX') is not None:
         res = subprocess.run('tmux list-panes',
