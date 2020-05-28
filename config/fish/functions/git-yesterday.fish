@@ -11,10 +11,12 @@ function git-yesterday
 
     set -l date_str "-"$before_date" days"
 
-    git log | grep "^Date:" | grep (date --date $date_str +"%a %b%e") 2>/dev/null >/dev/null
-    if test $status -eq 0
-        echo $date_str" commit exists."
-        return
+    set -l target_commit_date (string join ' ' (string split ' ' (git log | grep "^Date:" | head -n 2 | tail -n 1))[4..8])
+    set -l unix_time (date-to-unix-time $target_commit_date)
+
+    if test (math (date -d $date_str +"%s") - $unix_time) -ge '0'
+    else
+        echo invalid value $date_str \((date -d $date_str)\)
     end
 
     set -l date (before-date-git-style $before_date)
