@@ -4,6 +4,12 @@ function git-yesterday
         return
     end
 
+    if test (git diff --numstat | wc -l) -ne 0
+        echo error: has untracked files
+        false
+        return
+    end
+
     set -l before_date 1
     if test (count $argv) -eq 1
         set before_date $argv
