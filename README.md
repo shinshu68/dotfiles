@@ -20,6 +20,7 @@ curl -sSL git.io/shinshu68.dot | bash
 chsh -s $(which fish)
 ```
 
+### ここから下はfishで操作する
 ### 追加で設定する
 ```shell
 ansible-tag desktop
