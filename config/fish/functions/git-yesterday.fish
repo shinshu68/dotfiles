@@ -20,9 +20,10 @@ function git-yesterday
     set -l target_commit_date (string join ' ' (string split ' ' (git log | grep "^Date:" | head -n 2 | tail -n 1))[4..8])
     set -l unix_time (date-to-unix-time $target_commit_date)
 
-    if test (math (date -d $date_str +"%s") - $unix_time) -ge '0'
-    else
+    if test (math (date -d $date_str +"%s") - $unix_time) -lt '0'
         echo invalid value $date_str \((date -d $date_str)\)
+        false
+        return
     end
 
     set -l date (before-date-git-style $before_date)
