@@ -5,6 +5,12 @@
 # :emoji: Subject
 #
 # Commit body...
+#
+# ==================== Template ==================
+# :tada: First Commit
+# :pencil: Update README.md
+# :pencil2: Fix Typo
+# :black_nib: Add Comment
 
 # ==================== Emojis ====================
 # 🎉  :tada:        First Commit
@@ -26,7 +32,3 @@
 # 🙈  :see_no_evil: Update .gitignore (Ignore)
 # 👀  :eyes:        Update .gitignore (Reconsider)
 
-# ==================== Template ==================
-# :tada: First Commit
-# :pencil: Update README.md
-# :pencil2: Fix Typo
