@@ -250,3 +250,15 @@ on_ft = 'vue'
 #    autocmd! BufEnter,BufWritePost * Neomake
 #    let g:neomake_python_enabled_makers = ['python', 'flake8']
 #'''
+
+[[plugins]]
+repo = 'tbodt/deoplete-tabnine'
+on_event = 'InsertCharPre'
+hook_post_update = '''
+    if has('win32') || has('win64')
+        let cmd = 'powershell.exe .\install.ps1'
+    else
+        let cmd = './install.sh'
+    endif
+    let g:dein#plugin.build = cmd
+'''
