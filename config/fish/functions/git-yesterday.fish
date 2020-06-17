@@ -27,7 +27,7 @@ function git-yesterday
     end
 
     set -l date (before-date-git-style $before_date)
-    read -p'echo "Change Commit Date to $date [y/n] "' -l yn
+    read -p'echo "Change Commit Date to \"$date\" ? [y/n] "' -l yn
     if test $yn != 'y'
         return
     end
