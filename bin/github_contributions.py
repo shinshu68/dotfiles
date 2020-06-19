@@ -101,7 +101,7 @@ def cmd(halloween):
     for i in range(7):
         f = False
         print(f'{week[i]} ', end='')
-        for j in range(max(0, 53 + 2  - column // 2), 53):
+        for j in range(max(0, 53 + 2 - column // 2), 53):
             if arr[i][j] != 0:
                 print(rf'{arr[i][j]}', end='')
                 f = True
@@ -109,7 +109,7 @@ def cmd(halloween):
             print()
 
     print()
-    print(f" {parser.last_contribution} contributions on Today ({parser.last_date})")
+    print(f" {parser.last_contribution} contributions on {parser.last_date}")
 
     if os.getenv('TMUX') is not None:
         res = subprocess.run('tmux list-panes',
