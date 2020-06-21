@@ -4,7 +4,6 @@
 
 [alias]
 	c = commit
-	cm = commit -m
 
 	l = log --oneline
 	lg = log --oneline --graph
