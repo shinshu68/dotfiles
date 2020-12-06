@@ -43,6 +43,26 @@ end
 
 if set -q INSIDE_DOCKER
     set -g theme_display_docker_machine yes
+
+    set -x FZF_LEGACY_KEYBINDINGS 0
+    set -x FZF_DEFAULT_OPTS '--reverse'
+    if test $SHLVL -eq 1 -a -x /usr/bin/tmux
+        set -x FZF_TMUX 1
+        set -x FZF_TMUX_HEIGHT 25%
+
+        tmux ls 2>/dev/null >/dev/null
+        if test $status -eq 0
+            set -l tmux_ls (tmux ls)
+            set -l tmux_status (string split ' ' $tmux_ls)[-1]
+            if test $tmux_status = '(attached)'
+                tmux
+            else
+                tmux a
+            end
+        else
+            tmux
+        end
+    end
 end
 
 if test -f $XDG_CONFIG_HOME/fish/user_aliases.fish
@@ -97,22 +117,3 @@ if not set -q SSH_AGENT_PID && test -f $HOME/.ssh/id_rsa
     ssh-add ~/.ssh/id_rsa 2>/dev/null >/dev/null
 end
 
-set -x FZF_LEGACY_KEYBINDINGS 0
-if test $SHLVL -eq 1 -a -x /usr/bin/tmux
-    set -x FZF_TMUX 1
-    set -x FZF_TMUX_HEIGHT 25%
-    set -x FZF_DEFAULT_OPTS '--reverse'
-
-    tmux ls 2>/dev/null >/dev/null
-    if test $status -eq 0
-        set -l tmux_ls (tmux ls)
-        set -l tmux_status (string split ' ' $tmux_ls)[-1]
-        if test $tmux_status = '(attached)'
-            tmux
-        else
-            tmux a
-        end
-    else
-        tmux
-    end
-end
