@@ -97,7 +97,7 @@ alias py='python'
 alias dev='export cwd=$(pwd); cd $HOME; docker-compose up -d; docker-compose exec -u shinshu development fish; cd $cwd'
 alias sudo='sudo '
 alias psme='ps aux | grep $USER'
-alias psdefunct='ps aux | grep defunct'
+alias psdefunct='ps aux | grep defunct | grep -v grep'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
