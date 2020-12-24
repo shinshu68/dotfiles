@@ -130,15 +130,6 @@ if [ -f ~/dotfiles/bin/git-prompt.sh ]; then
     source $HOME/dotfiles/bin/git-prompt.sh
 fi
 
-export USER_ID=$(id -u)
-export GROUP_ID=$(id -g)
-
-if [ -f /usr/bin/nvim ]; then
-    export EDITOR=nvim
-elif [ -f /usr/bin/vim ]; then
-    export EDITOR=vim
-fi
-
 GIT_PS1_SHOWDIRTYSTATE=true
 GIT_PS1_SHOWUPSTREAM=true
 GIT_PS1_SHOWUNTRACKEDFILES=auto
@@ -169,4 +160,23 @@ PROMPT_COMMAND=get_line
 
 export DISPLAY=:0.0
 
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+
+if [ -f /usr/bin/nvim ]; then
+    export EDITOR=nvim
+elif [ -f /usr/bin/vim ]; then
+    export EDITOR=vim
+fi
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+function findword() {
+    if [ $# -eq 1 ]; then
+        find ./ -type f -print | xargs grep $1
+    elif [ $# -eq 2 ]; then
+        find $1 -type f -print | xargs grep $2
+    else
+        :
+    fi
+}
