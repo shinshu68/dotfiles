@@ -135,13 +135,15 @@ fish:
     - oh-my-fish/theme-bobthefish
 
 link:
-  bash/bashrc:    .bashrc
-  config/flake8:  .config/flake8
-  config/prepost: .config/prepost
-  config/nvim:    .config/nvim
-  git/config:     .gitconfig
-  tmux/tmux.conf: .tmux.conf
-  vim/vimrc:      .vimrc
+  bash/bashrc:     .bashrc
+  claude/commands: .claude/commands
+  claude/skills:   .claude/skills
+  config/flake8:   .config/flake8
+  config/prepost:  .config/prepost
+  config/nvim:     .config/nvim
+  git/config:      .gitconfig
+  tmux/tmux.conf:  .tmux.conf
+  vim/vimrc:       .vimrc
 
 others:
   repos:
