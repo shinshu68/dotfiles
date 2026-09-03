@@ -64,6 +64,7 @@ EOF
 
 - 常に通常のPRとして作成する(`--draft` は付けない)
 - ステップ1で `EXISTING_PR:` が出ていた場合はこのコマンドは実行せず、そのURLを案内する
+- 本文はステップ2で作成した内容のみとする。`🤖 Generated with [Claude Code]` のような定型の帰属(attribution)表記は追加しない(これを完全に止めるには `.claude/settings.json` 等で `attribution.pr` を空文字に設定するのが確実)
 ### 4. 結果をユーザーに伝える
 
 `gh pr create` の出力にPRのURLが含まれるので、それをそのまま提示する。
