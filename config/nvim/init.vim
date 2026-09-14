@@ -148,7 +148,7 @@ set showcmd
 
 set scrolloff=5
 
-set clipboard+=unnamedplus
+" set clipboard+=unnamedplus
 
 set list
 set listchars=tab:⊳-,trail:‗
