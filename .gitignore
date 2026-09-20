@@ -4,3 +4,5 @@ ansible/playbook.retry
 bin/.issue_data
 
 .vscode/
+
+claude/skills/synced
