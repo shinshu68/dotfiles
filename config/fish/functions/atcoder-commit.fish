@@ -14,8 +14,8 @@ function atcoder-commit
         return 1
     end
 
-    # 拡張子を削除
-    set -l names (path change-extension '' $files)
+    # 親ディレクトリを除いたファイル名にして、拡張子を削除
+    set -l names (path change-extension '' (path basename $files))
 
     # :thumbsup: ディレクトリ名 ファイル名 ファイル名 ...
     set -l dir (path basename $PWD)
