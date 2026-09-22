@@ -1,8 +1,11 @@
 {
-  "theme": "dark",
-  "language": "japanese",
   "attribution": {
     "commit": "",
     "pr": ""
+  },
+  "language": "japanese",
+  "theme": "dark",
+  "enabledPlugins": {
+    "cowork-plugin-management@synced": false
   }
 }
