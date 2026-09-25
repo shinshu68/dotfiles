@@ -7,5 +7,6 @@
   "theme": "dark",
   "enabledPlugins": {
     "cowork-plugin-management@synced": false
-  }
+  },
+  "syncClaudeAiSkills": false
 }
