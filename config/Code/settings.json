@@ -4,7 +4,6 @@
     // ==================================================
     "workbench.colorTheme": "Dark+",
     "workbench.iconTheme": "material-icon-theme",
-    "material-icon-theme.showUpdateMessage": true,
     "window.zoomLevel": 0,
     "window.title": "${rootName}${separator}${profileName}${separator}${appName}",
 
@@ -99,7 +98,6 @@
         "develop"
     ],
     "git.openRepositoryInParentFolders": "never",
-    "scm.showHistoryGraph": false,
     "diffEditor.ignoreTrimWhitespace": false,
 
     // GitLens
@@ -201,14 +199,6 @@
         },
         "editor.colorDecorators": false
     },
-    "markdownlint.config": {
-        "MD009": false,
-        "MD064": false
-    },
-
-    // Java
-    "java.errors.incompleteClasspath.severity": "ignore",
-    "java.referencesCodeLens.enabled": false,
 
     // JavaScript / TypeScript
     "js/ts.tsserver.checkNpmIsInstalled": false,
@@ -237,9 +227,6 @@
     // Claude Code
     "claudeCode.preferredLocation": "sidebar",
     "claudeCode.hideOnboarding": true,
-
-    // GitHub Copilot
-    "github.copilot.advanced": {},
 
     // Live Preview
     "livePreview.portNumber": 3030
