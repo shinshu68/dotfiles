@@ -117,7 +117,7 @@
         {
             "shortcode": ":thumbsup:",
             "emoji": "👍"
-        },
+        }
     ],
 
     // ==================================================
@@ -222,7 +222,16 @@
     // Code Spell Checker
     "cSpell.autoFormatConfigFile": true,
     "cSpell.userWords": [
-        "toplevel"
+        "Cica",
+        "easymotion",
+        "hlsearch",
+        "incsearch",
+        "rgba",
+        "showcmd",
+        "showmodename",
+        "Sysnative",
+        "toplevel",
+        "windir"
     ],
 
     // Claude Code
