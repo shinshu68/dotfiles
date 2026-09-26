@@ -21,7 +21,6 @@
         100
     ],
     "editor.minimap.enabled": false,
-    "editor.minimap.maxColumn": 100,
     "editor.unicodeHighlight.allowedCharacters": {
         "〔": true,
         "〕": true
@@ -39,8 +38,6 @@
         "editorBracketHighlight.foreground5": "#3F7FFF", // 青
         "editorBracketHighlight.foreground6": "#FF7FFF" // 紫
     },
-    "bracketPairColorizer.showBracketsInGutter": true,
-    "bracketPairColorizer.showBracketsInRuler": true,
     "indentRainbow.colors": [
         "rgba(128,64,64,0.5)",
         "rgba(128,96,32,0.5)",
@@ -54,12 +51,6 @@
     // ==================================================
     // ファイル・エクスプローラー
     // ==================================================
-    "files.associations": {
-        "*.cpp": "cpp",
-        "*.java": "java",
-        "*.ino": "cpp",
-        "*.src": "cpp"
-    },
     "files.trimTrailingWhitespace": true,
     "explorer.compactFolders": false,
 
@@ -208,7 +199,7 @@
             "strings": "off",
             "other": "off"
         },
-        "editor.colorDecorators": false,
+        "editor.colorDecorators": false
     },
     "markdownlint.config": {
         "MD009": false,
