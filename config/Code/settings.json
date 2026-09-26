@@ -203,6 +203,14 @@
     // JavaScript / TypeScript
     "js/ts.tsserver.checkNpmIsInstalled": false,
 
+    // JSON
+    "json.schemas": [
+        {
+            "fileMatch": ["**/dotfiles/config/Code/settings.json"],
+            "url": "vscode://schemas/settings/user"
+        }
+    ],
+
     // Python
     "python.analysis.typeCheckingMode": "standard",
 
