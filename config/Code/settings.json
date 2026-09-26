@@ -1,16 +1,59 @@
 {
+    // ==================================================
+    // 外観（テーマ・ウィンドウ）
+    // ==================================================
+    "workbench.colorTheme": "Dark+",
     "workbench.iconTheme": "material-icon-theme",
     "material-icon-theme.showUpdateMessage": true,
+    "window.zoomLevel": 0,
+    "window.title": "${rootName}${separator}${profileName}${separator}${appName}",
+
+    // ==================================================
+    // エディター基本
+    // ==================================================
     "editor.fontFamily": "Cica",
-    "editor.insertSpaces": true,
-    "editor.minimap.maxColumn": 100,
     "editor.fontSize": 14,
+    "editor.insertSpaces": true,
+    "editor.tabCompletion": "on",
     "editor.renderWhitespace": "boundary",
     "editor.rulers": [
         80,
         100
     ],
-    "editor.tabCompletion": "on",
+    "editor.minimap.enabled": false,
+    "editor.minimap.maxColumn": 100,
+    "editor.unicodeHighlight.allowedCharacters": {
+        "〔": true,
+        "〕": true
+    },
+
+    // ==================================================
+    // 括弧・インデントの色分け
+    // ==================================================
+    "editor.bracketPairColorization.enabled": true,
+    "workbench.colorCustomizations": {
+        "editorBracketHighlight.foreground1": "#FF0000", // 赤
+        "editorBracketHighlight.foreground2": "#FFBF3F", // 橙
+        "editorBracketHighlight.foreground3": "#FFFF00", // 黄
+        "editorBracketHighlight.foreground4": "#3FFF3F", // 緑
+        "editorBracketHighlight.foreground5": "#3F7FFF", // 青
+        "editorBracketHighlight.foreground6": "#FF7FFF" // 紫
+    },
+    "bracketPairColorizer.showBracketsInGutter": true,
+    "bracketPairColorizer.showBracketsInRuler": true,
+    "indentRainbow.colors": [
+        "rgba(128,64,64,0.5)",
+        "rgba(128,96,32,0.5)",
+        "rgba(128,128,32,0.5)",
+        "rgba(32,128,32,0.5)",
+        // "rgba(64,128,128,0.5)",
+        "rgba(32,64,128,0.5)",
+        "rgba(128,64,128,0.5)"
+    ],
+
+    // ==================================================
+    // ファイル・エクスプローラー
+    // ==================================================
     "files.associations": {
         "*.cpp": "cpp",
         "*.java": "java",
@@ -18,34 +61,92 @@
         "*.src": "cpp"
     },
     "files.trimTrailingWhitespace": true,
-    "window.zoomLevel": 0,
-    "java.errors.incompleteClasspath.severity": "ignore",
-    "java.referencesCodeLens.enabled": false,
-    "js/ts.tsserver.checkNpmIsInstalled": false,
-    "[markdown]": {
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2,
-        "editor.wordWrap": "on",
-        "editor.quickSuggestions": {
-            "comments": "off",
-            "strings": "off",
-            "other": "off"
+    "explorer.compactFolders": false,
+
+    // ==================================================
+    // ターミナル
+    // ==================================================
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
         },
-        "editor.colorDecorators": false,
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash",
+            "icon": "terminal-git-bash"
+        },
+        "Ubuntu (WSL)": {
+            "path": "C:\\WINDOWS\\System32\\wsl.exe",
+            "args": [
+                "-d",
+                "Ubuntu"
+            ]
+        }
     },
-    "markdownlint.config": {
-        "MD009": false,
-        "MD064": false
-    },
+    // "terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\bash.exe",
+
+    // ==================================================
+    // リモート（WSL など）
+    // ==================================================
+    "remote.autoForwardPortsSource": "hybrid",
+
+    // ==================================================
+    // Git・ソース管理
+    // ==================================================
+    "git.branchProtection": [
+        "main",
+        "develop"
+    ],
+    "git.openRepositoryInParentFolders": "never",
+    "scm.showHistoryGraph": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    // GitLens
+    "gitlens.codeLens.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.enabled": false,
+    "gitlens.menus": false,
+
+    // Gitmoji
+    "gitmoji.outputType": "code",
+    "gitmoji.showEmojiCode": true,
+
+    // Git Graph
+    "git-graph.customEmojiShortcodeMappings": [
+        {
+            "shortcode": ":thumbsup:",
+            "emoji": "👍"
+        },
+    ],
+
+    // ==================================================
+    // Vim
+    // ==================================================
+    "vim.leader": "<space>",
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
     "vim.easymotion": true,
     "vim.sneak": true,
     "vim.incsearch": true,
-    "vim.useSystemClipboard": true,
     "vim.hlsearch": true,
-    "vim.leader": "<space>",
     "vim.showcmd": true,
     "vim.showmodename": true,
-    "vim.useCtrlKeys": true,
+    "vim.handleKeys": {
+        "<C-f>": false,
+        "<C-a>": false,
+        "<C-p>": false,
+        "<C-y>": false
+    },
     "vim.insertModeKeyBindings": [
         {
             "before": [
@@ -93,95 +194,53 @@
             ]
         }
     ],
-    "vim.handleKeys": {
-        "<C-f>": false,
-        "<C-a>": false,
-        "<C-p>": false,
-        "<C-y>": false
-    },
-    "gitlens.hovers.currentLine.enabled": false,
-    "gitlens.menus": false,
-    "gitmoji.outputType": "code",
-    "gitmoji.showEmojiCode": true,
-    "git-graph.customEmojiShortcodeMappings": [
-        {
-            "shortcode": ":thumbsup:",
-            "emoji": "👍"
+
+    // ==================================================
+    // 言語別設定
+    // ==================================================
+    // Markdown
+    "[markdown]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
         },
-    ],
-    "bracketPairColorizer.showBracketsInGutter": true,
-    "bracketPairColorizer.showBracketsInRuler": true,
-    "indentRainbow.colors": [
-        "rgba(128,64,64,0.5)",
-        "rgba(128,96,32,0.5)",
-        "rgba(128,128,32,0.5)",
-        "rgba(32,128,32,0.5)",
-        // "rgba(64,128,128,0.5)",
-        "rgba(32,64,128,0.5)",
-        "rgba(128,64,128,0.5)"
-    ],
-    "editor.bracketPairColorization.enabled": true,
-    "workbench.colorCustomizations": {
-        "editorBracketHighlight.foreground1": "#FF0000", // 赤
-        "editorBracketHighlight.foreground2": "#FFBF3F", // 橙
-        "editorBracketHighlight.foreground3": "#FFFF00", // 黄
-        "editorBracketHighlight.foreground4": "#3FFF3F", // 緑
-        "editorBracketHighlight.foreground5": "#3F7FFF", // 青
-        "editorBracketHighlight.foreground6": "#FF7FFF" // 紫
+        "editor.colorDecorators": false,
     },
-    "workbench.colorTheme": "Dark+",
-    "github.copilot.advanced": {},
-    "editor.unicodeHighlight.allowedCharacters": {
-        "〔": true,
-        "〕": true
+    "markdownlint.config": {
+        "MD009": false,
+        "MD064": false
     },
-    "editor.minimap.enabled": false,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "git.branchProtection": [
-        "main",
-        "develop"
-    ],
-    "gitlens.codeLens.enabled": false,
-    "window.title": "${rootName}${separator}${profileName}${separator}${appName}",
-    "git.openRepositoryInParentFolders": "never",
-    "gitlens.currentLine.enabled": false,
-    "scm.showHistoryGraph": false,
-    "terminal.integrated.enableMultiLinePasteWarning": "never",
-    "terminal.integrated.profiles.windows": {
-        "PowerShell": {
-            "source": "PowerShell",
-            "icon": "terminal-powershell"
-        },
-        "Command Prompt": {
-            "path": [
-                "${env:windir}\\Sysnative\\cmd.exe",
-                "${env:windir}\\System32\\cmd.exe"
-            ],
-            "args": [],
-            "icon": "terminal-cmd"
-        },
-        "Git Bash": {
-            "source": "Git Bash",
-            "icon": "terminal-git-bash"
-        },
-        "Ubuntu (WSL)": {
-            "path": "C:\\WINDOWS\\System32\\wsl.exe",
-            "args": [
-                "-d",
-                "Ubuntu"
-            ]
-        }
-    },
-    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+
+    // Java
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "java.referencesCodeLens.enabled": false,
+
+    // JavaScript / TypeScript
+    "js/ts.tsserver.checkNpmIsInstalled": false,
+
+    // Python
+    "python.analysis.typeCheckingMode": "standard",
+
+    // ==================================================
+    // その他の拡張機能
+    // ==================================================
+    // Code Spell Checker
+    "cSpell.autoFormatConfigFile": true,
     "cSpell.userWords": [
         "toplevel"
     ],
-    "remote.autoForwardPortsSource": "hybrid",
+
+    // Claude Code
     "claudeCode.preferredLocation": "sidebar",
-    "cSpell.autoFormatConfigFile": true,
     "claudeCode.hideOnboarding": true,
-    "python.analysis.typeCheckingMode": "standard",
-    "livePreview.portNumber": 3030,
-    "explorer.compactFolders": false,
-    // "terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\bash.exe"
+
+    // GitHub Copilot
+    "github.copilot.advanced": {},
+
+    // Live Preview
+    "livePreview.portNumber": 3030
 }
