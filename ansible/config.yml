@@ -139,7 +139,6 @@ link:
   claude/commands:      .claude/commands
   claude/settings.json: .claude/settings.json
   claude/skills:        .claude/skills
-  config/flake8:        .config/flake8
   config/prepost:       .config/prepost
   config/nvim:          .config/nvim
   git/config:           .gitconfig
