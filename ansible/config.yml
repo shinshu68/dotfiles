@@ -144,7 +144,6 @@ link:
   config/nvim:          .config/nvim
   git/config:           .gitconfig
   tmux/tmux.conf:       .tmux.conf
-  vim/vimrc:            .vimrc
 
 others:
   repos:
