@@ -213,6 +213,7 @@
 
     // Python
     "python.analysis.typeCheckingMode": "standard",
+    "python.terminal.activateEnvironment": false,
 
     // ==================================================
     // その他の拡張機能
