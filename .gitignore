@@ -3,7 +3,5 @@ __pycache__/
 ansible/playbook.retry
 bin/.issue_data
 
-.vscode/
-
 claude/skills/synced
 claude/skills/.trash
