@@ -11,6 +11,7 @@ if test -x /usr/bin/direnv
 end
 
 if test -d $HOME/.anyenv
+    set -gx PATH (string match -v -r 'pyenv-win' $PATH)
     set -x PATH $HOME/.anyenv/bin $PATH
     anyenv init - fish | source
 end
