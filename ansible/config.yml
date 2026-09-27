@@ -135,7 +135,6 @@ fish:
     - oh-my-fish/theme-bobthefish
 
 link:
-  bash/bashrc:          .bashrc
   claude/CLAUDE.md:     .claude/CLAUDE.md
   claude/commands:      .claude/commands
   claude/settings.json: .claude/settings.json
