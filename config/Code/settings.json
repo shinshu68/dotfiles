@@ -26,7 +26,7 @@
     },
 
     // ==================================================
-    // 括弧・インデントの色分け
+    // 括弧・インデントの色分け・タブ
     // ==================================================
     "editor.bracketPairColorization.enabled": true,
     "workbench.colorCustomizations": {
@@ -35,7 +35,22 @@
         "editorBracketHighlight.foreground3": "#FFFF00", // 黄
         "editorBracketHighlight.foreground4": "#3FFF3F", // 緑
         "editorBracketHighlight.foreground5": "#3F7FFF", // 青
-        "editorBracketHighlight.foreground6": "#FF7FFF" // 紫
+        "editorBracketHighlight.foreground6": "#FF7FFF", // 紫
+
+        // タブとタブの間の区切り線（少し明るめに）
+        "tab.border": "#6a6a6a",
+        // アクティブタブの上端ライン（フォーカス時／非フォーカス時）
+        "tab.activeBorderTop": "#3794ff",
+        "tab.unfocusedActiveBorderTop": "#3794ff80",
+        // アクティブタブはエディタと同じ色、非アクティブはぐっと暗くする
+        "tab.activeBackground": "#1e1e1e",
+        "tab.inactiveBackground": "#161616",
+        // 非アクティブタブの文字を暗めにして差をつける
+        "tab.inactiveForeground": "#8a8a8a",
+        // マウスを乗せたタブを少し明るく
+        "tab.hoverBackground": "#2a2d2e",
+        // タブ列とエディタ本体の境目
+        "editorGroupHeader.tabsBorder": "#555555"
     },
     "indentRainbow.colors": [
         "rgba(128,64,64,0.5)",
