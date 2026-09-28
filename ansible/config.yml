@@ -4,25 +4,18 @@ anyenv:
   envs_dir:    '{{ home_path }}/.anyenv/envs'
 
 apt:
-  repositories:
-    - ppa:dawidd0811/neofetch
-    - ppa:neovim-ppa/stable
+  repositories: []
 
   packages:
     - cmake
-    - dconf-tools
     - direnv
     - git
-    - gdebi
-    - golang-1.10
     - libclang-dev
     - neofetch
     - neovim
     - nodejs
-    - npm
     - p7zip-full
-    - python-apt
-    - python-pip
+    - python3-apt
     - python3-pip
     - tmux
     - tree
