@@ -11,8 +11,8 @@
 - name: install fish
   become: yes
   apt:
-    name:             'fish'
-    state:            present
+    name:             ['fish', 'curl']
+    state:            latest
     update_cache:     yes
     cache_valid_time: 3600
 
@@ -58,33 +58,38 @@
     label: '{{ item.path | basename }}'
   with_items: '{{ fish_files.files }}'
 
-- name: check installed fisher
-  stat:
-    path: '{{ home_path }}/.config/fish/functions/fisher.fish'
-  register: fisher_stat
+- name: check fisher version
+  shell: |
+    fish -lc "fisher --version"
+  register: fisher_version
+  failed_when: False
+  changed_when: False
+
+# fisher 3 が残っていると 4 系のインストールがファイルの衝突で失敗するので、先に消す
+- name: uninstall fisher 3
+  shell: |
+    fish -lc "fisher self-uninstall"
+  when: fisher_version.rc == 0 and 'version 3.' in fisher_version.stdout
 
 - name: install fisher
-  get_url:
-    url:  https://git.io/fisher
-    dest: '{{ home_path }}/.config/fish/functions/fisher.fish'
-  when: not fisher_stat.stat.exists
-
-- name: update fisher
   shell: |
-    fish -lc "fisher self-update"
-  when: fisher_stat.stat.exists
+    fish -lc "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
+  when: fisher_version.rc != 0 or 'version 4.' not in fisher_version.stdout
+
+- name: update fisher and plugins
+  shell: |
+    fish -lc "fisher update"
+  when: fisher_version.rc == 0 and 'version 4.' in fisher_version.stdout
   changed_when: False
 
 - name: check installed fisher plugins
   shell: |
-    fish -lc "fisher ls"
+    fish -lc "fisher list"
   register: installed_fisher_plugins
   changed_when: False
 
 - name: install fisher plugins
   shell: |
-    fish -lc "fisher add {{ item }}"
-  when: |
-    installed_fisher_plugins.stdout.find(item) == -1
+    fish -lc "fisher install {{ item }}"
+  when: item not in installed_fisher_plugins.stdout_lines
   with_items: '{{ fish.fisher_plugins }}'
-
