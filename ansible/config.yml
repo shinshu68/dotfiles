@@ -24,33 +24,12 @@ apt:
     - xsel
 
 python:
-  version2:
-    - '2.7.15'
-  version3:
-    - '3.7.2'
+  versions:
+    - '3.14.7'
 
 pip:
   packages:
-    - PyGithub
-    - autopep8
-    - beautifulsoup4
-    - click
-    - flake8
-    - flask
-    - gitPython
-    - inquirer
-    - jedi
-    - matplotlib
-    - neovim
-    - numpy
-    - pipreqs
-    - pyperclip
-    - pyyaml
-    - readchar
-    - requests
-    - toml
-    - truecolor
-    - youtube_dl
+    - pynvim
 
 fish:
   fisher_plugins:

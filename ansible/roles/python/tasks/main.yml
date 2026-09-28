@@ -14,12 +14,13 @@
       - libbz2-dev
       - libffi-dev
       - liblzma-dev
-      - libncurses5-dev
+      - libncurses-dev
       - libreadline-dev
       - libsqlite3-dev
       - libssl-dev
       - libxml2-dev
       - libxmlsec1-dev
+      - libzstd-dev
       - llvm
       - make
       - tk-dev
@@ -31,7 +32,7 @@
   command: |
     bash -lc 'which pyenv'
   register: which_pyenv
-  ignore_errors: yes
+  failed_when: False
   changed_when: False
 
 - name: install pyenv
@@ -41,29 +42,26 @@
 
 - name: get installed versions
   command: |
-    bash -lc 'pyenv versions'
+    bash -lc 'pyenv versions --bare'
   register: installed_versions
   changed_when: False
 
-- name: install python3
+- name: install python
   command: |
     bash -lc 'pyenv install {{ item | quote }}'
-  when: |
-    python.version3 and installed_versions.stdout.find(item) == -1
-  with_items: '{{ python.version3 }}'
+  when: item not in installed_versions.stdout_lines
+  with_items: '{{ python.versions }}'
 
-- name: install python2
+- name: get global python
   command: |
-    bash -lc 'pyenv install {{ item | quote }}'
-  when: |
-    python.version2 and installed_versions.stdout.find(item) == -1
-  with_items: '{{ python.version2 }}'
+    bash -lc 'pyenv global'
+  register: global_version
+  changed_when: False
 
 - name: set global python
   command: |
-    bash -lc 'pyenv global {{ python.version3[0] | quote }} {{ python.version2[0] | quote}}'
-  when: |
-    installed_versions.stdout.find(python.version3[0]) == -1 or installed_versions.stdout.find(python.version2[0]) == -1
+    bash -lc 'pyenv global {{ python.versions[0] | quote }}'
+  when: global_version.stdout != python.versions[0]
 
 - name: rehash
   shell: |
@@ -73,9 +71,4 @@
     bash -lc 'pyenv rehash'
   environment:
     DOTSHIM_FILE: '{{ anyenv.envs_dir }}/pyenv/.pyenv-shim'
-  changed_when: False
-
-- name: bash restart
-  command: |
-    bash -lc 'exec $SHELL -l'
   changed_when: False
