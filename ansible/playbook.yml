@@ -18,6 +18,8 @@
       tags: ['python']
     - role: pip
       tags: ['pip']
+    - role: node
+      tags: ['node']
     - role: link
       tags: ['link']
     - role: others

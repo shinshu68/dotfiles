@@ -13,7 +13,6 @@ apt:
     - libclang-dev
     - neofetch
     - neovim
-    - nodejs
     - p7zip-full
     - python3-apt
     - python3-pip
@@ -30,6 +29,9 @@ python:
 pip:
   packages:
     - pynvim
+
+node:
+  version: lts
 
 fish:
   fisher_plugins:
