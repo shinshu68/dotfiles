@@ -1,6 +1,6 @@
 anyenv:
   dir:         '{{ home_path }}/.anyenv'
-  plugins_dir: '{{ home_path }}/.anyenv/pluins'
+  plugins_dir: '{{ home_path }}/.anyenv/plugins'
   envs_dir:    '{{ home_path }}/.anyenv/envs'
 
 apt:
