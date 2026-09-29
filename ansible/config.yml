@@ -7,19 +7,13 @@ apt:
   repositories: []
 
   packages:
-    - cmake
     - direnv
     - git
-    - libclang-dev
-    - neofetch
     - neovim
     - p7zip-full
     - python3-apt
-    - python3-pip
     - tmux
     - tree
-    - vim-nox
-    - xclip
     - xsel
 
 python:
