@@ -1,15 +1,10 @@
 {
-    "cSpell.words": [
-        "anyenv",
-        "atcoder",
-        "cowork",
-        "Dockerfiles",
-        "gitmoji",
-        "gpasswd",
-        "jaist",
-        "libasound",
-        "RTUN",
-        "shinshu",
-        "thumbsup"
-    ],
+    "cSpell.customDictionaries": {
+        "dotfiles-words": {
+            "name": "dotfiles-words",
+            "path": "${workspaceFolder}/.vscode/cspell-words.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    }
 }
