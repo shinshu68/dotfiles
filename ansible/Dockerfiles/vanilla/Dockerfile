@@ -1,19 +1,17 @@
-FROM ubuntu:18.04
+FROM ubuntu:24.04
 
-ENV USER shinshu
-ENV HOME /home/$USER
-ENV SHELL /bin/bash
+ENV USER=shinshu
+ENV HOME=/home/$USER
+ENV SHELL=/bin/bash
 
-RUN sed -i".back" -e 's/\/\/archive.ubuntu.com/\/\/ftp.jaist.ac.jp\/pub\/Linux/g' /etc/apt/sources.list
-
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    ca-certificates \
     curl \
-    libasound2 \
-    sudo
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m ${USER}
-RUN gpasswd -a ${USER} sudo
-RUN echo "${USER}:${USER}" | chpasswd
+RUN useradd -m -s /bin/bash ${USER} \
+    && echo "${USER} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${USER}
 
 USER ${USER}
 WORKDIR ${HOME}

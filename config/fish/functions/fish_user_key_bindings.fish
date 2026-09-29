@@ -1,6 +1,5 @@
 function fish_user_key_bindings
     bind \cd accept-autosuggestion
-    bind \cs emoji-fish
 end
 
 # ペースト末尾の改行で2行目ができないようにする
@@ -10,8 +9,4 @@ if functions -q __fish_paste; and not functions -q __fish_paste_orig
     function __fish_paste
         __fish_paste_orig (string replace -r '[\r\n]+$' '' -- $argv[1] | string collect)
     end
-end
-
-if test -d $HOME/.fzf
-    fzf_key_bindings
 end

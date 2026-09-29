@@ -1,0 +1,32 @@
+- set_fact:
+    vscode: {}
+    wsl_distro_name: '{{ lookup("env", "WSL_DISTRO_NAME") }}'
+
+# Windows 側の VS Code を設定するので、WSL 以外では何もしない
+- block:
+  # Windows から WSL 内のファイルは \\wsl.localhost\<distro>\... のパスでリンクする
+  # シンボリックリンクの作成には Windows の開発者モード（または管理者権限）が必要
+  - name: link settings.json on windows
+    command: |
+      powershell.exe -NoProfile -NonInteractive -EncodedCommand {{ lookup("template", "link-settings.ps1.j2") | b64encode(encoding="utf-16-le") }}
+    args:
+      chdir: /mnt/c
+    register: link_result
+    changed_when: "'changed' in link_result.stdout"
+
+  - name: get installed extensions on windows
+    command: |
+      cmd.exe /c code --list-extensions
+    args:
+      chdir: /mnt/c
+    register: installed_extensions
+    changed_when: False
+
+  - name: install extensions on windows
+    command: |
+      cmd.exe /c code --install-extension {{ item | quote }}
+    args:
+      chdir: /mnt/c
+    when: item | lower not in (installed_extensions.stdout_lines | map("trim") | map("lower") | list)
+    with_items: '{{ vscode.extensions }}'
+  when: wsl_distro_name != ""

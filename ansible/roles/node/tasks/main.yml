@@ -1,0 +1,34 @@
+- set_fact:
+    node: {}
+
+- name: check n
+  stat:
+    path: /usr/local/bin/n
+  register: n_stat
+
+# apt の npm は使わないので、n の公式手順で Node を入れてから npm で n 自体を入れる
+- name: install n
+  become: yes
+  shell: |
+    curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s install {{ node.version | quote }}
+    /usr/local/bin/npm install -g n
+  when: not n_stat.stat.exists
+
+- name: get target node version
+  command: |
+    /usr/local/bin/n ls-remote {{ node.version | quote }}
+  register: target_version
+  changed_when: False
+
+- name: get installed node version
+  command: |
+    /usr/local/bin/node --version
+  register: installed_version
+  failed_when: False
+  changed_when: False
+
+- name: install node
+  become: yes
+  command: |
+    /usr/local/bin/n install {{ node.version | quote }}
+  when: installed_version.stdout != 'v' + target_version.stdout_lines[0]

@@ -1,0 +1,19 @@
+- set_fact:
+    claude: {}
+
+- name: check claude code
+  stat:
+    path: '{{ home_path }}/.local/bin/claude'
+  register: claude_stat
+
+# インストール後は Claude Code 自身が自動更新するので、ここでは入れるだけにする
+- name: install claude code
+  shell: |
+    curl -fsSL https://claude.ai/install.sh | bash
+  when: not claude_stat.stat.exists
+
+- name: link claude config files
+  import_role:
+    name: link
+  vars:
+    link_items: '{{ claude.link }}'

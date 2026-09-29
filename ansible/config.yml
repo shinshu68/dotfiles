@@ -1,28 +1,20 @@
 anyenv:
   dir:         '{{ home_path }}/.anyenv'
-  plugins_dir: '{{ home_path }}/.anyenv/pluins'
+  plugins_dir: '{{ home_path }}/.anyenv/plugins'
   envs_dir:    '{{ home_path }}/.anyenv/envs'
 
 apt:
-  repositories:
-    - ppa:dawidd0811/neofetch
-    - ppa:neovim-ppa/stable
+  repositories: []
 
   packages:
     - cmake
-    - dconf-tools
     - direnv
     - git
-    - gdebi
-    - golang-1.10
     - libclang-dev
     - neofetch
     - neovim
-    - nodejs
-    - npm
     - p7zip-full
-    - python-apt
-    - python-pip
+    - python3-apt
     - python3-pip
     - tmux
     - tree
@@ -30,124 +22,50 @@ apt:
     - xclip
     - xsel
 
-desktop:
-  apt:
-    packages:
-      - fcitx
-      - fcitx-mozc
-      - gnome-system-monitor
-      - gnome-terminal
-      - gparted
-
-  appcenter:
-    packages:
-      - com.github.davidmhewitt.clipped
-
-  gnome:
-    terminal:
-      audible-bell: 'false'
-      background-color: "'rgb(0,0,0)'"
-      background-transparency-percent: 13
-      foreground-color: "'rgb(255,255,255)'"
-      use-theme-colors: 'false'
-      use-theme-transparency: 'false'
-      use-transparent-background: 'true'
-
-  plank:
-    dock_items:
-      - google-chrome
-      - vivaldi-stable
-      - slack
-      - io.elementary.files
-      - gnome-system-monitor
-      - io.elementary.appcenter
-      - io.elementary.switchboard
-      - code
-      - org.gnome.Terminal
-
-  vscode:
-    link:
-      config/Code/settings.json: settings.json
-
-    extensions:
-      - CoenraadS.bracket-pair-colorizer
-      - Dart-Code.dart-code
-      - Dart-Code.flutter
-      - DavidAnson.vscode-markdownlint
-      - MS-CEINTL.vscode-language-pack-ja
-      - PKief.material-icon-theme
-      - XadillaX.viml
-      - alanz.vscode-hie-server
-      - bungcip.better-toml
-      - christian-kohler.path-intellisense
-      - dbaeumer.vscode-eslint
-      - donjayamanne.githistory
-      - eamodio.gitlens
-      - formulahendry.auto-close-tag
-      - formulahendry.auto-rename-tag
-      - justusadam.language-haskell
-      - ms-azuretools.vscode-docker
-      - ms-python.python
-      - ms-vscode.cmake-tools
-      - ms-vscode.cpptools
-      - ms-vscode.csharp
-      - ms-vscode.vs-keybindings
-      - oderwat.indent-rainbow
-      - skyapps.fish-vscode
-      - twxs.cmake
-      - vsciot-vscode.vscode-arduino
-      - vscodevim.vim
-      - vscoss.vscode-ansible
-      - xyz.plsql-language
-
 python:
-  version2:
-    - '2.7.15'
-  version3:
-    - '3.7.2'
+  versions:
+    - '3.14.7'
 
 pip:
   packages:
-    - PyGithub
-    - autopep8
-    - beautifulsoup4
-    - click
-    - flake8
-    - flask
-    - gitPython
-    - inquirer
-    - jedi
-    - matplotlib
-    - neovim
-    - numpy
-    - pipreqs
-    - pyperclip
-    - pyyaml
-    - readchar
-    - requests
-    - toml
-    - truecolor
-    - youtube_dl
+    - pynvim
+
+node:
+  version: lts
+
+claude:
+  link:
+    claude/CLAUDE.md:     .claude/CLAUDE.md
+    claude/commands:      .claude/commands
+    claude/settings.json: .claude/settings.json
+    claude/skills:        .claude/skills
+
+vscode:
+  settings: config/Code/settings.json
+
+  extensions:
+    - anthropic.claude-code
+    - eamodio.gitlens
+    - mhutchie.git-graph
+    - ms-ceintl.vscode-language-pack-ja
+    - ms-python.isort
+    - ms-python.python
+    - ms-vscode-remote.remote-wsl
+    - ms-vscode.cpp-devtools
+    - ms-vscode.cpptools-extension-pack
+    - oderwat.indent-rainbow
+    - pkief.material-icon-theme
+    - seatonjiang.gitmoji-vscode
+    - streetsidesoftware.code-spell-checker
+    - vscodevim.vim
+    - vue.volar
+    - yzhang.markdown-all-in-one
 
 fish:
   fisher_plugins:
-    - jethrokuan/fzf
     - oh-my-fish/theme-bobthefish
 
 link:
-  claude/CLAUDE.md:     .claude/CLAUDE.md
-  claude/commands:      .claude/commands
-  claude/settings.json: .claude/settings.json
-  claude/skills:        .claude/skills
   config/nvim:          .config/nvim
   git/config:           .gitconfig
   tmux/tmux.conf:       .tmux.conf
-
-others:
-  repos:
-    - repo: 'git@github.com:shinshu68/emoji-fish.git'
-      dest: '{{ home_path }}/workspace/emoji-fish'
-    - repo: 'git@github.com:shinshu68/BookShelf.git'
-      dest: '{{ home_path }}/workspace/bookshelf'
-    - repo: 'git@github.com:toyota-ct-selab/shinshu_works.git'
-      dest: '{{ home_path }}/shinshu_works'

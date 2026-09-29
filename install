@@ -2,6 +2,7 @@
 
 DOTPATH=~/dotfiles; export DOTPATH
 GITHUB_URL="https://github.com/shinshu68/dotfiles.git"; export GITHUB_URL
+MIRROR_URL="http://ftp.jaist.ac.jp/pub/Linux/ubuntu/"
 
 is_exists() {
     which "$1" >/dev/null 2>&1
@@ -29,7 +30,48 @@ print_dotfiles_header() {
     printf "\e[0m\n"
 }
 
+set_apt_mirror() {
+    local sources='/etc/apt/sources.list.d/ubuntu.sources'
+
+    # Ubuntu 24.04 以降は deb822 形式の ubuntu.sources に設定がある
+    if [ -f "$sources" ]; then
+        if grep -q "$MIRROR_URL" "$sources"; then
+            echo 'Already set apt mirror'
+            return
+        fi
+
+        echo 'Setting apt mirror...'
+        # security.ubuntu.com はミラーせず、archive.ubuntu.com だけを書き換える
+        sudo sed -i".back" -E "s|^URIs: http://([a-z]+\.)?archive\.ubuntu\.com/ubuntu/?$|URIs: $MIRROR_URL|" "$sources"
+    else
+        echo 'Setting apt mirror...'
+        sudo sed -i".back" -e 's/\/\/archive.ubuntu.com/\/\/ftp.jaist.ac.jp\/pub\/Linux/g' /etc/apt/sources.list
+    fi
+
+    e_done "Set apt mirror"
+}
+
+install_ansible() {
+    if is_exists "ansible"; then
+        echo 'Already installed ansible'
+        return
+    fi
+
+    echo 'Installing ansible...'
+
+    # software-properties-common と gnupg は playbook で PPA を追加するときに使う
+    sudo apt-get update
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ansible git curl gnupg software-properties-common
+
+    e_done "Install ansible"
+}
+
 download_dotfiles() {
+    if [ -d "$DOTPATH" ]; then
+        echo 'Already downloaded dotfiles'
+        return
+    fi
+
     echo 'Downloading dotfiles...'
 
     if is_exists "git"; then
@@ -53,36 +95,17 @@ download_dotfiles() {
     e_done "Download dotfiles"
 }
 
-install_ansible() {
-    if is_exists "ansible"; then
-        echo 'Already installed ansible'
-        return
-    fi
-
-    echo 'Installing ansible...'
-
-    sudo sed -i".back" -e 's/\/\/archive.ubuntu.com/\/\/ftp.jaist.ac.jp\/pub\/Linux/g' /etc/apt/sources.list
-
-    yes | sudo apt update
-    yes | sudo apt install software-properties-common
-
-    yes | sudo apt-add-repository ppa:ansible/ansible
-    yes | sudo apt update
-    yes | sudo apt install ansible
-
-    e_done "Installi ansible"
-}
-
 run_ansible() {
     echo 'run Ansible...'
-    $DOTPATH/ansible/run.sh
+    "$DOTPATH/ansible/run.sh"
     e_done "run Ansible"
 }
 
 main() {
     print_dotfiles_header
-    download_dotfiles
+    set_apt_mirror
     install_ansible
+    download_dotfiles
     run_ansible
 }
 

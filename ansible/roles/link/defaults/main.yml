@@ -1,0 +1,2 @@
+# 他のロールから import_role で別のリンク一覧を渡せるようにする
+link_items: '{{ link }}'

@@ -18,13 +18,13 @@
       tags: ['python']
     - role: pip
       tags: ['pip']
+    - role: node
+      tags: ['node']
+    - role: claude
+      tags: ['claude']
+    - role: vscode
+      tags: ['vscode']
     - role: link
       tags: ['link']
-    - role: others
-      tags: ['others']
     - role: test
       tags: ['test', never]
-    - role: applications
-      tags: ['applications', never]
-    - role: desktop
-      tags: ['desktop', never]

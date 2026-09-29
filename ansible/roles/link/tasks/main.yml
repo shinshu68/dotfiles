@@ -7,7 +7,7 @@
   loop_control:
     label: '~/{{ item }}'
   when: item != ""
-  with_items: '{{ link.values() | map("dirname") | unique | list }}'
+  with_items: '{{ link_items.values() | map("dirname") | unique | list }}'
   register: dir_stat
  
 - name: allocate parent directories
@@ -27,7 +27,7 @@
     path: '{{ home_path }}/{{ item.value }}'
   loop_control:
     label: '{{ item.value }}'
-  with_dict: '{{ link }}'
+  with_dict: '{{ link_items }}'
   register: dest_stat
 
 - name: create backup files
@@ -50,4 +50,4 @@
     force: yes
   loop_control:
     label: '{{ item.value }}'
-  with_dict: '{{ link }}'
+  with_dict: '{{ link_items }}'

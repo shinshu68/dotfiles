@@ -45,12 +45,7 @@ end
 if set -q INSIDE_DOCKER
     set -g theme_display_docker_machine yes
 
-    set -x FZF_LEGACY_KEYBINDINGS 0
-    set -x FZF_DEFAULT_OPTS '--reverse'
     if test $SHLVL -eq 1 -a -x /usr/bin/tmux
-        set -x FZF_TMUX 1
-        set -x FZF_TMUX_HEIGHT 25%
-
         tmux ls 2>/dev/null >/dev/null
         if test $status -eq 0
             set -l tmux_ls (tmux ls)
@@ -72,12 +67,6 @@ end
 
 if test -f $HOME/.env.fish
     source $HOME/.env.fish
-end
-
-if test -d $HOME/goprojects
-    set -x PATH "/usr/lib/go-1.10/bin" $PATH
-    set -x GOPATH $HOME/goprojects
-    set -x PATH $GOPATH/bin $PATH
 end
 
 if test -d $HOME/.local/bin
