@@ -5,6 +5,9 @@ ENV HOME=/home/$USER
 ENV SHELL=/bin/bash
 ENV LANG=ja_JP.UTF-8
 
+# apt のミラーを jaist にする (security.ubuntu.com はそのまま)
+RUN sed -i -E 's|^URIs: http://archive\.ubuntu\.com/ubuntu/?$|URIs: http://ftp.jaist.ac.jp/pub/Linux/ubuntu/|' /etc/apt/sources.list.d/ubuntu.sources
+
 # gnupg と software-properties-common は WSL の Ubuntu には最初から入っている (PPA の追加に使う)
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     ansible \
