@@ -33,16 +33,19 @@ pip:
 node:
   version: lts
 
+claude:
+  link:
+    claude/CLAUDE.md:     .claude/CLAUDE.md
+    claude/commands:      .claude/commands
+    claude/settings.json: .claude/settings.json
+    claude/skills:        .claude/skills
+
 fish:
   fisher_plugins:
     - jethrokuan/fzf
     - oh-my-fish/theme-bobthefish
 
 link:
-  claude/CLAUDE.md:     .claude/CLAUDE.md
-  claude/commands:      .claude/commands
-  claude/settings.json: .claude/settings.json
-  claude/skills:        .claude/skills
   config/nvim:          .config/nvim
   git/config:           .gitconfig
   tmux/tmux.conf:       .tmux.conf

@@ -20,6 +20,8 @@
       tags: ['pip']
     - role: node
       tags: ['node']
+    - role: claude
+      tags: ['claude']
     - role: link
       tags: ['link']
     - role: test
