@@ -22,7 +22,5 @@
       tags: ['node']
     - role: link
       tags: ['link']
-    - role: others
-      tags: ['others']
     - role: test
       tags: ['test', never]

@@ -46,12 +46,3 @@ link:
   config/nvim:          .config/nvim
   git/config:           .gitconfig
   tmux/tmux.conf:       .tmux.conf
-
-others:
-  repos:
-    - repo: 'git@github.com:shinshu68/emoji-fish.git'
-      dest: '{{ home_path }}/workspace/emoji-fish'
-    - repo: 'git@github.com:shinshu68/BookShelf.git'
-      dest: '{{ home_path }}/workspace/bookshelf'
-    - repo: 'git@github.com:toyota-ct-selab/shinshu_works.git'
-      dest: '{{ home_path }}/shinshu_works'
