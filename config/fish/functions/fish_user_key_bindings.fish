@@ -1,6 +1,5 @@
 function fish_user_key_bindings
     bind \cd accept-autosuggestion
-    bind \cs emoji-fish
 end
 
 # ペースト末尾の改行で2行目ができないようにする
