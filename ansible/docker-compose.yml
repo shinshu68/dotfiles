@@ -1,12 +1,12 @@
-version: '3'
 services:
+    # 作業中のリポジトリをマウントして playbook を試す
     ansible:
         build: ./Dockerfiles/ansible
-        working_dir: /home/shinshu/dotfiles
         volumes:
-            - .:/home/shinshu/dotfiles/ansible
+            - ..:/home/shinshu/dotfiles
         tty: true
 
+    # 何も入っていない状態から install スクリプトを試す
     vanilla:
         build: ./Dockerfiles/vanilla
         tty: true

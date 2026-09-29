@@ -1,33 +1,31 @@
-FROM ubuntu:18.04
+FROM ubuntu:24.04
 
-ENV USER shinshu
-ENV HOME /home/$USER
-ENV SHELL /bin/bash
+ENV USER=shinshu
+ENV HOME=/home/$USER
+ENV SHELL=/bin/bash
+ENV LANG=ja_JP.UTF-8
 
-RUN sed -i".back" -e 's/\/\/archive.ubuntu.com/\/\/ftp.jaist.ac.jp\/pub\/Linux/g' /etc/apt/sources.list
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    software-properties-common
-
-RUN apt-add-repository --yes --update ppa:ansible/ansible
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# gnupg と software-properties-common は WSL の Ubuntu には最初から入っている (PPA の追加に使う)
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     ansible \
+    ca-certificates \
     curl \
     git \
-    sudo \
+    gnupg \
     locales \
-    python-apt \
-    libasound2
+    python3-apt \
+    software-properties-common \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
 
-ENV LANG ja_JP.UTF-8
 RUN locale-gen $LANG
 
-RUN useradd -m ${USER}
-RUN gpasswd -a ${USER} sudo
-RUN echo "${USER}:${USER}" | chpasswd
+# playbook の -K で聞かれるパスワードは空のまま Enter で通るようにする
+# ubuntu:24.04 には uid 1000 の ubuntu ユーザーがいるので消して、ホストと uid をそろえる
+# (マウントしたリポジトリのファイルの所有者が書き換わらないようにするため)
+RUN userdel -r ubuntu \
+    && useradd -m -s /bin/bash -u 1000 ${USER} \
+    && echo "${USER} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${USER}
 
 USER ${USER}
-WORKDIR ${HOME}
-
-RUN git clone https://github.com/shinshu68/dotfiles.git
+WORKDIR ${HOME}/dotfiles
