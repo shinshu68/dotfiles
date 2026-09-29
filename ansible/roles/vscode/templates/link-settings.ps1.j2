@@ -1,0 +1,27 @@
+$ErrorActionPreference = 'Stop'
+$ProgressPreference    = 'SilentlyContinue'
+$link   = Join-Path $env:APPDATA 'Code\User\settings.json'
+$target = '\\wsl.localhost\{{ wsl_distro_name }}' + ('{{ dotfiles_path }}/{{ vscode.settings }}' -replace '/', '\')
+
+$item = Get-Item -LiteralPath $link -ErrorAction SilentlyContinue
+if ($item -and $item.LinkType -eq 'SymbolicLink' -and (@($item.Target) -replace '^UNC\\', '\\') -contains $target) {
+    exit 0
+}
+
+# 既存のファイルを壊さないよう、先に別名でリンクを作れることを確かめてから入れ替える
+# (New-Item -ItemType SymbolicLink は開発者モードでも管理者権限を求めるので mklink を使う)
+New-Item -ItemType Directory -Force -Path (Split-Path $link) | Out-Null
+$tmp = "$link.tmp"
+if (Test-Path -LiteralPath $tmp) { Remove-Item -LiteralPath $tmp }
+cmd /c mklink "$tmp" "$target" | Out-Null
+if ($LASTEXITCODE -ne 0) { throw "mklink failed: $tmp -> $target" }
+
+if ($item) {
+    if ($item.LinkType) {
+        Remove-Item -LiteralPath $link
+    } else {
+        Move-Item -Force -LiteralPath $link -Destination "$link.bak"
+    }
+}
+Move-Item -LiteralPath $tmp -Destination $link
+Write-Output 'changed'

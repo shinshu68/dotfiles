@@ -40,6 +40,27 @@ claude:
     claude/settings.json: .claude/settings.json
     claude/skills:        .claude/skills
 
+vscode:
+  settings: config/Code/settings.json
+
+  extensions:
+    - anthropic.claude-code
+    - eamodio.gitlens
+    - mhutchie.git-graph
+    - ms-ceintl.vscode-language-pack-ja
+    - ms-python.isort
+    - ms-python.python
+    - ms-vscode-remote.remote-wsl
+    - ms-vscode.cpp-devtools
+    - ms-vscode.cpptools-extension-pack
+    - oderwat.indent-rainbow
+    - pkief.material-icon-theme
+    - seatonjiang.gitmoji-vscode
+    - streetsidesoftware.code-spell-checker
+    - vscodevim.vim
+    - vue.volar
+    - yzhang.markdown-all-in-one
+
 fish:
   fisher_plugins:
     - jethrokuan/fzf

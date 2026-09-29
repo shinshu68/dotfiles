@@ -22,6 +22,8 @@
       tags: ['node']
     - role: claude
       tags: ['claude']
+    - role: vscode
+      tags: ['vscode']
     - role: link
       tags: ['link']
     - role: test
