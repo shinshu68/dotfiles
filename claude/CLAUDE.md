@@ -8,7 +8,9 @@
 - ユーザーに選択肢を示すときは、各選択肢の詳細（メリット・影響など）は本文で説明し、選ぶ操作だけを AskUserQuestion の選択肢 UI で出す
 
 ## 環境
-- WSL2 (Ubuntu) + fish shell。シェルコマンドは fish で動く書き方を優先する
+- WSL2 (Ubuntu) と Windows の VSCode の両方で使う。どちらで動いているかは環境情報の Platform（linux / win32）で判断する
+- WSL2: シェルは fish。ユーザーに示すシェルコマンドは fish で動く書き方を優先する
+- Windows: Claude Code が実行するコマンドは Git Bash で動く。ユーザーに示すコマンドは PowerShell で動く書き方にする
 
 ## Git 運用
 - ブランチは develop から切る。master/develop へ直接コミットしない
