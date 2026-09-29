@@ -186,6 +186,7 @@ vscodevim
 vsplit
 Whicherrs
 wildmenu
+winget
 xclip
 xsel
 xspf

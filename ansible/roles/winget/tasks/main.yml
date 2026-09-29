@@ -1,0 +1,25 @@
+- set_fact:
+    winget: {}
+
+# Windows 側に入れるパッケージなので、WSL 以外では何もしない
+- block:
+  - name: check installed packages on windows
+    command: |
+      winget.exe list --exact --id {{ item | quote }} --accept-source-agreements --disable-interactivity
+    args:
+      chdir: /mnt/c
+    register: winget_list
+    changed_when: False
+    failed_when: False
+    with_items: '{{ winget.packages }}'
+
+  - name: install packages on windows
+    command: |
+      winget.exe install --exact --id {{ item.item | quote }} --silent --accept-package-agreements --accept-source-agreements --disable-interactivity
+    args:
+      chdir: /mnt/c
+    when: item.rc != 0
+    loop_control:
+      label: '{{ item.item }}'
+    with_items: '{{ winget_list.results }}'
+  when: lookup("env", "WSL_DISTRO_NAME") != ""
