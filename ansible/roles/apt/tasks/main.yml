@@ -1,11 +1,26 @@
 - set_fact:
     apt: {}
 
+# PPA 以外のリポジトリは署名鍵を先に置いて、repo の signed-by で指定する
+- name: apt add keyrings
+  become: yes
+  get_url:
+    url:  '{{ item.url }}'
+    dest: '{{ item.dest }}'
+    mode: 0644
+  loop_control:
+    label: '{{ item.dest }}'
+  with_items: '{{ apt.keyrings }}'
+  when: apt.keyrings
+
 - name: apt add repositories
   become: yes
   apt_repository:
-    repo:         '{{ item }}'
+    repo:         '{{ item.repo }}'
+    filename:     '{{ item.filename | default(omit) }}'
     update_cache: yes
+  loop_control:
+    label: '{{ item.repo }}'
   with_items: '{{ apt.repositories }}'
   when: apt.repositories
 
