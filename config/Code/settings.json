@@ -229,6 +229,7 @@
     // Python
     "python.analysis.typeCheckingMode": "standard",
     "python.terminal.activateEnvironment": false,
+    "python.terminal.shellIntegration.enabled": false,
 
     // ==================================================
     // その他の拡張機能
