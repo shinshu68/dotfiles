@@ -69,12 +69,6 @@ if test -f $HOME/.env.fish
     source $HOME/.env.fish
 end
 
-if test -d $HOME/goprojects
-    set -x PATH "/usr/lib/go-1.10/bin" $PATH
-    set -x GOPATH $HOME/goprojects
-    set -x PATH $GOPATH/bin $PATH
-end
-
 if test -d $HOME/.local/bin
     set -x PATH $HOME/.local/bin $PATH
 end
