@@ -11,7 +11,3 @@ if functions -q __fish_paste; and not functions -q __fish_paste_orig
         __fish_paste_orig (string replace -r '[\r\n]+$' '' -- $argv[1] | string collect)
     end
 end
-
-if test -d $HOME/.fzf
-    fzf_key_bindings
-end
