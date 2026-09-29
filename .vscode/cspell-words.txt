@@ -53,6 +53,7 @@ fnamemodify
 foldmethod
 fromstart
 gitgutter
+githubcli
 gitmoji
 gocode
 godef
