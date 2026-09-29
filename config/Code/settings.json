@@ -72,6 +72,7 @@
     // ターミナル
     // ==================================================
     "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "terminal.integrated.environmentChangesIndicator": "off",
     "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
     "terminal.integrated.initialHint": false,
     "terminal.integrated.profiles.windows": {
