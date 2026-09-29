@@ -236,17 +236,26 @@
     // ==================================================
     // Code Spell Checker
     "cSpell.autoFormatConfigFile": true,
+    // 言語に関係なく、技術用語やツール名の辞書を常に使う
+    "cSpell.dictionaries": [
+        "bash",
+        "docker",
+        "fonts",
+        "fullstack",
+        "git",
+        "node",
+        "npm",
+        "powershell",
+        "python",
+        "shellscript"
+    ],
     "cSpell.userWords": [
         "Cica",
         "easymotion",
         "hlsearch",
         "incsearch",
-        "rgba",
         "showcmd",
-        "showmodename",
-        "Sysnative",
-        "toplevel",
-        "windir"
+        "showmodename"
     ],
 
     // Claude Code
