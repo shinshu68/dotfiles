@@ -15,7 +15,7 @@
 	template = ~/dotfiles/git/template
 
 [core]
-	autoCRLF = false
+	autocrlf = input
 	filemode = false
 [init]
 	defaultBranch = main
