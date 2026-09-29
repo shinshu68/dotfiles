@@ -17,3 +17,17 @@
     name: link
   vars:
     link_items: '{{ claude.link }}'
+
+# Windows 側の VS Code（Claude Code 拡張）からも同じ設定を使えるよう、WSL のときは Windows 側にもリンクする
+# Windows から WSL 内のファイルは \\wsl.localhost\<distro>\... のパスでリンクする
+# シンボリックリンクの作成には Windows の開発者モード（または管理者権限）が必要
+- name: link claude config files on windows
+  command: |
+    powershell.exe -NoProfile -NonInteractive -EncodedCommand {{ lookup("template", "link-windows.ps1.j2") | b64encode(encoding="utf-16-le") }}
+  args:
+    chdir: /mnt/c
+  vars:
+    wsl_distro_name: '{{ lookup("env", "WSL_DISTRO_NAME") }}'
+  register: link_windows_result
+  changed_when: "'changed' in link_windows_result.stdout"
+  when: lookup("env", "WSL_DISTRO_NAME") != ""

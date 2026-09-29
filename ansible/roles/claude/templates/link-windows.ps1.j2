@@ -1,0 +1,45 @@
+$ErrorActionPreference = 'Stop'
+$ProgressPreference    = 'SilentlyContinue'
+$wsl   = '\\wsl.localhost\{{ wsl_distro_name }}'
+$items = @(
+{% for src, dest in claude.link.items() %}
+    @{ Link = Join-Path $env:USERPROFILE ('{{ dest }}' -replace '/', '\'); Target = $wsl + ('{{ dotfiles_path }}/{{ src }}' -replace '/', '\') }
+{% endfor %}
+)
+
+foreach ($i in $items) {
+    $link   = $i.Link
+    $target = $i.Target
+
+    $item = Get-Item -Force -LiteralPath $link -ErrorAction SilentlyContinue
+    if ($item -and $item.LinkType -eq 'SymbolicLink' -and (@($item.Target) -replace '^UNC\\', '\\') -contains $target) {
+        continue
+    }
+
+    # 既存のファイルを壊さないよう、先に別名でリンクを作れることを確かめてから入れ替える
+    # (New-Item -ItemType SymbolicLink は開発者モードでも管理者権限を求めるので mklink を使う)
+    New-Item -ItemType Directory -Force -Path (Split-Path $link) | Out-Null
+    $isDir = Test-Path -LiteralPath $target -PathType Container
+    $tmp   = "$link.tmp"
+    if (Test-Path -LiteralPath $tmp) { cmd /c rmdir "$tmp" 2>$null; cmd /c del /q "$tmp" 2>$null }
+    if ($isDir) {
+        cmd /c mklink /D "$tmp" "$target" | Out-Null
+    } else {
+        cmd /c mklink "$tmp" "$target" | Out-Null
+    }
+    if ($LASTEXITCODE -ne 0) { throw "mklink failed: $tmp -> $target" }
+
+    if ($item) {
+        if ($item.LinkType) {
+            # ディレクトリへのリンクを Remove-Item で消すとリンク先の中身まで辿ることがあるので rmdir を使う
+            if ($item.PSIsContainer) { cmd /c rmdir "$link" } else { cmd /c del /q "$link" }
+            if ($LASTEXITCODE -ne 0) { throw "failed to remove link: $link" }
+        } else {
+            $bak = "$link.bak"
+            if (Test-Path -LiteralPath $bak) { $bak = "$link.bak." + (Get-Date -Format 'yyyyMMddHHmmss') }
+            Move-Item -LiteralPath $link -Destination $bak
+        }
+    }
+    Move-Item -LiteralPath $tmp -Destination $link
+    Write-Output "changed: $link"
+}
