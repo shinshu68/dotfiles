@@ -5,7 +5,7 @@ WSL2 の Ubuntu 24.04 向けです。ansible で開発環境をセットアッ�
 
 ## Install
 ```shell
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/shinshu68/dotfiles/master/install)"
+bash -c "$(curl -fsSL https://shinshu68.github.io/dotfiles/install)"
 ```
 
 install スクリプトは次の順に実行します。何度実行しても、終わっている手順は飛ばします。
