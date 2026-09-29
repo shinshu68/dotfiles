@@ -73,6 +73,7 @@
     // ==================================================
     "terminal.integrated.enableMultiLinePasteWarning": "never",
     "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+    "terminal.integrated.initialHint": false,
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
             "source": "PowerShell",
