@@ -80,6 +80,27 @@ function Install-Cica(
     Remove-Item -Recurse -Force -LiteralPath $zip, $dir
 }
 
+# Returns $true when WSL was installed now (the setup continues inside Ubuntu).
+# Any Ubuntu distro counts as installed, since the existing one may be named just "Ubuntu".
+function Install-Wsl {
+    $env:WSL_UTF8 = '1'   # otherwise wsl.exe prints UTF-16 and the names cannot be matched
+    $installed = @()
+    # Without WSL, wsl.exe may print an error, which PowerShell 5.1 turns into an exception under 'Stop'
+    try {
+        $installed = @(wsl.exe --list --quiet 2>$null)
+        if ($LASTEXITCODE -ne 0) { $installed = @() }
+    } catch {
+        $installed = @()
+    }
+    if ($installed | Where-Object { $_ -match '^Ubuntu' }) { return $false }
+
+    Write-Host '==> install WSL and Ubuntu-24.04'
+    # --no-launch: creating the Linux user is done later, when Ubuntu is started
+    wsl.exe --install --distribution Ubuntu-24.04 --no-launch | Out-Host
+    if ($LASTEXITCODE -ne 0) { throw 'wsl --install failed' }
+    return $true
+}
+
 if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
     throw 'winget not found. Install "App Installer" from Microsoft Store first.'
 }
@@ -93,3 +114,16 @@ if ($isPersonal) {
 }
 
 Install-Cica
+
+$wslInstalled = Install-Wsl
+
+Write-Output ''
+Write-Output 'Done. Next steps:'
+if ($wslInstalled) {
+    Write-Output '  1. Restart Windows if wsl --install asked for it'
+    Write-Output '  2. Start "Ubuntu 24.04" from the Start menu and create the Linux user'
+    Write-Output '  3. Run the Linux side of the dotfiles in Ubuntu:'
+} else {
+    Write-Output '  Run the Linux side of the dotfiles in Ubuntu, if not done yet:'
+}
+Write-Output "     bash -c `"`$(curl -fsSL $baseUrl/install)`""
