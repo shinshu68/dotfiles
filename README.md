@@ -58,13 +58,25 @@ chsh -s /usr/bin/fish
 ssh-keygen -t ed25519
 ```
 
-作った公開鍵を GitHub に登録します。
+### GitHub CLI にログインする
+Claude Code の pr スキルと `contributions` 関数が gh を使います。
+
+```shell
+gh auth login
+```
+
+Git の操作に使うプロトコルは SSH を選びます。途中で SSH 公開鍵をアップロードするか聞かれるので、上で作った鍵をアップロードして GitHub に登録します。HTTPS を選んで Git の認証に gh を使う設定にすると、`~/.gitconfig`（このリポジトリの `git/config` へのリンク）に credential helper が書き込まれてしまいます。
 
 install スクリプトは鍵がなくても動くように HTTPS で clone するので、鍵を登録したらリモートを SSH に切り替えます。
 
 ```shell
 git -C ~/dotfiles remote set-url origin git@github.com:shinshu68/dotfiles.git
 ```
+
+Windows 側の gh（winget で入れたもの）は WSL とは別にログインが必要なので、PowerShell でも同じコマンドを実行します。Windows 側には SSH 鍵を作らないので、プロトコルは HTTPS を選びます。
+
+### Claude Code にログインする
+`claude` を起動すると、初回はログインの手順が表示されます。Windows 側の VS Code の Claude Code 拡張は、拡張の画面からログインします。
 
 ## Docker で確認する
 playbook の変更は、`ansible/` にある Docker 環境で確認できます。作業中のリポジトリをコンテナにマウントして実行します。
