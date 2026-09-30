@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-# developブランチとの差分を確認し、PR作成の準備を行うスクリプト。
+# 指定したベースブランチ(未指定時はdevelop)との差分を確認し、PR作成の準備を行うスクリプト。
+# 使い方: check_status.sh [ベースブランチ名]  例: check_status.sh main
 # - 前提条件のチェック
-# - developの最新化
+# - ベースブランチの最新化
 # - 未コミット変更の警告(対象外)
 # - コミット一覧/変更ファイル一覧/diffの出力
 # - 既存PRのチェック
 # - 未pushの場合は自動push
 set -uo pipefail
 
-BASE_BRANCH="develop"
+BASE_BRANCH="${1:-develop}"
 
 fail() {
   echo "ERROR: $1"
