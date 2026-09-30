@@ -4,6 +4,7 @@ abefnrtv
 addtags
 airblade
 anyenv
+argjson
 asyncrun
 atcoder
 augroup
@@ -100,6 +101,7 @@ mapleader
 matchgroup
 matchpairs
 matchtime
+maxw
 mdwn
 metalinter
 mhutchie

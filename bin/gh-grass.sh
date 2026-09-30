@@ -24,7 +24,12 @@ query($login: String!) {
   }
 }'
 
-gh api graphql -f query="$query" -f login="$user" | jq -r '
+# ターミナル幅から表示できる週数を計算（曜日ラベル4文字 + 1週あたり3文字）
+cols="${COLUMNS:-$(tput cols 2>/dev/null || echo 80)}"
+max_weeks=$(( (cols - 4) / 3 ))
+(( max_weeks < 1 )) && max_weeks=1
+
+gh api graphql -f query="$query" -f login="$user" | jq -r --argjson maxw "$max_weeks" '
   # GitHub ダークテーマ相当の配色 (R;G;B)
   def rgb: {
     NONE:            "22;27;34",
@@ -38,8 +43,14 @@ gh api graphql -f query="$query" -f login="$user" | jq -r '
   def months: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   def pad($n): if $n > 0 then " " * $n else "" end;
 
-  .data.user.contributionsCollection.contributionCalendar as $c
-  | "\($c.totalContributions) contributions in the last year",
+  .data.user.contributionsCollection.contributionCalendar
+  # 幅に収まらない場合は古い週から切り捨てる
+  | (.weeks | length) as $all
+  | .weeks |= .[(-$maxw):]
+  | . as $c
+  | "\($c.totalContributions) contributions in the last year"
+      + (if ($c.weeks | length) < $all
+         then " (showing last \($c.weeks | length) weeks)" else "" end),
     # 月ラベル行
     "    " + ($c.weeks | to_entries
       | reduce .[] as $w ({s: "", p: ""};
