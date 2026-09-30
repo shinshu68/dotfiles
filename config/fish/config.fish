@@ -97,13 +97,21 @@ if not functions -q standard_cd
     end
 end
 
-if not set -q SSH_AGENT_PID && test -f $HOME/.ssh/id_rsa
+# 鍵の種類は ed25519 と RSA のどちらでもよいので、あるものを全部 ssh-agent に登録する
+set -l ssh_keys
+for key in $HOME/.ssh/id_ed25519 $HOME/.ssh/id_rsa
+    if test -f $key
+        set -a ssh_keys $key
+    end
+end
+
+if not set -q SSH_AGENT_PID && test (count $ssh_keys) -gt 0
     set -l ssh_grep (ps aux | grep "^$USER" | grep "ssh-agent -c")
     if test $status -eq 0
         set -l ssh_pid (echo $ssh_grep | awk '{print $2}')
         kill -9 $ssh_pid
     end
     eval (ssh-agent -c) 2>/dev/null >/dev/null
-    ssh-add ~/.ssh/id_rsa 2>/dev/null >/dev/null
+    ssh-add $ssh_keys 2>/dev/null >/dev/null
 end
 
