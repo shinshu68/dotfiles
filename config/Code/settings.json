@@ -92,12 +92,9 @@
             "source": "Git Bash",
             "icon": "terminal-git-bash"
         },
+        // ディストリビューション名は環境によって違うので、-d で指定せず既定のディストリビューションを開く
         "Ubuntu (WSL)": {
-            "path": "C:\\WINDOWS\\System32\\wsl.exe",
-            "args": [
-                "-d",
-                "Ubuntu"
-            ]
+            "path": "C:\\WINDOWS\\System32\\wsl.exe"
         }
     },
     // "terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\bash.exe",
