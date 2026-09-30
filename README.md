@@ -60,6 +60,12 @@ ssh-keygen -t ed25519
 
 作った公開鍵を GitHub に登録します。
 
+install スクリプトは鍵がなくても動くように HTTPS で clone するので、鍵を登録したらリモートを SSH に切り替えます。
+
+```shell
+git -C ~/dotfiles remote set-url origin git@github.com:shinshu68/dotfiles.git
+```
+
 ## Docker で確認する
 playbook の変更は、`ansible/` にある Docker 環境で確認できます。作業中のリポジトリをコンテナにマウントして実行します。
 
