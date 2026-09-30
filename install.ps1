@@ -49,6 +49,37 @@ function Get-IsPersonal {
     return $personal
 }
 
+# Cica is not in winget, so install it for the current user from GitHub Releases.
+# (Written here instead of a separate .ps1, because a downloaded script can be blocked by the execution policy)
+# The paths are parameters so that it can be tried against a temporary place
+# (installed fonts are locked while signed in and cannot be removed to test it)
+function Install-Cica(
+    [string]$fontsDir = (Join-Path $env:LOCALAPPDATA 'Microsoft\Windows\Fonts'),
+    [string]$regPath  = 'HKCU:\Software\Microsoft\Windows NT\CurrentVersion\Fonts'
+) {
+    $version = 'v5.0.3'
+    $names   = 'Cica-Regular', 'Cica-Bold', 'Cica-RegularItalic', 'Cica-BoldItalic'
+
+    $missing = $names | Where-Object { -not (Test-Path -LiteralPath (Join-Path $fontsDir "$_.ttf")) }
+    if (-not $missing) { return }
+
+    Write-Output "==> install Cica $version"
+    $zip = Join-Path $env:TEMP "Cica_$version.zip"
+    $dir = Join-Path $env:TEMP "Cica_$version"
+    Invoke-WebRequest -UseBasicParsing -Uri "https://github.com/miiton/Cica/releases/download/$version/Cica_$version.zip" -OutFile $zip
+    Expand-Archive -Force -LiteralPath $zip -DestinationPath $dir
+
+    New-Item -ItemType Directory -Force -Path $fontsDir | Out-Null
+    # New-Item -Force on an existing key recreates it and drops the other fonts' entries
+    if (-not (Test-Path -LiteralPath $regPath)) { New-Item -Path $regPath | Out-Null }
+    foreach ($name in $names) {
+        $dest = Join-Path $fontsDir "$name.ttf"
+        Copy-Item -Force -LiteralPath (Join-Path $dir "$name.ttf") -Destination $dest
+        New-ItemProperty -Force -Path $regPath -Name "$name (TrueType)" -Value $dest -PropertyType String | Out-Null
+    }
+    Remove-Item -Recurse -Force -LiteralPath $zip, $dir
+}
+
 if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
     throw 'winget not found. Install "App Installer" from Microsoft Store first.'
 }
@@ -60,3 +91,5 @@ Invoke-WinGetConfigure 'windows/base.dsc.yaml'
 if ($isPersonal) {
     Invoke-WinGetConfigure 'windows/personal.dsc.yaml'
 }
+
+Install-Cica
