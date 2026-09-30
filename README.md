@@ -31,7 +31,6 @@ install スクリプトは次の順に実行します。何度実行しても、
 | pip | pip パッケージのインストール |
 | node | n と Node.js (LTS) のインストール |
 | claude | Claude Code のインストール、`~/.claude` への設定ファイルのリンク（WSL のときは Windows 側にもリンク） |
-| winget | Windows 側への Git for Windows と gh のインストール（WSL のときだけ） |
 | vscode | Windows 側の VS Code への settings.json のリンク、拡張機能のインストール（WSL のときだけ） |
 | link | nvim / git / tmux の設定ファイルのリンク |
 

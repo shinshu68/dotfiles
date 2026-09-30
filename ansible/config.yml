@@ -43,11 +43,6 @@ claude:
     claude/settings.json: .claude/settings.json
     claude/skills:        .claude/skills
 
-winget:
-  packages:
-    - Git.Git
-    - GitHub.cli
-
 vscode:
   settings: config/Code/settings.json
 
