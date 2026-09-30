@@ -37,4 +37,11 @@ properties:
       settings:
         id: Google.Chrome
         source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Windows Terminal をインストールする
+      settings:
+        id: Microsoft.WindowsTerminal
+        source: winget
   configurationVersion: 0.2.0
