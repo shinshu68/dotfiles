@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+# 私用の PC にだけ入れるもの（base.dsc.yaml の後に適用する）
+properties:
+  resources:
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Discord をインストールする
+      settings:
+        id: Discord.Discord
+        source: winget
+  configurationVersion: 0.2.0
