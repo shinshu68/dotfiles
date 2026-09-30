@@ -1,5 +1,0 @@
-- set_fact:
-    test: {}
-
-- name: debug
-  debug: var=hostvars[inventory_hostname]
