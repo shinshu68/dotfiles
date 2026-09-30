@@ -16,8 +16,10 @@ install スクリプトは次の順に実行します。何度実行しても、
 4. ansible の playbook を実行する（途中で sudo のパスワードを聞かれます）
 
 ### 事前に必要なもの
-- Windows に VS Code がインストールされていること
-- Windows の開発者モードが有効になっていること（Windows 側に VS Code の設定ファイルのリンクを作るため）
+- Windows に VS Code がインストールされていること（インストーラーの「PATH への追加」を有効にしておく。拡張機能を `code` コマンドで入れるため）
+- Windows に [Cica](https://github.com/miiton/Cica) フォントがインストールされていること（VS Code のエディタとターミナルのフォントに使う）
+- Windows で winget が使えること（Windows 側に Git for Windows と gh を入れるため）
+- Windows の開発者モードが有効になっていること（Windows 側に設定ファイルのリンクを作るため）
 
 ## ansible のロール
 | ロール | 内容 |
@@ -28,7 +30,8 @@ install スクリプトは次の順に実行します。何度実行しても、
 | python | pyenv と Python のインストール |
 | pip | pip パッケージのインストール |
 | node | n と Node.js (LTS) のインストール |
-| claude | Claude Code のインストール、`~/.claude` への設定ファイルのリンク |
+| claude | Claude Code のインストール、`~/.claude` への設定ファイルのリンク（WSL のときは Windows 側にもリンク） |
+| winget | Windows 側への Git for Windows と gh のインストール（WSL のときだけ） |
 | vscode | Windows 側の VS Code への settings.json のリンク、拡張機能のインストール（WSL のときだけ） |
 | link | nvim / git / tmux の設定ファイルのリンク |
 

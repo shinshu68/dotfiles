@@ -45,6 +45,7 @@ claude:
 
 winget:
   packages:
+    - Git.Git
     - GitHub.cli
 
 vscode:
