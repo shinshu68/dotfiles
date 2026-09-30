@@ -22,8 +22,6 @@
       tags: ['node']
     - role: claude
       tags: ['claude']
-    - role: winget
-      tags: ['winget']
     - role: vscode
       tags: ['vscode']
     - role: link
