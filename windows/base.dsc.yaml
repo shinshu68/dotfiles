@@ -44,4 +44,11 @@ properties:
       settings:
         id: Microsoft.WindowsTerminal
         source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: .NET 10 SDK をインストールする
+      settings:
+        id: Microsoft.DotNet.SDK.10
+        source: winget
   configurationVersion: 0.2.0
