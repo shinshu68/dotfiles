@@ -73,7 +73,8 @@
     // ==================================================
     "terminal.integrated.enableMultiLinePasteWarning": "never",
     "terminal.integrated.environmentChangesIndicator": "off",
-    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.defaultProfile.linux": "fish",
     "terminal.integrated.initialHint": false,
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
@@ -97,7 +98,6 @@
             "path": "C:\\WINDOWS\\System32\\wsl.exe"
         }
     },
-    // "terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\bash.exe",
 
     // ==================================================
     // リモート（WSL など）
