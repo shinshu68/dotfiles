@@ -19,8 +19,9 @@ install.ps1 は次の順に実行します。
 2. `windows/base.dsc.yaml` を winget configure で適用する（開発者モードの有効化と、会社・私用の両方で使うアプリのインストール。UAC の確認が1回出ます）
 3. 私用の PC なら `windows/personal.dsc.yaml` も適用する
 4. [Cica](https://github.com/miiton/Cica) フォントをユーザー用フォントとしてインストールする
-5. Ubuntu が入っていなければ、WSL と Ubuntu-24.04 をインストールする
-6. 次にやることを表示する
+5. 私用の PC なら [ImeCenterView](https://github.com/shinshu68/ImeCenterView) をビルドして、スタートアップに登録し、起動する
+6. Ubuntu が入っていなければ、WSL と Ubuntu-24.04 をインストールする
+7. 次にやることを表示する
 
 WSL を新しく入れたときは、必要なら Windows を再起動し、スタートメニューから Ubuntu 24.04 を起動して Linux のユーザーを作ってから、WSL 側の手順に進みます。
 
@@ -52,6 +53,20 @@ install スクリプトは次の順に実行します。
 
 ```powershell
 Remove-Item $env:USERPROFILE\.dotfiles-windows.json
+```
+
+### ImeCenterView
+winget にない自作アプリなので、install.ps1 がソースからビルドします。
+
+| 場所 | 内容 |
+|---|---|
+| `%LOCALAPPDATA%\dotfiles\src\ImeCenterView` | ビルド用の clone（develop ブランチ） |
+| `%LOCALAPPDATA%\Programs\ImeCenterView` | ビルドした exe の配置先 |
+
+install.ps1 を再実行すると最新のソースを取得し、新しいコミットがあるときだけビルドし直して起動し直します。スタートアップの登録は、次のコマンドで解除できます。
+
+```powershell
+Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'ImeCenterView'
 ```
 
 ## ansible のロール

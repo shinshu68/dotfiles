@@ -71,6 +71,7 @@ guibg
 guifg
 hisgre
 histoday
+HKCU
 hoge
 hostvars
 infercase

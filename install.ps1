@@ -80,6 +80,77 @@ function Install-Cica(
     Remove-Item -Recurse -Force -LiteralPath $zip, $dir
 }
 
+# winget configure installs git and dotnet, but the PATH of this session is not updated by it.
+function Update-SessionPath {
+    $machine = [Environment]::GetEnvironmentVariable('Path', 'Machine')
+    $user    = [Environment]::GetEnvironmentVariable('Path', 'User')
+    $env:Path = (@($machine, $user) | Where-Object { $_ }) -join ';'
+}
+
+# ImeCenterView is my own app and has no installer, so build it from source,
+# register it to run at sign-in, and start it.
+# It is rebuilt only when the source has new commits, so running this again also updates the app.
+function Install-ImeCenterView {
+    $repoUrl = 'https://github.com/shinshu68/ImeCenterView.git'   # HTTPS: works before the SSH key is set up
+    $branch  = 'develop'   # main is still empty. Change this to 'main' once develop is merged into it
+    $src     = Join-Path $env:LOCALAPPDATA 'dotfiles\src\ImeCenterView'   # a clone only for this build
+    $dest    = Join-Path $env:LOCALAPPDATA 'Programs\ImeCenterView'
+    $exe     = Join-Path $dest 'ImeCenterView.exe'
+    $marker  = Join-Path $dest '.built-commit'   # the commit the installed exe was built from
+
+    Update-SessionPath
+    foreach ($command in 'git', 'dotnet') {
+        if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
+            throw "$command not found. Open a new PowerShell and run this script again."
+        }
+    }
+
+    if (Test-Path -LiteralPath (Join-Path $src '.git')) {
+        git -C $src fetch --quiet origin
+        if ($LASTEXITCODE -eq 0) {
+            # Not pull: this also follows a change of $branch
+            git -C $src checkout --quiet -B $branch "origin/$branch"
+            if ($LASTEXITCODE -ne 0) { throw "git checkout failed: ImeCenterView ($branch)" }
+        } else {
+            # e.g. offline: keep going with the source already there
+            Write-Warning 'ImeCenterView: git fetch failed, using the existing source'
+        }
+    } else {
+        Write-Output '==> clone ImeCenterView'
+        git clone --quiet --branch $branch $repoUrl $src
+        if ($LASTEXITCODE -ne 0) { throw 'git clone failed: ImeCenterView' }
+    }
+
+    $commit = (git -C $src rev-parse HEAD)
+    if ($LASTEXITCODE -ne 0) { throw 'git rev-parse failed: ImeCenterView' }
+
+    $built = ''
+    if ((Test-Path -LiteralPath $exe) -and (Test-Path -LiteralPath $marker)) {
+        $built = (Get-Content -Raw -LiteralPath $marker).Trim()
+    }
+
+    if ($built -ne $commit) {
+        Write-Output "==> build ImeCenterView ($($commit.Substring(0, 7)))"
+        # A running exe is locked and makes publish fail
+        $running = Get-Process ImeCenterView -ErrorAction SilentlyContinue
+        if ($running) {
+            $running | Stop-Process -Force
+            $running | Wait-Process -Timeout 10 -ErrorAction SilentlyContinue
+        }
+
+        dotnet publish (Join-Path $src 'src\ImeCenterView') -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o $dest --nologo -v quiet
+        if ($LASTEXITCODE -ne 0) { throw 'dotnet publish failed: ImeCenterView' }
+        Set-Content -LiteralPath $marker -Value $commit -Encoding ASCII
+    }
+
+    # Same format as the app writes from its tray menu (the quoted full path of the exe)
+    Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'ImeCenterView' -Value "`"$exe`""
+
+    if (-not (Get-Process ImeCenterView -ErrorAction SilentlyContinue)) {
+        Start-Process $exe
+    }
+}
+
 # Returns $true when WSL was installed now (the setup continues inside Ubuntu).
 # Any Ubuntu distro counts as installed, since the existing one may be named just "Ubuntu".
 function Install-Wsl {
@@ -114,6 +185,10 @@ if ($isPersonal) {
 }
 
 Install-Cica
+
+if ($isPersonal) {
+    Install-ImeCenterView
+}
 
 $wslInstalled = Install-Wsl
 
