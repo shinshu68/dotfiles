@@ -60,7 +60,7 @@ winget にない自作アプリなので、install.ps1 がソースからビル�
 
 | 場所 | 内容 |
 |---|---|
-| `%LOCALAPPDATA%\dotfiles\src\ImeCenterView` | ビルド用の clone（develop ブランチ） |
+| `%LOCALAPPDATA%\dotfiles\src\ImeCenterView` | ビルド用の clone（main ブランチ） |
 | `%LOCALAPPDATA%\Programs\ImeCenterView` | ビルドした exe の配置先 |
 
 install.ps1 を再実行すると最新のソースを取得し、新しいコミットがあるときだけビルドし直して起動し直します。スタートアップの登録は、次のコマンドで解除できます。

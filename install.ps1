@@ -92,7 +92,7 @@ function Update-SessionPath {
 # It is rebuilt only when the source has new commits, so running this again also updates the app.
 function Install-ImeCenterView {
     $repoUrl = 'https://github.com/shinshu68/ImeCenterView.git'   # HTTPS: works before the SSH key is set up
-    $branch  = 'develop'   # main is still empty. Change this to 'main' once develop is merged into it
+    $branch  = 'main'      # the stable branch. develop is where the work in progress goes
     $src     = Join-Path $env:LOCALAPPDATA 'dotfiles\src\ImeCenterView'   # a clone only for this build
     $dest    = Join-Path $env:LOCALAPPDATA 'Programs\ImeCenterView'
     $exe     = Join-Path $dest 'ImeCenterView.exe'
