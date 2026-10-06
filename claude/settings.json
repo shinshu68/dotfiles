@@ -3,14 +3,14 @@
     "commit": "",
     "pr": ""
   },
-  "language": "japanese",
-  "theme": "dark",
+  "editorMode": "vim",
   "enabledPlugins": {
     "cowork-plugin-management@synced": false
   },
-  "editorMode": "vim",
+  "language": "japanese",
   "skillOverrides": {
     "project-init": "off"
   },
-  "syncClaudeAiSkills": false
+  "syncClaudeAiSkills": false,
+  "theme": "dark"
 }
