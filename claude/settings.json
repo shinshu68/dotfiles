@@ -8,5 +8,8 @@
   "enabledPlugins": {
     "cowork-plugin-management@synced": false
   },
+  "skillOverrides": {
+    "project-init": "off"
+  },
   "syncClaudeAiSkills": false
 }
