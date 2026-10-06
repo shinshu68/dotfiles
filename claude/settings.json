@@ -8,6 +8,7 @@
   "enabledPlugins": {
     "cowork-plugin-management@synced": false
   },
+  "editorMode": "vim",
   "skillOverrides": {
     "project-init": "off"
   },
