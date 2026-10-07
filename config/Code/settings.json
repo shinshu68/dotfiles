@@ -71,10 +71,10 @@
     // ==================================================
     // ターミナル
     // ==================================================
+    "terminal.integrated.defaultProfile.linux": "fish",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
     "terminal.integrated.enableMultiLinePasteWarning": "never",
     "terminal.integrated.environmentChangesIndicator": "off",
-    "terminal.integrated.defaultProfile.windows": "PowerShell",
-    "terminal.integrated.defaultProfile.linux": "fish",
     "terminal.integrated.initialHint": false,
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
@@ -264,6 +264,8 @@
     // Claude Code
     "claudeCode.preferredLocation": "sidebar",
     "claudeCode.hideOnboarding": true,
+    "claudeCode.showMessageTimestamps": true,
+    "claudeCode.useCtrlEnterToSend": true,
 
     // Live Preview
     "livePreview.portNumber": 3030
