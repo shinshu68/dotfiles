@@ -18,7 +18,20 @@
   vars:
     link_items: '{{ claude.link }}'
 
+# Windows 側からリンクする時点で実体がないとディレクトリへのリンクとして作れないので、先に作っておく
+- name: allocate directories shared with windows
+  file:
+    dest:  '{{ home_path }}/{{ item }}'
+    state: directory
+    owner: '{{ user_name }}'
+    group: '{{ user_name }}'
+  loop_control:
+    label: '~/{{ item }}'
+  with_items: '{{ claude.windows_share | default([]) }}'
+  when: lookup("env", "WSL_DISTRO_NAME") != ""
+
 # Windows 側の VS Code（Claude Code 拡張）からも同じ設定を使えるよう、WSL のときは Windows 側にもリンクする
+# バックログのように dotfiles では管理しないデータ（claude.windows_share）は、WSL 側のホームにある実体へリンクする
 # Windows から WSL 内のファイルは \\wsl.localhost\<distro>\... のパスでリンクする
 # シンボリックリンクの作成には Windows の開発者モード（または管理者権限）が必要
 - name: link claude config files on windows

@@ -43,6 +43,10 @@ claude:
     claude/settings.json: .claude/settings.json
     claude/skills:        .claude/skills
 
+  # dotfiles では管理しないが、WSL 側の実体を Windows 側からも参照させるディレクトリ（ホームからの相対パス）
+  windows_share:
+    - .claude/backlog-data
+
 vscode:
   settings: config/Code/settings.json
 

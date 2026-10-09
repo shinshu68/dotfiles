@@ -5,6 +5,9 @@ $items = @(
 {% for src, dest in claude.link.items() %}
     @{ Link = Join-Path $env:USERPROFILE ('{{ dest }}' -replace '/', '\'); Target = $wsl + ('{{ dotfiles_path }}/{{ src }}' -replace '/', '\') }
 {% endfor %}
+{% for path in claude.windows_share | default([]) %}
+    @{ Link = Join-Path $env:USERPROFILE ('{{ path }}' -replace '/', '\'); Target = $wsl + ('{{ home_path }}/{{ path }}' -replace '/', '\') }
+{% endfor %}
 )
 
 foreach ($i in $items) {
