@@ -37,4 +37,8 @@ for f in CLAUDE.md docs/plan.md; do
   fi
 done
 
+if [ -e .github/workflows/delete-merged-branch.yml ]; then
+  echo "WARNING: .github/workflows/delete-merged-branch.yml が既にあります(上書きしない)"
+fi
+
 echo "READY"

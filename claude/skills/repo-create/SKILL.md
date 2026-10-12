@@ -1,14 +1,14 @@
 ---
 name: repo-create
-description: 新しいプロジェクトのディレクトリ(git init前で、CLAUDE.md と docs/plan.md がある状態)で、ローカルリポジトリの作成からmainブランチへの空コミット、developブランチの作成、GitHubリモートリポジトリの作成、main・developのpushまでを一気に行うスキル。リポジトリ名と一言の説明文はディレクトリ名・CLAUDE.md・docs/plan.mdから判断して候補を提示し、公開設定(public/private)と一緒に確認してから作成する。ユーザーが「/repo-create」と入力したとき、または「GitHubにリポジトリを作って」「リポジトリを初期化してGitHubに上げて」「git initからリモート作成までやって」「このプロジェクトをGitHubで管理し始めたい」のように、新しいプロジェクトのgit管理とリモート作成を始めたいと言ったときは必ずこのスキルを使うこと。
+description: 新しいプロジェクトのディレクトリ(git init前で、CLAUDE.md と docs/plan.md がある状態)で、ローカルリポジトリの作成からmainブランチへの空コミット、マージ済みブランチを削除するGitHub Actionsワークフローの追加、developブランチの作成、GitHubリモートリポジトリの作成、main・developのpushまでを一気に行うスキル。リポジトリ名と一言の説明文はディレクトリ名・CLAUDE.md・docs/plan.mdから判断して候補を提示し、公開設定(public/private)と一緒に確認してから作成する。ユーザーが「/repo-create」と入力したとき、または「GitHubにリポジトリを作って」「リポジトリを初期化してGitHubに上げて」「git initからリモート作成までやって」「このプロジェクトをGitHubで管理し始めたい」のように、新しいプロジェクトのgit管理とリモート作成を始めたいと言ったときは必ずこのスキルを使うこと。
 ---
 
 # リポジトリ作成 (/repo-create)
 
 まだgit管理していないプロジェクトのディレクトリで、ローカルリポジトリの作成からGitHubへのpushまでを行うスキル。最終的に次の状態にする。
 
-- ローカル: `main` に空コミット「:tada: First Commit」が1つあり、そこから `develop` を作成済み
-- リモート: GitHubに同じ名前のリポジトリがあり、`main` と `develop` がpush済み(`origin` に設定)。PRマージ時にブランチを自動削除する設定が有効
+- ローカル: `main` に空コミット「:tada: First Commit」と、マージ済みブランチを削除するワークフローを追加するコミットがあり、そこから `develop` を作成済み
+- リモート: GitHubに同じ名前のリポジトリがあり、`main` と `develop` がpush済み(`origin` に設定)
 
 ## 前提条件
 
@@ -34,6 +34,7 @@ bash scripts/check_status.sh
 - 既にGitリポジトリになっていないか(なっていれば `ERROR:`。親ディレクトリがリポジトリの場合も含む)
 - ディレクトリ名(`DIR_NAME:`)
 - `CLAUDE.md` と `docs/plan.md` の中身(無ければ `WARNING:`)
+- `.github/workflows/delete-merged-branch.yml` が既にないか(あれば `WARNING:`。手順5で上書きせず、既存のものをそのままコミットするか確認時に聞く)
 
 ### 2. リポジトリ名の候補を決める
 
@@ -90,12 +91,30 @@ AskUserQuestion が使える環境ならそれを使い、名前は「候補名�
 ```bash
 git init -b main
 git commit --allow-empty -m ":tada: First Commit"
+
+mkdir -p .github/workflows
+cp <このスキルのディレクトリ>/assets/delete-merged-branch.yml .github/workflows/
+git add .github/workflows/delete-merged-branch.yml
+git commit -m ":construction_worker: マージ済みブランチを自動削除するワークフローを追加"
+
 git switch -c develop
 ```
 
-- 最初のコミットは**空コミット**にする。CLAUDE.md や docs/plan.md はステージもコミットもしない(後でユーザーが通常の作業としてコミットするため)
-- コミットメッセージは `:tada: First Commit` の1行だけにする。本文や `Co-Authored-By` などの行は付けない。どのプロジェクトでも同じ最初のコミットにそろえる運用のため
-- `develop` は `main` の空コミットから作る
+- 最初のコミットは**空コミット**にする。コミットメッセージは `:tada: First Commit` の1行だけ
+- 2つ目のコミットで、PRマージ後にGitHub上の作業ブランチを削除するワークフロー(`assets/delete-merged-branch.yml`)を追加する。中身は書き換えずにそのままコピーする
+- どちらのコミットも、メッセージは上の1行だけにする。本文や `Co-Authored-By` などの行は付けない。どのプロジェクトでも同じ最初のコミットにそろえる運用のため
+- `git add` はワークフローファイルだけを指定する。CLAUDE.md や docs/plan.md はステージもコミットもしない(後でユーザーが通常の作業としてコミットするため)
+- `develop` はワークフローを追加した後の `main` から作る。PRのマージ先(`develop`、リリース時は `main`)の両方にワークフローが入っていないと、マージしても動かないため
+
+#### ワークフローについて
+
+リポジトリ設定の「Automatically delete head branches」は使わない。この設定は `develop` → `main` のリリースPRをマージしたときに `develop` まで削除してしまうため。同梱のワークフローは次の条件をすべて満たすときだけ、PRのブランチを削除する。
+
+- PRがマージされた(マージせずに閉じたPRのブランチは残す)
+- ブランチがこのリポジトリのもの(フォークからのPRは対象外)
+- ブランチが `main` でも `develop` でもない
+
+ワークフローを編集したい場合は、スキル内の `assets/delete-merged-branch.yml` を直す。
 
 ### 6. リモートリポジトリを作成してpushする
 
@@ -107,20 +126,11 @@ git push -u origin develop
 
 - `gh repo create` では `--push` を付けない。`--push` は現在のブランチ(`develop`)しかpushしないため、2つのブランチを明示的にpushする
 - `main` を先にpushする。空のリポジトリに最初にpushしたブランチがGitHub上のデフォルトブランチになるため、`main` をデフォルトにするにはこの順番が必要
-pushが終わったら、リポジトリ設定の「Automatically delete head branches」を有効にする。PRをマージしたときにGitHub上の作業ブランチが自動で消え、リモートに不要なブランチが溜まらないようにするため。
-
-```bash
-gh repo edit "<GH_USER>/<リポジトリ名>" --delete-branch-on-merge
-gh repo view "<GH_USER>/<リポジトリ名>" --json deleteBranchOnMerge --jq .deleteBranchOnMerge
-```
-
-2つ目のコマンドで `true` が返ることを確認する。
-
 - 途中で失敗したら、どこまで終わったかを伝えて止まる(例: ローカルは作成済みでリモート作成に失敗)。やり直しのために `.git` を消すなどの後始末は勝手にしない
 
 ### 7. 結果を伝える
 
-作成したリポジトリのURL(`gh repo create` の出力に含まれる)と、`main`・`develop` をpushしたこと、マージ後のブランチ自動削除を有効にしたこと、現在 `develop` ブランチにいることを短く伝える。CLAUDE.md と docs/plan.md はまだ未コミットであることも一言添える。
+作成したリポジトリのURL(`gh repo create` の出力に含まれる)と、`main`・`develop` をpushしたこと、マージ済みブランチを削除するワークフローを入れたこと、現在 `develop` ブランチにいることを短く伝える。CLAUDE.md と docs/plan.md はまだ未コミットであることも一言添える。
 
 ## エッジケース
 
@@ -132,3 +142,4 @@ gh repo view "<GH_USER>/<リポジトリ名>" --json deleteBranchOnMerge --jq .d
 | CLAUDE.md や docs/plan.md がない | 警告として伝え、ディレクトリ名から名前の候補を作る。説明文は確認時に入力してもらう |
 | 同名リポジトリが既にある | 別の候補を考えて提示する |
 | 確認の段階でユーザーがやめた | 何も作成していないので、そのまま終わる |
+| `.github/workflows/delete-merged-branch.yml` が既にある | 上書きせず、既存のファイルをそのままコミットしてよいか確認時に聞く |
