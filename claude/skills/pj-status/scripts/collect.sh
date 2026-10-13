@@ -144,7 +144,6 @@ parse_backlog() {
   ' "$2"
 }
 
-summary=""
 details=""
 count=0
 
@@ -167,8 +166,10 @@ while IFS= read -r raw || [[ -n "$raw" ]]; do
   fi
   count=$(( count + 1 ))
 
+  # プロジェクトの間に区切り線を入れる(Markdown で見出し扱いにならないよう前後を空行にする)
+  (( count > 1 )) && details+="---"$'\n\n'
+
   if [[ ! -d "$path" ]]; then
-    summary+="| $display | - | - | - | - | - | パスが見つかりません |"$'\n'
     details+="### $display"$'\n'"\`$line\` が見つかりません。projects.txt のパスを確認してください。"$'\n\n'
     continue
   fi
@@ -180,18 +181,15 @@ while IFS= read -r raw || [[ -n "$raw" ]]; do
     dirty=$(git -C "$path" --no-optional-locks status --porcelain 2>/dev/null | wc -l | tr -d ' ')
     ahead=$(git -C "$path" rev-list --count '@{u}..HEAD' 2>/dev/null) || ahead=""
     if ts=$(git -C "$path" log -1 --format=%ct 2>/dev/null) && [[ -n "$ts" ]]; then
-      subject=$(git -C "$path" log -1 --format=%s)
+      # 件名は develop へのマージコミットであることが多く情報にならないので、時期だけ出す
       last="$(relative_time "$ts")"
-      last_detail="$last「$subject」"
     else
-      last="コミットなし"; last_detail="コミットなし"
+      last="なし"
     fi
     git_line="ブランチ \`$branch\` ・未コミット ${dirty}件"
     [[ -n "$ahead" && "$ahead" != "0" ]] && git_line+=" ・未push ${ahead}件"
-    git_line+=" ・最終コミット $last_detail"
-    dirty_cell="$dirty"
+    git_line+=" ・最終コミット $last"
   else
-    branch=""; dirty_cell="-"; last="-"
     git_line="git 管理外"
   fi
 
@@ -208,15 +206,11 @@ while IFS= read -r raw || [[ -n "$raw" ]]; do
   details+="### $display"$'\n'"$git_line"$'\n\n'
   if [[ -n "$backlog_file" ]]; then
     parsed="$(parse_backlog "$max_todo" "$backlog_file")"
-    IFS=$'\t' read -r np nt nd <<< "$(head -n1 <<< "$parsed")"
+    IFS=$'\t' read -r _ _ nd <<< "$(head -n1 <<< "$parsed")"
     details+="$(tail -n +2 <<< "$parsed")"$'\n\n'"完了: ${nd}件"$'\n\n'
   else
-    np="-"; nt="-"; nd="-"
     details+="バックログがありません(\`$backlog_dir\` に該当するファイルなし)"$'\n\n'
   fi
-
-  branch_cell="-"; [[ -n "$branch" ]] && branch_cell="\`$branch\`"
-  summary+="| $display | $branch_cell | $dirty_cell | $np | $nt | $nd | $last |"$'\n'
 done < "$config"
 
 if (( count == 0 )); then
@@ -229,9 +223,5 @@ if (( count == 0 )); then
 fi
 
 echo "## プロジェクト進捗"
-echo
-echo "| プロジェクト | ブランチ | 未コミット | 進行中 | 未着手 | 完了 | 最終コミット |"
-echo "|---|---|---|---|---|---|---|"
-printf '%s' "$summary"
 echo
 printf '%s' "$details"
