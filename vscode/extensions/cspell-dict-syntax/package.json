@@ -1,0 +1,36 @@
+{
+  "name": "cspell-dict-syntax",
+  "displayName": "CSpell Dictionary Syntax",
+  "description": "Code Spell Checker 用の辞書ファイル（.txt）を色分けする",
+  "version": "0.1.0",
+  "publisher": "local",
+  "private": true,
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "cspell-dict",
+        "aliases": [
+          "CSpell Dictionary",
+          "cspell-dict"
+        ],
+        "filenamePatterns": [
+          "**/dotfiles/cspell/*.txt"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "cspell-dict",
+        "scopeName": "source.cspell-dict",
+        "path": "./syntaxes/cspell-dict.tmLanguage.json"
+      }
+    ]
+  }
+}

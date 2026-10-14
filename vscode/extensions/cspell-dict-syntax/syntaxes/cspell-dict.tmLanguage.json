@@ -1,0 +1,23 @@
+{
+  "name": "CSpell Dictionary",
+  "scopeName": "source.cspell-dict",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#word" }
+  ],
+  "repository": {
+    "comment": {
+      "comment": "# で始まる行（行頭の空白は許容）はコメント。Dark+ では緑で表示される",
+      "match": "^\\s*(#).*$",
+      "name": "comment.line.number-sign.cspell-dict",
+      "captures": {
+        "1": { "name": "punctuation.definition.comment.cspell-dict" }
+      }
+    },
+    "word": {
+      "comment": "コメント以外の空白でない文字列は単語。variable スコープなので Dark+ では水色で表示される",
+      "match": "\\S+",
+      "name": "variable.other.word.cspell-dict"
+    }
+  }
+}
