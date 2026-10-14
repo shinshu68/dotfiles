@@ -2,7 +2,7 @@
   "name": "cspell-dict-syntax",
   "displayName": "CSpell Dictionary Syntax",
   "description": "Code Spell Checker 用の辞書ファイル（.txt）を色分けする",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "local",
   "private": true,
   "engines": {
@@ -20,7 +20,8 @@
           "cspell-dict"
         ],
         "filenamePatterns": [
-          "**/dotfiles/cspell/*.txt"
+          "**/dotfiles/config/cspell/*.txt",
+          "**/.config/cspell/*.txt"
         ],
         "configuration": "./language-configuration.json"
       }
