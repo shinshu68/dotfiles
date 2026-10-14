@@ -263,14 +263,6 @@
             "scope": "user"
         }
     },
-    "cSpell.userWords": [
-        "Cica",
-        "easymotion",
-        "hlsearch",
-        "incsearch",
-        "showcmd",
-        "showmodename"
-    ],
 
     // Claude Code
     "claudeCode.preferredLocation": "sidebar",
