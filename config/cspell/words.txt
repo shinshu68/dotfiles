@@ -1,0 +1,7 @@
+# Code Spell Checker 用のグローバル辞書（1 行に 1 単語、# で始まる行はコメント）
+# spell-check スキルがプロジェクトごとの見出しと説明を付けて追記する
+# 書式: 見出しは「# ===== <プロジェクト名> =====」、説明は単語の直前の行にコメントで書く
+
+# ===== dotfiles =====
+# git diff --diff-filter に渡す変更種別の指定（Added・Copied・Modified・Renamed）
+ACMR

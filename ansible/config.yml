@@ -50,6 +50,11 @@ claude:
 vscode:
   settings: config/Code/settings.json
 
+  # Windows 側のホームにリンクするファイル・ディレクトリ（dotfiles からの相対パス: ホームからの相対パス）
+  # settings.json から ~ 始まりのパスで参照するものを、WSL・Windows のどちらでも同じパスで読めるようにする
+  windows_link:
+    config/cspell: .config/cspell
+
   extensions:
     - anthropic.claude-code
     - eamodio.gitlens
@@ -73,6 +78,7 @@ fish:
     - oh-my-fish/theme-bobthefish
 
 link:
+  config/cspell:        .config/cspell
   config/nvim:          .config/nvim
   git/config:           .gitconfig
   tmux/tmux.conf:       .tmux.conf

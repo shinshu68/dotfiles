@@ -253,6 +253,16 @@
         "python",
         "shellscript"
     ],
+    // 全プロジェクト共通の単語辞書（実体は dotfiles の config/cspell/words.txt）
+    // WSL・Windows とも ~/.config/cspell にリンクしてあり、spell-check スキルが単語を追記する
+    "cSpell.customDictionaries": {
+        "global-words": {
+            "name": "global-words",
+            "path": "~/.config/cspell/words.txt",
+            "addWords": true,
+            "scope": "user"
+        }
+    },
     "cSpell.userWords": [
         "Cica",
         "easymotion",

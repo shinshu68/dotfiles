@@ -6,9 +6,9 @@
 - block:
   # Windows から WSL 内のファイルは \\wsl.localhost\<distro>\... のパスでリンクする
   # シンボリックリンクの作成には Windows の開発者モード（または管理者権限）が必要
-  - name: link settings.json on windows
+  - name: link settings.json and dictionaries on windows
     command: |
-      powershell.exe -NoProfile -NonInteractive -EncodedCommand {{ lookup("template", "link-settings.ps1.j2") | b64encode(encoding="utf-16-le") }}
+      powershell.exe -NoProfile -NonInteractive -EncodedCommand {{ lookup("template", "link-windows.ps1.j2") | b64encode(encoding="utf-16-le") }}
     args:
       chdir: /mnt/c
     register: link_result

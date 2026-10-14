@@ -79,8 +79,8 @@ Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' 
 | pip | pip パッケージのインストール |
 | node | n と Node.js (LTS) のインストール |
 | claude | Claude Code のインストール、`~/.claude` への設定ファイルのリンク（WSL のときは Windows 側にもリンク） |
-| vscode | Windows 側の VS Code への settings.json のリンク、拡張機能のインストール（WSL のときだけ） |
-| link | nvim / git / tmux の設定ファイルのリンク |
+| vscode | Windows 側の VS Code への settings.json・スペルチェック辞書のリンク、拡張機能のインストール（WSL のときだけ） |
+| link | cspell / nvim / git / tmux の設定ファイルのリンク |
 
 入れるパッケージやバージョン、リンクする設定ファイルは `ansible/config.yml` で管理しています。
 
