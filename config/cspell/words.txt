@@ -240,3 +240,11 @@ nvim
 chdir
 # WSL と Windows のパスを相互に変換する WSL 付属のコマンド名
 wslpath
+# git rev-parse のオプション名（--show-toplevel）の一部
+toplevel
+# CSS の色指定の関数名（indent-rainbow の色設定で使用）
+rgba
+# Windows のフォルダを指す環境変数名
+windir
+# 32 ビットのプロセスから 64 ビット版の System32 を参照するための Windows の仮想フォルダ名
+Sysnative

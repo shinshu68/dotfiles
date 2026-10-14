@@ -48,7 +48,7 @@ claude:
     - .claude/backlog-data
 
 vscode:
-  settings: config/Code/settings.json
+  settings: vscode/settings.json
 
   # Windows 側のホームにリンクするファイル・ディレクトリ（dotfiles からの相対パス: ホームからの相対パス）
   # settings.json から ~ 始まりのパスで参照するものを、WSL・Windows のどちらでも同じパスで読めるようにする

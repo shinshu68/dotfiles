@@ -23,7 +23,7 @@ VS Code の拡張機能 Code Spell Checker は、辞書にない単語に波線�
 
 - **辞書ファイル**: `~/.config/cspell/words.txt`
   - 実体は dotfiles の `config/cspell/words.txt`。WSL・Windows とも `~/.config/cspell` がそこへのリンクになっている(ansible の link ロール・vscode ロールで作成)。
-  - VS Code 側の `cSpell.customDictionaries`(dotfiles の `config/Code/settings.json`)もこのパスを指す。
+  - VS Code 側の `cSpell.customDictionaries`(dotfiles の `vscode/settings.json`)もこのパスを指す。
   - ファイルが存在しない場合は、リンクが作られていない可能性が高い。勝手に作成せず、ansible の link ロール(Windows では vscode ロール)の実行をユーザーに案内して止まる。
 
 ## 辞書ファイルの書式

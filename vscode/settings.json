@@ -221,7 +221,7 @@
     // JSON
     "json.schemas": [
         {
-            "fileMatch": ["**/dotfiles/config/Code/settings.json"],
+            "fileMatch": ["**/dotfiles/vscode/settings.json"],
             "url": "vscode://schemas/settings/user"
         },
         {
