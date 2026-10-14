@@ -240,19 +240,6 @@
     // ==================================================
     // Code Spell Checker
     "cSpell.autoFormatConfigFile": true,
-    // 言語に関係なく、技術用語やツール名の辞書を常に使う
-    "cSpell.dictionaries": [
-        "bash",
-        "docker",
-        "fonts",
-        "fullstack",
-        "git",
-        "node",
-        "npm",
-        "powershell",
-        "python",
-        "shellscript"
-    ],
     // 全プロジェクト共通の単語辞書（実体は dotfiles の config/cspell/words.txt）
     // WSL・Windows とも ~/.config/cspell にリンクしてあり、spell-check スキルが単語を追記する
     "cSpell.customDictionaries": {
