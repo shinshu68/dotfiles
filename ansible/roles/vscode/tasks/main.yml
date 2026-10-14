@@ -14,19 +14,92 @@
     register: link_result
     changed_when: "'changed' in link_result.stdout"
 
+  # 自作の拡張機能をバージョンで比べられるよう、<id>@<version> の形で取得する
   - name: get installed extensions on windows
     command: |
-      cmd.exe /c code --list-extensions
+      cmd.exe /c code --list-extensions --show-versions
     args:
       chdir: /mnt/c
     register: installed_extensions
     changed_when: False
+    check_mode: no
+
+  - set_fact:
+      installed_extension_versions: '{{ installed_extensions.stdout_lines | map("trim") | map("lower") | list }}'
 
   - name: install extensions on windows
     command: |
       cmd.exe /c code --install-extension {{ item | quote }}
     args:
       chdir: /mnt/c
-    when: item | lower not in (installed_extensions.stdout_lines | map("trim") | map("lower") | list)
+    when: item | lower not in (installed_extension_versions | map("regex_replace", "@.*$", "") | list)
     with_items: '{{ vscode.extensions }}'
+
+  # 自作の拡張機能は、package.json があるフォルダごとに .vsix を作って Windows 側に入れる
+  # 宣言だけの拡張機能（文法・言語定義など）は UI 側で動くので、Windows 側に入れれば WSL のウィンドウでも効く
+  - name: find local extensions
+    find:
+      paths:    '{{ dotfiles_path }}/{{ vscode.local_extensions_dir }}'
+      patterns: package.json
+      recurse:  yes
+      depth:    2
+    register: local_extension_manifests
+    when: vscode.local_extensions_dir is defined
+
+  - name: read local extension manifests
+    slurp:
+      src: '{{ item.path }}'
+    loop_control:
+      label: '{{ item.path | dirname | basename }}'
+    with_items: '{{ local_extension_manifests.files | default([]) }}'
+    register: local_extension_slurp
+
+  # 同じバージョンが入っていればビルドもしない（中身を変えたら package.json の version を上げる）
+  - name: collect local extensions to install
+    set_fact:
+      local_extensions: '{{ local_extensions | default([]) + [{"id": ext_id, "dir": ext_dir, "vsix": ext_dir ~ "/" ~ manifest.name ~ "-" ~ manifest.version ~ ".vsix"}] }}'
+    vars:
+      manifest: '{{ item.content | b64decode | from_json }}'
+      ext_id:   '{{ manifest.publisher }}.{{ manifest.name }}'
+      ext_dir:  '{{ item.source | dirname }}'
+    loop_control:
+      label: '{{ ext_id }}@{{ manifest.version }}'
+    when: (ext_id ~ "@" ~ manifest.version) | lower not in installed_extension_versions
+    with_items: '{{ local_extension_slurp.results }}'
+
+  - name: check npx
+    command: |
+      bash -c 'command -v npx'
+    register: npx_path
+    failed_when: False
+    changed_when: False
+    check_mode: no
+    when: local_extensions | default([]) | length > 0
+
+  # Node は node ロールで入れる。vscode タグだけを実行した環境などで npx が無いときは飛ばす
+  - name: warn missing npx
+    debug:
+      msg: 'npx が見つからないため、自作の拡張機能のビルドとインストールを飛ばしました: {{ local_extensions | map(attribute="id") | join(", ") }}'
+    when: local_extensions | default([]) | length > 0 and npx_path.rc != 0
+
+  - block:
+    - name: build local extensions
+      command: |
+        npx --yes @vscode/vsce@{{ vscode.vsce_version }} package --skip-license --allow-missing-repository --out {{ item.vsix | quote }}
+      args:
+        chdir: '{{ item.dir }}'
+      loop_control:
+        label: '{{ item.id }}'
+      with_items: '{{ local_extensions }}'
+
+    # Windows 側の code には \\wsl.localhost\<distro>\... のパスで渡す
+    - name: install local extensions on windows
+      shell: |
+        cmd.exe /c code --install-extension "$(wslpath -w {{ item.vsix | quote }})"
+      args:
+        chdir: /mnt/c
+      loop_control:
+        label: '{{ item.id }}'
+      with_items: '{{ local_extensions }}'
+    when: local_extensions | default([]) | length > 0 and npx_path.rc == 0
   when: wsl_distro_name != ""

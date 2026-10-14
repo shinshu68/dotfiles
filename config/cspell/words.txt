@@ -228,3 +228,15 @@ cowork
 cheatsheet
 hoge
 shinshu
+# Python のバイトコードキャッシュのディレクトリ名（__pycache__）の一部
+pycache
+# apt の署名鍵を置くディレクトリ名（/etc/apt/keyrings）
+keyrings
+# Python の import を並べ替えるツール名（VS Code 拡張 ms-python.isort）
+isort
+# Neovim のコマンド名・設定ディレクトリ名
+nvim
+# Ansible の command / shell モジュールで作業ディレクトリを指定する引数名
+chdir
+# WSL と Windows のパスを相互に変換する WSL 付属のコマンド名
+wslpath

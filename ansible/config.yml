@@ -73,6 +73,11 @@ vscode:
     - vue.volar
     - yzhang.markdown-all-in-one
 
+  # 自作の拡張機能を置くディレクトリ（dotfiles からの相対パス）。直下の package.json があるフォルダを .vsix にして入れる
+  local_extensions_dir: vscode/extensions
+  # .vsix の作成に npx で使う @vscode/vsce のバージョン
+  vsce_version: '4.0.0'
+
 fish:
   fisher_plugins:
     - oh-my-fish/theme-bobthefish

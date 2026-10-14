@@ -1,6 +1,7 @@
 *.orig
 __pycache__/
 ansible/playbook.retry
+*.vsix
 
 claude/skills/synced
 claude/skills/.trash
