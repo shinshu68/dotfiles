@@ -1,13 +1,10 @@
 # Code Spell Checker 用のグローバル辞書（1 行に 1 単語、# で始まる行はコメント）
 # spell-check スキルがプロジェクトごとの見出しと説明を付けて追記する
-# 書式: 見出しは「# ===== <プロジェクト名> =====」、説明は単語の直前の行にコメントで書く
+# 書式: 見出しは「# ===== <プロジェクト名> =====」、説明は単語の前の行にコメントで書く（同じ種類の単語はまとめて 1 つの説明にする）
 
 # ===== dotfiles =====
-# git diff --diff-filter に渡す変更種別の指定（Added・Copied・Modified・Renamed）
-ACMR
-
-# --- 以下は .vscode/cspell-words.txt と settings.json の cSpell.userWords から移行した単語（分類ごとに説明） ---
-# Vim のオプション名・コマンド名・関数名・色名（nvim の設定やチートシートで使う）
+# Vim のオプション名・コマンド名・関数名・正規表現の文字クラス・色名（nvim の設定やチートシートで使う）
+alnum
 augroup
 autocmd
 autoindent
@@ -27,14 +24,17 @@ filereadable
 fnamemodify
 foldmethod
 fromstart
+gethighlight
 guibg
 guifg
 hlsearch
+ignorecase
 incsearch
 infercase
 inoremap
 insertenter
 insertleave
+isdirectory
 laststatus
 listchars
 loclist
@@ -53,6 +53,7 @@ redir
 runtimepath
 scrolloff
 setf
+setlocal
 shiftround
 shiftwidth
 showbreak
@@ -73,11 +74,13 @@ vsplit
 wildmenu
 # Vim プラグイン名・カラースキーム名・プラグインの設定値
 asyncrun
+autopep
 codedark
 dein
 denite
 deoplete
 gitgutter
+libclang
 neomake
 neosnippet
 nerdtree
@@ -91,6 +94,7 @@ textobj
 addtags
 Callees
 errcheck
+Freevars
 gocode
 godef
 gofmt
@@ -128,15 +132,17 @@ zchee
 # VS Code の拡張機能 ID に含まれる公開者名・拡張機能名
 ceintl
 eamodio
+isort
 mhutchie
 oderwat
 pkief
 seatonjiang
 vscodevim
 yzhang
-# VSCodeVim の設定名と、VS Code で使うフォント名
+# VS Code の設定で使う名前（VSCodeVim の設定名・フォント名・CSS の色指定の関数名）
 Cica
 easymotion
+rgba
 showmodename
 # dircolors の設定キーワード・端末名・ファイル拡張子
 colorizable
@@ -149,23 +155,29 @@ Eterm
 jfbterm
 konsole
 kterm
+lzma
 mjpeg
 mjpg
 mlterm
 MULTIHARDLINK
 rmvb
 rxvt
+SETGID
+SETUID
 svgz
 tzst
 xspf
 # fish・tmux の設定で使う関数名・変数名・コマンドのオプション（一部は以前の設定で使っていたもの）
 abefnrtv
+argparse
 atcoder
 binfmt
+colour
 DOTPATH
 DOTSHIM
 hisgre
 histoday
+islink
 mignore
 newcmd
 numstat
@@ -176,25 +188,42 @@ SHLVL
 superproject
 tmpl
 truecolor
+winhome
 xtype
 # シェルから使うコマンド・ツール名
+chsh
 direnv
 gsettings
 neofetch
+nvim
+pyenv
 vcxsrv
 xclip
 xsel
 Xsrv
 zapcc
-# ansible・Docker・apt の設定で使うモジュール名・属性名・コマンド名・パッケージ名
+# Git のオプション名・設定キー名（diff-filter の変更種別の指定を含む）
+ACMR
+filemode
+oneline
+toplevel
+# シェルスクリプト・awk・Python のスクリプトで使う構文・関数名・変数名・ディレクトリ名
+cand
+elif
+gsub
+pycache
+# ansible・Docker・apt の設定で使うモジュール名・属性名・コマンド名・パッケージ名など（Jinja2 テンプレートの構文を含む）
 anyenv
 blockinfile
+chdir
 Dockerfiles
+endfor
 githubcli
 gpasswd
 hostvars
 islnk
 jaist
+keyrings
 libasound
 libbz
 LIBGL
@@ -207,14 +236,23 @@ noninteractive
 NOPASSWD
 pynvim
 userdel
-# Windows・PowerShell のコマンド名・変数名
+# Windows・WSL・PowerShell・Git Bash のコマンド名・オプション名・環境変数名・フォルダ名
 HKCU
 LASTEXITCODE
+LOCALAPPDATA
 mklink
+nologo
+PATHCONV
+Sysnative
+USERPROFILE
+windir
 winget
-# jq のオプション名と変数名（bin/gh-grass.sh）
+WSLENV
+wslpath
+# jq のオプション名・関数名・変数名（bin/gh-grass.sh）
 argjson
 maxw
+tonumber
 # Markdown の拡張子
 mdwn
 mkdn
@@ -222,29 +260,12 @@ mkdn
 bento
 gitmoji
 thumbsup
-# Claude Code のプラグイン名の一部
+# Claude Code のプラグイン名の一部と、スキル名・スキルの評価用ディレクトリ名
 cowork
+evals
+reask
 # その他（例示用の名前、チートシート、このリポジトリの作者名）
 cheatsheet
 hoge
+imeindicator
 shinshu
-# Python のバイトコードキャッシュのディレクトリ名（__pycache__）の一部
-pycache
-# apt の署名鍵を置くディレクトリ名（/etc/apt/keyrings）
-keyrings
-# Python の import を並べ替えるツール名（VS Code 拡張 ms-python.isort）
-isort
-# Neovim のコマンド名・設定ディレクトリ名
-nvim
-# Ansible の command / shell モジュールで作業ディレクトリを指定する引数名
-chdir
-# WSL と Windows のパスを相互に変換する WSL 付属のコマンド名
-wslpath
-# git rev-parse のオプション名（--show-toplevel）の一部
-toplevel
-# CSS の色指定の関数名（indent-rainbow の色設定で使用）
-rgba
-# Windows のフォルダを指す環境変数名
-windir
-# 32 ビットのプロセスから 64 ビット版の System32 を参照するための Windows の仮想フォルダ名
-Sysnative
