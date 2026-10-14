@@ -316,3 +316,9 @@ TOCTOU
 unstub
 # その他（.env.example の例示用のユーザー名）
 yourname
+
+# ===== bookshelf-app =====
+# Flutter のパッケージ名（状態管理・PDF の描画、CLAUDE.md・docs/plan.md の技術選定）
+pdfrx
+pdfx
+Riverpod
