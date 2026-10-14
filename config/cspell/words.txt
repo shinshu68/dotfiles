@@ -269,3 +269,50 @@ cheatsheet
 hoge
 imeindicator
 shinshu
+
+# ===== bookshelf =====
+# Nuxt・Vue まわりのフレームワーク名・ライブラリ名・CLI 名
+nuxi
+Nuxt
+ofetch
+Vuetify
+# PDF 処理・OCR のツール名・ライブラリ名・コマンドのオプション（表紙生成・ページ画像化、docs の技術比較）
+pdfinfo
+pdftoppm
+poppler
+pypdf
+singlefile
+tesseract
+# Prisma のマイグレーション SQL のキーワード・外部キー制約名の接尾辞（prisma/migrations）
+autoincrement
+fkey
+# 書誌情報の取得元サイト名と、取得時に使う URL パラメータ名・User-Agent の文字列（server/utils/bookInfoScraper.ts）
+dlsite
+dmm
+FANZA
+KHTML
+melonbooks
+nrdp
+toranoana
+# Windows・WSL の LAN 公開設定で使うコマンド名・オプション名・設定ファイル名（README・docs/roadmap.md）
+connectaddress
+connectport
+listenaddress
+listenport
+netsh
+portproxy
+wslconfig
+# シェルから使うコマンド名・オプション（docs/dev-notes.md・docker/db-backup/backup.sh）
+Iseconds
+nohup
+pgrep
+# NAS の製品名・ファイル共有のプロトコル名・WSL のファイルシステム名（docs/file-scanner.md）
+CIFS
+drvfs
+QNAP
+# 並行処理・セキュリティの用語の略語（docs/requirements.md）
+TOCTOU
+# テストフレームワーク（vitest）の関数名の一部（*.test.ts）
+unstub
+# その他（.env.example の例示用のユーザー名）
+yourname
