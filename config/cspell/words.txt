@@ -314,8 +314,9 @@ drvfs
 QNAP
 # 並行処理・セキュリティの用語の略語（docs/requirements.md）
 TOCTOU
-# テストフレームワーク（vitest）の関数名の一部（*.test.ts）
+# テストフレームワーク（vitest）の名前・関数名の一部（*.test.ts）
 unstub
+vitest
 # その他（.env.example の例示用のユーザー名）
 yourname
 
