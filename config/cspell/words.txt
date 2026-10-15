@@ -207,11 +207,13 @@ ACMR
 filemode
 oneline
 toplevel
-# シェルスクリプト・awk・Python のスクリプトで使う構文・関数名・変数名・ディレクトリ名
+# シェルスクリプト・awk・Python のスクリプトで使う構文・関数名・引数名・変数名・ディレクトリ名
 cand
 elif
 gsub
+lineterm
 pycache
+tofile
 # ansible・Docker・apt の設定で使うモジュール名・属性名・コマンド名・パッケージ名など（Jinja2 テンプレートの構文を含む）
 anyenv
 blockinfile
