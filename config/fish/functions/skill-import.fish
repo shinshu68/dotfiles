@@ -86,8 +86,9 @@ function skill-import --description 'Windows側の受け渡しフォルダから
         end
 
         mkdir -p $to; or return 1
-        cp -r $from/. $to/; or return 1
-        # Windows経由だと実行権限が落ちるので付け直す
+        # /mnt/c のファイルは全部に実行権限があるように見えるため、権限は引き継がずに作る
+        cp -r --no-preserve=mode $from/. $to/; or return 1
+        # 実行権限はスクリプトにだけ付け直す
         if test -d $to/scripts
             chmod +x $to/scripts/* 2>/dev/null
         end
