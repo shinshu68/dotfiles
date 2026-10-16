@@ -1,6 +1,6 @@
 ---
 name: repo-create
-description: 新しいプロジェクトのディレクトリ(git init前で、CLAUDE.md と docs/plan.md がある状態)で、ローカルリポジトリの作成からmainブランチへの空コミット、マージ済みブランチを削除するGitHub Actionsワークフローの追加、developブランチの作成、GitHubリモートリポジトリの作成、main・developのpushまでを一気に行うスキル。リポジトリ名と一言の説明文はディレクトリ名・CLAUDE.md・docs/plan.mdから判断して候補を提示し、公開設定(public/private)と一緒に確認してから作成する。ユーザーが「/repo-create」と入力したとき、または「GitHubにリポジトリを作って」「リポジトリを初期化してGitHubに上げて」「git initからリモート作成までやって」「このプロジェクトをGitHubで管理し始めたい」のように、新しいプロジェクトのgit管理とリモート作成を始めたいと言ったときは必ずこのスキルを使うこと。
+description: 新しいプロジェクトのディレクトリ(git init前で、CLAUDE.md と docs/plan.md がある状態)で、ローカルリポジトリの作成からmainブランチへの空コミット、マージ済みブランチを削除するGitHub Actionsワークフローの追加、developブランチの作成、GitHubリモートリポジトリの作成、main・developのpush、さらにCLAUDE.mdやdocs/配下をコミットするための作業ブランチ(docs/add-project-docs)の作成・ステージ・commit-suggestの呼び出しまでを一気に行うスキル。リポジトリ名と一言の説明文はディレクトリ名・CLAUDE.md・docs/plan.mdから判断して候補を提示し、公開設定(public/private)と一緒に確認してから作成する。ユーザーが「/repo-create」と入力したとき、または「GitHubにリポジトリを作って」「リポジトリを初期化してGitHubに上げて」「git initからリモート作成までやって」「このプロジェクトをGitHubで管理し始めたい」のように、新しいプロジェクトのgit管理とリモート作成を始めたいと言ったときは必ずこのスキルを使うこと。
 ---
 
 # リポジトリ作成 (/repo-create)
@@ -9,6 +9,7 @@ description: 新しいプロジェクトのディレクトリ(git init前で、C
 
 - ローカル: `main` に空コミット「:tada: First Commit」と、マージ済みブランチを削除するワークフローを追加するコミットがあり、そこから `develop` を作成済み
 - リモート: GitHubに同じ名前のリポジトリがあり、`main` と `develop` がpush済み(`origin` に設定)
+- 作業ブランチ: `develop` から `docs/add-project-docs` を作り、CLAUDE.md と docs/ 配下をステージして、commit-suggest でコミットメッセージの候補を出した状態
 
 ## 前提条件
 
@@ -131,7 +132,29 @@ git push -u origin develop
 
 ### 7. 結果を伝える
 
-作成したリポジトリのURL(`gh repo create` の出力に含まれる)と、`main`・`develop` をpushしたこと、マージ済みブランチを削除するワークフローを入れたこと、現在 `develop` ブランチにいることを短く伝える。CLAUDE.md と docs/plan.md はまだ未コミットであることも一言添える。
+作成したリポジトリのURL(`gh repo create` の出力に含まれる)と、`main`・`develop` をpushしたこと、マージ済みブランチを削除するワークフローを入れたことを短く伝える。この報告は手順8・9より**先に**出す。このあとコミットメッセージの候補が続くので、リポジトリ作成の結果が候補の下に埋もれないようにするため。
+
+### 8. プロジェクトのドキュメント用ブランチを作ってステージする
+
+CLAUDE.md や docs/ 配下のドキュメントは、`develop` に直接コミットせず、作業ブランチからPRで入れる。ほかの作業と同じ流れ(ブランチ → コミット → `/pr` → マージ → `/pr-done`)にそろえるため。
+
+```bash
+git switch -c docs/add-project-docs
+git add CLAUDE.md docs/
+git status --short
+```
+
+- ブランチは `develop`(手順6の時点でいるブランチ)から作る。名前は `docs/add-project-docs` で固定
+- ステージするのは **`CLAUDE.md` と `docs/` 配下のすべて**。project-init が plan.md 以外に docs/ 配下の複数ファイルを作っている場合があるので、ファイル名を決め打ちせず `docs/` ごと入れる。存在しない方はコマンドから外す
+- それ以外の未追跡ファイル(ソースコード、`.env`、`.claude/` など)はステージしない。意図せずコミットされると困るものが混ざりうるため。`git status --short` に `??` で残ったファイルがあれば、報告で「ステージしていないファイル」として名前だけ伝える
+- `CLAUDE.md` も `docs/` もない場合は、ブランチを作らずに手順9も飛ばし、ドキュメントが見つからなかったことを伝えて終わる
+
+### 9. commit-suggest を呼ぶ
+
+ステージできたら、`commit-suggest` スキルを呼び出してコミットメッセージの候補を出す。commit-suggest は最初にスペルチェック(spell-check スキル)を行うので、その確認にもそのまま対応する。
+
+- `git commit` はこのスキルでは実行しない。候補から選んでコミットするのはユーザーに任せる(`/commit <番号>` で選べる)
+- 候補を出したあと、最後に「コミット後は `/pr` で develop 向けのPRを作成できます」と一言だけ添える
 
 ## エッジケース
 
@@ -143,4 +166,5 @@ git push -u origin develop
 | CLAUDE.md や docs/plan.md がない | 警告として伝え、ディレクトリ名から名前の候補を作る。説明文は確認時に入力してもらう |
 | 同名リポジトリが既にある | 別の候補を考えて提示する |
 | 確認の段階でユーザーがやめた | 何も作成していないので、そのまま終わる |
+| CLAUDE.md・docs/ 以外の未追跡ファイルがある | ステージせず、ファイル名だけ伝える |
 | `.github/workflows/delete-merged-branch.yml` が既にある | 上書きせず、既存のファイルをそのままコミットしてよいか確認時に聞く |
