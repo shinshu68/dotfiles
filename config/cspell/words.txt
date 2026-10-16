@@ -325,3 +325,7 @@ yourname
 pdfrx
 pdfx
 Riverpod
+
+# ===== wakeup-alarm =====
+# その他（このリポジトリ名の一部）
+wakeup
