@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# gh-grass: GitHub の contributions グラフ（草）をターミナルに表示する
+# gh-grass: GitHub の contributions グラフ (草) をターミナルに表示する
 # 使い方: bash gh-grass.sh [ユーザー名]   (省略時はログイン中のユーザー)
 # 必要なもの: gh (gh auth login 済み), jq, TrueColor 対応ターミナル
 set -euo pipefail
@@ -24,7 +24,7 @@ query($login: String!) {
   }
 }'
 
-# ターミナル幅から表示できる週数を計算（曜日ラベル4文字 + 1週あたり3文字）
+# ターミナル幅から表示できる週数を計算 (曜日ラベル4文字 + 1週あたり3文字)
 cols="${COLUMNS:-$(tput cols 2>/dev/null || echo 80)}"
 max_weeks=$(( (cols - 4) / 3 ))
 (( max_weeks < 1 )) && max_weeks=1
@@ -60,7 +60,7 @@ gh api graphql -f query="$query" -f login="$user" | jq -r --argjson maxw "$max_w
             else . end
           | .p = $m)
       | .s),
-    # 曜日ごと（日〜土）に1行ずつ描画
+    # 曜日ごと (日〜土) に1行ずつ描画
     (range(0; 7) as $d
       | (["    ","Mon ","    ","Wed ","    ","Fri ","    "][$d])
         + ([$c.weeks[]
@@ -71,7 +71,7 @@ gh api graphql -f query="$query" -f login="$user" | jq -r --argjson maxw "$max_w
     "    Less " + (["NONE","FIRST_QUARTILE","SECOND_QUARTILE","THIRD_QUARTILE","FOURTH_QUARTILE"]
                    | map(cell) | join("")) + "More",
     "",
-    # 最後の日（今日）のコントリビューション数
+    # 最後の日 (今日) のコントリビューション数
     ($c.weeks[-1].contributionDays[-1]
       | "Today (\(.date)): \(.contributionCount) contribution\(if .contributionCount == 1 then "" else "s" end)")
 '

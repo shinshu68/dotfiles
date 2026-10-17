@@ -43,14 +43,14 @@ claude:
     claude/settings.json: .claude/settings.json
     claude/skills:        .claude/skills
 
-  # dotfiles では管理しないが、WSL 側の実体を Windows 側からも参照させるディレクトリ（ホームからの相対パス）
+  # dotfiles では管理しないが、WSL 側の実体を Windows 側からも参照させるディレクトリ (ホームからの相対パス)
   windows_share:
     - .claude/backlog-data
 
 vscode:
   settings: vscode/settings.json
 
-  # Windows 側のホームにリンクするファイル・ディレクトリ（dotfiles からの相対パス: ホームからの相対パス）
+  # Windows 側のホームにリンクするファイル・ディレクトリ (dotfiles からの相対パス: ホームからの相対パス)
   # settings.json から ~ 始まりのパスで参照するものを、WSL・Windows のどちらでも同じパスで読めるようにする
   windows_link:
     config/cspell: .config/cspell
@@ -73,7 +73,7 @@ vscode:
     - vue.volar
     - yzhang.markdown-all-in-one
 
-  # 自作の拡張機能を置くディレクトリ（dotfiles からの相対パス）。直下の package.json があるフォルダを .vsix にして入れる
+  # 自作の拡張機能を置くディレクトリ (dotfiles からの相対パス)。直下の package.json があるフォルダを .vsix にして入れる
   local_extensions_dir: vscode/extensions
   # .vsix の作成に npx で使う @vscode/vsce のバージョン
   vsce_version: '4.0.0'

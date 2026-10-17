@@ -5,7 +5,7 @@
 # Windows 側の VS Code を設定するので、WSL 以外では何もしない
 - block:
   # Windows から WSL 内のファイルは \\wsl.localhost\<distro>\... のパスでリンクする
-  # シンボリックリンクの作成には Windows の開発者モード（または管理者権限）が必要
+  # シンボリックリンクの作成には Windows の開発者モード (または管理者権限) が必要
   - name: link settings.json and dictionaries on windows
     command: |
       powershell.exe -NoProfile -NonInteractive -EncodedCommand {{ lookup("template", "link-windows.ps1.j2") | b64encode(encoding="utf-16-le") }}
@@ -36,7 +36,7 @@
     with_items: '{{ vscode.extensions }}'
 
   # 自作の拡張機能は、package.json があるフォルダごとに .vsix を作って Windows 側に入れる
-  # 宣言だけの拡張機能（文法・言語定義など）は UI 側で動くので、Windows 側に入れれば WSL のウィンドウでも効く
+  # 宣言だけの拡張機能 (文法・言語定義など) は UI 側で動くので、Windows 側に入れれば WSL のウィンドウでも効く
   - name: find local extensions
     find:
       paths:    '{{ dotfiles_path }}/{{ vscode.local_extensions_dir }}'
@@ -54,7 +54,7 @@
     with_items: '{{ local_extension_manifests.files | default([]) }}'
     register: local_extension_slurp
 
-  # 同じバージョンが入っていればビルドもしない（中身を変えたら package.json の version を上げる）
+  # 同じバージョンが入っていればビルドもしない (中身を変えたら package.json の version を上げる)
   - name: collect local extensions to install
     set_fact:
       local_extensions: '{{ local_extensions | default([]) + [{"id": ext_id, "dir": ext_dir, "vsix": ext_dir ~ "/" ~ manifest.name ~ "-" ~ manifest.version ~ ".vsix"}] }}'

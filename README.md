@@ -15,8 +15,8 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://shinshu68.github.
 
 install.ps1 は次の順に実行します。
 
-1. 私用の PC かどうかを聞く（初回だけ。答えは `%USERPROFILE%\.dotfiles-windows.json` に保存します）
-2. `windows/base.dsc.yaml` を winget configure で適用する（開発者モードの有効化と、会社・私用の両方で使うアプリのインストール。UAC の確認が1回出ます）
+1. 私用の PC かどうかを聞く (初回だけ。答えは `%USERPROFILE%\.dotfiles-windows.json` に保存します)
+2. `windows/base.dsc.yaml` を winget configure で適用する (開発者モードの有効化と、会社・私用の両方で使うアプリのインストール。UAC の確認が1回出ます)
 3. 私用の PC なら `windows/personal.dsc.yaml` も適用する
 4. [Cica](https://github.com/miiton/Cica) フォントをユーザー用フォントとしてインストールする
 5. 私用の PC なら [ImeCenterView](https://github.com/shinshu68/ImeCenterView) をビルドして、スタートアップに登録し、起動する
@@ -25,7 +25,7 @@ install.ps1 は次の順に実行します。
 
 WSL を新しく入れたときは、必要なら Windows を再起動し、スタートメニューから Ubuntu 24.04 を起動して Linux のユーザーを作ってから、WSL 側の手順に進みます。
 
-事前に必要なのは、Windows で winget が使えること（Microsoft Store の「アプリ インストーラー」）だけです。
+事前に必要なのは、Windows で winget が使えること (Microsoft Store の「アプリ インストーラー」) だけです。
 
 ### 2. WSL 側
 Ubuntu で実行します。
@@ -39,7 +39,7 @@ install スクリプトは次の順に実行します。
 1. apt のミラーを jaist にする
 2. ansible をインストールする
 3. このリポジトリを `~/dotfiles` に clone する
-4. ansible の playbook を実行する（途中で sudo のパスワードを聞かれます）
+4. ansible の playbook を実行する (途中で sudo のパスワードを聞かれます)
 
 ## Windows 側に入れるアプリ
 | ファイル | 入れる PC |
@@ -60,7 +60,7 @@ winget にない自作アプリなので、install.ps1 がソースからビル�
 
 | 場所 | 内容 |
 |---|---|
-| `%LOCALAPPDATA%\dotfiles\src\ImeCenterView` | ビルド用の clone（main ブランチ） |
+| `%LOCALAPPDATA%\dotfiles\src\ImeCenterView` | ビルド用の clone (main ブランチ) |
 | `%LOCALAPPDATA%\Programs\ImeCenterView` | ビルドした exe の配置先 |
 
 install.ps1 を再実行すると最新のソースを取得し、新しいコミットがあるときだけビルドし直して起動し直します。スタートアップの登録は、次のコマンドで解除できます。
@@ -78,8 +78,8 @@ Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' 
 | python | pyenv と Python のインストール |
 | pip | pip パッケージのインストール |
 | node | n と Node.js (LTS) のインストール |
-| claude | Claude Code のインストール、`~/.claude` への設定ファイルのリンク（WSL のときは Windows 側にもリンク） |
-| vscode | Windows 側の VS Code への settings.json・スペルチェック辞書のリンク、拡張機能のインストール（WSL のときだけ） |
+| claude | Claude Code のインストール、`~/.claude` への設定ファイルのリンク (WSL のときは Windows 側にもリンク) |
+| vscode | Windows 側の VS Code への settings.json・スペルチェック辞書のリンク、拡張機能のインストール (WSL のときだけ) |
 | link | cspell / nvim / git / tmux の設定ファイルのリンク |
 
 入れるパッケージやバージョン、リンクする設定ファイルは `ansible/config.yml` で管理しています。
@@ -110,7 +110,7 @@ WSL と Windows のそれぞれで鍵を作ります。WSL では Ubuntu で実�
 ssh-keygen -t ed25519
 ```
 
-Windows では PowerShell で実行します（Windows に標準で入っている OpenSSH を使います）。鍵は `%USERPROFILE%\.ssh` にでき、Git for Windows もこの鍵を使います。
+Windows では PowerShell で実行します (Windows に標準で入っている OpenSSH を使います)。鍵は `%USERPROFILE%\.ssh` にでき、Git for Windows もこの鍵を使います。
 
 ```powershell
 ssh-keygen -t ed25519
@@ -123,7 +123,7 @@ Claude Code の pr スキルと `contributions` 関数が gh を使います。
 gh auth login
 ```
 
-Git の操作に使うプロトコルは SSH を選びます。途中で SSH 公開鍵をアップロードするか聞かれるので、上で作った鍵をアップロードして GitHub に登録します。HTTPS を選んで Git の認証に gh を使う設定にすると、`~/.gitconfig`（このリポジトリの `git/config` へのリンク）に credential helper が書き込まれてしまいます。
+Git の操作に使うプロトコルは SSH を選びます。途中で SSH 公開鍵をアップロードするか聞かれるので、上で作った鍵をアップロードして GitHub に登録します。HTTPS を選んで Git の認証に gh を使う設定にすると、`~/.gitconfig` (このリポジトリの `git/config` へのリンク) に credential helper が書き込まれてしまいます。
 
 install スクリプトは鍵がなくても動くように HTTPS で clone するので、鍵を登録したらリモートを SSH に切り替えます。
 
@@ -131,7 +131,7 @@ install スクリプトは鍵がなくても動くように HTTPS で clone す�
 git -C ~/dotfiles remote set-url origin git@github.com:shinshu68/dotfiles.git
 ```
 
-Windows 側の gh（install.ps1 で入れたもの）は WSL とは別にログインが必要なので、PowerShell でも `gh auth login` を実行します。WSL と同じくプロトコルは SSH を選び、Windows で作った鍵をアップロードします。鍵のタイトルは、WSL の鍵と見分けがつくように PC 名と `windows` などを含めておきます。
+Windows 側の gh (install.ps1 で入れたもの) は WSL とは別にログインが必要なので、PowerShell でも `gh auth login` を実行します。WSL と同じくプロトコルは SSH を選び、Windows で作った鍵をアップロードします。鍵のタイトルは、WSL の鍵と見分けがつくように PC 名と `windows` などを含めておきます。
 
 ### Claude Code にログインする
 `claude` を起動すると、初回はログインの手順が表示されます。Windows 側の VS Code の Claude Code 拡張は、拡張の画面からログインします。

@@ -7,7 +7,7 @@ function atcoder-commit
     end
     or return 1
 
-    # コミット予定（ステージ済み）のファイル名を取得
+    # コミット予定 (ステージ済み) のファイル名を取得
     set -l files (git diff --cached --name-only)
     if test (count $files) -eq 0
         echo "コミットする変更がありません"

@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
-# 私用の PC にだけ入れるもの（base.dsc.yaml の後に適用する）
+# 私用の PC にだけ入れるもの (base.dsc.yaml の後に適用する)
 properties:
   resources:
     - resource: Microsoft.WinGet.DSC/WinGetPackage

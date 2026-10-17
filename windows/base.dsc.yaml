@@ -4,7 +4,7 @@ properties:
   resources:
     - resource: Microsoft.Windows.Settings/WindowsSettings
       directives:
-        description: 開発者モードを有効にする（WSL からシンボリックリンクを作るため）
+        description: 開発者モードを有効にする (WSL からシンボリックリンクを作るため)
         allowPrerelease: true
         securityContext: elevated
       settings:

@@ -1,9 +1,9 @@
-# Code Spell Checker 用のグローバル辞書（1 行に 1 単語、# で始まる行はコメント）
+# Code Spell Checker 用のグローバル辞書 (1 行に 1 単語、# で始まる行はコメント)
 # spell-check スキルがプロジェクトごとの見出しと説明を付けて追記する
-# 書式: 見出しは「# ===== <プロジェクト名> =====」、説明は単語の前の行にコメントで書く（同じ種類の単語はまとめて 1 つの説明にする）
+# 書式: 見出しは「# ===== <プロジェクト名> =====」、説明は単語の前の行にコメントで書く (同じ種類の単語はまとめて 1 つの説明にする)
 
 # ===== dotfiles =====
-# Vim のオプション名・コマンド名・関数名・正規表現の文字クラス・色名（nvim の設定やチートシートで使う）
+# Vim のオプション名・コマンド名・関数名・正規表現の文字クラス・色名 (nvim の設定やチートシートで使う)
 alnum
 augroup
 autocmd
@@ -90,7 +90,7 @@ powerlineish
 quickrun
 tabnine
 textobj
-# vim-go の設定・コメントで使う Go のツール名・コマンド名（一部は現在の設定では未使用）
+# vim-go の設定・コメントで使う Go のツール名・コマンド名 (一部は現在の設定では未使用)
 addtags
 Callees
 errcheck
@@ -139,7 +139,7 @@ pkief
 seatonjiang
 vscodevim
 yzhang
-# VS Code の設定で使う名前（VSCodeVim の設定名・フォント名・CSS の色指定の関数名）
+# VS Code の設定で使う名前 (VSCodeVim の設定名・フォント名・CSS の色指定の関数名)
 Cica
 easymotion
 rgba
@@ -167,7 +167,7 @@ SETUID
 svgz
 tzst
 xspf
-# fish・tmux の設定で使う関数名・変数名・コマンドのオプション（一部は以前の設定で使っていたもの）
+# fish・tmux の設定で使う関数名・変数名・コマンドのオプション (一部は以前の設定で使っていたもの)
 abefnrtv
 argparse
 atcoder
@@ -202,7 +202,7 @@ xclip
 xsel
 Xsrv
 zapcc
-# Git のオプション名・設定キー名（diff-filter の変更種別の指定を含む）
+# Git のオプション名・設定キー名 (diff-filter の変更種別の指定を含む)
 ACMR
 filemode
 oneline
@@ -214,7 +214,7 @@ gsub
 lineterm
 pycache
 tofile
-# ansible・Docker・apt の設定で使うモジュール名・属性名・コマンド名・パッケージ名など（Jinja2 テンプレートの構文を含む）
+# ansible・Docker・apt の設定で使うモジュール名・属性名・コマンド名・パッケージ名など (Jinja2 テンプレートの構文を含む)
 anyenv
 blockinfile
 chdir
@@ -251,7 +251,7 @@ windir
 winget
 WSLENV
 wslpath
-# jq のオプション名・関数名・変数名（bin/gh-grass.sh）
+# jq のオプション名・関数名・変数名 (bin/gh-grass.sh)
 argjson
 maxw
 tonumber
@@ -266,7 +266,7 @@ thumbsup
 cowork
 evals
 reask
-# その他（例示用の名前、チートシート、このリポジトリの作者名）
+# その他 (例示用の名前、チートシート、このリポジトリの作者名)
 cheatsheet
 hoge
 imeindicator
@@ -278,17 +278,17 @@ nuxi
 Nuxt
 ofetch
 Vuetify
-# PDF 処理・OCR のツール名・ライブラリ名・コマンドのオプション（表紙生成・ページ画像化、docs の技術比較）
+# PDF 処理・OCR のツール名・ライブラリ名・コマンドのオプション (表紙生成・ページ画像化、docs の技術比較)
 pdfinfo
 pdftoppm
 poppler
 pypdf
 singlefile
 tesseract
-# Prisma のマイグレーション SQL のキーワード・外部キー制約名の接尾辞（prisma/migrations）
+# Prisma のマイグレーション SQL のキーワード・外部キー制約名の接尾辞 (prisma/migrations)
 autoincrement
 fkey
-# 書誌情報の取得元サイト名と、取得時に使う URL パラメータ名・User-Agent の文字列（server/utils/bookInfoScraper.ts）
+# 書誌情報の取得元サイト名と、取得時に使う URL パラメータ名・User-Agent の文字列 (server/utils/bookInfoScraper.ts)
 dlsite
 dmm
 FANZA
@@ -296,7 +296,7 @@ KHTML
 melonbooks
 nrdp
 toranoana
-# Windows・WSL の LAN 公開設定で使うコマンド名・オプション名・設定ファイル名（README・docs/roadmap.md）
+# Windows・WSL の LAN 公開設定で使うコマンド名・オプション名・設定ファイル名 (README・docs/roadmap.md)
 connectaddress
 connectport
 listenaddress
@@ -304,28 +304,28 @@ listenport
 netsh
 portproxy
 wslconfig
-# シェルから使うコマンド名・オプション（docs/dev-notes.md・docker/db-backup/backup.sh）
+# シェルから使うコマンド名・オプション (docs/dev-notes.md・docker/db-backup/backup.sh)
 Iseconds
 nohup
 pgrep
-# NAS の製品名・ファイル共有のプロトコル名・WSL のファイルシステム名（docs/file-scanner.md）
+# NAS の製品名・ファイル共有のプロトコル名・WSL のファイルシステム名 (docs/file-scanner.md)
 CIFS
 drvfs
 QNAP
-# 並行処理・セキュリティの用語の略語（docs/requirements.md）
+# 並行処理・セキュリティの用語の略語 (docs/requirements.md)
 TOCTOU
-# テストフレームワーク（vitest）の名前・関数名の一部（*.test.ts）
+# テストフレームワーク (vitest) の名前・関数名の一部 (*.test.ts)
 unstub
 vitest
-# その他（.env.example の例示用のユーザー名）
+# その他 (.env.example の例示用のユーザー名)
 yourname
 
 # ===== bookshelf-app =====
-# Flutter のパッケージ名（状態管理・PDF の描画、CLAUDE.md・docs/plan.md の技術選定）
+# Flutter のパッケージ名 (状態管理・PDF の描画、CLAUDE.md・docs/plan.md の技術選定)
 pdfrx
 pdfx
 Riverpod
 
 # ===== wakeup-alarm =====
-# その他（このリポジトリ名の一部）
+# その他 (このリポジトリ名の一部)
 wakeup

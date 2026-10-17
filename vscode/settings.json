@@ -1,6 +1,6 @@
 {
     // ==================================================
-    // 外観（テーマ・ウィンドウ）
+    // 外観 (テーマ・ウィンドウ)
     // ==================================================
     "workbench.colorTheme": "Dark+",
     "workbench.iconTheme": "material-icon-theme",
@@ -37,9 +37,9 @@
         "editorBracketHighlight.foreground5": "#3F7FFF", // 青
         "editorBracketHighlight.foreground6": "#FF7FFF", // 紫
 
-        // タブとタブの間の区切り線（少し明るめに）
+        // タブとタブの間の区切り線 (少し明るめに)
         "tab.border": "#6a6a6a",
-        // アクティブタブの上端ライン（フォーカス時／非フォーカス時）
+        // アクティブタブの上端ライン (フォーカス時／非フォーカス時)
         "tab.activeBorderTop": "#3794ff",
         "tab.unfocusedActiveBorderTop": "#3794ff80",
         // アクティブタブはエディタと同じ色、非アクティブはぐっと暗くする
@@ -100,7 +100,7 @@
     },
 
     // ==================================================
-    // リモート（WSL など）
+    // リモート (WSL など)
     // ==================================================
     "remote.autoForwardPortsSource": "hybrid",
 
@@ -240,7 +240,7 @@
     // ==================================================
     // Code Spell Checker
     "cSpell.autoFormatConfigFile": true,
-    // 全プロジェクト共通の単語辞書（実体は dotfiles の config/cspell/words.txt）
+    // 全プロジェクト共通の単語辞書 (実体は dotfiles の config/cspell/words.txt)
     // WSL・Windows とも ~/.config/cspell にリンクしてあり、spell-check スキルが単語を追記する
     "cSpell.customDictionaries": {
         "global-words": {

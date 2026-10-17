@@ -1,7 +1,7 @@
 {
   "name": "cspell-dict-syntax",
   "displayName": "CSpell Dictionary Syntax",
-  "description": "Code Spell Checker 用の辞書ファイル（.txt）を色分けする",
+  "description": "Code Spell Checker 用の辞書ファイル (.txt) を色分けする",
   "version": "0.1.1",
   "publisher": "local",
   "private": true,

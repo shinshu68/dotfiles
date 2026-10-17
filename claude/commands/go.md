@@ -1,5 +1,5 @@
 ---
-description: 直前に提案された次の作業を承認して進める（approve-next-step スキルを実行）
+description: 直前に提案された次の作業を承認して進める (approve-next-step スキルを実行)
 argument-hint: "[番号 または 追加指示]"
 disable-model-invocation: true
 ---
@@ -8,4 +8,4 @@ disable-model-invocation: true
 
 `~/.claude/skills/approve-next-step/SKILL.md` を読み込み、その手順に従って作業を進めてください。
 
-引数（選択肢の番号または追加指示。空なら指定なし）: $ARGUMENTS
+引数 (選択肢の番号または追加指示。空なら指定なし): $ARGUMENTS
