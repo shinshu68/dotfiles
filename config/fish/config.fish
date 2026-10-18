@@ -1,5 +1,15 @@
 umask 022
 
+# dotfiles の関数・補完を ~/.config/fish にリンクせず、そのまま読み込む
+# config.fish は dotfiles へのリンクなので、リンク先から dotfiles 側のディレクトリを求める
+set -l dotfiles_fish_dir (path dirname (path resolve (status filename)))
+if not contains $dotfiles_fish_dir/functions $fish_function_path
+    set -p fish_function_path $dotfiles_fish_dir/functions
+end
+if not contains $dotfiles_fish_dir/completions $fish_complete_path
+    set -p fish_complete_path $dotfiles_fish_dir/completions
+end
+
 eval (dircolors -c $HOME/dotfiles/config/dircolors)
 
 set -g theme_nerd_fonts yes
@@ -61,9 +71,7 @@ if set -q INSIDE_DOCKER
     end
 end
 
-if test -f $XDG_CONFIG_HOME/fish/user_aliases.fish
-    source $XDG_CONFIG_HOME/fish/user_aliases.fish
-end
+source $dotfiles_fish_dir/user_aliases.fish
 
 if test -f $HOME/.env.fish
     source $HOME/.env.fish

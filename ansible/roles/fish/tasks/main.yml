@@ -1,5 +1,10 @@
 - set_fact:
     dotfiles_fish_config_path: '{{ dotfiles_path }}/config/fish/'
+    # ~/.config/fish にリンクするファイル。関数・補完・user_aliases.fish は config.fish が dotfiles から直接読む
+    fish_link_files:
+      - config.fish
+      # fisher はリンク先に書き込むので、fisher install/remove の結果も dotfiles 側に残る
+      - fish_plugins
 
 - name: add fish repository
   become: yes
@@ -16,47 +21,68 @@
     update_cache:     yes
     cache_valid_time: 3600
 
-- name: check fish config functions directory
-  stat:
-    path: '{{ home_path }}/.config/fish/functions'
-  register: config_functions
-
-- name: create fish config directory
+- name: create fish config directories
   file:
-    path:  '{{ home_path }}/.config/fish/functions'
+    path:  '{{ home_path }}/.config/fish/{{ item }}'
     state: directory
     mode:  0755
-  when: not config_functions.stat.exists
+  with_items:
+    - functions
+    - completions
 
-- name: check fish completions directory
-  stat:
-    path: '{{ home_path }}/.config/fish/completions'
-  register: config_completions
-
-- name: create fish config directory
-  file:
-    path:  '{{ home_path }}/.config/fish/completions'
-    state: directory
-    mode:  0755
-  when: not config_completions.stat.exists
-
-- name: get fish config files
+# 以前はファイルごとにリンクしていたので、dotfiles を指すリンク (リンク切れを含む) を消す
+- name: find old fish links
   find:
-    paths:   '{{ dotfiles_fish_config_path }}'
-    recurse: yes
-  register: fish_files
+    paths:
+      - '{{ home_path }}/.config/fish'
+      - '{{ home_path }}/.config/fish/functions'
+      - '{{ home_path }}/.config/fish/completions'
+    file_type: link
+    excludes:  '{{ fish_link_files }}'
+  register: old_fish_links
+
+- name: check old fish links
+  stat:
+    path: '{{ item.path }}'
+  loop_control:
+    label: '{{ item.path | basename }}'
+  with_items: '{{ old_fish_links.files }}'
+  register: old_fish_links_stat
+
+- name: remove old fish links
+  file:
+    path:  '{{ item.stat.path }}'
+    state: absent
+  loop_control:
+    label: '{{ item.stat.path | basename }}'
+  when: item.stat.lnk_source.startswith(dotfiles_fish_config_path)
+  with_items: '{{ old_fish_links_stat.results }}'
+
+- name: check fish config destinations
+  stat:
+    path: '{{ home_path }}/.config/fish/{{ item }}'
+  with_items: '{{ fish_link_files }}'
+  register: fish_link_dest_stat
+
+- name: create fish config backup files
+  command: |
+    mv -f \
+      {{ home_path | quote }}/.config/fish/{{ item.item | quote }} \
+      {{ home_path | quote }}/.config/fish/{{ item.item | quote }}.bak
+  when: item.stat.exists and not item.stat.islnk
+  loop_control:
+    label: '{{ item.item }}'
+  with_items: '{{ fish_link_dest_stat.results }}'
 
 - name: create symlinks
   file:
-    src:   '{{ item.path }}'
-    dest:  '{{ home_path }}/.config/fish/{{ item.path[dotfiles_fish_config_path|length:] }}'
+    src:   '{{ dotfiles_fish_config_path }}{{ item }}'
+    dest:  '{{ home_path }}/.config/fish/{{ item }}'
     owner: '{{ user_name }}'
     group: '{{ user_name }}'
     state: link
     force: yes
-  loop_control:
-    label: '{{ item.path | basename }}'
-  with_items: '{{ fish_files.files }}'
+  with_items: '{{ fish_link_files }}'
 
 - name: check fisher version
   shell: |
@@ -76,20 +102,8 @@
     fish -lc "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
   when: fisher_version.rc != 0 or 'version 4.' not in fisher_version.stdout
 
+# fish_plugins に書かれたプラグインを入れ、書かれていないものは消す
 - name: update fisher and plugins
   shell: |
     fish -lc "fisher update"
-  when: fisher_version.rc == 0 and 'version 4.' in fisher_version.stdout
   changed_when: False
-
-- name: check installed fisher plugins
-  shell: |
-    fish -lc "fisher list"
-  register: installed_fisher_plugins
-  changed_when: False
-
-- name: install fisher plugins
-  shell: |
-    fish -lc "fisher install {{ item }}"
-  when: item not in installed_fisher_plugins.stdout_lines
-  with_items: '{{ fish.fisher_plugins }}'
