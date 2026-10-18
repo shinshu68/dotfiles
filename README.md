@@ -116,6 +116,19 @@ Windows では PowerShell で実行します (Windows に標準で入ってい�
 ssh-keygen -t ed25519
 ```
 
+### Git のユーザーを設定する
+共通の設定 (`~/.config/git/config`) には名前とメールアドレスを入れていないので、環境ごとに `~/.gitconfig` へ設定します。`~/.gitconfig` は管理外のローカルファイルで、ansible が空のファイルを作ります。`--global` で書き込む設定は、`~/.gitconfig` があればそちらに入り、このリポジトリのファイルは書き換わりません。
+
+```shell
+git config --global user.name "名前"
+```
+
+```shell
+git config --global user.email "メールアドレス"
+```
+
+会社の PC では、会社用の名前とメールアドレスを設定します。
+
 ### GitHub CLI にログインする
 Claude Code の pr スキルと `contributions` 関数が gh を使います。
 
@@ -123,7 +136,7 @@ Claude Code の pr スキルと `contributions` 関数が gh を使います。
 gh auth login
 ```
 
-Git の操作に使うプロトコルは SSH を選びます。途中で SSH 公開鍵をアップロードするか聞かれるので、上で作った鍵をアップロードして GitHub に登録します。HTTPS を選んで Git の認証に gh を使う設定にすると、`~/.gitconfig` (このリポジトリの `git/config` へのリンク) に credential helper が書き込まれてしまいます。
+Git の操作に使うプロトコルは SSH を選びます。途中で SSH 公開鍵をアップロードするか聞かれるので、上で作った鍵をアップロードして GitHub に登録します。HTTPS を選んで Git の認証に gh を使う設定にした場合、credential helper は `~/.gitconfig` に書き込まれます。
 
 install スクリプトは鍵がなくても動くように HTTPS で clone するので、鍵を登録したらリモートを SSH に切り替えます。
 

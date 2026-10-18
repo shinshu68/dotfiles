@@ -17,6 +17,8 @@
     name: link
   vars:
     link_items: '{{ claude.link }}'
+    unlink_items: []
+    local_files_items: []
 
 # Windows 側からリンクする時点で実体がないとディレクトリへのリンクとして作れないので、先に作っておく
 - name: allocate directories shared with windows

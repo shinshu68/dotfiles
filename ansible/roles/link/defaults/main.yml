@@ -1,2 +1,4 @@
 # 他のロールから import_role で別のリンク一覧を渡せるようにする
 link_items: '{{ link }}'
+unlink_items: '{{ unlink | default([]) }}'
+local_files_items: '{{ local_files | default([]) }}'
