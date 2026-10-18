@@ -265,6 +265,7 @@ thumbsup
 # Claude Code のプラグイン名の一部と、スキル名・スキルの評価用ディレクトリ名
 cowork
 evals
+prefs
 reask
 # その他 (例示用の名前、チートシート、このリポジトリの作者名)
 cheatsheet
