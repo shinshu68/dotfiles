@@ -237,6 +237,7 @@ libzstd
 noninteractive
 NOPASSWD
 pynvim
+startswith
 userdel
 # Windows・WSL・PowerShell・Git Bash のコマンド名・オプション名・環境変数名・フォルダ名
 HKCU
