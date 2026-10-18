@@ -130,8 +130,17 @@ cspell の CLI は VS Code の設定を読まないので、辞書ファイル�
 実行する。
 
 ```
-cspell --config /tmp/spell-check-cspell.json --no-progress --no-summary --show-context --no-must-find-files <対象ファイル...>
+cspell --config /tmp/spell-check-cspell.json --no-progress --show-context --no-must-find-files <対象ファイル...>
 ```
+
+対象ファイルは、手順1で得たリポジトリ内のパスのまま渡す。一時フォルダにコピーしたファイルを渡さない。
+cspell はカレントディレクトリの外のファイルを検査の対象から外し、`--no-must-find-files` があるとエラーも
+出さずに終わるため。
+
+出力の最後の行にある `CSpell: Files checked: N, ...` の `N` が、渡した対象ファイルの数と同じかを確かめる。
+少ない場合は、一部のファイルが検査されていない (カレントディレクトリの外にある、プロジェクトの cspell
+設定の `ignorePaths` に当たる、など)。そのまま「未登録の単語はありませんでした」とせず、外れたファイルと
+理由をユーザーに伝える。
 
 未知語があると終了コードが 0 以外になるが、エラーではない。出力の `ファイル:行:列 - Unknown word (単語)` を読む。
 
