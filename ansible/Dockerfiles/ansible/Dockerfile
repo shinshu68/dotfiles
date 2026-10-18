@@ -23,7 +23,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 
 RUN locale-gen $LANG
 
-# playbook の -K で聞かれるパスワードは空のまま Enter で通るようにする
+# sudo をパスワードなしで使えるようにする (run.sh はこのとき sudo のパスワードを聞かない)
 # ubuntu:24.04 には uid 1000 の ubuntu ユーザーがいるので消して、ホストと uid をそろえる
 # (マウントしたリポジトリのファイルの所有者が書き換わらないようにするため)
 RUN userdel -r ubuntu \

@@ -157,7 +157,7 @@ cd ~/dotfiles/ansible
 docker compose run --rm ansible
 ```
 
-コンテナの中で playbook を実行します。sudo のパスワードは空のまま Enter で通ります。
+コンテナの中で playbook を実行します。sudo のパスワードは聞かれません。
 
 ```shell
 ./ansible/run.sh
