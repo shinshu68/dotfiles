@@ -85,16 +85,19 @@ fish:
 link:
   config/cspell:        .config/cspell
   config/nvim:          .config/nvim
-  git/config:           .config/git/config
-  git/template:         .config/git/template
-  tmux/tmux.conf:       .tmux.conf
+  # ~/.config/git には ignore などのローカルファイルもあるので、ディレクトリごとではなくファイル単位でリンクする
+  config/git/config:    .config/git/config
+  config/git/template:  .config/git/template
+  config/tmux:          .config/tmux
 
 # リンクせずに環境ごとに中身を書くファイル。なければ空で作る
 local_files:
-  # ないと git config --global の書き込みが ~/.config/git/config (dotfiles の git/config) に入ってしまう
+  # ないと git config --global の書き込みが ~/.config/git/config (dotfiles の config/git/config) に入ってしまう
   - .gitconfig
 
 # 以前リンクしていて今は不要になったもの。dotfiles を指すリンクのときだけ消す
 unlink:
   # ~/.gitconfig は環境ごとの設定 (user など) を書くローカルファイルにした
   - .gitconfig
+  # ~/.config/tmux/tmux.conf に移した。tmux は ~/.tmux.conf があるとそちらを先に読む
+  - .tmux.conf
