@@ -207,12 +207,15 @@ ACMR
 filemode
 oneline
 toplevel
-# シェルスクリプト・awk・Python のスクリプトで使う構文・関数名・引数名・変数名・ディレクトリ名
+# シェルスクリプト・awk・Python のスクリプトで使う構文・関数名・引数名・変数名・ディレクトリ名・コマンドのオプション
 cand
 elif
 gsub
 lineterm
+lname
 pycache
+systemtap
+tapset
 tofile
 # ansible・Docker・apt の設定で使うモジュール名・属性名・コマンド名・パッケージ名など (Jinja2 テンプレートの構文を含む)
 anyenv
@@ -269,6 +272,8 @@ cowork
 evals
 prefs
 reask
+# Python・Node のバージョン管理ツールが読むファイル名 (config/mise/config.toml)
+nvmrc
 # その他 (例示用の名前、チートシート、このリポジトリの作者名)
 cheatsheet
 hoge
