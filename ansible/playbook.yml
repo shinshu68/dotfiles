@@ -12,6 +12,8 @@
       tags: ['apt']
     - role: fish
       tags: ['fish']
+    - role: bash
+      tags: ['bash']
     - role: anyenv
       tags: ['anyenv']
     - role: python

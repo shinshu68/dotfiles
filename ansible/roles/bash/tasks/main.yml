@@ -1,0 +1,20 @@
+- set_fact:
+    bash: {}
+
+- name: link bash config files
+  import_role:
+    name: link
+  vars:
+    link_items: '{{ bash.link }}'
+    unlink_items: []
+    local_files_items: []
+
+# ~/.bashrc はディストリビューションが用意したものを残し、dotfiles の設定を読み込む行だけ足す
+- name: source bash config files from bashrc
+  lineinfile:
+    path:   '{{ home_path }}/.bashrc'
+    line:   '[ -f ~/{{ item }} ] && . ~/{{ item }}'
+    create: yes
+    owner:  '{{ user_name }}'
+    group:  '{{ user_name }}'
+  with_items: '{{ bash.source }}'

@@ -47,6 +47,14 @@ claude:
   windows_share:
     - .claude/backlog-data
 
+bash:
+  link:
+    config/bash: .config/bash
+
+  # ~/.bashrc から読み込むファイル (ホームからの相対パス)
+  source:
+    - .config/bash/prompt.bash
+
 vscode:
   settings: vscode/settings.json
 

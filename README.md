@@ -74,6 +74,7 @@ Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' 
 |---|---|
 | apt | 基本的なパッケージのインストール |
 | fish | fish と fisher のインストール、fish の設定ファイルのリンク、fisher プラグインのインストール (プラグインの一覧は `config/fish/fish_plugins`) |
+| bash | bash の設定ファイルのリンク、`~/.bashrc` への読み込み処理の追記 (プロンプトは `config/bash/prompt.bash`) |
 | anyenv | anyenv と anyenv-update のインストール |
 | python | pyenv と Python のインストール |
 | pip | pip パッケージのインストール |

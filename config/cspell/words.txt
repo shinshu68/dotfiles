@@ -234,6 +234,7 @@ libreadline
 libsqlite
 libxmlsec
 libzstd
+lineinfile
 noninteractive
 NOPASSWD
 pynvim
