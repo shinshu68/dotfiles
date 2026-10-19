@@ -1,0 +1,3 @@
+# 値は group_vars/all.yml で設定する
+pip:
+  packages: []

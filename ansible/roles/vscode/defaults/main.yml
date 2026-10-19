@@ -1,0 +1,5 @@
+# 値は group_vars/all.yml で設定する
+# settings・vsce_version は空では動かないので、既定値を置かない
+vscode:
+  windows_link: {}
+  extensions:   []

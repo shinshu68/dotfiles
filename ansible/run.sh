@@ -11,7 +11,6 @@ max_tries=3
 run_playbook() {
   ansible-playbook \
     -i 'localhost,' \
-    --extra-vars='@config.yml' \
     "$@" \
     playbook.yml
 }

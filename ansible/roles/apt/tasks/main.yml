@@ -1,6 +1,3 @@
-- set_fact:
-    apt: {}
-
 # PPA 以外のリポジトリは署名鍵を先に置いて、repo の signed-by で指定する
 - name: apt add keyrings
   become: yes

@@ -1,6 +1,3 @@
-- set_fact:
-    claude: {}
-
 - name: check claude code
   stat:
     path: '{{ home_path }}/.local/bin/claude'

@@ -1,0 +1,4 @@
+# 値は group_vars/all.yml で設定する
+bash:
+  link:   {}
+  source: []

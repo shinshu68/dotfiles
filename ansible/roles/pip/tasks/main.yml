@@ -1,6 +1,3 @@
-- set_fact:
-    pip: {}
-
 # mise で入れた Python の pip を使う
 - name: get mise pip
   command: |

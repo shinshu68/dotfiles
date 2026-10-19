@@ -81,7 +81,7 @@ Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' 
 | vscode | Windows 側の VS Code への settings.json・スペルチェック辞書のリンク、拡張機能のインストール (WSL のときだけ) |
 | link | cspell / nvim / git / tmux の設定ファイルのリンク |
 
-入れるパッケージやバージョン、リンクする設定ファイルは `ansible/config.yml` で管理しています。mise で入れるツールのバージョンだけは `config/mise/config.toml` に書きます。
+入れるパッケージやバージョン、リンクする設定ファイルは `ansible/group_vars/all.yml` で管理しています。mise で入れるツールのバージョンだけは `config/mise/config.toml` に書きます。
 
 ### ロールを個別に実行する
 ロール名をタグとして指定します。

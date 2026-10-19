@@ -1,6 +1,3 @@
-- set_fact:
-    mise: {}
-
 # mise 本体は apt ロールで入れる
 - name: link mise config files
   import_role:

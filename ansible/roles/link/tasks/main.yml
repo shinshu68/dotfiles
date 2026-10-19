@@ -1,6 +1,3 @@
-- set_fact:
-    link: {}
-
 - name: check obsolete links
   stat:
     path: '{{ home_path }}/{{ item }}'

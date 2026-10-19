@@ -1,6 +1,3 @@
-- set_fact:
-    bash: {}
-
 - name: link bash config files
   import_role:
     name: link
