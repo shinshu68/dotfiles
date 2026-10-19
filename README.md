@@ -150,6 +150,33 @@ Windows 側の gh (install.ps1 で入れたもの) は WSL とは別にログイ
 ### Claude Code にログインする
 `claude` を起動すると、初回はログインの手順が表示されます。Windows 側の VS Code の Claude Code 拡張は、拡張の画面からログインします。
 
+## ansible を使わずに bash のプロンプトを入れる
+dotfiles を入れない bash の環境でも、`config/bash/prompt.bash` だけを手でコピーして使えます。bash 4.4 以降と git があれば動きます。
+
+`~/.config/bash` に置きます (bash ロールと同じ場所です)。
+
+```bash
+mkdir -p ~/.config/bash
+```
+
+```bash
+curl -fsSL https://shinshu68.github.io/dotfiles/config/bash/prompt.bash -o ~/.config/bash/prompt.bash
+```
+
+`~/.bashrc` の末尾に、次の1行を追記します。bash ロールが追記するものと同じ内容です。
+
+```bash
+[ -f ~/.config/bash/prompt.bash ] && . ~/.config/bash/prompt.bash
+```
+
+追記したら、新しいターミナルを開くか、`~/.bashrc` を読み込み直します。
+
+```bash
+. ~/.bashrc
+```
+
+パスの短縮や所要時間を表示するしきい値は、読み込む行より前で `PROMPT_SHORTEN_PATH` (`0` で短縮しない) と `PROMPT_DURATION_MIN` (秒、`0` で表示しない) を設定すると変えられます。
+
 ## Docker で確認する
 playbook の変更は、`ansible/` にある Docker 環境で確認できます。作業中のリポジトリをコンテナにマウントして実行します。
 
