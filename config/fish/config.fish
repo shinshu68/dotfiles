@@ -20,10 +20,11 @@ if test -x /usr/bin/direnv
     direnv hook fish | source
 end
 
-if test -d $HOME/.anyenv
-    set -gx PATH (string match -v -r 'pyenv-win' $PATH)
-    set -x PATH $HOME/.anyenv/bin $PATH
-    anyenv init - fish | source
+# Windows 側の pyenv-win が PATH に入っていると Windows の python が動いてしまうので外す
+set -gx PATH (string match -v -r 'pyenv-win' $PATH)
+
+if command -q mise
+    mise activate fish | source
 end
 
 set -x PATH $HOME/dotfiles/bin $PATH

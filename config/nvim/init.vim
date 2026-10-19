@@ -10,9 +10,8 @@ if &runtimepath !~# '/dein.vim'
     execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
-if isdirectory($HOME . '/.anyenv/envs/pyenv/shims/')
-    let g:python_host_prog  = $HOME . '/.anyenv/envs/pyenv/shims/python2'
-    let g:python3_host_prog = $HOME . '/.anyenv/envs/pyenv/shims/python'
+if isdirectory($HOME . '/.local/share/mise/shims/')
+    let g:python3_host_prog = $HOME . '/.local/share/mise/shims/python'
 else
     let g:python_host_prog  = '/usr/bin/python'
     let g:python3_host_prog = '/usr/bin/python3'

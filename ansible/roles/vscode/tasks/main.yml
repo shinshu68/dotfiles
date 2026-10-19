@@ -69,14 +69,14 @@
 
   - name: check npx
     command: |
-      bash -c 'command -v npx'
+      mise which npx
     register: npx_path
     failed_when: False
     changed_when: False
     check_mode: no
     when: local_extensions | default([]) | length > 0
 
-  # Node は node ロールで入れる。vscode タグだけを実行した環境などで npx が無いときは飛ばす
+  # Node は mise ロールで入れる。vscode タグだけを実行した環境などで npx が無いときは飛ばす
   - name: warn missing npx
     debug:
       msg: 'npx が見つからないため、自作の拡張機能のビルドとインストールを飛ばしました: {{ local_extensions | map(attribute="id") | join(", ") }}'
@@ -85,7 +85,7 @@
   - block:
     - name: build local extensions
       command: |
-        npx --yes @vscode/vsce@{{ vscode.vsce_version }} package --skip-license --allow-missing-repository --out {{ item.vsix | quote }}
+        mise exec -- npx --yes @vscode/vsce@{{ vscode.vsce_version }} package --skip-license --allow-missing-repository --out {{ item.vsix | quote }}
       args:
         chdir: '{{ item.dir }}'
       loop_control:

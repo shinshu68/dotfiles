@@ -75,15 +75,13 @@ Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' 
 | apt | 基本的なパッケージのインストール |
 | fish | fish と fisher のインストール、fish の設定ファイルのリンク、fisher プラグインのインストール (プラグインの一覧は `config/fish/fish_plugins`) |
 | bash | bash の設定ファイルのリンク、`~/.bashrc` への読み込み処理の追記 (プロンプトは `config/bash/prompt.bash`) |
-| anyenv | anyenv と anyenv-update のインストール |
-| python | pyenv と Python のインストール |
-| pip | pip パッケージのインストール |
-| node | n と Node.js (LTS) のインストール |
+| mise | mise の設定ファイルのリンク、Python・Node.js・uv・npm パッケージのインストール (一覧は `config/mise/config.toml`)、以前の anyenv・n で入れたものの削除 |
+| pip | pip パッケージのインストール (mise の Python に入れる) |
 | claude | Claude Code のインストール、`~/.claude` への設定ファイルのリンク (WSL のときは Windows 側にもリンク) |
 | vscode | Windows 側の VS Code への settings.json・スペルチェック辞書のリンク、拡張機能のインストール (WSL のときだけ) |
 | link | cspell / nvim / git / tmux の設定ファイルのリンク |
 
-入れるパッケージやバージョン、リンクする設定ファイルは `ansible/config.yml` で管理しています。
+入れるパッケージやバージョン、リンクする設定ファイルは `ansible/config.yml` で管理しています。mise で入れるツールのバージョンだけは `config/mise/config.toml` に書きます。
 
 ### ロールを個別に実行する
 ロール名をタグとして指定します。

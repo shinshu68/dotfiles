@@ -14,14 +14,10 @@
       tags: ['fish']
     - role: bash
       tags: ['bash']
-    - role: anyenv
-      tags: ['anyenv']
-    - role: python
-      tags: ['python']
+    - role: mise
+      tags: ['mise']
     - role: pip
       tags: ['pip']
-    - role: node
-      tags: ['node']
     - role: claude
       tags: ['claude']
     - role: vscode

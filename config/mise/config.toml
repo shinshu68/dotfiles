@@ -1,0 +1,14 @@
+# mise で入れるツールとバージョン。ansible の mise ロールが mise install で入れる
+# ~/.config/mise/config.toml にリンクするので、mise use -g の結果もこのファイルに入る
+[tools]
+python = "3.14.7"
+node = "lts"
+uv = "latest"
+"npm:cspell" = "latest"
+"npm:wsl-open" = "latest"
+"npm:npm-check-updates" = "latest"
+"npm:@vue/cli" = "latest"
+
+[settings]
+# pyenv・nvm 用に書かれたプロジェクトの .python-version・.nvmrc も読む
+idiomatic_version_file_enable_tools = ["python", "node"]

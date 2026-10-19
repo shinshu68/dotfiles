@@ -1,9 +1,18 @@
 - set_fact:
     pip: {}
 
+# mise で入れた Python の pip を使う
+- name: get mise pip
+  command: |
+    mise which pip
+  register: mise_pip
+  changed_when: False
+  check_mode: no
+  when: pip.packages
+
 - name: pip install
   pip:
     name:       '{{ pip.packages }}'
     state:      latest
-    executable: '{{ anyenv.envs_dir }}/pyenv/versions/{{ python.versions[0] }}/bin/pip'
+    executable: '{{ mise_pip.stdout }}'
   when: pip.packages

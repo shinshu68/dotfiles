@@ -1,22 +1,23 @@
-anyenv:
-  dir:         '{{ home_path }}/.anyenv'
-  plugins_dir: '{{ home_path }}/.anyenv/plugins'
-  envs_dir:    '{{ home_path }}/.anyenv/envs'
-
 apt:
   keyrings:
     - url:  https://cli.github.com/packages/githubcli-archive-keyring.gpg
       dest: /etc/apt/keyrings/githubcli-archive-keyring.gpg
+    # mise の鍵は ASCII 形式なので、apt が読めるように拡張子を .asc にする
+    - url:  https://mise.jdx.dev/gpg-key.pub
+      dest: /etc/apt/keyrings/mise-archive-keyring.asc
 
   repositories:
     - repo:     deb [arch=amd64 signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main
       filename: github-cli
+    - repo:     deb [arch=amd64 signed-by=/etc/apt/keyrings/mise-archive-keyring.asc] https://mise.jdx.dev/deb stable main
+      filename: mise
 
   packages:
     - direnv
     - gh
     - git
     - jq
+    - mise
     - neovim
     - p7zip-full
     - python3-apt
@@ -25,16 +26,14 @@ apt:
     - unzip
     - xsel
 
-python:
-  versions:
-    - '3.14.7'
+# Python・Node などのバージョンは config/mise/config.toml に書く
+mise:
+  link:
+    config/mise: .config/mise
 
 pip:
   packages:
     - pynvim
-
-node:
-  version: lts
 
 claude:
   link:
@@ -54,6 +53,7 @@ bash:
   # ~/.bashrc から読み込むファイル (ホームからの相対パス)
   source:
     - .config/bash/prompt.bash
+    - .config/bash/mise.bash
 
 vscode:
   settings: vscode/settings.json
