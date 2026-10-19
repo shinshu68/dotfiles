@@ -1,6 +1,3 @@
-- set_fact:
-    wsl_distro_name: '{{ lookup("env", "WSL_DISTRO_NAME") }}'
-
 # Windows 側の VS Code を設定するので、WSL 以外では何もしない
 - block:
   # Windows から WSL 内のファイルは \\wsl.localhost\<distro>\... のパスでリンクする

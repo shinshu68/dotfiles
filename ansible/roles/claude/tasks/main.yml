@@ -27,7 +27,7 @@
   loop_control:
     label: '~/{{ item }}'
   with_items: '{{ claude.windows_share | default([]) }}'
-  when: lookup("env", "WSL_DISTRO_NAME") != ""
+  when: wsl_distro_name != ""
 
 # Windows 側の VS Code (Claude Code 拡張) からも同じ設定を使えるよう、WSL のときは Windows 側にもリンクする
 # バックログのように dotfiles では管理しないデータ (claude.windows_share) は、WSL 側のホームにある実体へリンクする
@@ -38,8 +38,6 @@
     powershell.exe -NoProfile -NonInteractive -EncodedCommand {{ lookup("template", "link-windows.ps1.j2") | b64encode(encoding="utf-16-le") }}
   args:
     chdir: /mnt/c
-  vars:
-    wsl_distro_name: '{{ lookup("env", "WSL_DISTRO_NAME") }}'
   register: link_windows_result
   changed_when: "'changed' in link_windows_result.stdout"
-  when: lookup("env", "WSL_DISTRO_NAME") != ""
+  when: wsl_distro_name != ""

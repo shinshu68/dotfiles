@@ -1,0 +1,2 @@
+# WSL のディストリビューション名。WSL 以外では空になる
+wsl_distro_name: '{{ lookup("env", "WSL_DISTRO_NAME") }}'

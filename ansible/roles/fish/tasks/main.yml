@@ -1,11 +1,3 @@
-- set_fact:
-    dotfiles_fish_config_path: '{{ dotfiles_path }}/config/fish/'
-    # ~/.config/fish にリンクするファイル。関数・補完・user_aliases.fish は config.fish が dotfiles から直接読む
-    fish_link_files:
-      - config.fish
-      # fisher はリンク先に書き込むので、fisher install/remove の結果も dotfiles 側に残る
-      - fish_plugins
-
 - name: add fish repository
   become: yes
   apt_repository:
