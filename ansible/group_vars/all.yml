@@ -19,7 +19,6 @@ apt:
     - jq
     - mise
     - neovim
-    - p7zip-full
     - python3-apt
     - tmux
     - tree
@@ -98,10 +97,3 @@ link:
 local_files:
   # ないと git config --global の書き込みが ~/.config/git/config (dotfiles の config/git/config) に入ってしまう
   - .gitconfig
-
-# 以前リンクしていて今は不要になったもの。dotfiles を指すリンクのときだけ消す
-unlink:
-  # ~/.gitconfig は環境ごとの設定 (user など) を書くローカルファイルにした
-  - .gitconfig
-  # ~/.config/tmux/tmux.conf に移した。tmux は ~/.tmux.conf があるとそちらを先に読む
-  - .tmux.conf

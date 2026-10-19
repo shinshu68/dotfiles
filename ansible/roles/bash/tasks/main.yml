@@ -3,7 +3,6 @@
     name: link
   vars:
     link_items: '{{ bash.link }}'
-    unlink_items: []
     local_files_items: []
 
 # ~/.bashrc はディストリビューションが用意したものを残し、dotfiles の設定を読み込む行だけ足す

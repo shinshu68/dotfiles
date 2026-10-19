@@ -14,7 +14,6 @@
     name: link
   vars:
     link_items: '{{ claude.link }}'
-    unlink_items: []
     local_files_items: []
 
 # Windows 側からリンクする時点で実体がないとディレクトリへのリンクとして作れないので、先に作っておく
@@ -26,7 +25,7 @@
     group: '{{ user_name }}'
   loop_control:
     label: '~/{{ item }}'
-  with_items: '{{ claude.windows_share | default([]) }}'
+  with_items: '{{ claude.windows_share }}'
   when: wsl_distro_name != ""
 
 # Windows 側の VS Code (Claude Code 拡張) からも同じ設定を使えるよう、WSL のときは Windows 側にもリンクする

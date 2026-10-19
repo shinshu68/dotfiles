@@ -1,20 +1,3 @@
-- name: check obsolete links
-  stat:
-    path: '{{ home_path }}/{{ item }}'
-  loop_control:
-    label: '~/{{ item }}'
-  with_items: '{{ unlink_items }}'
-  register: unlink_stat
-
-- name: remove obsolete links
-  file:
-    path:  '{{ home_path }}/{{ item.item }}'
-    state: absent
-  loop_control:
-    label: '~/{{ item.item }}'
-  when: item.stat.islnk is defined and item.stat.islnk and item.stat.lnk_source.startswith(dotfiles_path ~ '/')
-  with_items: '{{ unlink_stat.results }}'
-
 - name: check dir stat
   stat:
     path: '{{ home_path }}/{{ item }}'

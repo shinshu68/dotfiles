@@ -22,34 +22,6 @@
     - functions
     - completions
 
-# 以前はファイルごとにリンクしていたので、dotfiles を指すリンク (リンク切れを含む) を消す
-- name: find old fish links
-  find:
-    paths:
-      - '{{ home_path }}/.config/fish'
-      - '{{ home_path }}/.config/fish/functions'
-      - '{{ home_path }}/.config/fish/completions'
-    file_type: link
-    excludes:  '{{ fish_link_files }}'
-  register: old_fish_links
-
-- name: check old fish links
-  stat:
-    path: '{{ item.path }}'
-  loop_control:
-    label: '{{ item.path | basename }}'
-  with_items: '{{ old_fish_links.files }}'
-  register: old_fish_links_stat
-
-- name: remove old fish links
-  file:
-    path:  '{{ item.stat.path }}'
-    state: absent
-  loop_control:
-    label: '{{ item.stat.path | basename }}'
-  when: item.stat.lnk_source.startswith(dotfiles_fish_config_path)
-  with_items: '{{ old_fish_links_stat.results }}'
-
 - name: check fish config destinations
   stat:
     path: '{{ home_path }}/.config/fish/{{ item }}'
@@ -83,16 +55,10 @@
   failed_when: False
   changed_when: False
 
-# fisher 3 が残っていると 4 系のインストールがファイルの衝突で失敗するので、先に消す
-- name: uninstall fisher 3
-  shell: |
-    fish -lc "fisher self-uninstall"
-  when: fisher_version.rc == 0 and 'version 3.' in fisher_version.stdout
-
 - name: install fisher
   shell: |
     fish -lc "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
-  when: fisher_version.rc != 0 or 'version 4.' not in fisher_version.stdout
+  when: fisher_version.rc != 0
 
 # fish_plugins に書かれたプラグインを入れ、書かれていないものは消す
 - name: update fisher and plugins

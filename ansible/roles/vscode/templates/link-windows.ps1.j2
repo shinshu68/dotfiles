@@ -3,7 +3,7 @@ $ProgressPreference    = 'SilentlyContinue'
 $wsl   = '\\wsl.localhost\{{ wsl_distro_name }}'
 $items = @(
     @{ Link = Join-Path $env:APPDATA 'Code\User\settings.json'; Target = $wsl + ('{{ dotfiles_path }}/{{ vscode.settings }}' -replace '/', '\') }
-{% for src, dest in (vscode.windows_link | default({})).items() %}
+{% for src, dest in vscode.windows_link.items() %}
     @{ Link = Join-Path $env:USERPROFILE ('{{ dest }}' -replace '/', '\'); Target = $wsl + ('{{ dotfiles_path }}/{{ src }}' -replace '/', '\') }
 {% endfor %}
 )

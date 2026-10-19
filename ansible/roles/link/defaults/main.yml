@@ -1,9 +1,7 @@
 # 値は group_vars/all.yml で設定する
 link:        {}
-unlink:      []
 local_files: []
 
 # 他のロールから import_role で別のリンク一覧を渡せるようにする
 link_items:        '{{ link }}'
-unlink_items:      '{{ unlink }}'
 local_files_items: '{{ local_files }}'
