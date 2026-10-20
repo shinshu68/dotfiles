@@ -41,7 +41,7 @@ PC用のツールは `mcp__remote-devices__` で始まる(見当たらなけれ�
    フォルダが存在しないと言われたら、「WSL で `skill-push <スキル名>` を実行してから、もう一度 /skill-sync を」と伝えて止まる。
 2. `device_list_dir`(recursive)で中身を見る。直下にあって `SKILL.md` を含むフォルダが、反映対象のスキル。
    1つも無ければ、同じく `skill-push` の実行を案内して止まる。
-3. ユーザーがスキル名を指定していれば、そのスキルだけに絞る(手順3の `--only`)。
+3. ユーザーがスキル名を指定していれば、そのスキルだけに絞る。
 
 ### 2. ファイルを取り込む
 
@@ -52,8 +52,12 @@ PC用のツールは `mcp__remote-devices__` で始まる(見当たらなけれ�
 ### 3. 差分を確認して .skill を作る
 
 ```bash
-python3 <このスキルのディレクトリ>/scripts/package_skills.py /mnt/user-data/uploads/skill-sync --out /mnt/user-data/outputs/skill-sync [--only <名前> ...]
+python3 <このスキルのディレクトリ>/scripts/package_skills.py /mnt/user-data/uploads/skill-sync --out /mnt/user-data/outputs/skill-sync --only <名前> [<名前> ...]
 ```
+
+`--only` には、手順1で決めた対象のスキル名(PC の受け渡しフォルダに今あるもの)を全部渡す。必須にしてある。
+取り込み先の `/mnt/user-data/uploads/skill-sync/` には、同じセッションで前回取り込んだスキルが
+残っていることがあり、フォルダの中身だけで対象を決めると前回分が混ざるため。
 
 スクリプトがやること:
 - 登録済みの版(インストール済みスキルの置き場所を自動で探す)とファイル単位で比べ、状態を判定する

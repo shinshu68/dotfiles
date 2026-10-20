@@ -2,10 +2,13 @@
 """受け渡しフォルダに置かれたスキルを、デスクトップ版へ登録できる .skill にまとめるスクリプト。
 
 使い方:
-  python3 package_skills.py <受け渡しフォルダを置いた場所> [--only 名前 ...] [--out <dir>]
+  python3 package_skills.py <受け渡しフォルダを置いた場所> --only 名前 [名前 ...] [--out <dir>]
                             [--installed-root <dir> ...] [--force]
 
-  <受け渡しフォルダを置いた場所> の直下にある、SKILL.md を持つフォルダをそれぞれ1スキルとして扱う。
+  <受け渡しフォルダを置いた場所> の直下にある、SKILL.md を持つフォルダのうち、--only で指定したものを
+  それぞれ1スキルとして扱う。--only は必須。取り込み先には同じセッションで前回取り込んだスキルが
+  残っていることがあり、フォルダの中身だけで対象を決めると前回分が混ざるため、PC の受け渡しフォルダに
+  今あるスキル名を必ず渡してもらう。
   スキルごとに、いま登録されている版(インストール済みのスキル)と比べて差分を出し、
   変わっているものだけ <out>/<name>.skill を作る。
 
@@ -138,7 +141,8 @@ def package(name: str, files: dict, out: Path) -> Path:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("src", help="スキルフォルダが並んでいる受け渡しフォルダ")
-    ap.add_argument("--only", nargs="*", default=None, help="対象をこのスキル名だけに絞る")
+    ap.add_argument("--only", nargs="+", required=True,
+                    help="対象のスキル名(PC の受け渡しフォルダに今あるもの。前回の取り込み分を混ぜないため必須)")
     ap.add_argument("--out", default="skill-sync-out")
     ap.add_argument("--installed-root", action="append", default=None,
                     help="インストール済みスキルの置き場所(省略時は自動で探す)")
@@ -153,12 +157,9 @@ def main():
     roots = [Path(r) for r in args.installed_root] if args.installed_root else default_installed_roots()
 
     skill_dirs = sorted(d for d in src.iterdir() if d.is_dir() and (d / "SKILL.md").is_file())
-    if args.only:
-        wanted = {w.split(":")[-1] for w in args.only}
-        missing = wanted - {d.name for d in skill_dirs}
-        skill_dirs = [d for d in skill_dirs if d.name in wanted]
-    else:
-        missing = set()
+    wanted = {w.split(":")[-1] for w in args.only}
+    missing = wanted - {d.name for d in skill_dirs}
+    skill_dirs = [d for d in skill_dirs if d.name in wanted]
 
     summary, report = [], []
     for d in skill_dirs:
