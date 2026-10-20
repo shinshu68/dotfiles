@@ -337,3 +337,38 @@ Riverpod
 # ===== wakeup-alarm =====
 # その他 (このリポジトリ名の一部)
 wakeup
+
+# ===== x-video-saver =====
+# SMB 接続に使うライブラリ名と、それが取り込む依存ライブラリ名 (docs/x-video-saver-storage-plan.md)
+mbassador
+smbj
+# Android の API の定数名・クラス名・属性名・Kotlin のライブラリ名・R8 のルール名 (docs/x-video-saver-storage-plan.md・Kotlin のコード・AndroidManifest.xml)
+dontwarn
+kotlinx
+Persistable
+Recents
+UNMETERED
+# Windows のファイルシステム名 (docs/x-video-saver-storage-plan.md の Windows 側の設定)
+NTFS
+# Gradle の設定名・ファイル名と JVM のオプション名 (android/ 配下の Flutter の雛形)
+allprojects
+dists
+gradlew
+jvmargs
+Metaspace
+# Flutter の雛形が生成するファイル名・パッケージ名・設定のコメント (.gitignore・.metadata・pubspec.yaml)
+buildlog
+cupertino
+pbxproj
+pubspec
+Schyler
+swiftpm
+Symbolication
+xcodeproj
+# このアプリの識別子の一部と、動画の取得元のサービス名・ホスト名 (lib/・test/・docs/plan.md)
+fxtwitter
+resaving
+twimg
+# その他 (Windows の共有フォルダに接続するアカウント名の例、URL 解析の例示用のホスト名)
+notx
+xvsaver
