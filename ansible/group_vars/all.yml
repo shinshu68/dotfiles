@@ -36,10 +36,11 @@ pip:
 
 claude:
   link:
-    claude/CLAUDE.md:     .claude/CLAUDE.md
-    claude/commands:      .claude/commands
-    claude/settings.json: .claude/settings.json
-    claude/skills:        .claude/skills
+    claude/CLAUDE.md:        .claude/CLAUDE.md
+    claude/commands:         .claude/commands
+    claude/keybindings.json: .claude/keybindings.json
+    claude/settings.json:    .claude/settings.json
+    claude/skills:           .claude/skills
 
   # dotfiles では管理しないが、WSL 側の実体を Windows 側からも参照させるディレクトリ (ホームからの相対パス)
   windows_share:
