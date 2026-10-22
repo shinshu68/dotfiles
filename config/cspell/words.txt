@@ -243,7 +243,8 @@ NOPASSWD
 pynvim
 startswith
 userdel
-# Windows・WSL・PowerShell・Git Bash のコマンド名・オプション名・環境変数名・フォルダ名
+# Windows・WSL・PowerShell・Git Bash のコマンド名・オプション名・環境変数名・フォルダ名・パッケージファミリー名の一部
+bbwe
 HKCU
 LASTEXITCODE
 LOCALAPPDATA
@@ -252,6 +253,7 @@ nologo
 PATHCONV
 Sysnative
 USERPROFILE
+wekyb
 windir
 winget
 WSLENV

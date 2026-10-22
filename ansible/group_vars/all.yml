@@ -86,6 +86,17 @@ vscode:
   # .vsix の作成に npx で使う @vscode/vsce のバージョン
   vsce_version: '4.0.0'
 
+# Windows Terminal の設定ファイルに足すアクションとキーの割り当て
+# id のアクションがなければ足し、keys が別の操作に割り当て済みなら上書きしない
+windows_terminal:
+  actions:
+    # Ctrl+Enter を Enter と区別して送り、Claude Code の CLI で送信できるようにする (CSI u 形式)
+    - id:   User.sendCtrlEnter
+      keys: ctrl+enter
+      command:
+        action: sendInput
+        input:  "\u001b[13;5u"
+
 link:
   config/cspell:        .config/cspell
   config/nvim:          .config/nvim

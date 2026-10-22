@@ -1,0 +1,5 @@
+# WSL のディストリビューション名。WSL 以外では空になる
+wsl_distro_name: '{{ lookup("env", "WSL_DISTRO_NAME") }}'
+
+# winget (Microsoft Store 版) で入れた Windows Terminal の設定ファイル
+settings_path: '{{ local_app_data.stdout }}/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json'

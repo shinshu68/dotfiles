@@ -22,5 +22,7 @@
       tags: ['claude']
     - role: vscode
       tags: ['vscode']
+    - role: windows_terminal
+      tags: ['windows_terminal']
     - role: link
       tags: ['link']

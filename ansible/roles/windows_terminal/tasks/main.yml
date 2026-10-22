@@ -1,0 +1,40 @@
+# Windows 側の Windows Terminal を設定するので、WSL 以外では何もしない
+- block:
+  - name: get windows local app data path
+    shell: |
+      wslpath -u "$(cmd.exe /c echo %LOCALAPPDATA% | tr -d '\r')"
+    args:
+      chdir: /mnt/c
+    register: local_app_data
+    changed_when: False
+    check_mode: no
+
+  - name: check windows terminal settings
+    stat:
+      path: '{{ settings_path }}'
+    register: settings_stat
+
+  # 設定ファイルは Windows Terminal を一度起動すると作られる
+  - name: warn missing windows terminal settings
+    debug:
+      msg: 'Windows Terminal の設定ファイルがないため、設定の追加を飛ばしました: {{ settings_path }}'
+    when: not settings_stat.stat.exists
+
+  # ファイル全体は管理せず、足りないアクションとキーの割り当てだけを足す
+  # --check のときもスクリプトは実行し、書き込みだけを止めて結果を返させる
+  - block:
+    - name: add actions to windows terminal settings
+      command: |
+        python3 {{ role_path }}/files/merge-settings.py
+      args:
+        stdin: '{{ {"path": settings_path, "actions": windows_terminal.actions, "check": ansible_check_mode} | to_json }}'
+      register: merge_result
+      changed_when: (merge_result.stdout | from_json).changed
+      check_mode: no
+
+    - name: warn conflicting key bindings
+      debug:
+        msg: '{{ (merge_result.stdout | from_json).warnings }}'
+      when: (merge_result.stdout | from_json).warnings | length > 0
+    when: settings_stat.stat.exists and windows_terminal.actions | length > 0
+  when: wsl_distro_name != ""
