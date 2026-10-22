@@ -341,17 +341,33 @@ Riverpod
 wakeup
 
 # ===== x-video-saver =====
-# SMB 接続に使うライブラリ名と、それが取り込む依存ライブラリ名 (docs/x-video-saver-storage-plan.md)
+# SMB 接続に使うライブラリ名と、それが取り込む依存ライブラリ名・パッケージ名 (docs/x-video-saver-storage-plan.md・Kotlin のコード・proguard-rules.pro)
+bcprov
+bouncycastle
+engio
+hierynomus
+javax
+jgss
 mbassador
+mbassy
+msdtyp
+mserref
+mssmb
 smbj
-# Android の API の定数名・クラス名・属性名・Kotlin のライブラリ名・R8 のルール名 (docs/x-video-saver-storage-plan.md・Kotlin のコード・AndroidManifest.xml)
+# Android の API の定数名・クラス名・属性名・Kotlin のライブラリ名・R8 のルール名・ルールファイル名 (docs/x-video-saver-storage-plan.md・Kotlin のコード・AndroidManifest.xml)
 dontwarn
+keepattributes
+keepclassmembers
 kotlinx
 Persistable
+proguard
 Recents
 UNMETERED
-# Windows のファイルシステム名 (docs/x-video-saver-storage-plan.md の Windows 側の設定)
+# Windows のファイルシステム名・レジストリのキー名・認証方式名 (docs/x-video-saver-storage-plan.md の Windows 側の設定)
+HKLM
 NTFS
+NTLM
+Winlogon
 # Gradle の設定名・ファイル名と JVM のオプション名 (android/ 配下の Flutter の雛形)
 allprojects
 dists
@@ -371,6 +387,9 @@ xcodeproj
 fxtwitter
 resaving
 twimg
-# その他 (Windows の共有フォルダに接続するアカウント名の例、URL 解析の例示用のホスト名)
+# その他 (Windows の共有フォルダに接続するアカウント名の例、URL 解析の例示用のホスト名、テストの架空のユーザー名・保存先の種類)
 notx
+sampleuser
+webdav
+xvideosaver
 xvsaver
