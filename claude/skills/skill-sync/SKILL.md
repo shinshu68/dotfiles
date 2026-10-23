@@ -38,7 +38,7 @@ PC用のツールは `mcp__remote-devices__` で始まる(見当たらなけれ�
 
 1. `get_device_info` の `connectedFolders` に `SYNC_DIR` があるか見る。無ければ
    `device_request_folder_access` で `~/skill-sync` へのアクセスを1回だけ求める。
-   フォルダが存在しないと言われたら、「WSL で `skill-push <スキル名>` を実行してから、もう一度 /skill-sync を」と伝えて止まる。
+   フォルダが存在しないと言われたら、「WSL で `skill-push <スキル名>` を実行してから、もう一度 `/skill-sync` を」と伝えて止まる。
 2. `device_list_dir`(recursive)で中身を見る。直下にあって `SKILL.md` を含むフォルダが、反映対象のスキル。
    1つも無ければ、同じく `skill-push` の実行を案内して止まる。
 3. ユーザーがスキル名を指定していれば、そのスキルだけに絞る。
