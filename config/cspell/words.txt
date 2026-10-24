@@ -364,7 +364,8 @@ Persistable
 proguard
 Recents
 UNMETERED
-# Windows のファイルシステム名・レジストリのキー名・認証方式名 (docs/x-video-saver-storage-plan.md の Windows 側の設定)
+# Windows のファイルシステム名・レジストリのキー名・認証方式名・プロセス名 (docs/x-video-saver-storage-plan.md の Windows 側の設定・docs/plan.md の Windows 側の設定)
+dllhost
 HKLM
 NTFS
 NTLM
