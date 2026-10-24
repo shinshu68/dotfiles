@@ -269,11 +269,12 @@ mkdn
 bento
 gitmoji
 thumbsup
-# Claude Code のプラグイン名の一部と、スキル名・スキルの評価用ディレクトリ名
+# Claude Code のプラグイン名の一部と、スキル名・スキルの評価用ディレクトリ名・code-review の effort レベル名
 cowork
 evals
 prefs
 reask
+xhigh
 # Python・Node のバージョン管理ツールが読むファイル名 (config/mise/config.toml)
 nvmrc
 # その他 (例示用の名前、チートシート、このリポジトリの作者名)
