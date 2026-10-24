@@ -1,17 +1,26 @@
 {
+  "syncClaudeAiSkills": false,
   "attribution": {
     "commit": "",
     "pr": ""
   },
-  "editorMode": "vim",
-  "enabledPlugins": {
-    "cowork-plugin-management@synced": false
-  },
-  "language": "japanese",
   "skillOverrides": {
     "project-init": "off",
     "skill-export": "off"
   },
-  "syncClaudeAiSkills": false,
-  "theme": "dark"
+  "enabledPlugins": {
+    "cowork-plugin-management@synced": false,
+    "usage-guard@dotfiles": true
+  },
+  "extraKnownMarketplaces": {
+    "dotfiles": {
+      "source": {
+        "source": "directory",
+        "path": "/home/shinshu/dotfiles/claude/plugins"
+      }
+    }
+  },
+  "language": "japanese",
+  "theme": "dark",
+  "editorMode": "vim"
 }
