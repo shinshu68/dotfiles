@@ -15,8 +15,10 @@
   "extraKnownMarketplaces": {
     "dotfiles": {
       "source": {
-        "source": "directory",
-        "path": "/home/shinshu/dotfiles/claude/plugins"
+        "source": "github",
+        "repo": "shinshu68/dotfiles",
+        "path": "claude/plugins/.claude-plugin/marketplace.json",
+        "sparsePaths": ["claude/plugins"]
       }
     }
   },
