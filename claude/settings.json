@@ -9,18 +9,7 @@
     "skill-export": "off"
   },
   "enabledPlugins": {
-    "cowork-plugin-management@synced": false,
-    "usage-guard@dotfiles": true
-  },
-  "extraKnownMarketplaces": {
-    "dotfiles": {
-      "source": {
-        "source": "github",
-        "repo": "shinshu68/dotfiles",
-        "path": "claude/plugins/.claude-plugin/marketplace.json",
-        "sparsePaths": ["claude/plugins"]
-      }
-    }
+    "cowork-plugin-management@synced": false
   },
   "language": "japanese",
   "theme": "dark",
