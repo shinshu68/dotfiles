@@ -4,3 +4,4 @@ __pycache__/
 
 claude/skills/synced
 claude/skills/.trash
+claude/plugins/*/.claude-plugin/types/
