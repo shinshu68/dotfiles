@@ -6,12 +6,6 @@ const WINDOW_LABELS: Readonly<Record<string, string>> = {
   seven_day: '7日枠',
 }
 
-/** ステータス欄で使う短い表示名 */
-const SHORT_LABELS: Readonly<Record<string, string>> = {
-  five_hour: '5h',
-  seven_day: '7d',
-}
-
 /** ISO 8601 のリセット時刻を「2026-10-25 18:00」の形にする (ローカル時刻) */
 const formatResetsAt = (iso: string | undefined): string | undefined => {
   if (iso === undefined) return undefined
@@ -56,13 +50,4 @@ export const register: Register = (on, options) => {
 
     return { ...ran, context: [...(ran.context ?? []), message] }
   }).catch(($, e, next) => next(e)) // 失敗してもツールの実行は妨げない (呼び済みなら結果を再生する)
-
-  // ステータス欄に常に使用率を出す
-  on('session.measure', ($, e, next) => {
-    const parts = e.rateLimits
-      .filter(l => l.kind in SHORT_LABELS)
-      .map(l => `${SHORT_LABELS[l.kind]} ${l.percentUsed}%`)
-    $.ui.status(parts.length === 0 ? undefined : parts.join(' / '))
-    return next(e)
-  })
 }
