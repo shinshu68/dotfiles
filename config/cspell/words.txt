@@ -396,3 +396,14 @@ sampleuser
 webdav
 xvideosaver
 xvsaver
+
+# ===== video-streamer =====
+# Go のビルド用の環境変数名
+GOARCH
+# ffmpeg のオプション名・値
+faststart
+movflags
+# mp4 のボックス名
+moov
+# その他 (比較対象のメディアサーバー名)
+Jellyfin
