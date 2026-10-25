@@ -385,8 +385,9 @@ Schyler
 swiftpm
 Symbolication
 xcodeproj
-# このアプリの識別子の一部と、動画の取得元のサービス名・ホスト名 (lib/・test/・docs/plan.md)
+# このアプリの識別子の一部と、動画の取得元のサービス名・ホスト名 (lib/・test/・docs/plan.md・Kotlin のコード)
 fxtwitter
+redownloaded
 resaving
 twimg
 # その他 (Windows の共有フォルダに接続するアカウント名の例、URL 解析の例示用のホスト名、テストの架空のユーザー名・保存先の種類)
