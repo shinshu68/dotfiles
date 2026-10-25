@@ -10,7 +10,7 @@ description: 新しいプロジェクトのディレクトリ(git init前で、C
 - ローカル: `main` に空コミット「:tada: First Commit」と、マージ済みブランチを削除するワークフローを追加するコミットがあり、そこから `develop` を作成済み
 - リモート: GitHubに同じ名前のリポジトリがあり、`main` と `develop` がpush済み(`origin` に設定)
 - pj-status: WSL 側の `~/.claude/skills/pj-status/projects.txt` にこのプロジェクトのディレクトリが追加済み
-- 作業ブランチ: `develop` から `docs/add-project-docs` を作り、CLAUDE.md と docs/ 配下をステージして、commit-suggest でコミットメッセージの候補を出した状態
+- 作業ブランチ: `develop` から `docs/add-project-docs` を作り、CLAUDE.md(モノレポ構成ならサブディレクトリのものも)と docs/ 配下をステージして、commit-suggest でコミットメッセージの候補を出した状態
 
 ## 前提条件
 
@@ -153,16 +153,29 @@ bash scripts/register_pj_status.sh
 
 CLAUDE.md や docs/ 配下のドキュメントは、`develop` に直接コミットせず、作業ブランチからPRで入れる。ほかの作業と同じ流れ(ブランチ → コミット → `/pr` → マージ → `/pr-done`)にそろえるため。
 
+まず対象のファイルを洗い出す。
+
+```bash
+git ls-files --others --exclude-standard -- ':(glob)**/CLAUDE.md' ':(glob)docs/**' ':(exclude,glob)**/node_modules/**'
+```
+
+1件以上あれば、ブランチを作ってステージする。
+
 ```bash
 git switch -c docs/add-project-docs
-git add CLAUDE.md docs/
+git ls-files -z --others --exclude-standard -- ':(glob)**/CLAUDE.md' ':(glob)docs/**' ':(exclude,glob)**/node_modules/**' | xargs -0 -r git add --
 git status --short
 ```
 
 - ブランチは `develop`(手順6の時点でいるブランチ)から作る。名前は `docs/add-project-docs` で固定
-- ステージするのは **`CLAUDE.md` と `docs/` 配下のすべて**。project-init が plan.md 以外に docs/ 配下の複数ファイルを作っている場合があるので、ファイル名を決め打ちせず `docs/` ごと入れる。存在しない方はコマンドから外す
-- それ以外の未追跡ファイル(ソースコード、`.env`、`.claude/` など)はステージしない。意図せずコミットされると困るものが混ざりうるため。`git status --short` に `??` で残ったファイルがあれば、報告で「ステージしていないファイル」として名前だけ伝える
-- `CLAUDE.md` も `docs/` もない場合は、ブランチを作らずに手順10も飛ばし、ドキュメントが見つからなかったことを伝えて終わる
+- ステージするのは次の2種類:
+  - **すべての階層の `CLAUDE.md`**: ルートの `CLAUDE.md` に加えて、モノレポ構成で各サブプロジェクトのディレクトリに置かれた `CLAUDE.md`(例: `apps/mobile/CLAUDE.md`、`packages/ui/CLAUDE.md`)も含める。単一プロジェクトならルートの1つだけが対象になる
+  - **ルートの `docs/` 配下のすべて**: project-init が plan.md 以外に docs/ 配下の複数ファイルを作っている場合があるので、ファイル名を決め打ちせず `docs/` ごと入れる
+- `**/node_modules/**` の中の `CLAUDE.md` は、依存パッケージに同梱されたもので自分のプロジェクトのドキュメントではないので除外する。`.gitignore` で無視されているファイルも `--exclude-standard` で除外される
+- `CLAUDE.local.md` は個人用のローカル設定なのでステージしない(ファイル名が `CLAUDE.md` と完全に一致するものだけが対象になるので、上のコマンドのままで含まれない)
+- それ以外の未追跡ファイル(ソースコード、`.env`、`.claude/`、サブプロジェクト内の `docs/` など)はステージしない。意図せずコミットされると困るものが混ざりうるため。`git status --short` に `??` で残ったファイルがあれば、報告で「ステージしていないファイル」として名前だけ伝える
+- ステージした `CLAUDE.md` が複数ある場合(モノレポ構成)は、報告でそのパスを一覧で伝える。どのサブプロジェクトのものが入ったかを確認できるようにするため
+- 洗い出しの結果が0件(`CLAUDE.md` も `docs/` もない)の場合は、ブランチを作らずに手順10も飛ばし、ドキュメントが見つからなかったことを伝えて終わる
 
 ### 10. commit-suggest を呼ぶ
 
@@ -182,6 +195,7 @@ git status --short
 | 同名リポジトリが既にある | 別の候補を考えて提示する |
 | 確認の段階でユーザーがやめた | 何も作成していないので、そのまま終わる |
 | CLAUDE.md・docs/ 以外の未追跡ファイルがある | ステージせず、ファイル名だけ伝える |
+| モノレポ構成でサブディレクトリにも CLAUDE.md がある | すべてステージし、報告でパスを一覧で伝える(node_modules 内のもの、CLAUDE.local.md は除く) |
 | pj-status への登録が `ERROR:` になった | 止まらずに続け、報告で理由と手での追加をお願いする |
 | 既に pj-status に登録されている(`ALREADY:`) | 何もせず、登録済みだったことだけ伝える |
 | `.github/workflows/delete-merged-branch.yml` が既にある | 上書きせず、既存のファイルをそのままコミットしてよいか確認時に聞く |
