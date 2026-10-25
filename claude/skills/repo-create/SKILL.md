@@ -1,6 +1,6 @@
 ---
 name: repo-create
-description: 新しいプロジェクトのディレクトリ(git init前で、CLAUDE.md と docs/plan.md がある状態)で、ローカルリポジトリの作成からmainブランチへの空コミット、マージ済みブランチを削除するGitHub Actionsワークフローの追加、developブランチの作成、GitHubリモートリポジトリの作成、main・developのpush、pj-statusスキルの対象一覧(WSL側のprojects.txt)への登録、さらにCLAUDE.mdやdocs/配下をコミットするための作業ブランチ(docs/add-project-docs)の作成・ステージ・commit-suggestの呼び出しまでを一気に行うスキル。リポジトリ名と一言の説明文はディレクトリ名・CLAUDE.md・docs/plan.mdから判断して候補を提示し、公開設定(public/private)と一緒に確認してから作成する。ユーザーが「/repo-create」と入力したとき、または「GitHubにリポジトリを作って」「リポジトリを初期化してGitHubに上げて」「git initからリモート作成までやって」「このプロジェクトをGitHubで管理し始めたい」のように、新しいプロジェクトのgit管理とリモート作成を始めたいと言ったときは必ずこのスキルを使うこと。
+description: 新しいプロジェクトのディレクトリ(git init前で、CLAUDE.md と docs/plan.md がある状態)で、ローカルリポジトリの作成からmainブランチへの空コミット、マージ済みブランチを削除するGitHub Actionsワークフローの追加、developブランチの作成、GitHubリモートリポジトリの作成、main・developのpush、pj-statusスキルの対象一覧(WSL側のprojects.txt)への登録とbacklogスキルの保存ファイル(WSL側のbacklog-data)の作成、さらにCLAUDE.mdやdocs/配下をコミットするための作業ブランチ(docs/add-project-docs)の作成・ステージ・commit-suggestの呼び出しまでを一気に行うスキル。リポジトリ名と一言の説明文はディレクトリ名・CLAUDE.md・docs/plan.mdから判断して候補を提示し、公開設定(public/private)と一緒に確認してから作成する。ユーザーが「/repo-create」と入力したとき、または「GitHubにリポジトリを作って」「リポジトリを初期化してGitHubに上げて」「git initからリモート作成までやって」「このプロジェクトをGitHubで管理し始めたい」のように、新しいプロジェクトのgit管理とリモート作成を始めたいと言ったときは必ずこのスキルを使うこと。
 ---
 
 # リポジトリ作成 (/repo-create)
@@ -10,6 +10,7 @@ description: 新しいプロジェクトのディレクトリ(git init前で、C
 - ローカル: `main` に空コミット「:tada: First Commit」と、マージ済みブランチを削除するワークフローを追加するコミットがあり、そこから `develop` を作成済み
 - リモート: GitHubに同じ名前のリポジトリがあり、`main` と `develop` がpush済み(`origin` に設定)
 - pj-status: WSL 側の `~/.claude/skills/pj-status/projects.txt` にこのプロジェクトのディレクトリが追加済み
+- バックログ: WSL 側の `~/.claude/backlog-data/<リポジトリ名>.md` が空の状態で作成済み
 - 作業ブランチ: `develop` から `docs/add-project-docs` を作り、CLAUDE.md(モノレポ構成ならサブディレクトリのものも)と docs/ 配下をステージして、commit-suggest でコミットメッセージの候補を出した状態
 
 ## 前提条件
@@ -131,13 +132,17 @@ git push -u origin develop
 - `main` を先にpushする。空のリポジトリに最初にpushしたブランチがGitHub上のデフォルトブランチになるため、`main` をデフォルトにするにはこの順番が必要
 - 途中で失敗したら、どこまで終わったかを伝えて止まる(例: ローカルは作成済みでリモート作成に失敗)。やり直しのために `.git` を消すなどの後始末は勝手にしない
 
-### 7. pj-status の対象に登録する
+### 7. pj-status の対象に登録し、バックログを作る
 
-リモートの作成とpushが終わったら、このプロジェクトのディレクトリを pj-status スキルの対象一覧に追加する。新しいプロジェクトを作るたびに手で書き足す手間をなくし、登録漏れを防ぐため。
+リモートの作成とpushが終わったら、このプロジェクトを pj-status スキルの対象一覧に追加し、backlog スキルの保存ファイルも作る。新しいプロジェクトを作るたびに手で用意する手間をなくし、pj-status で「バックログがありません」と出る状態を残さないため。
 
 ```bash
 bash scripts/register_pj_status.sh
+bash scripts/create_backlog.sh "<リポジトリ名>"
 ```
+
+#### pj-status への登録(register_pj_status.sh)
+
 
 - 一覧は **WSL 側の `~/.claude/skills/pj-status/projects.txt`** で一元管理している。スクリプトは Windows 側(Git Bash)から実行された場合も `wsl.exe` 経由で WSL の中のこのファイルを編集し、パスも WSL の形式(`~/...` など)に変換して書く。Windows 側の `projects.txt` を探したり作ったりはしない
 - プロジェクトディレクトリ(カレントディレクトリ)で実行する。ホームの下なら `~/work/xxx` のように `~` で書かれる
@@ -145,9 +150,18 @@ bash scripts/register_pj_status.sh
 - 出力の最終行で結果がわかる: `ADDED:`(追加した)、`ALREADY:`(登録済みなので何もしていない)、`ERROR:`(追加できなかった)。`projects.txt` が無ければひな形から作られ、`INFO:` が出る
 - `ERROR:` でもリポジトリ作成そのものは終わっているので、止まらずに次の手順へ進み、報告で理由と「手で `projects.txt` に追加してほしい」ことを伝える
 
+#### バックログの作成(create_backlog.sh)
+
+- 作るのは **WSL 側の `~/.claude/backlog-data/<リポジトリ名>.md`**。pj-status と同じく、Windows 側から実行された場合も `wsl.exe` 経由で WSL の中に作る。フォルダが無ければ作成する
+- ファイル名には、手順6で作成した **GitHub のリポジトリ名**(手順4で確定した名前。PascalCase ならそのまま)を使う。pj-status はリモート origin のリポジトリ名を最優先にバックログを探し、backlog スキルも git のリポジトリ名を優先するので、ディレクトリ名とリポジトリ名が違っても両方のスキルで同じファイルが使われるようにするため
+- 中身は backlog スキルのフォーマットに合わせた、タスクが空の状態(「進行中」「未着手」「完了」の見出しだけ)。タスクの追加は、このあとユーザーが backlog スキルで行う
+- backlog スキルは新規作成の前にユーザーへ確認する決まりだが、ここでは手順4で作成の確認が済んでいるので、あらためて聞かない
+- 出力の最終行で結果がわかる: `CREATED:`(作成した)、`EXISTS:`(既にあるので何もしていない。中身は上書きしない)、`ERROR:`(作成できなかった)
+- `ERROR:` の場合も止まらずに次の手順へ進み、報告で理由と「backlog スキルで作成してほしい」ことを伝える
+
 ### 8. 結果を伝える
 
-作成したリポジトリのURL(`gh repo create` の出力に含まれる)と、`main`・`develop` をpushしたこと、マージ済みブランチを削除するワークフローを入れたこと、pj-status の対象に追加したか(手順7の結果)を短く伝える。この報告は手順9・10より**先に**出す。このあとコミットメッセージの候補が続くので、リポジトリ作成の結果が候補の下に埋もれないようにするため。
+作成したリポジトリのURL(`gh repo create` の出力に含まれる)と、`main`・`develop` をpushしたこと、マージ済みブランチを削除するワークフローを入れたこと、pj-status の対象に追加したか・バックログを作成したか(手順7の結果)を短く伝える。この報告は手順9・10より**先に**出す。このあとコミットメッセージの候補が続くので、リポジトリ作成の結果が候補の下に埋もれないようにするため。
 
 ### 9. プロジェクトのドキュメント用ブランチを作ってステージする
 
@@ -198,4 +212,6 @@ git status --short
 | モノレポ構成でサブディレクトリにも CLAUDE.md がある | すべてステージし、報告でパスを一覧で伝える(node_modules 内のもの、CLAUDE.local.md は除く) |
 | pj-status への登録が `ERROR:` になった | 止まらずに続け、報告で理由と手での追加をお願いする |
 | 既に pj-status に登録されている(`ALREADY:`) | 何もせず、登録済みだったことだけ伝える |
+| バックログのファイルが既にある(`EXISTS:`) | 上書きせず、既にあったことだけ伝える |
+| バックログの作成が `ERROR:` になった | 止まらずに続け、報告で理由と backlog スキルでの作成をお願いする |
 | `.github/workflows/delete-merged-branch.yml` が既にある | 上書きせず、既存のファイルをそのままコミットしてよいか確認時に聞く |
