@@ -407,3 +407,17 @@ movflags
 moov
 # その他 (比較対象のメディアサーバー名)
 Jellyfin
+
+# ===== TVClock =====
+# .NET のファイル形式・拡張子 (ソリューションファイルなど)
+slnx
+# Win32 のウィンドウのクラス名・ウィンドウスタイルの定数名
+Progman
+TOOLWINDOW
+# 画像の画素形式の名前 (tools/New-AppIcon.ps1)
+Argb
+BGRA
+# PowerShell の型名
+pscustomobject
+# Windows のフォント名 (テストで使う)
+Segoe
