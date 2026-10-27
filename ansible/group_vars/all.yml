@@ -66,6 +66,7 @@ vscode:
   extensions:
     - anthropic.claude-code
     - eamodio.gitlens
+    - golang.go
     - mhutchie.git-graph
     - ms-ceintl.vscode-language-pack-ja
     - ms-python.isort

@@ -3,6 +3,7 @@
 [tools]
 python = "3.14.7"
 node = "lts"
+go = "latest"
 uv = "latest"
 "npm:cspell" = "latest"
 "npm:wsl-open" = "latest"
