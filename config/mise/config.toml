@@ -1,7 +1,7 @@
 # mise で入れるツールとバージョン。ansible の mise ロールが mise install で入れる
 # ~/.config/mise/config.toml にリンクするので、mise use -g の結果もこのファイルに入る
 [tools]
-python = "3.14.7"
+python = "latest"
 node = "lts"
 go = "latest"
 uv = "latest"
