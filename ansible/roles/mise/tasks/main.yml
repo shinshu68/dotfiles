@@ -12,3 +12,10 @@
     mise install --yes
   register: mise_install
   changed_when: "'all tools are installed' not in mise_install.stderr"
+
+# mise install は latest・lts に合う版が1つでも入っていれば新しい版を入れないので、upgrade で追従させる
+- name: upgrade mise tools
+  command: |
+    mise upgrade --yes
+  register: mise_upgrade
+  changed_when: "'All tools are up to date' not in mise_upgrade.stderr"
