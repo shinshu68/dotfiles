@@ -6,7 +6,8 @@
   },
   "skillOverrides": {
     "project-init": "off",
-    "skill-export": "off"
+    "skill-export": "off",
+    "skill-sync": "off"
   },
   "enabledPlugins": {
     "cowork-plugin-management@synced": false
