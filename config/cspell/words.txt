@@ -400,12 +400,29 @@ xvsaver
 # ===== video-streamer =====
 # Go のビルド用の環境変数名
 GOARCH
-# ffmpeg のオプション名・値
+# ffmpeg のオプション名・値・入力形式名・フィルター名 (ffprobe の出力形式のオプションを含む)
 faststart
+lavfi
+loglevel
 movflags
+nokey
+noprint
+nostdin
+testsrc
+# ffmpeg に同梱のコマンド名
+ffprobe
 # mp4 のボックス名
 moov
-# その他 (比較対象のメディアサーバー名)
+# このプロジェクトの Go のパッケージ名
+httpapi
+# adb・エミュレーターのコマンド名 (android/CLAUDE.md の動作確認の手順)
+screencap
+screenrecord
+uiautomator
+# winget のパッケージ ID (docs/deployment.md)
+Gyan
+# その他 (比較対象のメディアサーバー名、URL エンコードしたパスの断片)
+Foutside
 Jellyfin
 
 # ===== TVClock =====
