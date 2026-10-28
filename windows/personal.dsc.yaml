@@ -29,4 +29,11 @@ properties:
       settings:
         id: Vivaldi.Vivaldi
         source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Go をインストールする
+      settings:
+        id: GoLang.Go
+        source: winget
   configurationVersion: 0.2.0
