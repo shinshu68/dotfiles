@@ -277,8 +277,10 @@ reask
 xhigh
 # Python・Node のバージョン管理ツールが読むファイル名 (config/mise/config.toml)
 nvmrc
-# その他 (例示用の名前、チートシート、このリポジトリの作者名)
+# その他 (例示用の名前とその由来の語、チートシート、このリポジトリの作者名)
 cheatsheet
+fluvio
+fluvius
 hoge
 imeindicator
 shinshu
