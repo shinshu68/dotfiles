@@ -30,10 +30,6 @@ mise:
   link:
     config/mise: .config/mise
 
-pip:
-  packages:
-    - pynvim
-
 claude:
   link:
     claude/CLAUDE.md:        .claude/CLAUDE.md
