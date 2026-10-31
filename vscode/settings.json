@@ -215,6 +215,10 @@
         },
         "editor.colorDecorators": false
     },
+    // code コマンドにプレビューで開くオプションが無いので、pj-status の一覧だけ関連付けで開く
+    "workbench.editorAssociations": {
+        "**/pj-status/latest.md": "vscode.markdown.preview.editor"
+    },
 
     // JavaScript / TypeScript
     "js/ts.tsserver.checkNpmIsInstalled": false,
