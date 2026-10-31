@@ -37,6 +37,10 @@ for f in CLAUDE.md docs/plan.md; do
   fi
 done
 
+if [ -e .gitattributes ]; then
+  echo "WARNING: .gitattributes が既にあります(上書きしない)"
+fi
+
 if [ -e .github/workflows/delete-merged-branch.yml ]; then
   echo "WARNING: .github/workflows/delete-merged-branch.yml が既にあります(上書きしない)"
 fi
