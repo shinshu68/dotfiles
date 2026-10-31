@@ -14,7 +14,7 @@ description: 新しい開発プロジェクトを始めるときに、GitHub の
 次の URL から取得する。
 
 ```
-https://raw.githubusercontent.com/shinshu68/dotfiles/refs/heads/master/claude/CLAUDE.md
+https://raw.githubusercontent.com/shinshu68/dotfiles/refs/heads/main/claude/CLAUDE.md
 ```
 
 - bash の `curl -sS -w "%{http_code}"` で取得し、HTTP 200 であることを確認する

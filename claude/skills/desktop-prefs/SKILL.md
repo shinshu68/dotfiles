@@ -23,10 +23,10 @@ CLAUDE.md は Claude Code 向けに書かれていて、デスクトップ版で
 
 ### 1. CLAUDE.md を取得する
 
-次の URL から取得する (dotfiles リポジトリの master ブランチ。push 済みの内容が対象になる)。
+次の URL から取得する (dotfiles リポジトリの main ブランチ。push 済みの内容が対象になる)。
 
 ```
-https://raw.githubusercontent.com/shinshu68/dotfiles/refs/heads/master/claude/CLAUDE.md
+https://raw.githubusercontent.com/shinshu68/dotfiles/refs/heads/main/claude/CLAUDE.md
 ```
 
 - bash で `curl -sS -w "%{http_code}"` を使って取得し、HTTP 200 であることを確認する
