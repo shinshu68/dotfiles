@@ -2,6 +2,7 @@
 # Windows 側の受け渡しフォルダ(%USERPROFILE%\skill-sync)へコピーする。
 # コピー後、デスクトップ版で /skill-sync を実行すると .skill にまとめて登録できる。
 # skill-import(デスクトップ版 → dotfiles)の逆向き。
+# git 管理下では .gitignore で除外されるファイルはコピーしない。
 #
 # 使い方: skill-push <スキル名> [<スキル名> ...]
 #   引数なし、または -h/--help で使い方と、コピーできるスキルの一覧を表示する。
@@ -54,17 +55,34 @@ function skill-push --description 'dotfiles のスキルをデスクトップ版
     find $dest -mindepth 1 -delete; or return 1
 
     for name in $names
+        set -l src $src_root/$name
         mkdir -p $dest/$name
-        # skill-creator の作業用ファイルなどは登録に不要なので除く(-h でシンボリックリンクは実体をコピー)
-        tar -C $src_root/$name -ch \
-            --exclude=./evals --exclude='*-workspace' --exclude='*.skill' \
-            --exclude=__pycache__ --exclude='*.pyc' -f - . | tar -C $dest/$name -xf -
-        or begin
-            echo "エラー: $name のコピーに失敗しました" >&2
-            return 1
+        if git -C $src rev-parse --is-inside-work-tree >/dev/null 2>&1
+            # cp や tar のディレクトリ丸ごとのコピーでは .gitignore を解釈できないので、git に一覧を出させる
+            set -l files
+            for f in (git -C $src ls-files -z --cached --others --exclude-standard -- . | string split0)
+                # --cached には作業ツリーで削除済みのファイルも含まれる
+                test -e $src/$f; and set -a files $f
+            end
+            set files (string match -v -r '^evals/|(^|/)__pycache__/|(^|/)[^/]*-workspace(/|$)|\.pyc$|\.skill$|(^|/)\.gitignore$' -- $files)
+            set -l ignored (git -C $src ls-files --others --ignored --exclude-standard -- . | count)
+            # -h はシンボリックリンクを実体としてコピーするため
+            printf '%s\0' $files | tar -C $src -ch --null -T - -f - | tar -C $dest/$name -xf -
+            or begin
+                echo "エラー: $name のコピーに失敗しました" >&2
+                return 1
+            end
+            echo "コピーしました: $name ("(count $files)" ファイル、.gitignore で除外 $ignored ファイル)"
+        else
+            tar -C $src -ch \
+                --exclude=./evals --exclude='*-workspace' --exclude='*.skill' \
+                --exclude=__pycache__ --exclude='*.pyc' -f - . | tar -C $dest/$name -xf -
+            or begin
+                echo "エラー: $name のコピーに失敗しました" >&2
+                return 1
+            end
+            echo "コピーしました: $name ("(find $dest/$name -type f | count)" ファイル、git 管理外のため .gitignore は未適用)"
         end
-        set -l n (find $dest/$name -type f | count)
-        echo "コピーしました: $name ($n ファイル)"
     end
 
     echo "→ $dest"
