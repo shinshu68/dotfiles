@@ -423,6 +423,16 @@ screenrecord
 uiautomator
 # winget のパッケージ ID (docs/deployment.md)
 Gyan
+# Flutter の API 名の一部
+LTWH
+# Android のライブラリのパッケージ名・ビルドツール名
+aapt
+androidx
+# PowerShell のオプション名の一部 (docs/deployment.md)
+Dont
+# テスト名などに使う一般的な英単語
+Rescan
+Rescans
 # その他 (比較対象のメディアサーバー名、URL エンコードしたパスの断片)
 Foutside
 Jellyfin
