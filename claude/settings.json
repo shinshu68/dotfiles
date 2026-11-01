@@ -14,5 +14,12 @@
   },
   "language": "japanese",
   "theme": "dark",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "pluginConfigs": {
+    "usage-guard@synced": {
+      "options": {
+        "threshold": 95
+      }
+    }
+  }
 }
