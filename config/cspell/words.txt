@@ -457,7 +457,8 @@ pscustomobject
 Segoe
 
 # ===== fern-rove =====
-# Android 開発で使うライブラリ名・ツール名
+# Android・Flutter の開発で使うライブラリ名・ツール名
+inappwebview
 Jetpack
 ktlint
 # このアプリの名前 (アプリケーション ID・namespace の一部)
@@ -472,6 +473,7 @@ PDFSETTINGS
 pikepdf
 # Python の標準モジュール名・ライブラリ名・仮想環境のコマンド名 (CLAUDE.md・docs/plan.md)
 cookiejar
+pytest
 shutil
 tqdm
 venv
