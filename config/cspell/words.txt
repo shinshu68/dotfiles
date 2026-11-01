@@ -294,7 +294,9 @@ nuxi
 Nuxt
 ofetch
 Vuetify
-# PDF 処理・OCR のツール名・ライブラリ名・コマンドのオプション (表紙生成・ページ画像化、docs の技術比較)
+# PDF 処理・OCR のツール名・ライブラリ名・コマンドのオプション・PDF の構文キーワード (表紙生成・ページ画像化、docs の技術比較)
+nendobj
+nstartxref
 pdfinfo
 pdftoppm
 poppler
