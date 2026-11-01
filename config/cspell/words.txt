@@ -460,3 +460,21 @@ Jetpack
 ktlint
 # このアプリの名前 (アプリケーション ID・namespace の一部)
 fernrove
+
+# ===== komacomi =====
+# PDF・画像の圧縮で使うツール名・ライブラリ名・オプション名・圧縮方式名 (CLAUDE.md・docs/plan.md)
+CCITT
+ghostscript
+natsort
+PDFSETTINGS
+pikepdf
+# Python の標準モジュール名・ライブラリ名・仮想環境のコマンド名 (CLAUDE.md・docs/plan.md)
+cookiejar
+shutil
+tqdm
+venv
+# NAS のマウントで使うコマンド名・資格情報ファイル名の一部 (CLAUDE.md・docs/plan.md)
+mountpoint
+smbcredentials
+# その他 (このリポジトリ名)
+komacomi
