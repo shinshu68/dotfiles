@@ -343,6 +343,10 @@ yourname
 pdfrx
 pdfx
 Riverpod
+# Android エミュレーターの GPU 指定の名前 (CLAUDE.md の動作確認)
+swiftshader
+# Flutter の雛形のコメントに出る語 (lib/main.dart)
+appbar
 
 # ===== wakeup-alarm =====
 # その他 (このリポジトリ名の一部)
