@@ -246,9 +246,10 @@ NOPASSWD
 pynvim
 startswith
 userdel
-# Windows・WSL・PowerShell・Git Bash のコマンド名・オプション名・環境変数名・フォルダ名・パッケージファミリー名の一部
+# Windows・WSL・PowerShell・Git Bash のコマンド名・オプション名・環境変数名・フォルダ名・パッケージファミリー名の一部・winget のパッケージ ID の一部
 bbwe
 HKCU
+jqlang
 LASTEXITCODE
 LOCALAPPDATA
 mklink

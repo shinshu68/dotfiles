@@ -26,6 +26,13 @@ properties:
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: jq をインストールする (Claude Code のフックで使うため)
+      settings:
+        id: jqlang.jq
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: VS Code をインストールする
       settings:
         id: Microsoft.VisualStudioCode
