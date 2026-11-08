@@ -12,6 +12,18 @@
   "enabledPlugins": {
     "cowork-plugin-management@synced": false
   },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/skills/kickoff/scripts/session-title.sh\""
+          }
+        ]
+      }
+    ]
+  },
   "language": "japanese",
   "theme": "dark",
   "editorMode": "vim"
