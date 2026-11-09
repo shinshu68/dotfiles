@@ -25,6 +25,7 @@
     ]
   },
   "language": "japanese",
+  "outputStyle": "yua",
   "theme": "dark",
   "editorMode": "vim"
 }
