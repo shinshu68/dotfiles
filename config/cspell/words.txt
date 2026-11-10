@@ -348,8 +348,13 @@ Riverpod
 swiftshader
 # Flutter の雛形のコメントに出る語 (lib/main.dart)
 appbar
+# Flutter のクラス名の一部 (docs/architecture.md のビューア)
+Overscroll
 
 # ===== wakeup-alarm =====
+# 連携する外部サービス名・パッケージ名 (Alexa 連携: docs/alexa-integration.md・alexa-skill/・cloud_firestore)
+Alexa
+Firestore
 # その他 (このリポジトリ名の一部)
 wakeup
 
@@ -466,8 +471,12 @@ Segoe
 inappwebview
 Jetpack
 ktlint
+# 受け入れ条件の ID の接頭辞 (docs/plan.md・docs/roadmap.md)
+XHIST
 # このアプリの名前 (アプリケーション ID・namespace の一部)
 fernrove
+# その他 (改造版アプリの名前 ReVanced の一部)
+Vanced
 
 # ===== komacomi =====
 # PDF・画像の圧縮で使うツール名・ライブラリ名・オプション名・圧縮方式名 (CLAUDE.md・docs/plan.md)
@@ -487,3 +496,9 @@ mountpoint
 smbcredentials
 # その他 (このリポジトリ名)
 komacomi
+
+# ===== backlog-kanban =====
+# git の環境変数名 (テストで git の設定を切り離すのに使う)
+NOSYSTEM
+# Node.js・OS のエラーコード (README のトラブルシューティング)
+ENOENT
