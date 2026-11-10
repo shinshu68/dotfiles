@@ -266,7 +266,8 @@ wslpath
 argjson
 maxw
 tonumber
-# Markdown の拡張子
+# Markdown の拡張子・用語
+frontmatter
 mdwn
 mkdn
 # gitmoji とその絵文字コード
