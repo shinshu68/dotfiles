@@ -77,7 +77,7 @@ PC用のツールは `mcp__remote-devices__` で始まる(見当たらなけれ�
 
 短く伝える:
 - 書き出したスキル名と場所(`EXPORT_DIR\<name>`)
-- 「WSLで `skill-import` を実行するとdotfilesに取り込まれます」
+- WSLで `skill-import` を実行するとdotfilesに取り込まれること
 - 前回の書き出しが残っていた場合はその旨
 
 このスキルの役目はエクスポートまで。`skill-import` の実行や、`git add`・コミット・コミットメッセージの提案などは
