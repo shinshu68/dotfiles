@@ -25,6 +25,13 @@ properties:
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: ChatGPT のデスクトップアプリ (Codex を含む) をインストールする
+      settings:
+        id: OpenAI.ChatGPT
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: Vivaldi をインストールする
       settings:
         id: Vivaldi.Vivaldi
