@@ -158,6 +158,8 @@ WSL の Codex CLI (mise ロールで入れたもの) は、VS Code の WSL の�
 codex login
 ```
 
+Windows の Codex CLI (私用の PC で install.ps1 が入れたもの) は、デスクトップアプリと同じ `%USERPROFILE%\.codex\auth.json` を使うので、アプリでログインしていればログインは要りません。
+
 ## ansible を使わずに bash のプロンプトを入れる
 dotfiles を入れない bash の環境でも、`config/bash/prompt.bash` だけを手でコピーして使えます。bash 4.4 以降と git があれば動きます。
 

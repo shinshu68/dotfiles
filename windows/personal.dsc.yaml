@@ -32,6 +32,13 @@ properties:
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: Codex CLI をインストールする (Claude Code からコードレビューを頼むため)
+      settings:
+        id: OpenAI.Codex
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: Vivaldi をインストールする
       settings:
         id: Vivaldi.Vivaldi
