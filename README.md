@@ -152,6 +152,12 @@ Windows 側の gh (install.ps1 で入れたもの) は WSL とは別にログイ
 ### ChatGPT・Codex にログインする
 私用の PC では、ChatGPT のデスクトップアプリ (Codex を含む) を起動して ChatGPT のアカウントでログインします。VS Code の Codex 拡張 (`openai.chatgpt`) は、拡張の画面から同じアカウントでログインします。
 
+WSL の Codex CLI (mise ロールで入れたもの) は、VS Code の WSL のウィンドウで拡張にログインしていれば、同じ `~/.codex/auth.json` を使うのでログインは要りません。ログインしていなければ Ubuntu で実行します。
+
+```shell
+codex login
+```
+
 ## ansible を使わずに bash のプロンプトを入れる
 dotfiles を入れない bash の環境でも、`config/bash/prompt.bash` だけを手でコピーして使えます。bash 4.4 以降と git があれば動きます。
 

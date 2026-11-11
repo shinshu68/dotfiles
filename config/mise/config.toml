@@ -9,6 +9,7 @@ uv = "latest"
 "npm:wsl-open" = "latest"
 "npm:npm-check-updates" = "latest"
 "npm:@vue/cli" = "latest"
+"npm:@openai/codex" = "latest"
 
 [settings]
 # pyenv・nvm 用に書かれたプロジェクトの .python-version・.nvmrc も読む
