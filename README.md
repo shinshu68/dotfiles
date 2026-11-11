@@ -150,7 +150,7 @@ Windows 側の gh (install.ps1 で入れたもの) は WSL とは別にログイ
 `claude` を起動すると、初回はログインの手順が表示されます。Windows 側の VS Code の Claude Code 拡張は、拡張の画面からログインします。
 
 ### ChatGPT・Codex にログインする
-私用の PC では、ChatGPT のデスクトップアプリ (Codex を含む) を起動して ChatGPT のアカウントでログインします。
+私用の PC では、ChatGPT のデスクトップアプリ (Codex を含む) を起動して ChatGPT のアカウントでログインします。VS Code の Codex 拡張 (`openai.chatgpt`) は、拡張の画面から同じアカウントでログインします。
 
 ## ansible を使わずに bash のプロンプトを入れる
 dotfiles を入れない bash の環境でも、`config/bash/prompt.bash` だけを手でコピーして使えます。bash 4.4 以降と git があれば動きます。
