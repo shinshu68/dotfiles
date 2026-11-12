@@ -151,6 +151,27 @@ function Install-ImeCenterView {
     }
 }
 
+# Use the native installer instead of winget: a winget install does not update itself.
+# Once installed, Claude Code keeps itself up to date, so this only installs it when missing.
+function Install-ClaudeCode {
+    $binDir = Join-Path $env:USERPROFILE '.local\bin'
+
+    if (-not (Test-Path -LiteralPath (Join-Path $binDir 'claude.exe'))) {
+        Write-Output '==> install Claude Code'
+        # Run in a child process: the installer calls exit on failure, which would end this script too
+        powershell.exe -NoProfile -ExecutionPolicy Bypass -Command 'irm https://claude.ai/install.ps1 | iex'
+        if ($LASTEXITCODE -ne 0) { throw 'Claude Code install failed' }
+    }
+
+    # The installer only prints a note asking to add this to PATH by hand
+    $userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+    $entries  = @($userPath -split ';' | Where-Object { $_ })
+    if ($entries -notcontains $binDir) {
+        Write-Output "==> add $binDir to the user PATH"
+        [Environment]::SetEnvironmentVariable('Path', (($entries + $binDir) -join ';'), 'User')
+    }
+}
+
 # Returns $true when WSL was installed now (the setup continues inside Ubuntu).
 # Any Ubuntu distro counts as installed, since the existing one may be named just "Ubuntu".
 function Install-Wsl {
@@ -188,6 +209,7 @@ Install-Cica
 
 if ($isPersonal) {
     Install-ImeCenterView
+    Install-ClaudeCode
 }
 
 $wslInstalled = Install-Wsl

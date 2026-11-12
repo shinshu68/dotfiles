@@ -20,8 +20,9 @@ install.ps1 は次の順に実行します。
 3. 私用の PC なら `windows/personal.dsc.yaml` も適用する
 4. [Cica](https://github.com/miiton/Cica) フォントをユーザー用フォントとしてインストールする
 5. 私用の PC なら [ImeCenterView](https://github.com/shinshu68/ImeCenterView) をビルドして、スタートアップに登録し、起動する
-6. Ubuntu が入っていなければ、WSL と Ubuntu-24.04 をインストールする
-7. 次にやることを表示する
+6. 私用の PC なら Claude Code を公式のインストーラーで入れ、`%USERPROFILE%\.local\bin` をユーザーの PATH に足す (Orca などのアプリから呼ぶため。入れたあとは Claude Code が自分で更新します)
+7. Ubuntu が入っていなければ、WSL と Ubuntu-24.04 をインストールする
+8. 次にやることを表示する
 
 WSL を新しく入れたときは、必要なら Windows を再起動し、スタートメニューから Ubuntu 24.04 を起動して Linux のユーザーを作ってから、WSL 側の手順に進みます。
 
@@ -148,6 +149,8 @@ Windows 側の gh (install.ps1 で入れたもの) は WSL とは別にログイ
 
 ### Claude Code にログインする
 `claude` を起動すると、初回はログインの手順が表示されます。Windows 側の VS Code の Claude Code 拡張は、拡張の画面からログインします。
+
+Windows の Claude Code (私用の PC で install.ps1 が入れたもの) は、VS Code の拡張と同じ `%USERPROFILE%\.claude\.credentials.json` を使うので、拡張でログインしていればログインは要りません。
 
 ### ChatGPT・Codex にログインする
 私用の PC では、ChatGPT のデスクトップアプリ (Codex を含む) を起動して ChatGPT のアカウントでログインします。VS Code の Codex 拡張 (`openai.chatgpt`) は、拡張の画面から同じアカウントでログインします。
