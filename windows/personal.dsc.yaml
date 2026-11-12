@@ -39,6 +39,13 @@ properties:
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: Orca をインストールする (Claude Code などのエージェントを並べて動かすため)
+      settings:
+        id: StablyAI.Orca
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: Vivaldi をインストールする
       settings:
         id: Vivaldi.Vivaldi
