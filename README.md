@@ -163,6 +163,11 @@ codex login
 
 Windows の Codex CLI (私用の PC で install.ps1 が入れたもの) は、デスクトップアプリと同じ `%USERPROFILE%\.codex\auth.json` を使うので、アプリでログインしていればログインは要りません。
 
+### Orca の Agent 状態フックをオフにする
+私用の PC では、Orca を起動したら、設定の「Agent」にある「Agent 状態フック」をオフにします。
+
+オンのままだと、Orca が `%USERPROFILE%\.claude\settings.json` に Orca を呼ぶフックを書き込みます。このファイルは dotfiles の `claude/settings.json` へのリンクなので、WSL の Claude Code にも Windows のパスのフックが入ってしまいます。
+
 ## ansible を使わずに bash のプロンプトを入れる
 dotfiles を入れない bash の環境でも、`config/bash/prompt.bash` だけを手でコピーして使えます。bash 4.4 以降と git があれば動きます。
 
