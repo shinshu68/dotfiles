@@ -13,6 +13,8 @@ apt:
       filename: mise
 
   packages:
+    # Codex CLI のサンドボックスが使う (ないと同梱版で動くが、毎回警告が出る)
+    - bubblewrap
     - direnv
     - gh
     - git

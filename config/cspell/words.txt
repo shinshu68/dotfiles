@@ -223,6 +223,7 @@ tofile
 # ansible・Docker・apt の設定で使うモジュール名・属性名・コマンド名・パッケージ名など (Jinja2 テンプレートの構文を含む)
 anyenv
 blockinfile
+bubblewrap
 chdir
 Dockerfiles
 endfor
