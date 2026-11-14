@@ -4,3 +4,7 @@ __pycache__/
 
 claude/skills/synced
 claude/skills/.trash
+
+# codex/generate-agents-md.sh の生成物
+codex/AGENTS.generated.md
+codex/AGENTS.generated.md.*

@@ -70,6 +70,21 @@ install.ps1 を再実行すると最新のソースを取得し、新しいコ�
 Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'ImeCenterView'
 ```
 
+## Claude Code と Codex への指示
+両方に効かせる指示と、それぞれ専用の指示を分けて管理しています。
+
+| ファイル | 内容 | 読む側 |
+|---|---|---|
+| `agents/common.md` | 共通の指示 | Claude Code・Codex |
+| `claude/CLAUDE.md` | Claude Code 専用の指示。先頭で `agents/common.md` を `@` で取り込む (`~/.claude/CLAUDE.md` からリンク) | Claude Code |
+| `codex/codex.md` | Codex 専用の指示 | Codex |
+
+Codex はファイルの取り込みができないので、`codex/generate-agents-md.sh` が `agents/common.md` と `codex/codex.md` をつなげた `codex/AGENTS.generated.md` (コミットしない) を作り、`~/.codex/AGENTS.md` からリンクします。作り直しは claude ロールの実行時と、`hooks/` の git フック (コミット・マージ・リベース・チェックアウトの後) で行うので、コミット前の編集は Codex に反映されません。すぐ反映したいときはスクリプトを直接実行します。
+
+```shell
+~/dotfiles/codex/generate-agents-md.sh
+```
+
 ## ansible のロール
 | ロール | 内容 |
 |---|---|
@@ -78,7 +93,7 @@ Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' 
 | bash | bash の設定ファイルのリンク、`~/.bashrc` への読み込み処理の追記 (プロンプトは `config/bash/prompt.bash`) |
 | mise | mise の設定ファイルのリンク、Python・Node.js・Go・uv・npm パッケージのインストール (一覧は `config/mise/config.toml`) |
 | pip | pip パッケージのインストール (mise の Python に入れる) |
-| claude | Claude Code のインストール、`~/.claude` への設定ファイルのリンク (WSL のときは Windows 側にもリンク) |
+| claude | Claude Code のインストール、`~/.claude` への設定ファイルのリンク、Codex 用の `~/.codex/AGENTS.md` の生成とリンク (WSL のときは Windows 側にもリンク) |
 | vscode | Windows 側の VS Code への settings.json・スペルチェック辞書のリンク、拡張機能のインストール (WSL のときだけ) |
 | windows_terminal | Windows Terminal の設定ファイルへの、足りないアクションとキーの割り当ての追加 (WSL のときだけ。ファイル全体は管理しない) |
 | link | cspell / nvim / git / tmux の設定ファイルのリンク |

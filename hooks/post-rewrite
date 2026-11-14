@@ -1,0 +1,3 @@
+#!/bin/sh
+# 生成物の更新に失敗しても git の操作自体は止めない
+"$(git rev-parse --show-toplevel)/codex/generate-agents-md.sh" || true

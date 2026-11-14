@@ -9,6 +9,20 @@
     curl -fsSL https://claude.ai/install.sh | bash
   when: not claude_stat.stat.exists
 
+# リンク先の生成物を、リンクより先に作っておく
+- name: generate AGENTS.md for codex
+  command: '{{ dotfiles_path }}/codex/generate-agents-md.sh'
+  register: generate_agents_result
+  changed_when: "'changed' in generate_agents_result.stdout"
+
+# 共通の指示を変えたら AGENTS.md を作り直すフックを有効にする
+- name: use hooks in dotfiles
+  git_config:
+    repo:  '{{ dotfiles_path }}'
+    scope: local
+    name:  core.hooksPath
+    value: hooks
+
 - name: link claude config files
   import_role:
     name: link

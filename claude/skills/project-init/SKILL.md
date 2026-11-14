@@ -11,15 +11,19 @@ description: 新しい開発プロジェクトを始めるときに、GitHub の
 
 ### 1. グローバル CLAUDE.md を取得する
 
-次の URL から取得する。
+次の2つの URL から取得する。1つ目は Claude 専用の部分で、2つ目は Claude と Codex の共通の指示。1つ目の中の `@../agents/common.md` の行の位置に2つ目の中身を展開し、1つのグローバル CLAUDE.md として扱う。
 
 ```
 https://raw.githubusercontent.com/shinshu68/dotfiles/refs/heads/main/claude/CLAUDE.md
 ```
 
+```
+https://raw.githubusercontent.com/shinshu68/dotfiles/refs/heads/main/agents/common.md
+```
+
 - bash の `curl -sS -w "%{http_code}"` で取得し、HTTP 200 であることを確認する
 - 失敗した場合は web_fetch で同じ URL を試す
-- それでも取得できなければ、取得できなかった旨を伝え、内容を貼り付けてもらうよう依頼して止まる。推測で中身を補わない
+- どちらか一方でも取得できなければ、取得できなかった旨を伝え、取れなかったファイルの内容を貼り付けてもらうよう依頼して止まる。推測で中身を補わない
 
 取得した内容は「プロジェクトでも常に読み込まれる前提のルール」として扱う。
 

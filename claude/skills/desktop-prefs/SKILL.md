@@ -26,9 +26,10 @@ CLAUDE.md と出力スタイルは Claude Code 向けに書かれていて、デ
 
 dotfiles リポジトリの中で実行されたときは、ローカルのファイルを読む。それ以外は GitHub から取得する。dotfiles にはまだ push していない変更があることが多く、GitHub から取ると直したばかりの内容が反映されないため。
 
-読むファイルは次の3つ。CLAUDE.md・settings.json・出力スタイルは同じ読み込み元 (ローカルか GitHub のどちらか) からそろえて読み、混ぜない。
+読むファイルは次の4つ。CLAUDE.md・共通の指示・settings.json・出力スタイルは同じ読み込み元 (ローカルか GitHub のどちらか) からそろえて読み、混ぜない。
 
-- `claude/CLAUDE.md`: グローバルの CLAUDE.md
+- `claude/CLAUDE.md`: グローバルの CLAUDE.md (Claude 専用の部分)
+- `agents/common.md`: Claude と Codex の共通の指示。`claude/CLAUDE.md` の `@../agents/common.md` の行で取り込まれているので、その行の位置に中身を展開し、1つの CLAUDE.md として扱う
 - `claude/settings.json`: 使っている出力スタイルの名前 (`outputStyle`) を調べるため
 - `claude/output-styles/` の中の出力スタイル: 1-4 で決める
 
@@ -57,7 +58,7 @@ git remote get-url origin
 `git rev-parse --show-toplevel` の結果をリポジトリのルートとし、そこを起点に各ファイルを読む。ルートを起点にするのは、dotfiles のサブディレクトリから実行しても同じファイルを読めるようにするため。
 
 - 作業ツリーのファイルをそのまま読む。未コミットの編集も含めてよい (直してすぐ確かめられるようにするため)
-- CLAUDE.md の読み取りに失敗したら、3つとも 1-3 で取得し直す
+- CLAUDE.md か共通の指示の読み取りに失敗したら、4つとも 1-3 で取得し直す
 - settings.json や出力スタイルだけ読めなかった場合は、出力スタイルなしで進める (1-4)
 
 #### 1-3. それ以外は、URL から取得する
@@ -72,7 +73,7 @@ https://raw.githubusercontent.com/shinshu68/dotfiles/refs/heads/main/
 
 - bash で `curl -sS -w "%{http_code}"` を使って取得し、HTTP 200 であることを確認する
 - 失敗したら WebFetch (web_fetch) で同じ URL を試す。要約ではなく全文を得る必要があるので、要約しか返らない場合は失敗とみなす
-- CLAUDE.md が取れなければ、取得できなかった旨を伝え、CLAUDE.md の内容を貼り付けてもらうよう頼んで止まる。推測で中身を補わない
+- CLAUDE.md か共通の指示が取れなければ、取得できなかった旨を伝え、取れなかったファイルの内容を貼り付けてもらうよう頼んで止まる。推測で中身を補わない
   - 貼り付けてもらった場合は、出力スタイルは含めない。ユーザーが出力スタイルの内容も一緒に貼り付けたときだけ含める
 - settings.json や出力スタイルだけ取れなかった場合は、止まらずに出力スタイルなしで進める (1-4)
 
