@@ -197,6 +197,7 @@ xtype
 chsh
 direnv
 gsettings
+mktemp
 neofetch
 nvim
 pyenv
