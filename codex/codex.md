@@ -11,5 +11,7 @@ Windows では、シェルのコマンドは Windows PowerShell 5.1 (sandbox で
 - コミット済みのファイル: `git show <リビジョン>:<パス>` (例: `git show HEAD:lib/main.dart`)
 - 文字列の検索: `git grep -n <パターン>`
 - コミットされていないファイル: `cmd /c "chcp 65001 >nul & type <パス>"`
+- 上のコマンドの出力を、PowerShell のコマンドレット (`Select-Object`・`Select-String` など) にパイプで渡さない。パイプで受け取るときに日本語が化ける。行を絞りたいときは `git grep -n <パターン> <リビジョン> -- <パス>` を使うか、全体を読む
+- `rg` は入っていないので、検索には `git grep` を使う
 
 <!-- キャラクター設定は未定。内容が決まったらここに書く -->
