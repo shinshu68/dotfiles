@@ -5,8 +5,8 @@
 # - ベースブランチの最新化
 # - 未コミット変更の警告(対象外)
 # - コミット一覧/変更ファイル一覧/diffの出力
+# - 未pushの場合は自動push (既存PRにコミットを足したときも)
 # - 既存PRのチェック
-# - 未pushの場合は自動push
 set -uo pipefail
 
 BASE_BRANCH="${1:-develop}"
@@ -70,23 +70,29 @@ git diff --stat "${MERGE_BASE}..${CURRENT_BRANCH}"
 echo "--- 差分詳細 ---"
 git diff "${MERGE_BASE}..${CURRENT_BRANCH}"
 
-# 7. 既存PRの確認
-EXISTING_PR=$(gh pr list --head "$CURRENT_BRANCH" --base "$BASE_BRANCH" --json url --jq '.[0].url' 2>/dev/null || echo "")
-if [ -n "$EXISTING_PR" ]; then
-  echo "EXISTING_PR: $EXISTING_PR"
-  exit 0
-fi
-
-# 8. push状態の確認、必要なら自動push
+# 7. push状態の確認、必要なら自動push
+#    既存PRにコミットを足したときも push されるよう、既存PRの確認より先に行う
 git fetch origin "$CURRENT_BRANCH" > /dev/null 2>&1 || true
 LOCAL_HASH=$(git rev-parse "$CURRENT_BRANCH")
-REMOTE_HASH=$(git rev-parse "origin/${CURRENT_BRANCH}" 2>/dev/null || echo "")
+REMOTE_HASH=$(git rev-parse --verify --quiet "origin/${CURRENT_BRANCH}" || echo "")
 
 if [ "$LOCAL_HASH" != "$REMOTE_HASH" ]; then
   echo "--- ローカルブランチをリモートにpushします ---"
   git push -u origin "$CURRENT_BRANCH" 2>&1 || fail "pushに失敗しました。"
+  if [ -n "$REMOTE_HASH" ]; then
+    echo "PUSHED: ${REMOTE_HASH}..${LOCAL_HASH}"
+  else
+    echo "PUSHED: (new branch)"
+  fi
 else
   echo "ブランチは既にpush済みです。"
+fi
+
+# 8. 既存PRの確認
+EXISTING_PR=$(gh pr list --head "$CURRENT_BRANCH" --base "$BASE_BRANCH" --json url --jq '.[0].url' 2>/dev/null || echo "")
+if [ -n "$EXISTING_PR" ]; then
+  echo "EXISTING_PR: $EXISTING_PR"
+  exit 0
 fi
 
 echo "READY_FOR_PR"
