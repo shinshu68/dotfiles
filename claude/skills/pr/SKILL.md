@@ -29,6 +29,7 @@ PRの種類ごとの違い:
 | | 作業ブランチのPR | リリースPR |
 |---|---|---|
 | 先端(レビューする側のコミット) | `HEAD` | `origin/develop` |
+| レビューする手段 | Codex | Codex と code-review スキルの両方(再レビューも同じ) |
 | effort | `medium`。了承を取らずに実行する | 差分の規模を見て提案し(基本は `high`、変更量が大きいと判断したら `xhigh`。`max` は使用制限に達するため提案しない)、ユーザーの了承を得てから実行する |
 | 記録のファイル名 | `feature-review-<ブランチ名>.md`(ブランチ名の `/` は `-` に置き換える) | `release-review.md` |
 
@@ -44,7 +45,8 @@ PRの種類ごとの違い:
 
 レビューの実行手順:
 
-1. Codex CLI の `codex review` でレビューする(後述の「Codex でのレビュー」)。Codex が使えないときは code-review スキルに切り替え、切り替えたことと理由をユーザーに伝える
+1. 上の表の手段でレビューする。Codex は Codex CLI の `codex review` で動かす(後述の「Codex でのレビュー」)。Codex が使えないときは code-review スキルに切り替え(リリースPRでは code-review スキルだけになる)、切り替えたことと理由をユーザーに伝える
+   - リリースPRでは、Codex を `run_in_background` で動かしておき、その間に code-review スキルを動かす。両方の effort は表の値にそろえる。両方の結果がそろってから、手順3以降を1回にまとめて行う。同じ問題を挙げた指摘は1件にまとめ、各指摘にどちらが挙げたか(Codex / code-review / 両方)を添える。比べた結果、両者は見つける問題の傾向が違い、重なりが少なかったため両方を使う
    - code-review スキルは、effort と対象を明示して呼び出す(effort を省略すると前回のレベルが使われるため、必ず指定する。例: `medium origin/develop...HEAD`、`high origin/main...origin/develop`、`high a1b2c3d...origin/develop`)
    - 範囲指定が受け付けられなかった場合は、対象を先端のブランチ(作業ブランチのPRでは今のブランチ、リリースPRでは `develop`)にして呼び出し直す。再レビューのときは、その結果から対象の範囲の差分に含まれない指摘を除く
 2. レビューを実行したら、すぐに記録の「レビュー済みのコミット」を今の先端のハッシュに更新する(後述)
@@ -65,27 +67,27 @@ Codex は指摘を出すだけで、各指摘の判断・記録・ユーザー�
 | リリースPRの最初のレビュー | 指示文(後述の「リリースPRの指示文」) |
 | 再レビュー(作業ブランチのPR・リリースPRとも) | 指示文(後述の「再レビューの指示文」) |
 
-プロジェクトのディレクトリから次のように実行する。stdout にはレビュー結果(Codex の最後のメッセージ)だけが出て、実行ログは stderr に出るので、stderr は一時ファイルに逃がす。指示文は記号や改行を含むので、`-` を渡して標準入力から読ませる:
+プロジェクトのディレクトリから次のように実行する。stdout にはレビュー結果(Codex の最後のメッセージ)だけが出て、実行ログは stderr に出るので、それぞれ一時ファイルに受け、終わったら `$out` を読む。指示文は記号や改行を含むので、`-` を渡して標準入力から読ませる:
 
 ```bash
 # 作業ブランチのPRの最初のレビュー
-log=$(mktemp)
+log=$(mktemp); out=$(mktemp)
 codex review --base origin/develop \
   -c model_reasoning_effort=<effort> \
   -c sandbox_mode=read-only \
   -c approval_policy=never \
-  2>"$log"
+  2>"$log" >"$out"
 echo "exit=$?"
 ```
 
 ```bash
 # 指示文を渡すレビュー
-log=$(mktemp)
+log=$(mktemp); out=$(mktemp)
 codex review \
   -c model_reasoning_effort=<effort> \
   -c sandbox_mode=read-only \
   -c approval_policy=never \
-  - 2>"$log" <<'EOF'
+  - 2>"$log" >"$out" <<'EOF'
 <指示文>
 EOF
 echo "exit=$?"
