@@ -27,7 +27,7 @@
 ## 環境
 - WSL2 (Ubuntu) と Windows の VSCode の両方で使う。どちらで動いているかは環境情報の Platform (linux / win32) で判断する
 - WSL2: シェルは fish。ユーザーに示すシェルコマンドは fish で動く書き方を優先する
-- Windows: Claude Code が実行するコマンドは Git Bash で動く。ユーザーに示すコマンドは PowerShell で動く書き方にする
+- Windows: ユーザーに示すコマンドは PowerShell で動く書き方にする
 
 ## 事前に確認する操作
 - 外部への操作 (push、PR の作成・マージ、Issue や PR へのコメント、パッケージの公開など) は、了承を得てから行う
