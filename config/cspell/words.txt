@@ -354,6 +354,11 @@ swiftshader
 appbar
 # Flutter のクラス名の一部 (docs/architecture.md のビューア)
 Overscroll
+# PDF の描画エンジン名 (docs/plan.md の技術選定)
+PDFium
+# PDF の構文キーワード (tool/mock_server.dart のモックの PDF。直前の改行の n とつながった形を含む)
+nendstream
+startxref
 
 # ===== wakeup-alarm =====
 # 連携する外部サービス名・パッケージ名 (Alexa 連携: docs/alexa-integration.md・alexa-skill/・cloud_firestore)
