@@ -511,3 +511,8 @@ komacomi
 NOSYSTEM
 # Node.js・OS のエラーコード (README のトラブルシューティング)
 ENOENT
+
+# ===== vscode-ai-subscription-usage =====
+# SVG からアイコンフォントを作る npm パッケージ名
+fantasticon
+svgtofont
