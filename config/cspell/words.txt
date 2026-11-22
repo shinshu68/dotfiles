@@ -484,7 +484,11 @@ ktlint
 XHIST
 # このアプリの名前 (アプリケーション ID・namespace の一部)
 fernrove
-# その他 (改造版アプリの名前 ReVanced の一部)
+# フォント名の一部 (docs/plan.md・docs/roadmap.md)
+Maru
+Noto
+# その他 (改造版アプリの名前 ReVanced の一部、例示用のドメイン名)
+notexample
 Vanced
 
 # ===== komacomi =====
