@@ -344,7 +344,8 @@ vitest
 yourname
 
 # ===== bookshelf-app =====
-# Flutter のパッケージ名 (状態管理・PDF の描画、CLAUDE.md・docs/plan.md の技術選定)
+# Flutter のパッケージ名 (状態管理・PDF の描画・表紙の表示、CLAUDE.md・docs/plan.md の技術選定)
+octo
 pdfrx
 pdfx
 Riverpod
@@ -359,6 +360,8 @@ PDFium
 # PDF の構文キーワード (tool/mock_server.dart のモックの PDF。直前の改行の n とつながった形を含む)
 nendstream
 startxref
+# アプリロックの識別子に使う語 (lib/features/lock/)
+relock
 
 # ===== wakeup-alarm =====
 # 連携する外部サービス名・パッケージ名 (Alexa 連携: docs/alexa-integration.md・alexa-skill/・cloud_firestore)
