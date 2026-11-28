@@ -516,8 +516,13 @@ komacomi
 # ===== backlog-kanban =====
 # git の環境変数名 (テストで git の設定を切り離すのに使う)
 NOSYSTEM
-# Node.js・OS のエラーコード (README のトラブルシューティング)
+# Node.js・OS のエラーコード (README のトラブルシューティング・docs/plan.md)
+EISDIR
 ENOENT
+# HTML の属性名 (Webview の表示のテスト)
+hrefs
+# プログラミングの用語 (自動更新の処理の名前)
+debouncer
 
 # ===== vscode-ai-subscription-usage =====
 # SVG からアイコンフォントを作る npm パッケージ名
